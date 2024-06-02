@@ -1,29 +1,29 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:plantopia/utils/app_routes.dart';
+import 'package:plantopia/views/home/home_view.dart';
+import 'package:plantopia/views/weather/weather_view.dart';
+import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 
 Future<void> main() async {
+  await dotenv.load(fileName: '.env');
+
   runApp(
     GetMaterialApp(
-      home: HomePage(), // home screen
+      home: const BottomNavigationBarGlobalWidget(), 
       getPages: [
         GetPage(
-          name: AppRoutes.splashScreen,
-          page: () => SplashScreen(),
+          name: AppRoutes.home,
+          page: () => const HomeView(),
         ),
-
         GetPage(
-          name: AppRoutes.splashScreen,
-          page: () => HomePage(),
+          name: AppRoutes.weather,
+          page: () => WeatherView(),
         ),
-
-        // add more pages
-
+        // Add more pages as needed
       ],
-
-      // add initial route (first page to be loaded is splash screen)
-      initialRoute: AppRoutes.splashScreen,
+      // initialRoute: AppRoutes.splashScreen, // Uncomment this line if you have a splash screen
     ),
   );
 }
