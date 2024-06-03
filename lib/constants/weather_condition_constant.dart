@@ -1,0 +1,67 @@
+import 'package:plantopia/constants/icon_constant.dart';
+
+class WeatherCondition {
+  static Map<String, String> weatherIconMap = {
+    'thunderstorm with light rain': IconConstant.weatherRainStrom,
+    'thunderstorm with rain': IconConstant.weatherRainStrom,
+    'thunderstorm with heavy rain': IconConstant.weatherRainStrom,
+    'light thunderstorm': IconConstant.weatherRainStrom,
+    'thunderstorm': IconConstant.weatherRainStrom,
+    'heavy thunderstorm': IconConstant.weatherRainStrom,
+    'ragged thunderstorm': IconConstant.weatherRainStrom,
+    'thunderstorm with light drizzle': IconConstant.weatherRainStrom,
+    'thunderstorm with drizzle': IconConstant.weatherRainStrom,
+    'thunderstorm with heavy drizzle': IconConstant.weatherRainStrom,
+    'light intensity drizzle': IconConstant.weatherRain,
+    'drizzle': IconConstant.weatherRain,
+    'heavy intensity drizzle': IconConstant.weatherRain,
+    'light intensity drizzle rain': IconConstant.weatherRain,
+    'drizzle rain': IconConstant.weatherRain,
+    'heavy intensity drizzle rain': IconConstant.weatherRain,
+    'shower rain and drizzle': IconConstant.weatherRain,
+    'heavy shower rain and drizzle': IconConstant.weatherRain,
+    'shower drizzle': IconConstant.weatherRain,
+    'light rain': IconConstant.weatherRain,
+    'moderate rain': IconConstant.weatherRain,
+    'heavy intensity rain': IconConstant.weatherRain,
+    'very heavy rain': IconConstant.weatherRain,
+    'extreme rain': IconConstant.weatherRain,
+    'freezing rain': IconConstant.weatherSnow,
+    'light intensity shower rain': IconConstant.weatherRain,
+    'shower rain': IconConstant.weatherRain,
+    'heavy intensity shower rain': IconConstant.weatherRain,
+    'ragged shower rain': IconConstant.weatherRain,
+    'light snow': IconConstant.weatherSnow,
+    'snow': IconConstant.weatherSnow,
+    'heavy snow': IconConstant.weatherSnow,
+    'sleet': IconConstant.weatherSnow,
+    'light shower sleet': IconConstant.weatherSnow,
+    'shower sleet': IconConstant.weatherSnow,
+    'light rain and snow': IconConstant.weatherSnow,
+    'rain and snow': IconConstant.weatherSnow,
+    'light shower snow': IconConstant.weatherSnow,
+    'shower snow': IconConstant.weatherSnow,
+    'heavy shower snow': IconConstant.weatherSnow,
+    'mist': IconConstant.weatherCloudy,
+    'smoke': IconConstant.weatherCloudy,
+    'haze': IconConstant.weatherCloudy,
+    'sand, dust whirls': IconConstant.weatherCloudy,
+    'fog': IconConstant.weatherCloudy,
+    'sand': IconConstant.weatherCloudy,
+    'dust': IconConstant.weatherCloudy,
+    'volcanic ash': IconConstant.weatherCloudy,
+    'squalls': IconConstant.weatherCloudy,
+    'tornado': IconConstant.weatherCloudy,
+    'clear sky': IconConstant.weatherSun,
+    'few clouds': IconConstant.weatherCloudy,
+    'scattered clouds': IconConstant.weatherCloudy,
+    'broken clouds': IconConstant.weatherCloudy,
+    'overcast clouds': IconConstant.weatherCloudy,
+  };
+
+  static String getWeatherDescriptionIcon(String weatherDescription) {
+    return weatherIconMap.containsKey(weatherDescription)
+        ? weatherIconMap[weatherDescription]!
+        : IconConstant.weatherSun;
+  }
+}
