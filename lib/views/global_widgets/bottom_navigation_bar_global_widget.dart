@@ -4,6 +4,7 @@ import 'package:plantopia/constants/icon_constant.dart';
 
 import 'package:plantopia/controllers/bottom_navigation_bar_controller.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_icon_global_widget.dart';
+import 'package:plantopia/views/home/home_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 import 'package:plantopia/controllers/weather_controller.dart'; 
 
@@ -26,7 +27,7 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
         return IndexedStack(
           index: controller.currentIndex.value,
           children: [
-            SizedBox.shrink(),
+            HomeView(),
             WeatherView(),
             const SizedBox.shrink(),
             const SizedBox.shrink()
