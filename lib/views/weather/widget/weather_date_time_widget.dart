@@ -16,7 +16,7 @@ class WeatherDateTimeWidget extends StatelessWidget {
     return Text(
       dateTime ?? '',
       style: textStyle ??
-          TextStyleConstant.mediumText
+          TextStyleConstant.caption
     );
   }
 }

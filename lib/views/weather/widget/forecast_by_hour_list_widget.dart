@@ -1,6 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:plantopia/constants/color_constant.dart';
+import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/models/get_forecast_by_hour_response_model.dart';
-import 'package:plantopia/views/weather/widget/forecast_by_hour_list_item_widget.dart';
+import 'package:plantopia/views/weather/widget/weather_date_time_widget.dart';
+import 'package:plantopia/views/weather/widget/weather_image_widget.dart';
+import 'package:plantopia/views/weather/widget/weather_temperature_widget.dart';
+import 'package:intl/intl.dart';
+
+part 'forecast_by_hour_list_item_widget.dart';
 
 class ForecastByHourListWidget extends StatelessWidget {
   final GetForecastByHourResponseModel forecastByHourModel;

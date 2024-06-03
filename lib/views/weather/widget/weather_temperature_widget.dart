@@ -17,7 +17,10 @@ class WeatherTemperatureWidget extends StatelessWidget {
 
     return Text(
       '$intTemperature°',
-      style: textStyle ?? TextStyleConstant.paragraphBold,
+      style: textStyle ??
+          TextStyleConstant.paragraph.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
     );
   }
 }

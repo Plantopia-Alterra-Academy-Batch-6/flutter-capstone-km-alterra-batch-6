@@ -17,7 +17,12 @@ class WeatherDetailView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Weather Detail', style: TextStyleConstant.heading4Bold),
+        title: Text(
+          'Weather Detail',
+          style: TextStyleConstant.heading4.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
+        ),
         centerTitle: true,
       ),
       body: SingleChildScrollView(

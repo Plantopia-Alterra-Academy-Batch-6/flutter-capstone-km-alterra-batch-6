@@ -1,11 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:plantopia/constants/color_constant.dart';
-import 'package:plantopia/constants/text_style_constant.dart';
-import 'package:plantopia/models/get_forecast_by_hour_response_model.dart';
-import 'package:plantopia/views/weather/widget/weather_image_widget.dart';
-import 'package:plantopia/views/weather/widget/weather_temperature_widget.dart';
-import 'package:plantopia/views/weather/widget/weather_date_time_widget.dart';
+part of 'forecast_by_hour_list_widget.dart';
 
 class ForecastByHourListItemWidget extends StatelessWidget {
   final ListElement forecastByHourListElement;
@@ -34,13 +27,13 @@ class ForecastByHourListItemWidget extends StatelessWidget {
               8,
             ),
           ),
-          color: isFirstItem ? ColorConstant.blueLink50 : null,
+          color: isFirstItem ? ColorConstant.neutral0 : null,
         ),
         child: Column(
           children: [
             WeatherDateTimeWidget(
               dateTime: formattedTime,
-              textStyle: TextStyleConstant.bodySmall,
+              textStyle: TextStyleConstant.caption,
             ),
             const SizedBox(
               height: 8,

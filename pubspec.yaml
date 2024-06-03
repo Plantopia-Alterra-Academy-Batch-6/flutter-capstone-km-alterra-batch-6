@@ -34,7 +34,7 @@ dev_dependencies:
   flutter_svg: ^2.0.10+1
   country_code_picker: ^3.0.0
   shared_preferences: ^2.2.3
-
+  syncfusion_flutter_gauges: ^25.2.6
 
 flutter:
   uses-material-design: true

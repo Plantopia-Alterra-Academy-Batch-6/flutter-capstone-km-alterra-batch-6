@@ -1,10 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:plantopia/constants/text_style_constant.dart';
-import 'package:plantopia/models/get_forecast_by_day_response_model.dart';
-import 'package:plantopia/views/weather/widget/weather_image_widget.dart';
-import 'package:plantopia/views/weather/widget/weather_temperature_widget.dart';
-import 'package:plantopia/views/weather/widget/weather_date_time_widget.dart';
+part of 'forecast_by_day_list_widget.dart';
 
 class ForecastByDayListItemWidget extends StatelessWidget {
   final ListElement forecastByDayListElement;
@@ -17,22 +11,45 @@ class ForecastByDayListItemWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
         (forecastByDayListElement.dt ?? 0) * 1000);
-    String formattedTime = DateFormat('HH:mm').format(dateTime);
+    String formattedDay = DateFormat('EEEE').format(dateTime);
+    String formattedDate = DateFormat('dd MMMM').format(dateTime);
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 24),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          WeatherDateTimeWidget(
-            dateTime: formattedTime,
-            textStyle: TextStyleConstant.mediumText.copyWith(color: Colors.black),
+          SizedBox(
+            width: 80,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                WeatherDateTimeWidget(
+                  dateTime: formattedDay,
+                  textStyle: TextStyleConstant.paragraph.copyWith(
+                    color: ColorConstant.neutral500,
+                  ),
+                ),
+                WeatherDateTimeWidget(
+                  dateTime: formattedDate,
+                  textStyle: TextStyleConstant.subtitle.copyWith(
+                      color: ColorConstant.neutral950,
+                      fontWeight: FontWeight.w700),
+                ),
+              ],
+            ),
           ),
           const SizedBox(
             height: 8,
           ),
           WeatherTemperatureWidget(
             temperature: forecastByDayListElement.temp?.day,
-            textStyle: TextStyleConstant.heading1Bold,
+            textStyle: TextStyleConstant.heading1.copyWith(
+              fontWeight: FontWeight.w700,
+            ),
           ),
           const SizedBox(
             height: 8,

@@ -1,8 +1,4 @@
-import 'package:country_code_picker/country_code_picker.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/svg.dart';
-import 'package:plantopia/constants/icon_constant.dart';
-import 'package:plantopia/constants/text_style_constant.dart';
+part of 'current_weather_card_widget.dart';
 
 class CurrentWeatherLocationWidget extends StatelessWidget {
   final String? locationName;
@@ -32,7 +28,10 @@ class CurrentWeatherLocationWidget extends StatelessWidget {
         ),
         Text(
           '$locationName, $countryName',
-          style: TextStyleConstant.regular,
+          style: TextStyleConstant.paragraph.copyWith(
+            fontWeight: FontWeight.w700,
+            color: ColorConstant.neutral0,
+          ),
         ),
       ],
     );

@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/icon_constant.dart';
 
 import 'package:plantopia/controllers/bottom_navigation_bar_controller.dart';
-import 'package:plantopia/views/home/home_view.dart';
+import 'package:plantopia/views/global_widgets/bottom_navigation_icon_global_widget.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
+import 'package:plantopia/controllers/weather_controller.dart'; 
+
 
 class BottomNavigationBarGlobalWidget extends StatelessWidget {
   const BottomNavigationBarGlobalWidget({
@@ -12,74 +15,89 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(
-      BottomNavigationBarController(),
-    );
+    final BottomNavigationBarController controller =
+        Get.put(BottomNavigationBarController());
+
+    final WeatherController weatherController = Get.put(WeatherController());
+
+
     return Scaffold(
       body: Obx(() {
-        final controller = Get.find<BottomNavigationBarController>();
         return IndexedStack(
           index: controller.currentIndex.value,
           children: [
-            const HomeView(),
+            SizedBox.shrink(),
             WeatherView(),
+            const SizedBox.shrink(),
+            const SizedBox.shrink()
           ],
         );
       }),
       bottomNavigationBar: Obx(() {
-        final controller = Get.find<BottomNavigationBarController>();
         return BottomNavigationBar(
-          backgroundColor: Theme.of(
-            context,
-          ).colorScheme.primary,
           currentIndex: controller.currentIndex.value,
-          onTap: (
-            index,
-          ) {
-            controller.setCurrentIndex(
-              index,
-            );
+          onTap: (index) {
+            controller.setCurrentIndex(index);
+
+            if (index == 1) {
+              weatherController.initLocationAndWeatherData();
+            }
+
           },
+          elevation: 0.0,
+          type: BottomNavigationBarType.fixed,
           items: [
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.home,
-                color: Theme.of(
-                  context,
-                ).colorScheme.outlineVariant,
-              ),
+            _buildBottomNavigationBarItem(
+              iconAssetPath: IconConstant.home,
+              selectedIconAssetPath: IconConstant.homeSelected,
               label: 'Home',
-              activeIcon: Icon(
-                Icons.home,
-                color: Theme.of(
-                  context,
-                ).colorScheme.onPrimary,
-              ),
+              index: 0,
+              controller: controller,
             ),
-            BottomNavigationBarItem(
-              icon: Icon(
-                Icons.search_rounded,
-                color: Theme.of(
-                  context,
-                ).colorScheme.outlineVariant,
-              ),
+            _buildBottomNavigationBarItem(
+              iconAssetPath: IconConstant.weatherSunCloudy,
+              selectedIconAssetPath: IconConstant.weatherSelected,
               label: 'Weather',
-              activeIcon: Icon(
-                Icons.search_rounded,
-                color: Theme.of(
-                  context,
-                ).colorScheme.onPrimary,
-              ),
+              index: 1,
+              controller: controller,
+            ),
+            _buildBottomNavigationBarItem(
+              iconAssetPath: IconConstant.potPlant,
+              selectedIconAssetPath: IconConstant.potPlantSelected,
+              label: 'My Plant',
+              index: 2,
+              controller: controller,
+            ),
+            _buildBottomNavigationBarItem(
+              iconAssetPath: IconConstant.locationAlt,
+              selectedIconAssetPath: IconConstant.locationAlt,
+              label: 'Profile',
+              index: 3,
+              controller: controller,
             ),
           ],
-          selectedItemColor: Theme.of(
-            context,
-          ).colorScheme.onPrimary,
-          unselectedItemColor: Theme.of(
-            context,
-          ).colorScheme.outlineVariant,
         );
       }),
+    );
+  }
+
+  BottomNavigationBarItem _buildBottomNavigationBarItem({
+    required String iconAssetPath,
+    required String selectedIconAssetPath,
+    required String label,
+    required int index,
+    required BottomNavigationBarController controller,
+  }) {
+    return BottomNavigationBarItem(
+      icon: BottomNavigationIconWidget(
+        iconAssetPath: controller.currentIndex.value == index
+            ? selectedIconAssetPath
+            : iconAssetPath,
+        label: label,
+        index: index,
+        controller: controller,
+      ),
+      label: '',
     );
   }
 }

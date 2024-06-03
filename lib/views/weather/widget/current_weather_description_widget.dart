@@ -1,6 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:plantopia/constants/color_constant.dart';
-import 'package:plantopia/constants/text_style_constant.dart';
+part of 'current_weather_card_widget.dart';
 
 class CurrentWeatherDescriptionWidget extends StatelessWidget {
   final String? description;
@@ -15,13 +13,13 @@ class CurrentWeatherDescriptionWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 12),
       decoration: BoxDecoration(
-        color: ColorConstant.white.withOpacity(0.1),
+        color: ColorConstant.neutral0.withOpacity(0.1),
         borderRadius: BorderRadius.circular(12),
       ),
-      child: Text(
-        _toTitleCase(description ?? ''),
-        style: TextStyleConstant.mediumText
-      ),
+      child: Text(_toTitleCase(description ?? ''),
+          style: TextStyleConstant.caption.copyWith(
+            color: ColorConstant.neutral0,
+          )),
     );
   }
 
