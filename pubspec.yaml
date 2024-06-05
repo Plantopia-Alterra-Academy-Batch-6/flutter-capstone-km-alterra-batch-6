@@ -13,7 +13,16 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-
+  flutter_dotenv: ^5.1.0
+  flutter_gemini: ^2.0.3
+  image_picker: ^1.1.1
+  dash_chat_2: ^0.0.20
+  flutter_markdown: 0.6.23
+  get: ^4.6.6
+  google_fonts: ^6.2.1
+  blur: ^4.0.0
+  flutter_svg: ^2.0.10+1
+  dart_openai: ^5.1.0
 
   
   cupertino_icons: ^1.0.6
@@ -24,12 +33,14 @@ dev_dependencies:
 
   
   flutter_lints: ^3.0.0
-  get: ^4.6.6
-  google_fonts: ^6.2.1
 
 
 flutter:
   uses-material-design: true
+  assets:
+    - assets/vectors/
+    - assets/icons/
+    - .env
 
   # To add assets to your application, add an assets section, like this:
   # assets:
