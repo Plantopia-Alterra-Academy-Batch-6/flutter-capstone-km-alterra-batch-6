@@ -7,7 +7,7 @@ import 'package:plantopia/utils/base_url_util.dart';
 
 class WeatherService {
   final Dio dio = Dio();
-  final String apiKey = dotenv.get('apiKey');
+  final String apiKey = "5abe71406c0f4135dea0f76a724f8b92";
 
   Future<GetCurrentWeatherResponseModel> getCurrentWeather(
       {double? lat, double? lon}) async {

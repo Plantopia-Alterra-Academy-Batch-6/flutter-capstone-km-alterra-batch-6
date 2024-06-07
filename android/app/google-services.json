@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "355159605133",
+    "project_id": "agriculture-af713",
+    "storage_bucket": "agriculture-af713.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355159605133:android:fd955e28a6906911e4c7c4",
+        "android_client_info": {
+          "package_name": "com.example.plantopia"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAYh8U6Ygo5tJbOqJepR8QGbKFsu2sVz_I"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
