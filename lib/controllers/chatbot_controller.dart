@@ -1,17 +1,25 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_gemini/flutter_gemini.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
 import '../views/chatbot/widgets/topic_choice_bottom_sheet_widget.dart';
 
 class ChatbotController extends GetxController {
-  final Gemini gemini = Gemini.instance;
+  final openAI = OpenAI.instance.build(
+    token: dotenv.env['CHATBOT_API_KEY'],
+    baseOption: HttpSetup(
+      receiveTimeout: const Duration(seconds: 20),
+    ),
+    enableLog: true,
+  );
 
   var isLoading = false.obs;
   var messages = <ChatMessage>[].obs;
@@ -33,6 +41,7 @@ class ChatbotController extends GetxController {
 
   void _showTopicChoice() {
     Get.bottomSheet(
+      isDismissible: false,
       TopicChoiceBottomSheet(
         onSelectTopic: (selectedTopic) {
           topic.value = selectedTopic;
@@ -57,46 +66,104 @@ class ChatbotController extends GetxController {
     );
   }
 
-  void sendMessage(ChatMessage chatMessage) {
+  void sendMessage(ChatMessage chatMessage) async {
     isSendButtonEnabled.value = false;
     messages.insert(0, chatMessage);
     typingUsers.add(plantBotUser);
     fullResponse.value = "";
 
-    Completer<void> completer = Completer<void>();
-
     try {
-      String questionPrefix =
-          "Topiknya mengenai '${topic.value}' pertanyaannya: ";
-      String question = questionPrefix + chatMessage.text;
-      List<Uint8List>? images;
-      if (chatMessage.medias?.isNotEmpty ?? false) {
-        images = [
-          File(chatMessage.medias!.first.url).readAsBytesSync(),
-        ];
+      if (chatMessage.medias != null && chatMessage.medias!.isNotEmpty) {
+        await sendMediaPrompt(chatMessage);
+      } else {
+        await sendTextPrompt(chatMessage);
       }
-      gemini.streamGenerateContent(question, images: images).listen((event) {
-        fullResponse.value += event.content?.parts?.fold(
-                "", (previous, current) => "$previous ${current.text}") ??
-            "";
-        update();
-      }, onDone: () {
-        ChatMessage message = ChatMessage(
-          user: plantBotUser,
-          createdAt: DateTime.now(),
-          text: fullResponse.value,
-        );
-        messages.insert(0, message);
-        typingUsers.remove(plantBotUser);
-        update();
-        isSendButtonEnabled.value = true;
-      }, onError: (error) {
-        completer.completeError(error);
-        update();
-        isSendButtonEnabled.value = true;
-      });
+      typingUsers.remove(plantBotUser);
+      isSendButtonEnabled.value = true;
     } catch (e) {
       isSendButtonEnabled.value = true;
+    }
+  }
+
+  Future<void> sendTextPrompt(ChatMessage chatMessage) async {
+    List<Map<String, dynamic>> messagesHistory =
+        messages.reversed.toList().map((m) {
+      return {
+        "role": m.user == currentUser ? 'user' : 'assistant',
+        "content": m.user == currentUser
+            ? "Please **DON'T** provide any information if the question below is **NOT** related to '$topic', here is the question:\n${m.text}"
+            : m.text
+      };
+    }).toList();
+
+    final request = ChatCompleteText(
+      messages: messagesHistory,
+      maxToken: 200,
+      model: Gpt4ChatModel(),
+    );
+
+    ChatCTResponse? response = await openAI.onChatCompletion(request: request);
+    for (var element in response!.choices) {
+      if (element.message != null) {
+        ChatMessage responseMessage = ChatMessage(
+          user: plantBotUser,
+          createdAt: DateTime.now(),
+          text: element.message!.content,
+        );
+        messages.insert(0, responseMessage);
+      }
+    }
+  }
+
+  Future<void> sendMediaPrompt(ChatMessage chatMessage) async {
+    try {
+      String base64Image = '';
+      // Memuat semua gambar yang terlampir secara asinkron
+      List<Uint8List> images =
+          await Future.wait(chatMessage.medias!.map((media) async {
+        return await File(media.url).readAsBytes();
+      }).toList());
+
+      // Menambahkan setiap gambar ke dalam permintaan sebagai Base64
+      for (var image in images) {
+        base64Image = base64Encode(image);
+      }
+
+      final request = ChatCompleteText(
+        messages: [
+          {
+            "role": "user",
+            "content": [
+              {
+                "type": "text",
+                "text":
+                    "Please **DON'T** provide any information if the picture below is **NOT** related to '$topic'",
+              },
+              {
+                "type": "image_url",
+                "image_url": {"url": "data:image/jpeg;base64,$base64Image"}
+              },
+            ]
+          }
+        ],
+        maxToken: 200,
+        model: Gpt4VisionPreviewChatModel(),
+      );
+
+      ChatCTResponse? response =
+          await openAI.onChatCompletion(request: request);
+      for (var element in response!.choices) {
+        if (element.message != null) {
+          ChatMessage responseMessage = ChatMessage(
+            user: plantBotUser,
+            createdAt: DateTime.now(),
+            text: element.message!.content,
+          );
+          messages.insert(0, responseMessage);
+        }
+      }
+    } catch (e) {
+      // Log error
     }
   }
 
@@ -106,7 +173,6 @@ class ChatbotController extends GetxController {
     } else if (text.isEmpty && typingUsers.contains(currentUser)) {
       typingUsers.remove(currentUser);
     }
-    update();
   }
 
   void sendMediaMessage() async {
@@ -127,7 +193,6 @@ class ChatbotController extends GetxController {
         ],
       );
       sendMessage(chatMessage);
-      update();
     }
   }
 }

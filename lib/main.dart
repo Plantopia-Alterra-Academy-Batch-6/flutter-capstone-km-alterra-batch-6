@@ -8,15 +8,11 @@ import 'package:plantopia/views/chatbot/chatbot_view.dart';
 
 Future main() async {
   await dotenv.load(fileName: ".env");
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({super.key}) : super() {
-    Gemini.init(
-      apiKey: dotenv.env['CHATBOT_API_KEY']!,
-    );
-  }
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -5,8 +5,11 @@ import '../../../constants/icon_constant.dart';
 import 'topic_choice_tile_widget.dart';
 
 class PlantOptionsBottomSheetWidget extends StatelessWidget {
+  final Function(bool) isBottomSheetClosed;
+
   const PlantOptionsBottomSheetWidget({
     super.key,
+    required this.isBottomSheetClosed,
   });
 
   @override
@@ -98,6 +101,7 @@ class PlantOptionsBottomSheetWidget extends StatelessWidget {
               child: IconButton(
                 onPressed: () {
                   Get.back();
+                  isBottomSheetClosed(true);
                 },
                 icon: SvgPicture.asset(IconConstant.close),
               ),

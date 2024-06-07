@@ -101,6 +101,7 @@ class TopicChoiceBottomSheet extends StatelessWidget {
             child: IconButton(
               onPressed: () {
                 Get.back();
+                isBottomSheetClosed(true);
               },
               icon: SvgPicture.asset(IconConstant.close),
             ),
@@ -120,13 +121,17 @@ class TopicChoiceBottomSheet extends StatelessWidget {
   }
 
   void _showPlantOptions(BuildContext context, List<String> plantOptions) {
-    showModalBottomSheet(
-      context: context,
+    Get.bottomSheet(
+      PlantOptionsBottomSheetWidget(
+        isBottomSheetClosed: (isClose) {
+          if (isClose) {
+            isBottomSheetClosed(true);
+          }
+        },
+      ),
+      isDismissible: false,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (BuildContext context) {
-        return const PlantOptionsBottomSheetWidget();
-      },
     ).then((value) {
       if (value != null) {
         onSelectTopic(value);

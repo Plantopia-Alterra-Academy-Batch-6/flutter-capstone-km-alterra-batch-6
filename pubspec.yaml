@@ -22,9 +22,7 @@ dependencies:
   google_fonts: ^6.2.1
   blur: ^4.0.0
   flutter_svg: ^2.0.10+1
-  dart_openai: ^5.1.0
-
-  
+  chat_gpt_sdk: ^3.0.8
   cupertino_icons: ^1.0.6
 
 dev_dependencies:
