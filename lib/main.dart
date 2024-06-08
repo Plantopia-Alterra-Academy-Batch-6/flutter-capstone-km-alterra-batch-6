@@ -19,17 +19,7 @@ import 'package:plantopia/views/weather/weather_view.dart';
 
 import 'firebase_options.dart';
 
-Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
-  // If you're going to use other Firebase services in the background, such as Firestore,
-  // make sure you call `initializeApp` before using other Firebase services.
-  await Firebase.initializeApp();
 
-  if (message.notification != null) {
-    log('${message.notification?.title}');
-    log('${message.notification?.body}');
-    NotificationService.displayNotification(message);
-  }
-}
 
 Future<void> main() async {
   await dotenv.load(fileName: '.env');
