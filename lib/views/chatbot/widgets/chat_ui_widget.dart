@@ -118,7 +118,7 @@ class ChatUIWidget extends StatelessWidget {
               top: 8,
               bottom: 8,
             ),
-            onTextChange: controller.handleUserTyping,
+            // onTextChange: controller.handleUserTyping,
           ),
           currentUser: controller.currentUser,
           onSend: controller.sendMessage,

@@ -14,7 +14,6 @@ dependencies:
   flutter:
     sdk: flutter
   flutter_dotenv: ^5.1.0
-  flutter_gemini: ^2.0.3
   image_picker: ^1.1.1
   dash_chat_2: ^0.0.20
   flutter_markdown: 0.6.23

@@ -91,7 +91,7 @@ class ChatbotController extends GetxController {
       return {
         "role": m.user == currentUser ? 'user' : 'assistant',
         "content": m.user == currentUser
-            ? "Please **DON'T** provide any information if the question below is **NOT** related to '$topic', here is the question:\n${m.text}"
+            ? "Your role here is as an assistant that only answers questions related to '$topic' or plants. Please do not provide any information if the question is not about '$topic' or plants. Here is the question: ${m.text}"
             : m.text
       };
     }).toList();
@@ -137,7 +137,7 @@ class ChatbotController extends GetxController {
               {
                 "type": "text",
                 "text":
-                    "Please **DON'T** provide any information if the picture below is **NOT** related to '$topic'",
+                    "Your role here is as an assistant that only answers questions related to '$topic' or plants. Please do not provide any information if the picture below is not related to '$topic'."
               },
               {
                 "type": "image_url",
@@ -164,14 +164,6 @@ class ChatbotController extends GetxController {
       }
     } catch (e) {
       // Log error
-    }
-  }
-
-  void handleUserTyping(String text) {
-    if (text.isNotEmpty && !typingUsers.contains(currentUser)) {
-      typingUsers.add(currentUser);
-    } else if (text.isEmpty && typingUsers.contains(currentUser)) {
-      typingUsers.remove(currentUser);
     }
   }
 
