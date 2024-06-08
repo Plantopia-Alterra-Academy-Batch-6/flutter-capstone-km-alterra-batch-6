@@ -3,11 +3,12 @@ import 'package:get/get.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 
 import 'package:plantopia/controllers/bottom_navigation_bar_controller.dart';
+import 'package:plantopia/controllers/my_plant_controller.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_icon_global_widget.dart';
 import 'package:plantopia/views/home/home_view.dart';
+import 'package:plantopia/views/my_plant/my_plant_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
-import 'package:plantopia/controllers/weather_controller.dart'; 
-
+import 'package:plantopia/controllers/weather_controller.dart';
 
 class BottomNavigationBarGlobalWidget extends StatelessWidget {
   const BottomNavigationBarGlobalWidget({
@@ -20,16 +21,16 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
         Get.put(BottomNavigationBarController());
 
     final WeatherController weatherController = Get.put(WeatherController());
-
+    final MyPlantController myPlantController = Get.put(MyPlantController());
 
     return Scaffold(
       body: Obx(() {
         return IndexedStack(
           index: controller.currentIndex.value,
           children: [
-            HomeView(),
+            const HomeView(),
             WeatherView(),
-            const SizedBox.shrink(),
+            MyPlantView(),
             const SizedBox.shrink()
           ],
         );
@@ -42,8 +43,9 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
 
             if (index == 1) {
               weatherController.initLocationAndWeatherData();
+            } else if (index == 2) {
+              myPlantController.getMyPlant();
             }
-
           },
           elevation: 0.0,
           type: BottomNavigationBarType.fixed,
