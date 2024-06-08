@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/views/auth/widgets/custom_auth_button_widget.dart';
 import 'package:plantopia/views/home/home_view.dart';
@@ -16,15 +17,6 @@ class AllowNotificationView extends StatefulWidget {
 
 class _AllowNotificationViewState extends State<AllowNotificationView> {
   final AuthController authController = Get.put(AuthController());
-  @override
-  void initState() {
-    getUser();
-    super.initState();
-  }
-
-  getUser() async {
-    await authController.getUser();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -76,10 +68,21 @@ class _AllowNotificationViewState extends State<AllowNotificationView> {
               isActive: true,
               text: "Allow Access",
               onPressed: () async {
-                // String? userId = await UserTokenPref.getToken();
-                // print(userId);
+                PermissionStatus status =
+                    await Permission.notification.request();
 
-                Get.offAll(const HomeView());
+                if (status.isGranted) {
+                  Get.offAll(const HomeView());
+                } else if (status.isDenied) {
+                  Get.snackbar(
+                    'Permission Denied',
+                    'Please allow notification permission to use this app',
+                    snackPosition: SnackPosition.BOTTOM,
+                  );
+                  openAppSettings();
+                } else if (status.isPermanentlyDenied) {
+                  openAppSettings();
+                }
               },
             ),
             const SizedBox(
