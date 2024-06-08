@@ -4,6 +4,7 @@ import 'package:plantopia/constants/icon_constant.dart';
 import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:plantopia/views/global_widgets/recommended_widget.dart';
 
 part 'widget/my_plant_widget.dart';
 part 'widget/plant_caring_widget.dart';
@@ -12,7 +13,6 @@ part 'widget/plant_guide_first_item_widget.dart';
 part 'widget/plant_guide_second_item_widget.dart';
 part 'widget/plant_guide_third_item_widget.dart';
 part 'widget/plant_guide_widget.dart';
-part 'widget/recommended_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

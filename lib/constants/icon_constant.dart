@@ -13,4 +13,8 @@ class IconConstant {
   static const String weatherRainStrom = 'assets/icons/weather_rain_strom.svg';
   static const String notification = 'assets/icons/notification.svg';
   static const String add = 'assets/icons/add.svg';
+  static const String search = 'assets/icons/search.svg';
+  static const String filter = 'assets/icons/filter.svg';
+  static const String history = 'assets/icons/history.svg';
+  static const String emptyHistoryPlant = 'assets/icons/empty_history_plant.svg';
 }
