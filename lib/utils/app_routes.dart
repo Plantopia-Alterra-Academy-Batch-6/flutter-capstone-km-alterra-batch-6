@@ -5,4 +5,7 @@ class AppRoutes {
   static const String auth = '/auth';
   static const String allowNotif = '/allowNotif';
   static const String onboarding = '/onboarding';
+  static const String myPlant = '/myplant';
+  static const String historyPlant = '/historyplant';
 }
+

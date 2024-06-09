@@ -15,6 +15,9 @@ import 'package:plantopia/views/auth/auth_view.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 import 'package:plantopia/views/home/home_view.dart';
 import 'package:plantopia/views/onboarding/onboarding_view.dart';
+import 'package:plantopia/views/history_plant/history_plant_view.dart';
+import 'package:plantopia/views/home/home_view.dart';
+import 'package:plantopia/views/my_plant/my_plant_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 
 import 'firebase_options.dart';
@@ -58,7 +61,14 @@ Future<void> main() async {
         ),
         GetPage(
           name: AppRoutes.onboarding,
-          page: () => const OnboardingView(),
+          page: () => const OnboardingView()),
+       GetPage(
+          name: AppRoutes.myPlant,
+          page: () => MyPlantView(),
+        ),
+        GetPage(
+          name: AppRoutes.historyPlant,
+          page: () => const HistoryPlantView(),
         ),
       ],
       initialRoute: AppRoutes.splashApp,

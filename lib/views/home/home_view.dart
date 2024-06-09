@@ -8,6 +8,8 @@ import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/utils/app_routes.dart';
+import 'package:flutter_svg/svg.dart';
+import 'package:plantopia/views/global_widgets/recommended_widget.dart';
 
 part 'widget/custom_app_bar_widget.dart';
 part 'widget/my_plant_widget.dart';
@@ -16,7 +18,6 @@ part 'widget/plant_guide_first_item_widget.dart';
 part 'widget/plant_guide_second_item_widget.dart';
 part 'widget/plant_guide_third_item_widget.dart';
 part 'widget/plant_guide_widget.dart';
-part 'widget/recommended_widget.dart';
 
 class HomeView extends StatelessWidget {
   const HomeView({super.key});

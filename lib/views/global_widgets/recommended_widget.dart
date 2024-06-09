@@ -1,4 +1,8 @@
-part of '../home_view.dart';
+import 'package:flutter/material.dart';
+import 'package:plantopia/constants/color_constant.dart';
+import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/views/my_plant/widget/category_plant_widget.dart';
+import 'package:plantopia/views/my_plant/widget/list_recomended_plant_widget.dart';
 
 class RecommendedWidget extends StatelessWidget {
   const RecommendedWidget({super.key});
@@ -6,18 +10,13 @@ class RecommendedWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(
-          height: 24,
-        ),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Text(
-              'My Plant',
+              'Recommended',
               style: TextStyleConstant.heading4.copyWith(
                 fontWeight: FontWeight.w700,
               ),
@@ -36,10 +35,11 @@ class RecommendedWidget extends StatelessWidget {
         const SizedBox(
           height: 12,
         ),
-        // TODO 1: Add PlantCategoryItemWidget
-        // TODO 2: Add ListView.builder PlantCategoryItemWidget
-        // TODO 3: Add PlantItemWidget
-        // TODO 4: Add ListPlantItemWidget
+        const CategoryPlantWidget(),
+        const SizedBox(
+          height: 18,
+        ),
+        const ListRecomendedPlantWidget(),
       ],
     );
   }
