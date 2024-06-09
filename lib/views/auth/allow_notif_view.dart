@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/views/auth/widgets/custom_auth_button_widget.dart';
+import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 import 'package:plantopia/views/home/home_view.dart';
 
 class AllowNotificationView extends StatefulWidget {
@@ -72,7 +73,7 @@ class _AllowNotificationViewState extends State<AllowNotificationView> {
                     await Permission.notification.request();
 
                 if (status.isGranted) {
-                  Get.offAll(const HomeView());
+                  Get.offAll(const BottomNavigationBarGlobalWidget());
                 } else if (status.isDenied) {
                   Get.snackbar(
                     'Permission Denied',

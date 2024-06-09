@@ -12,6 +12,8 @@ class IconConstant {
   static const String weatherSnow = 'assets/icons/weather_snow.svg';
   static const String weatherRainStrom = 'assets/icons/weather_rain_strom.svg';
   static const String notification = 'assets/icons/notification.svg';
+  static const String wind = 'assets/icons/wind.svg';
+  static const String humidity = 'assets/icons/humidity.svg';
   static const String add = 'assets/icons/add.svg';
   static const String search = 'assets/icons/search.svg';
   static const String filter = 'assets/icons/filter.svg';
