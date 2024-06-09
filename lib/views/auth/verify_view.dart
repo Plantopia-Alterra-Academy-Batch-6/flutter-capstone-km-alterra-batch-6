@@ -50,90 +50,92 @@ class _VerificationViewState extends State<VerificationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const SizedBox(
-              height: 50.0,
-            ),
-            const CustomAppbarVerifyWidget(),
-            const SizedBox(
-              height: 32.0,
-            ),
-            const ConfirmDescriptionWidget(),
-            const SizedBox(
-              height: 40.0,
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5.0),
-              child: Obx(
-                () => OtpTextField(
-                  autoFocus: true,
-                  numberOfFields: 6,
-                  filled: true,
-                  showFieldAsBox: true,
-                  fieldWidth: 53,
-                  borderWidth: 0.5,
-                  enabledBorderColor: authController.borderVerifyColor.value,
-                  focusedBorderColor: Colors.black,
-                  cursorColor: Colors.black,
-                  keyboardType: TextInputType.number,
-                  disabledBorderColor: Colors.red,
-                  contentPadding: const EdgeInsets.symmetric(
-                    vertical: 14,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(
+                height: 15.0,
+              ),
+              const CustomAppbarVerifyWidget(),
+              const SizedBox(
+                height: 32.0,
+              ),
+              const ConfirmDescriptionWidget(),
+              const SizedBox(
+                height: 40.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                child: Obx(
+                  () => OtpTextField(
+                    autoFocus: true,
+                    numberOfFields: 6,
+                    filled: true,
+                    showFieldAsBox: true,
+                    fieldWidth: 53,
+                    borderWidth: 0.5,
+                    enabledBorderColor: authController.borderVerifyColor.value,
+                    focusedBorderColor: Colors.black,
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.number,
+                    disabledBorderColor: Colors.red,
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 14,
+                    ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    textStyle: TextStyle(color: colorCurrent ?? Colors.black),
+                    borderRadius: BorderRadius.circular(12),
+                    onSubmit: (String otpUser) async {
+                      final LoginParamsModel? result =
+                          await authController.verification(
+                              loginParams: widget.loginParamsModel, otp: otpUser);
+        
+                      if (result != null) {
+                        alertsuccess(context);
+        
+                        //melakukan login otomatis ketika akun telah verifikasi
+                        await authController.login(loginParams: result);
+                      }
+                    },
                   ),
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  textStyle: TextStyle(color: colorCurrent ?? Colors.black),
-                  borderRadius: BorderRadius.circular(12),
-                  onSubmit: (String otpUser) async {
-                    final LoginParamsModel? result =
-                        await authController.verification(
-                            loginParams: widget.loginParamsModel, otp: otpUser);
-
-                    if (result != null) {
-                      alertsuccess(context);
-
-                      //melakukan login otomatis ketika akun telah verifikasi
-                      await authController.login(loginParams: result);
-                    }
-                  },
                 ),
               ),
-            ),
-            const SizedBox(
-              height: 24.0,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text(
-                  textAlign: TextAlign.center,
-                  "Didn’t receive the code? ",
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                ),
-                TextButton(
-                  style: const ButtonStyle(
-                      padding: WidgetStatePropertyAll(EdgeInsets.zero)),
-                  onPressed: _start == 0
-                      ? () async {
-                          await authController.resendOTP(
-                              email: widget.loginParamsModel.email);
-                          startTimer();
-                        }
-                      : null,
-                  child: Text(
-                    _start == 0 ? "Resend it" : "Resend in $_start",
-                    style: TextStyle(
-                      color:
-                          _start == 0 ? const Color(0xFF10B981) : Colors.grey,
-                      fontWeight: FontWeight.w700,
+              const SizedBox(
+                height: 24.0,
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  const Text(
+                    textAlign: TextAlign.center,
+                    "Didn’t receive the code? ",
+                    style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
+                  ),
+                  TextButton(
+                    style: const ButtonStyle(
+                        padding: WidgetStatePropertyAll(EdgeInsets.zero)),
+                    onPressed: _start == 0
+                        ? () async {
+                            await authController.resendOTP(
+                                email: widget.loginParamsModel.email);
+                            startTimer();
+                          }
+                        : null,
+                    child: Text(
+                      _start == 0 ? "Resend it" : "Resend in $_start",
+                      style: TextStyle(
+                        color:
+                            _start == 0 ? const Color(0xFF10B981) : Colors.grey,
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
-                ),
-              ],
-            ),
-          ],
+                ],
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -104,8 +104,6 @@ class AuthController extends GetxController {
         Get.snackbar('Error', '$e');
       }
       authSection.value = 1;
-
-      authSection.value = 1;
     } finally {
       isLoading.value = false;
     }

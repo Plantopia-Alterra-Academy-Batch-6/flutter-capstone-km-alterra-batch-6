@@ -22,86 +22,95 @@ class _AuthViewState extends State<AuthView> {
   final LoginFormController loginFormController =
       Get.put(LoginFormController());
   final AuthController authController = Get.put(AuthController());
-
+  TabController? tabController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Obx(
-      () => authController.isLoading.value
-          ? const Center(
-              child: CircularProgressIndicator(),
-            )
-          : SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const SizedBox(
-                    height: 50.0,
-                  ),
-                  const CustomAuthAppbarWidget(),
-                  Obx(
-                    () => DefaultTabController(
-                      length: 2,
-                      initialIndex: authController.authSection.value,
-                      child: Column(
-                        children: <Widget>[
-                          Container(
-                            margin:
-                                const EdgeInsets.symmetric(horizontal: 16.0),
-                            decoration: const BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                              color: Color(0xFFF3F4F6),
-                            ),
-                            constraints:
-                                const BoxConstraints.expand(height: 45),
-                            child: const TabBar(
-                                splashBorderRadius:
+        body: SafeArea(
+      child: Obx(
+        () => authController.isLoading.value
+            ? const Center(
+                child: CircularProgressIndicator(),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const SizedBox(
+                      height: 20.0,
+                    ),
+                    const CustomAuthAppbarWidget(),
+                    Obx(
+                      () => DefaultTabController(
+                        length: 2,
+                        initialIndex: authController.authSection.value,
+                        child: Column(
+                          children: <Widget>[
+                            Container(
+                              margin:
+                                  const EdgeInsets.symmetric(horizontal: 16.0),
+                              decoration: const BoxDecoration(
+                                borderRadius:
                                     BorderRadius.all(Radius.circular(8)),
-                                dividerHeight: 0,
-                                labelColor: Colors.white,
-                                indicatorPadding: EdgeInsets.all(5),
-                                indicator: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(8)),
-                                  color: Color(0xFF10B981),
+                                color: Color(0xFFF3F4F6),
+                              ),
+                              constraints:
+                                  const BoxConstraints.expand(height: 45),
+                              child: TabBar(
+                                  onTap: (value) {
+                                    authController.authSection.value = value;
+                                  },
+                                  splashBorderRadius: const BorderRadius.all(
+                                      Radius.circular(8)),
+                                  dividerHeight: 0,
+                                  labelColor: Colors.white,
+                                  indicatorPadding: const EdgeInsets.all(5),
+                                  indicator: const BoxDecoration(
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
+                                    color: Color(0xFF10B981),
+                                  ),
+                                  indicatorSize: TabBarIndicatorSize.tab,
+                                  indicatorColor: Colors.amber,
+                                  unselectedLabelStyle: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w400),
+                                  labelStyle: const TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.w600),
+                                  tabs: const [
+                                    Tab(
+                                      child: Text("Login"),
+                                    ),
+                                    Tab(
+                                      child: Text("Sign Up"),
+                                    ),
+                                  ]),
+                            ),
+                            const SizedBox(
+                              // color: Colors.orange[200],
+                              height: 600,
+                              child: TabBarView(children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 16.0),
+                                  child: LoginSectionWidget(),
                                 ),
-                                indicatorSize: TabBarIndicatorSize.tab,
-                                indicatorColor: Colors.amber,
-                                unselectedLabelStyle: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w400),
-                                labelStyle: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.w600),
-                                tabs: [
-                                  Tab(
-                                    child: Text("Login"),
-                                  ),
-                                  Tab(
-                                    child: Text("Sign Up"),
-                                  ),
-                                ]),
-                          ),
-                          const SizedBox(
-                            // color: Colors.orange[200],
-                            height: 600,
-                            child: TabBarView(children: [
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                                child: LoginSectionWidget(),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(horizontal: 16.0),
-                                child: SignUpSectionWidget(),
-                              ),
-                            ]),
-                          ),
-                        ],
+                                Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 16.0),
+                                  child: SignUpSectionWidget(),
+                                ),
+                              ]),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
+      ),
     ));
   }
 }
