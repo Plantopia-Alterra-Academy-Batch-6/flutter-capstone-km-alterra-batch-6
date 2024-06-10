@@ -13,13 +13,13 @@ class ImageCarouselWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map arguments = Get.arguments;
-    final PlantElement detailMyPlant = arguments['detailPlant'];
+    final PlantElement detailMyPlant = arguments['myPlantDetails'];
     return Obx(
       () {
         return Stack(
           children: [
             CarouselSlider.builder(
-              itemCount: detailMyPlant.plant!.plantImages!.length,
+              itemCount: detailMyPlant.plant?.plantImages?.length ?? 0,
               itemBuilder: (context, index, realIndex) {
                 return Container(
                   width: double.infinity,

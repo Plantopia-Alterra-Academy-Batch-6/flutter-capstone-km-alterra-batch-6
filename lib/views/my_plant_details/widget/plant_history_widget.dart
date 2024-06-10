@@ -10,14 +10,18 @@ import 'package:plantopia/models/get_my_plant_response_model.dart';
 class PlantHistoryWidget extends StatelessWidget {
   PlantHistoryWidget({super.key});
 
-  final MyPlantDetailsController myPlantDetailsController = Get.put(MyPlantDetailsController());
+  final MyPlantDetailsController myPlantDetailsController =
+      Get.put(MyPlantDetailsController());
 
   @override
   Widget build(BuildContext context) {
     final Map arguments = Get.arguments;
-    final PlantElement detailMyPlant = arguments['detailPlant'];
+    final PlantElement detailMyPlant = arguments['myPlantDetails'];
     return Column(
       children: [
+        const SizedBox(
+          height: 24,
+        ),
         SizedBox(
           child:
               Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [

@@ -8,7 +8,7 @@ class PlantGuideCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final Map arguments = Get.arguments;
-    // final PlantElement detailMyPlant = arguments['detailPlant'];
+    // final PlantElement detailMyPlant = arguments['myPlantDetails'];
     //get the plant id throught that
     return Column(
       children: [

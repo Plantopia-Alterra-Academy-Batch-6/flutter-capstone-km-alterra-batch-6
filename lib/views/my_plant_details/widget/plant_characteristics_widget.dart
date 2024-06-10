@@ -10,7 +10,7 @@ class PlantCharacteristicsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map arguments = Get.arguments;
-    final PlantElement detailMyPlant = arguments['detailPlant'];
+    final PlantElement detailMyPlant = arguments['myPlantDetails'];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -29,7 +29,7 @@ class PlantCharacteristicsWidget extends StatelessWidget {
                 fontWeight: FontWeight.w400, color: ColorConstant.neutral500),
           ),
           trailing: Text(
-            '${(detailMyPlant.plant!.plantCharacteristic!.height! / 100).truncate()} meter',
+            '${(detailMyPlant.plant?.plantCharacteristic?.height ?? 0 / 100 ).truncate()} meter',
             style: TextStyleConstant.subtitle
                 .copyWith(fontWeight: FontWeight.w700),
           ),
@@ -45,7 +45,7 @@ class PlantCharacteristicsWidget extends StatelessWidget {
                 fontWeight: FontWeight.w400, color: ColorConstant.neutral500),
           ),
           trailing: Text(
-            '${detailMyPlant.plant!.plantCharacteristic!.wide!} cm',
+            '${detailMyPlant.plant?.plantCharacteristic?.wide ?? 0} cm',
             style: TextStyleConstant.subtitle
                 .copyWith(fontWeight: FontWeight.w700),
           ),

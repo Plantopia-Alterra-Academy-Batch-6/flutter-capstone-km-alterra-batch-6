@@ -8,6 +8,7 @@ import 'package:plantopia/utils/status_enum_util.dart';
 import 'package:plantopia/views/global_widgets/card_global_widget.dart';
 import 'package:plantopia/views/global_widgets/recommended_widget.dart';
 import 'package:plantopia/views/my_plant/widget/empty_my_plant_widget.dart';
+import 'package:plantopia/views/my_plant/widget/my_plant_list_widget.dart';
 import 'package:plantopia/views/my_plant/widget/search_bar_widget.dart';
 
 class MyPlantView extends StatelessWidget {
@@ -19,6 +20,7 @@ class MyPlantView extends StatelessWidget {
   Widget build(BuildContext context) {
     final MyPlantController myPlantController = Get.find<MyPlantController>();
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -41,17 +43,8 @@ class MyPlantView extends StatelessWidget {
                     style: TextStyleConstant.subtitle,
                   ),
                 ),
-                const SizedBox(
-                  height: 18,
-                ),
                 SearchBarWidget(),
-                const SizedBox(
-                  height: 24,
-                ),
-                Obx(() => _myPlantList(
-                      myPlantController.myPlantData.value,
-                      context,
-                    )),
+                MyPlantListWidget(),
                 const SizedBox(
                   height: 10,
                 ),

@@ -23,4 +23,6 @@ class IconConstant {
   static const String waterDrop = 'assets/icons/water_drop.svg';
   static const String schedule = 'assets/icons/schedule.svg';
   static const String calendar = 'assets/icons/calendar.svg';
+  static const String chat = 'assets/icons/chat.svg';
+  static const String addPhoto = 'assets/icons/add_photo.svg';
 }

@@ -12,21 +12,21 @@ class AboutPlantWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map arguments = Get.arguments;
-    final PlantElement detailMyPlant = arguments['detailPlant'];
+    final PlantElement detailMyPlant = arguments['myPlantDetails'];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(height: 20), // Add some space to adjust for the overlap
         Center(
           child: Text(
-            controller.plantByIdResponse!.data!.name!,
+            detailMyPlant.plant?.name ?? "-",
             style: TextStyleConstant.heading3
                 .copyWith(fontWeight: FontWeight.w700),
           ),
         ),
         const SizedBox(height: 8),
         Text(
-          detailMyPlant.plant!.description!,
+          detailMyPlant.plant?.description ?? "-",
           style: TextStyleConstant.paragraph,
         ),
       ],

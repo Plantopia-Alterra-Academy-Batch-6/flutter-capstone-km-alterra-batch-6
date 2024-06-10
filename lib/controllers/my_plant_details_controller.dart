@@ -40,19 +40,23 @@ class MyPlantDetailsController extends GetxController {
     int months = (difference.inDays % 365) ~/ 30;
     int weeks = ((difference.inDays % 365) % 30) ~/ 7;
     int days = ((difference.inDays % 365) % 30) % 7;
+    int hours = difference.inHours;
+    int minutes = difference.inMinutes.remainder(60);
 
     if (years > 0) {
-      plantAge += '$years years ';
+      plantAge = '$years years ';
+    } else if (months > 0) {
+      plantAge = '$months months ';
+    } else if (weeks > 0) {
+      plantAge = '$weeks weeks ';
+    } else if (days > 0) {
+      plantAge = '$days days ';
+    } else if (hours > 0) {
+      plantAge = '$hours hours ';
+    } else if (minutes > 0) {
+      plantAge = '$minutes minutes ';
     }
-    if (months > 0) {
-      plantAge += '$months months ';
-    }
-    if (weeks > 0) {
-      plantAge += '$weeks weeks ';
-    }
-    if (days > 0) {
-      plantAge += '$days days ';
-    }
+
     return plantAge;
   }
 }

@@ -13,7 +13,7 @@ class FaqWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map arguments = Get.arguments;
-    final PlantElement detailMyPlant = arguments['detailPlant'];
+    final PlantElement detailMyPlant = arguments['myPlantDetails'];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -26,7 +26,7 @@ class FaqWidget extends StatelessWidget {
         const SizedBox(height: 14),
         Column(
           children: List.generate(
-            detailMyPlant.plant!.plantFaqs!.length,
+            detailMyPlant.plant?.plantFaqs?.length ?? 0,
             (value) {
               return Padding(
                 padding: const EdgeInsets.only(bottom: 14),
@@ -43,8 +43,7 @@ class FaqWidget extends StatelessWidget {
                         .copyWith(dividerColor: Colors.transparent),
                     child: ExpansionTile(
                       title: Text(
-                        controller.plantByIdResponse!.data!.plantFaqs![value]
-                            .question!,
+                        detailMyPlant.plant?.plantFaqs?[value].question ?? "-",
                         style: TextStyleConstant.subtitle
                             .copyWith(fontWeight: FontWeight.w700),
                       ),
@@ -58,13 +57,10 @@ class FaqWidget extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                controller.plantByIdResponse!.data!
-                                    .plantFaqs![value].answer!,
-                                style: TextStyleConstant.subtitle.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
-                                ),
-                              ),
+                                  detailMyPlant
+                                          .plant?.plantFaqs?[value].answer! ??
+                                      "-",
+                                  style: TextStyleConstant.paragraph),
                             ],
                           ),
                         ),

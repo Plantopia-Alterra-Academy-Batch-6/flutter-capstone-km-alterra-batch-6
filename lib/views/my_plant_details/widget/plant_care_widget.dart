@@ -8,7 +8,7 @@ class PlantCareWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // final Map arguments = Get.arguments;
-    // final PlantElement detailMyPlant = arguments['detailPlant'];
+    // final PlantElement detailMyPlant = arguments['myPlantDetails'];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [

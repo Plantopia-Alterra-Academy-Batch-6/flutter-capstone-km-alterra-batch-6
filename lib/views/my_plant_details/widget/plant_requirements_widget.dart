@@ -11,7 +11,7 @@ class PlantRequirementsWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map arguments = Get.arguments;
-    final PlantElement detailMyPlant = arguments['detailPlant'];
+    final PlantElement detailMyPlant = arguments['myPlantDetails'];
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -66,9 +66,7 @@ class PlantRequirementsWidget extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.w600),
                 ),
                 trailing: Text(
-                  detailMyPlant.plant?.isToxic != null
-                      ? 'Toxic'
-                      : 'Non-Toxic' ,
+                  detailMyPlant.plant?.isToxic != null ? 'Toxic' : 'Non-Toxic',
                   style: TextStyleConstant.subtitle
                       .copyWith(fontWeight: FontWeight.w400),
                 ),
