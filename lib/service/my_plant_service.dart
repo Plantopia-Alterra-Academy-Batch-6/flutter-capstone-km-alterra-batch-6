@@ -1,14 +1,15 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
 
 class MyPlantService {
   static Dio dio = Dio();
-  static String token = dotenv.get('TOKEN');
-  
+
   static Future<GetMyPlantResponse> getMyPlant() async {
     try {
-      int userId = 3;
+      final token = await UserTokenPref.getToken();
+
+      final userId = await UserTokenPref.getUserId();
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
       };
