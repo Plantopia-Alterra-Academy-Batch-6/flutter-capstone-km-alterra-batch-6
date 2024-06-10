@@ -16,7 +16,9 @@ class WeatherDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
+        backgroundColor: Colors.white,
         title: Text(
           'Weather Detail',
           style: TextStyleConstant.heading4.copyWith(
