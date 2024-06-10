@@ -7,5 +7,8 @@ class AppRoutes {
   static const String onboarding = '/onboarding';
   static const String myPlant = '/myplant';
   static const String historyPlant = '/historyplant';
+  static const String addPlant = '/addPlant';
+  static const String searchPlant = '/searchPlant';
+  static const String plantDetails = '/plantDetails';
 }
 

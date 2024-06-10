@@ -27,6 +27,7 @@ class AuthController extends GetxController {
       final String? token = await UserTokenPref.getToken();
       if (token != null) {
         final UserModel? result = await AuthService.getUser(token);
+        await UserTokenPref.setUserId(result?.id ?? -1);
         if (result != null) {
           currentUser.value = result;
           print("cek currentUser name :  ${currentUser.value?.name}");

@@ -56,7 +56,9 @@ class MyPlantWidget extends StatelessWidget {
                 height: 12,
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed(AppRoutes.addPlant);
+                },
                 child: Ink(
                   decoration: BoxDecoration(
                     color: ColorConstant.primary100,
