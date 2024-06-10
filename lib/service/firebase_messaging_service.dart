@@ -16,7 +16,7 @@ class FirebaseMessagingService {
       }
     }
 
-    FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+    //FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
     FirebaseMessaging.onMessage.listen(
       (RemoteMessage message) {
