@@ -30,8 +30,10 @@ class CardGlobalWidget extends StatelessWidget {
         borderRadius: BorderRadius.circular(24),
         child: Stack(
           children: [
-            Align(
-              alignment: Alignment.bottomRight,
+            Positioned(
+              //alignment: Alignment.bottomRight,
+              bottom: -10,
+              left: 70,
               child: Image.asset(
                 ImageConstant.plantDummy,
                 height: 130,

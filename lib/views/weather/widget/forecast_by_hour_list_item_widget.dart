@@ -27,7 +27,7 @@ class ForecastByHourListItemWidget extends StatelessWidget {
               8,
             ),
           ),
-          color: isFirstItem ? ColorConstant.neutral0 : null,
+          color: isFirstItem ? ColorConstant.link50 : null,
         ),
         child: Column(
           children: [

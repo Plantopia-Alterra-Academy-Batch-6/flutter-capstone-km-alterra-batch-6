@@ -10,11 +10,13 @@ import 'package:plantopia/views/my_plant/widget/empty_my_plant_widget.dart';
 import 'package:plantopia/views/my_plant/widget/search_bar_widget.dart';
 
 class MyPlantView extends StatelessWidget {
-  MyPlantView({super.key});
-  final MyPlantController myPlantController = Get.put(MyPlantController());
+  MyPlantView({super.key}) {
+    Get.lazyPut<MyPlantController>(() => MyPlantController());
+  }
 
   @override
   Widget build(BuildContext context) {
+    final MyPlantController myPlantController = Get.find<MyPlantController>();
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
@@ -58,25 +60,26 @@ class MyPlantView extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        backgroundColor: ColorConstant.primary500,
-        label: Text(
-          'Add Plant',
-          style: TextStyleConstant.subtitle.copyWith(
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-        ),
-        icon: const Icon(
-          Icons.add_circle_outline,
-          color: Colors.white,
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () {},
+      //   backgroundColor: ColorConstant.primary500,
+      //   label: Text(
+      //     'Add Plant',
+      //     style: TextStyleConstant.subtitle.copyWith(
+      //       fontWeight: FontWeight.w700,
+      //       color: Colors.white,
+      //     ),
+      //   ),
+      //   icon: const Icon(
+      //     Icons.add_circle_outline,
+      //     color: Colors.white,
+      //   ),
+      // ),
     );
   }
 
   Widget _myPlantList(Status status, BuildContext context) {
+    final MyPlantController myPlantController = Get.find<MyPlantController>();
     switch (status) {
       case Status.loading:
         return const Center(

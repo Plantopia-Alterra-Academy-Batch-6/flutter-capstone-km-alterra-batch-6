@@ -7,6 +7,10 @@ import 'package:plantopia/views/weather/weather_detail_view.dart';
 import 'package:plantopia/views/weather/widget/current_weather_card_widget.dart';
 import 'package:plantopia/views/weather/widget/forecast_by_hour_list_widget.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/views/weather/widget/weather_info_humidity_widget.dart';
+import 'package:plantopia/views/weather/widget/weather_info_real_feel_widget.dart';
+import 'package:plantopia/views/weather/widget/weather_info_sunset_sunrise_widget.dart';
+import 'package:plantopia/views/weather/widget/weather_info_wind_speed_widget.dart';
 
 part 'widget/permission_location_widget.dart';
 
@@ -20,13 +24,13 @@ class WeatherView extends StatelessWidget {
     final WeatherController weatherController = Get.find<WeatherController>();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Obx(
         () {
           if (weatherController.locationPermissionDenied.value) {
             return PermissionLocationWidget(
               onPressed: () async {
-                weatherController.currentWeatherStatus.value =
-                    Status.loading;
+                weatherController.currentWeatherStatus.value = Status.loading;
                 weatherController.forecastByHour.value = Status.loading;
                 weatherController.forecastByDay.value = Status.loading;
                 await weatherController.requestLocationPermission();
@@ -91,6 +95,57 @@ class WeatherView extends StatelessWidget {
                       );
                     },
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Obx(
+                    () {
+                      return _buildStatusWidget(
+                        weatherController.currentWeatherStatus.value,
+                        () => Column(
+                          children: [
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: WeatherInfoWindSpeedWidget(
+                                    weatherData:
+                                        weatherController.weatherData.value,
+                                  ),
+                                ),
+                                const SizedBox(
+                                    width:
+                                        16), 
+                                Expanded(
+                                  child: WeatherInfoSunsetSunriseWidget(
+                                    weatherData:
+                                        weatherController.weatherData.value,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(height: 16),
+                            Row(
+                              children: [
+                                Expanded(
+                                  child: WeatherInfoRealFeelWidget(
+                                    weatherData:
+                                        weatherController.weatherData.value,
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: WeatherInfoHumidityWidget(
+                                    weatherData:
+                                        weatherController.weatherData.value,
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      );
+                    },
+                  )
                 ],
               ),
             );
