@@ -30,7 +30,7 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
           children: [
             const HomeView(),
             WeatherView(),
-            //MyPlantView(),
+            MyPlantView(),
             const SizedBox.shrink()
           ],
         );
