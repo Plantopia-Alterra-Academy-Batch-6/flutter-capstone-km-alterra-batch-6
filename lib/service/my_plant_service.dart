@@ -8,7 +8,6 @@ class MyPlantService {
   static Future<GetMyPlantResponse> getMyPlant() async {
     try {
       final token = await UserTokenPref.getToken();
-
       final userId = await UserTokenPref.getUserId();
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',

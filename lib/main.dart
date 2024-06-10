@@ -15,6 +15,7 @@ import 'package:plantopia/views/auth/allow_notif_view.dart';
 import 'package:plantopia/views/auth/auth_view.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 import 'package:plantopia/views/home/home_view.dart';
+import 'package:plantopia/views/my_plant_details/my_plant_details_view.dart';
 import 'package:plantopia/views/onboarding/onboarding_view.dart';
 import 'package:plantopia/views/history_plant/history_plant_view.dart';
 
@@ -86,6 +87,10 @@ Future<void> main() async {
         GetPage(
           name: AppRoutes.plantDetails,
           page: () => PlantDetailsView(),
+        ),
+        GetPage(
+          name: AppRoutes.myPlantDetails,
+          page: () => MyPlantDetailsView(),
         ),
       ],
       initialRoute: AppRoutes.splashApp,
