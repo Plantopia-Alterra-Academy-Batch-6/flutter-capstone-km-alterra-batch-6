@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/my_plant_controller.dart';
 import 'package:plantopia/views/global_widgets/recommended_widget.dart';
@@ -49,22 +50,21 @@ class MyPlantView extends StatelessWidget {
           ),
         ),
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   onPressed: () {},
-      //   backgroundColor: ColorConstant.primary500,
-      //   label: Text(
-      //     'Add Plant',
-      //     style: TextStyleConstant.subtitle.copyWith(
-      //       fontWeight: FontWeight.w700,
-      //       color: Colors.white,
-      //     ),
-      //   ),
-      //   icon: const Icon(
-      //     Icons.add_circle_outline,
-      //     color: Colors.white,
-      //   ),
-      // ),
+      floatingActionButton: FloatingActionButton.extended(
+        onPressed: () {},
+        backgroundColor: ColorConstant.primary500,
+        label: Text(
+          'Add Plant',
+          style: TextStyleConstant.subtitle.copyWith(
+            fontWeight: FontWeight.w700,
+            color: Colors.white,
+          ),
+        ),
+        icon: const Icon(
+          Icons.add_circle_outline,
+          color: Colors.white,
+        ),
+      ),
     );
   }
-
 }
