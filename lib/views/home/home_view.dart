@@ -14,7 +14,6 @@ import 'package:plantopia/views/global_widgets/card_global_widget.dart';
 import 'package:plantopia/views/global_widgets/recommended_widget.dart';
 import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
 import 'package:plantopia/views/my_plant/widget/empty_my_plant_widget.dart';
-import 'package:plantopia/views/my_plant/widget/my_plant_list_widget.dart';
 part 'widget/custom_app_bar_widget.dart';
 part 'widget/my_plant_widget.dart';
 part 'widget/plant_caring_widget.dart';
