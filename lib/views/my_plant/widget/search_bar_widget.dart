@@ -13,72 +13,79 @@ class SearchBarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 4.0,
-      ),
-      child: Row(
-        children: [
-          Expanded(
-            child: TextFormField(
-              controller: _myPlantController.searchController,
-              decoration: InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: ColorConstant.neutral300,
-                  ),
-                  borderRadius: BorderRadius.circular(
-                    8,
-                  ),
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(
-                    color: ColorConstant.neutral300,
-                  ),
-                  borderRadius: BorderRadius.circular(
-                    8,
-                  ),
-                ),
-                hintText: "Search",
-                prefixIconConstraints: const BoxConstraints(
-                  minHeight: 16,
-                  minWidth: 16,
-                ),
-                prefixIcon: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                  child: SvgPicture.asset(
-                    IconConstant.search,
-                  ),
-                ),
-                suffixIconConstraints: const BoxConstraints(
-                  minHeight: 16,
-                  minWidth: 16,
-                ),
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                  child: InkWell(
-                    onTap: () {},
-                    child: SvgPicture.asset(
-                      IconConstant.filter,
+    return Column(
+      children: [
+        const SizedBox(
+          height: 18,
+        ),
+        Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 4.0,
+          ),
+          child: Row(
+            children: [
+              Expanded(
+                child: TextFormField(
+                  controller: _myPlantController.searchController,
+                  decoration: InputDecoration(
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: ColorConstant.neutral300,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        8,
+                      ),
+                    ),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(
+                        color: ColorConstant.neutral300,
+                      ),
+                      borderRadius: BorderRadius.circular(
+                        8,
+                      ),
+                    ),
+                    hintText: "Search",
+                    prefixIconConstraints: const BoxConstraints(
+                      minHeight: 16,
+                      minWidth: 16,
+                    ),
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                      child: SvgPicture.asset(
+                        IconConstant.search,
+                      ),
+                    ),
+                    suffixIconConstraints: const BoxConstraints(
+                      minHeight: 16,
+                      minWidth: 16,
+                    ),
+                    suffixIcon: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                      child: InkWell(
+                        onTap: () {},
+                        child: SvgPicture.asset(
+                          IconConstant.filter,
+                        ),
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
+              const SizedBox(
+                width: 10,
+              ),
+              InkWell(
+                onTap: () {
+                  Get.toNamed(AppRoutes.historyPlant);
+                },
+                child: SvgPicture.asset(
+                  IconConstant.history,
+                ),
+              ),
+            ],
           ),
-          const SizedBox(
-            width: 10,
-          ),
-          InkWell(
-            onTap: () {
-              Get.toNamed(AppRoutes.historyPlant);
-            },
-            child: SvgPicture.asset(
-              IconConstant.history,
-            ),
-          ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }

@@ -5,11 +5,12 @@ class AppRoutes {
   static const String auth = '/auth';
   static const String allowNotif = '/allowNotif';
   static const String onboarding = '/onboarding';
-  static const String myPlant = '/myplant';
-  static const String historyPlant = '/historyplant';
+  static const String myPlant = '/myPlant';
+  static const String historyPlant = '/historyPlant';
   static const String addPlant = '/addPlant';
   static const String searchPlant = '/searchPlant';
   static const String plantDetails = '/plantDetails';
+  static const String myPlantDetails = '/myPlantDetails';
   static const String successAddPlant = '/successAddPlant';
   static const String plantFilter = '/plantFilter';
 }

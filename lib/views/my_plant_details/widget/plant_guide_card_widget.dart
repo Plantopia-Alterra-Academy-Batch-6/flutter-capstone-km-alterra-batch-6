@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 
@@ -9,6 +7,9 @@ class PlantGuideCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // final Map arguments = Get.arguments;
+    // final PlantElement detailMyPlant = arguments['myPlantDetails'];
+    //get the plant id throught that
     return Column(
       children: [
         const SizedBox(height: 24),

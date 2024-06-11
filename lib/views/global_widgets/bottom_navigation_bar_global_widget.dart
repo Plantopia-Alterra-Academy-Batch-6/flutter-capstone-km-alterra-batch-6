@@ -47,10 +47,13 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
           currentIndex: controller.currentIndex.value,
           onTap: (index) {
             controller.setCurrentIndex(index);
-            if (index == 1) {
+
+            if (index == 0) {
+              myPlantController.init();
+            } else if (index == 1) {
               weatherController.initLocationAndWeatherData();
             } else if (index == 2) {
-              myPlantController.getMyPlant();
+              myPlantController.init();
             }
           },
           elevation: 0.0,

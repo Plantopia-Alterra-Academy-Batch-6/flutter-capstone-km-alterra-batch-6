@@ -1,101 +1,113 @@
 part of '../home_view.dart';
 
 class MyPlantWidget extends StatelessWidget {
-  const MyPlantWidget({super.key});
+  MyPlantWidget({super.key});
+
+  final MyPlantController myPlantController = Get.put(MyPlantController());
 
   @override
   Widget build(BuildContext context) {
     return Column(
-      // TODO 1: Add Conditional with plant data
-      // TODO 2: Add PlantItemWidget
-      // TODO 3: Add ListPlantItemWidget
-      mainAxisAlignment: MainAxisAlignment.start,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SizedBox(
           height: 24,
         ),
-        Text(
-          'My Plant',
-          style: TextStyleConstant.heading4.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              "My Plant",
+              style: TextStyleConstant.heading4.copyWith(
+                fontWeight: FontWeight.w700,
+              ),
+            ),
+            TextButton(
+              onPressed: () {},
+              child: Text(
+                "View more",
+                style: TextStyleConstant.paragraph.copyWith(
+                  color: ColorConstant.link500,
+                ),
+              ),
+            )
+          ],
         ),
         const SizedBox(
           height: 12,
         ),
-        Container(
-          padding: const EdgeInsets.all(
-            16,
-          ),
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: ColorConstant.neutral300,
-            ),
-            borderRadius: BorderRadius.circular(
-              16,
-            ),
-          ),
-          alignment: Alignment.center,
-          child: Column(
-            children: [
-              SvgPicture.asset(
-                ImageConstant.g10,
-                height: 58,
-                width: 58,
-              ),
-              const SizedBox(
-                height: 4,
-              ),
-              Text(
-                "Let’s get started by adding\nyour first plant!",
-                textAlign: TextAlign.center,
-                style: TextStyleConstant.paragraph,
-              ),
-              const SizedBox(
-                height: 12,
-              ),
-              InkWell(
-                onTap: () {
-                  Get.toNamed(AppRoutes.addPlant);
-                },
-                child: Ink(
-                  decoration: BoxDecoration(
-                    color: ColorConstant.primary100,
-                    borderRadius: BorderRadius.circular(
-                      8,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(
-                      14,
-                    ),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        SvgPicture.asset(
-                          IconConstant.add,
-                          height: 20,
-                          width: 20,
+        Obx(() {
+          switch (myPlantController.myPlantData.value) {
+            case Status.loading:
+              return SizedBox(
+                height: 200,
+                width: double.infinity,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: myPlantController.listMyPlant.length,
+                    itemExtent: 156,
+                    itemBuilder: (context, int index) {
+                      return const Padding(
+                        padding: EdgeInsets.only(right: 8.0),
+                        child: ShimmerContainerGlobalWidget(
+                          width: 156,
+                          height: 200,
+                          radius: 24,
                         ),
-                        const SizedBox(
-                          width: 16,
-                        ),
-                        Text(
-                          "Add Plant",
-                          style: TextStyleConstant.subtitle.copyWith(
-                            color: ColorConstant.primary500,
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
+                      );
+                    }),
+              );
+            case Status.loaded:
+              return SizedBox(
+                height: 200,
+                width: double.infinity,
+                child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: myPlantController.listMyPlant.length,
+                    itemExtent: 156,
+                    itemBuilder: (context, int index) {
+                      return Padding(
+                          padding: const EdgeInsets.only(right: 12.0),
+                          child: InkWell(
+                            onTap: () {
+                              Get.toNamed(AppRoutes.myPlantDetails, arguments: {
+                                'myPlantDetails':
+                                    myPlantController.listMyPlant[index]
+                              })?.then((value) {
+                                myPlantController.getMyPlant();
+                              });
+                            },
+                            child: CardGlobalWidget(
+                                plantName: myPlantController
+                                        .listMyPlant[index].plant?.name ??
+                                    "-",
+                                plantCategory: myPlantController
+                                        .listMyPlant[index]
+                                        .plant
+                                        ?.plantCategory
+                                        ?.name ??
+                                    "-",
+                                plantImageUrl: myPlantController
+                                        .listMyPlant[index]
+                                        .plant
+                                        ?.plantImages?[0]
+                                        .fileName ??
+                                    "-"),
+                          ));
+                    }),
+              );
+            case Status.error:
+              return Text(
+                "Failed to load my plant data",
+                style: TextStyleConstant.heading4.copyWith(
+                  color: ColorConstant.danger500,
                 ),
-              ),
-            ],
-          ),
-        ),
+              );
+
+            default:
+              return const EmptyMyPlantWidget();
+          }
+        }),
       ],
     );
   }
