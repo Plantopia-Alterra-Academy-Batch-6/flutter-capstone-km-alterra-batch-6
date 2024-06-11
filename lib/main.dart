@@ -19,6 +19,8 @@ import 'package:plantopia/views/home/home_view.dart';
 import 'package:plantopia/views/my_plant/my_plant_view.dart';
 import 'package:plantopia/views/onboarding/onboarding_view.dart';
 import 'package:plantopia/views/plant_details/plant_details_view.dart';
+import 'package:plantopia/views/plant_details/success_add_plant_view.dart';
+import 'package:plantopia/views/plant_filter/plant_filter_view.dart';
 import 'package:plantopia/views/search_plant/search_plant_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 
@@ -81,6 +83,14 @@ Future<void> main() async {
         GetPage(
           name: AppRoutes.plantDetails,
           page: () => PlantDetailsView(),
+        ),
+        GetPage(
+          name: AppRoutes.successAddPlant,
+          page: () => const SuccessAddPlantView(),
+        ),
+        GetPage(
+          name: AppRoutes.plantFilter,
+          page: () => PlantFilterView(),
         ),
       ],
       initialRoute: AppRoutes.splashApp,

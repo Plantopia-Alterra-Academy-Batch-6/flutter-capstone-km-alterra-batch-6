@@ -16,7 +16,7 @@ class ImageCarouselWidget extends StatelessWidget {
         return Stack(
           children: [
             CarouselSlider.builder(
-              itemCount: controller.plantByIdResponse!.data!.plantImages!.length,
+              itemCount: controller.plantByIdResponse!.data!.plantImages?.length ?? 0,
               itemBuilder: (context, index, realIndex) {
                 return Container(
                   width: double.infinity,
@@ -43,7 +43,7 @@ class ImageCarouselWidget extends StatelessWidget {
               child: Center(
                 child: AnimatedSmoothIndicator(
                   activeIndex: controller.activeIndex.value,
-                  count: controller.plantByIdResponse!.data!.plantImages!.length,
+                  count: controller.plantByIdResponse!.data!.plantImages?.length ?? 0,
                   effect: ScrollingDotsEffect(
                     activeDotColor: Colors.green,
                     dotColor: Colors.white.withOpacity(0.5),

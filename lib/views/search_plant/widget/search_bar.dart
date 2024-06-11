@@ -4,6 +4,7 @@ import 'package:plantopia/constants/icon_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/controllers/search_plant_controller.dart';
+import 'package:plantopia/utils/app_routes.dart';
 
 class SearchBarWidget extends StatelessWidget {
   SearchBarWidget({super.key});
@@ -54,7 +55,10 @@ class SearchBarWidget extends StatelessWidget {
           width: 20,
           height: 20,
           child: InkWell(
-            onTap: () {},
+            borderRadius: BorderRadius.circular(180),
+            onTap: () {
+              Get.toNamed(AppRoutes.plantFilter);
+            },
             child: SvgPicture.asset(
               IconConstant.filter,
             ),
