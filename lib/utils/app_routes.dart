@@ -10,5 +10,7 @@ class AppRoutes {
   static const String addPlant = '/addPlant';
   static const String searchPlant = '/searchPlant';
   static const String plantDetails = '/plantDetails';
+  static const String successAddPlant = '/successAddPlant';
+  static const String plantFilter = '/plantFilter';
 }
 

@@ -9,6 +9,7 @@ class AddPlantController extends GetxController {
   AddPlantService addPlantService = AddPlantService();
   PlantCategoriesResponse? plantCategoriesResponse;
   PlantRecommendationsResponse? plantRecommendationsResponse;
+  RxInt selectedPlant = 0.obs;
 
   @override
   void onInit() {
@@ -19,7 +20,7 @@ class AddPlantController extends GetxController {
   Future<void> initAddPlantPage() async {
     isPageLoading(true);
     plantCategoriesResponse = await addPlantService.getAllPlantCategory();
-    //plantRecommendationsResponse = await addPlantService.getPlantRecommendations();
+    plantRecommendationsResponse = await addPlantService.getPlantRecommendations();
     isPageLoading(false);
   }
 

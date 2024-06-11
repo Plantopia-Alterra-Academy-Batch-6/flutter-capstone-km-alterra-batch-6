@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/controllers/add_plant_controller.dart';
+import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/global_widgets/card_global_widget.dart';
 
 class RecommendedCardWidget extends StatelessWidget {
-  const RecommendedCardWidget({super.key});
+  RecommendedCardWidget({super.key});
+
+  final controller = Get.put(AddPlantController());
 
   @override
   Widget build(BuildContext context) {
@@ -23,12 +28,18 @@ class RecommendedCardWidget extends StatelessWidget {
               itemCount: 5,
               itemExtent: 156,
               itemBuilder: (context, int index) {
-                return const Padding(
-                    padding: EdgeInsets.only(right: 12.0),
-                    child: CardGlobalWidget(
-                      plantName: '',
-                      plantCategory: '',
-                      plantImageUrl: '',
+                return Padding(
+                    padding: const EdgeInsets.only(right: 12.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        controller.selectedPlant(controller.plantRecommendationsResponse!.data![index].id);
+                        Get.toNamed(AppRoutes.plantDetails);
+                      },
+                      child: CardGlobalWidget(
+                        plantName: controller.plantRecommendationsResponse!.data![index].name!,
+                        plantCategory: controller.plantRecommendationsResponse!.data![index].plantCategory!.name!,
+                        plantImageUrl: controller.plantRecommendationsResponse!.data![index].plantCategory!.imageUrl!,
+                      ),
                     ));
               }),
         )
