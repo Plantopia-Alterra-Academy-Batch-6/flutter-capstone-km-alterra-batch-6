@@ -6,6 +6,7 @@ import 'package:plantopia/controllers/my_plant_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 import 'package:plantopia/views/global_widgets/card_global_widget.dart';
+import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
 import 'package:plantopia/views/my_plant/widget/empty_my_plant_widget.dart';
 
 class MyPlantListWidget extends StatelessWidget {
@@ -23,15 +24,28 @@ class MyPlantListWidget extends StatelessWidget {
         Obx(() {
           switch (myPlantController.myPlantData.value) {
             case Status.loading:
-              return const Center(
-                child: CircularProgressIndicator(),
-              );
+              return GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: myPlantController.listMyPlant.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisExtent: 200,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      crossAxisCount: 2),
+                  itemBuilder: (context, int index) {
+                    return const ShimmerContainerGlobalWidget(
+                      width: 156,
+                      height: 200,
+                      radius: 24,
+                    );
+                  });
             case Status.loaded:
               if (myPlantController.listMyPlant.isEmpty) {
                 return const EmptyMyPlantWidget();
               } else {
                 return GridView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: myPlantController.listMyPlant.length,
                     gridDelegate:

@@ -25,4 +25,5 @@ class IconConstant {
   static const String calendar = 'assets/icons/calendar.svg';
   static const String chat = 'assets/icons/chat.svg';
   static const String addPhoto = 'assets/icons/add_photo.svg';
+  static const String confirmation = 'assets/icons/confirmation.svg';
 }

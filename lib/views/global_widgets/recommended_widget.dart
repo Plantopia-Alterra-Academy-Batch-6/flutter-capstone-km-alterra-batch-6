@@ -39,7 +39,7 @@ class RecommendedWidget extends StatelessWidget {
         const SizedBox(
           height: 18,
         ),
-        const ListRecomendedPlantWidget(),
+        ListRecomendedPlantWidget(),
       ],
     );
   }

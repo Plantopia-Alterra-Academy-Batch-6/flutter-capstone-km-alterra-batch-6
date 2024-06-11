@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
-import 'package:plantopia/controllers/plant_details_controller.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
 
 class AboutPlantWidget extends StatelessWidget {
-  AboutPlantWidget({super.key});
-
-  final controller = Get.put(PlantDetailsController());
+  const AboutPlantWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

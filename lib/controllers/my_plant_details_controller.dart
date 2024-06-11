@@ -1,20 +1,12 @@
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:plantopia/models/get_plant_by_id_response.dart';
-import 'package:plantopia/service/plant_details_service.dart';
+import 'package:plantopia/service/my_plant_details_service.dart';
 
 class MyPlantDetailsController extends GetxController {
-  PlantDetailsService plantDetailsService = PlantDetailsService();
-  PlantByIdResponse? plantByIdResponse;
-  RxBool isPageLoading = false.obs;
   RxInt activeIndex = 0.obs;
   RxBool customIcon = false.obs;
+  RxBool isSuccess = false.obs;
 
-  void getPlantDetails(int id) async {
-    isPageLoading(true);
-    plantByIdResponse = await plantDetailsService.getPlantById(id);
-    isPageLoading(false);
-  }
 
   String parseHour(String wateringSchedule) {
     DateTime time = DateFormat.Hm().parse(wateringSchedule);
@@ -58,5 +50,18 @@ class MyPlantDetailsController extends GetxController {
     }
 
     return plantAge;
+  }
+
+  void deleteMyplant(int plantId) async {
+    try {
+      final response = await MyPlantDetailsService.deleteMyPlant(plantId);
+      if (response == "success") {
+        isSuccess.value = true;
+      } else {
+        isSuccess.value = false;
+      }
+    } catch (e) {
+      print("ini errornya disini $e");
+    }
   }
 }

@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
-import 'package:plantopia/controllers/plant_details_controller.dart';
+import 'package:plantopia/controllers/my_plant_details_controller.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
 
 class FaqWidget extends StatelessWidget {
   FaqWidget({super.key});
 
-  final controller = Get.put(PlantDetailsController());
+  final controller = Get.put(MyPlantDetailsController());
 
   @override
   Widget build(BuildContext context) {

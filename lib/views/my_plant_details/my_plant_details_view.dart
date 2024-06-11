@@ -4,7 +4,9 @@ import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/models/get_my_plant_response_model.dart';
 import 'package:plantopia/views/my_plant_details/widget/about_plant_widget.dart';
+import 'package:plantopia/views/my_plant_details/widget/bottom_sheet_delete_widget.dart';
 import 'package:plantopia/views/my_plant_details/widget/faq_widget.dart';
 import 'package:plantopia/views/my_plant_details/widget/image_carousel_widget.dart';
 import 'package:plantopia/views/my_plant_details/widget/monitoring_progress_widget.dart';
@@ -19,6 +21,8 @@ class MyPlantDetailsView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final Map arguments = Get.arguments;
+    final PlantElement detailMyPlant = arguments['myPlantDetails'];
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -42,43 +46,39 @@ class MyPlantDetailsView extends StatelessWidget {
         ],
       ),
       body: SingleChildScrollView(
-        child: Obx(
-          () {
-            return Column(
-              children: [
-                ImageCarouselWidget(),
-                Transform.translate(
-                  offset: const Offset(0, -30),
-                  child: Container(
-                    width: double.infinity,
-                    decoration: const BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(30),
-                        topRight: Radius.circular(30),
-                      ),
-                      color: Colors.white,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          AboutPlantWidget(),
-                          PlantHistoryWidget(),
-                          const PlantRequirementsWidget(),
-                          const PlantCharacteristicsWidget(),
-                          const PlantGuideCardWidget(),
-                          const MonitoringProgressWidget(),
-                          const PlantCareWidget(),
-                          FaqWidget(),
-                        ],
-                      ),
-                    ),
+        child: Column(
+          children: [
+            ImageCarouselWidget(),
+            Transform.translate(
+              offset: const Offset(0, -30),
+              child: Container(
+                width: double.infinity,
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(30),
+                    topRight: Radius.circular(30),
+                  ),
+                  color: Colors.white,
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      AboutPlantWidget(),
+                      PlantHistoryWidget(),
+                      const PlantRequirementsWidget(),
+                      const PlantCharacteristicsWidget(),
+                      const PlantGuideCardWidget(),
+                      const MonitoringProgressWidget(),
+                      const PlantCareWidget(),
+                      FaqWidget(),
+                    ],
                   ),
                 ),
-              ],
-            );
-          },
+              ),
+            ),
+          ],
         ),
       ),
       bottomNavigationBar: Padding(
@@ -108,7 +108,13 @@ class MyPlantDetailsView extends StatelessWidget {
             Expanded(
               flex: 5,
               child: ElevatedButton(
-                onPressed: () {},
+                onPressed: () {
+                  if (detailMyPlant.id != null) {
+                    Get.bottomSheet(BottomSheetDeleteWidget(
+                      plantId: detailMyPlant.id!,
+                    ));
+                  }
+                },
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
                       ColorConstant.primary500, // Button background color
