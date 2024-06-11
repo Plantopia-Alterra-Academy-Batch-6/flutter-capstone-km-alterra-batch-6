@@ -50,21 +50,21 @@ class MyPlantView extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {},
-        backgroundColor: ColorConstant.primary500,
-        label: Text(
-          'Add Plant',
-          style: TextStyleConstant.subtitle.copyWith(
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-        ),
-        icon: const Icon(
-          Icons.add_circle_outline,
-          color: Colors.white,
-        ),
-      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () {},
+      //   backgroundColor: ColorConstant.primary500,
+      //   label: Text(
+      //     'Add Plant',
+      //     style: TextStyleConstant.subtitle.copyWith(
+      //       fontWeight: FontWeight.w700,
+      //       color: Colors.white,
+      //     ),
+      //   ),
+      //   icon: const Icon(
+      //     Icons.add_circle_outline,
+      //     color: Colors.white,
+      //   ),
+      // ),
     );
   }
 }
