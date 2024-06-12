@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
@@ -15,11 +14,11 @@ import 'package:plantopia/views/auth/auth_view.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 import 'package:plantopia/views/history_plant/history_plant_view.dart';
 import 'package:plantopia/views/home/home_view.dart';
-
 import 'package:plantopia/views/my_plant/my_plant_view.dart';
 import 'package:plantopia/views/onboarding/onboarding_view.dart';
 import 'package:plantopia/views/plant_details/plant_details_view.dart';
 import 'package:plantopia/views/search_plant/search_plant_view.dart';
+import 'package:plantopia/views/upload_progress/upload_progress_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 
 import 'firebase_options.dart';
@@ -81,6 +80,10 @@ Future<void> main() async {
         GetPage(
           name: AppRoutes.plantDetails,
           page: () => PlantDetailsView(),
+        ),
+        GetPage(
+          name: AppRoutes.uploadProgress,
+          page: () => const UploadProgressView(),
         ),
       ],
       initialRoute: AppRoutes.splashApp,

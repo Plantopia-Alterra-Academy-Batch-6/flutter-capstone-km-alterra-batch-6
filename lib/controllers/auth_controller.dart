@@ -10,7 +10,7 @@ import 'package:plantopia/models/signup_params_model.dart';
 import 'package:plantopia/models/user_model.dart';
 import 'package:plantopia/service/auth_service.dart';
 import 'package:plantopia/views/auth/allow_notif_view.dart';
-import 'package:plantopia/views/auth/verify_view.dart';
+import 'package:plantopia/views/verify/verify_view.dart';
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;

@@ -7,7 +7,6 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/views/auth/widgets/custom_auth_button_widget.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
-import 'package:plantopia/views/home/home_view.dart';
 
 class AllowNotificationView extends StatefulWidget {
   const AllowNotificationView({super.key});
@@ -94,8 +93,7 @@ class _AllowNotificationViewState extends State<AllowNotificationView> {
                   overlayColor: WidgetStateProperty.all(Colors.transparent),
                 ),
                 isSemanticButton: false,
-                onPressed: () {
-                },
+                onPressed: () {},
                 child: const Text(
                   "Maybe Next Time",
                   style: TextStyle(color: Color(0xFF10B981)),
