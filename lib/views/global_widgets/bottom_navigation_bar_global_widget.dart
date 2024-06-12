@@ -41,7 +41,6 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
             WeatherView(),
             MyPlantView(),
             const ProfileView()
-
           ],
         );
       }),

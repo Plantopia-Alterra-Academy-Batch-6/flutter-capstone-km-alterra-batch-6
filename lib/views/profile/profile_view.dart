@@ -1,17 +1,13 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
-import 'package:plantopia/controllers/auth_controller.dart';
-import 'package:plantopia/helpers/user_token_preference.dart';
-import 'package:plantopia/utils/app_routes.dart';
-
+import 'package:plantopia/controllers/profile_controller.dart'; 
 import '../../constants/image_constant.dart';
-
+import '../../controllers/auth_controller.dart';
 part 'widget/profile_button_logout_widget.dart';
 part 'widget/profile_setting_item_widget.dart';
 part 'widget/profile_custom_app_bar_widget.dart';
@@ -24,18 +20,19 @@ class ProfileView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    final ProfileController profileController = Get.put(ProfileController()); 
+    return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              ProfileCustomAppBarWidget(),
-              ProfileAccountWidget(),
-              ProfileHelpAndSupportWidget(),
-              ProfileAboutTheAppWidget(),
-              ProfileButtonLogoutWidget(),
+              const ProfileCustomAppBarWidget(),
+              const ProfileAccountWidget(),
+              const ProfileHelpAndSupportWidget(),
+              const ProfileAboutTheAppWidget(),
+              ProfileButtonLogoutWidget(profileController: profileController), 
             ],
           ),
         ),

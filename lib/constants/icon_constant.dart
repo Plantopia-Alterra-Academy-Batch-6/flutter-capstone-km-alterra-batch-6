@@ -18,7 +18,7 @@ class IconConstant {
   static const String search = 'assets/icons/search.svg';
   static const String filter = 'assets/icons/filter.svg';
   static const String history = 'assets/icons/history.svg';
-  static const String emptyHistoryPlant ='assets/icons/empty_history_plant.svg';
+  static const String emptyHistoryPlant = 'assets/icons/empty_history_plant.svg';
   static const String waterDrop = 'assets/icons/water_drop.svg';
   static const String schedule = 'assets/icons/schedule.svg';
   static const String calendar = 'assets/icons/calendar.svg';
