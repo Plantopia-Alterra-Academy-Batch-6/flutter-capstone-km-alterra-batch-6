@@ -88,7 +88,7 @@ Future<void> main() async {
         ),
         GetPage(
           name: AppRoutes.myPlantDetails,
-          page: () => MyPlantDetailsView(),
+          page: () => const MyPlantDetailsView(),
         ),
         GetPage(
           name: AppRoutes.successAddPlant,
@@ -96,7 +96,7 @@ Future<void> main() async {
         ),
         GetPage(
           name: AppRoutes.plantFilter,
-          page: () => PlantFilterView(),
+          page: () => const PlantFilterView(),
         ),
         GetPage(
           name: AppRoutes.chatbot,
