@@ -7,4 +7,6 @@ class ImageConstant {
   static const String confirmation = 'assets/images/confirmation.png';
   static const String chatbotOption1 = 'assets/vectors/chatbot-option-1.svg';
   static const String chatbotOption2 = 'assets/vectors/chatbot-option-2.svg';
+  static const String g12 = 'assets/images/g12.svg';
+
 }

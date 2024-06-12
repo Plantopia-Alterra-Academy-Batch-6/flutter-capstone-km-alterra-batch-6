@@ -23,33 +23,27 @@ part 'widget/plant_guide_third_item_widget.dart';
 part 'widget/plant_guide_widget.dart';
 
 class HomeView extends StatelessWidget {
-  const HomeView({super.key});
+   HomeView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await UserTokenPref.clearToken();
-          Get.offAllNamed(AppRoutes.splashApp);
-        },
-        child: const Icon(Icons.logout_rounded),
-      ),
+
+    return  Scaffold(
+      
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
-            padding: const EdgeInsets.all(
+            padding:  const EdgeInsets.all(
               16,
             ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const CustomAppBarWidget(),
+                 const CustomAppBarWidget(),
                 MyPlantWidget(),
-                const PlantCaringWidget(),
-                const PlantGuideWidget(),
-                const RecommendedWidget(),
+                 const PlantCaringWidget(),
+                 const PlantGuideWidget(),
+                 const RecommendedWidget(),
               ],
             ),
           ),

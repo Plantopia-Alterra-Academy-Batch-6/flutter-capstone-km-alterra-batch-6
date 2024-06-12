@@ -47,7 +47,7 @@ Future<void> main() async {
       getPages: [
         GetPage(
           name: AppRoutes.home,
-          page: () => const HomeView(),
+          page: () => const BottomNavigationBarGlobalWidget(),
         ),
         GetPage(
           name: AppRoutes.weather,
