@@ -7,19 +7,22 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/helpers/fcm_token.dart';
 import 'package:plantopia/service/firebase_messaging_service.dart';
-import 'package:plantopia/service/notification_service.dart';
 import 'package:plantopia/splash_screen_view.dart';
 import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/add_plant/add_plant_view.dart';
 import 'package:plantopia/views/auth/allow_notif_view.dart';
 import 'package:plantopia/views/auth/auth_view.dart';
+import 'package:plantopia/views/chatbot/chatbot_view.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 import 'package:plantopia/views/home/home_view.dart';
+import 'package:plantopia/views/my_plant_details/my_plant_details_view.dart';
 import 'package:plantopia/views/onboarding/onboarding_view.dart';
 import 'package:plantopia/views/history_plant/history_plant_view.dart';
 
 import 'package:plantopia/views/my_plant/my_plant_view.dart';
 import 'package:plantopia/views/plant_details/plant_details_view.dart';
+import 'package:plantopia/views/plant_details/success_add_plant_view.dart';
+import 'package:plantopia/views/plant_filter/plant_filter_view.dart';
 import 'package:plantopia/views/search_plant/search_plant_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 
@@ -82,6 +85,22 @@ Future<void> main() async {
         GetPage(
           name: AppRoutes.plantDetails,
           page: () => PlantDetailsView(),
+        ),
+        GetPage(
+          name: AppRoutes.myPlantDetails,
+          page: () => MyPlantDetailsView(),
+        ),
+        GetPage(
+          name: AppRoutes.successAddPlant,
+          page: () => const SuccessAddPlantView(),
+        ),
+        GetPage(
+          name: AppRoutes.plantFilter,
+          page: () => PlantFilterView(),
+        ),
+        GetPage(
+          name: AppRoutes.chatbot,
+          page: () => ChatbotView(),
         ),
       ],
       initialRoute: AppRoutes.splashApp,

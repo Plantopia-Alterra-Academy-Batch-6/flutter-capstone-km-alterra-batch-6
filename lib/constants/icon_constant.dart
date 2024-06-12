@@ -1,11 +1,11 @@
 class IconConstant {
   static const String locationAlt = 'assets/icons/location_alt.svg';
-  static const String home ='assets/icons/home.svg';
-  static const String potPlant ='assets/icons/pot_plant.svg';
-  static const String weatherSunCloudy ='assets/icons/weather_sun_cloudy.svg';
-  static const String homeSelected ='assets/icons/home_selected.svg';
-  static const String potPlantSelected ='assets/icons/pot_plant_selected.svg';
-  static const String weatherSelected ='assets/icons/weather_selected.svg';
+  static const String home = 'assets/icons/home.svg';
+  static const String potPlant = 'assets/icons/pot_plant.svg';
+  static const String weatherSunCloudy = 'assets/icons/weather_sun_cloudy.svg';
+  static const String homeSelected = 'assets/icons/home_selected.svg';
+  static const String potPlantSelected = 'assets/icons/pot_plant_selected.svg';
+  static const String weatherSelected = 'assets/icons/weather_selected.svg';
   static const String weatherSun = 'assets/icons/weather_sun.svg';
   static const String weatherCloudy = 'assets/icons/weather_cloudy.svg';
   static const String weatherRain = 'assets/icons/weather_rain.svg';
@@ -19,6 +19,16 @@ class IconConstant {
   static const String filter = 'assets/icons/filter.svg';
   static const String history = 'assets/icons/history.svg';
   static const String emptyHistoryPlant = 'assets/icons/empty_history_plant.svg';
+  static const String waterDrop = 'assets/icons/water_drop.svg';
+  static const String schedule = 'assets/icons/schedule.svg';
+  static const String calendar = 'assets/icons/calendar.svg';
+  static const String chat = 'assets/icons/chat.svg';
+  static const String addPhoto = 'assets/icons/add_photo.svg';
+  static const String confirmation = 'assets/icons/confirmation.svg';
+  static const String uploadPhoto = 'assets/icons/upload-photo.svg';
+  static const String send = 'assets/icons/send.svg';
+  static const String back = 'assets/icons/back.svg';
+  static const String close = 'assets/icons/close.svg';
   static const String profile = 'assets/icons/profile.svg';
   static const String manageNotification = 'assets/icons/manage_notification.svg';
   static const String setLanguage = 'assets/icons/language.svg';

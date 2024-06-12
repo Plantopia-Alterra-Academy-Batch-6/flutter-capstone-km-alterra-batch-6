@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/my_plant_controller.dart';
-import 'package:plantopia/utils/status_enum_util.dart';
-import 'package:plantopia/views/global_widgets/card_global_widget.dart';
 import 'package:plantopia/views/global_widgets/recommended_widget.dart';
-import 'package:plantopia/views/my_plant/widget/empty_my_plant_widget.dart';
+import 'package:plantopia/views/my_plant/widget/my_plant_list_widget.dart';
 import 'package:plantopia/views/my_plant/widget/search_bar_widget.dart';
 
 class MyPlantView extends StatelessWidget {
@@ -18,6 +15,7 @@ class MyPlantView extends StatelessWidget {
   Widget build(BuildContext context) {
     final MyPlantController myPlantController = Get.find<MyPlantController>();
     return Scaffold(
+      backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
@@ -40,17 +38,8 @@ class MyPlantView extends StatelessWidget {
                     style: TextStyleConstant.subtitle,
                   ),
                 ),
-                const SizedBox(
-                  height: 18,
-                ),
                 SearchBarWidget(),
-                const SizedBox(
-                  height: 24,
-                ),
-                Obx(() => _myPlantList(
-                      myPlantController.myPlantData.value,
-                      context,
-                    )),
+                MyPlantListWidget(),
                 const SizedBox(
                   height: 10,
                 ),
@@ -76,51 +65,5 @@ class MyPlantView extends StatelessWidget {
       //   ),
       // ),
     );
-  }
-
-  Widget _myPlantList(Status status, BuildContext context) {
-    final MyPlantController myPlantController = Get.find<MyPlantController>();
-    switch (status) {
-      case Status.loading:
-        return const Center(
-          child: CircularProgressIndicator(),
-        );
-      case Status.loaded:
-        if (myPlantController.listMyPlant.isEmpty) {
-          return const EmptyMyPlantWidget();
-        } else {
-          return GridView.builder(
-              shrinkWrap: true,
-              itemCount: myPlantController.listMyPlant.length,
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  mainAxisExtent: 200,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                  crossAxisCount: 2),
-              itemBuilder: (context, int index) {
-                return CardGlobalWidget(
-                    plantName:
-                        myPlantController.listMyPlant[index].plant?.name ?? "",
-                    plantCategory: myPlantController
-                            .listMyPlant[index].plant?.plantCategory?.name ??
-                        "",
-                    plantImageUrl: ""
-                    //  myPlantController
-                    //     .listMyPlant[index].plant?.plantImages?[0].fileName ?? "",
-                    );
-              });
-        }
-      case Status.error:
-        return Center(
-          child: Text(
-            "Failed to load my plant data",
-            style: TextStyleConstant.heading4.copyWith(
-              color: ColorConstant.danger500,
-            ),
-          ),
-        );
-      default:
-        return const EmptyMyPlantWidget();
-    }
   }
 }

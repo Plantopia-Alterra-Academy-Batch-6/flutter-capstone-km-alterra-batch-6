@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter/widgets.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 
@@ -29,8 +29,10 @@ class PlantGuideCardWidget extends StatelessWidget {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                SvgPicture.asset(
-                  'assets/icons/plant_guide.svg',
+                Image.asset(
+                  'assets/images/plant_guide.png',
+                  width: 87,
+                  height: 91,
                 ),
                 Expanded(
                   child: Column(

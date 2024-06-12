@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/plant_details_controller.dart';
 import 'package:plantopia/views/plant_details/widget/about_plant_widget.dart';
 import 'package:plantopia/views/plant_details/widget/faq_widget.dart';
@@ -15,6 +16,7 @@ class PlantDetailsView extends StatelessWidget {
   PlantDetailsView({super.key});
 
   final controller = Get.put(PlantDetailsController());
+  final addPlantController = Get.put(AddPlantController());
 
   @override
   Widget build(BuildContext context) {
@@ -81,8 +83,8 @@ class PlantDetailsView extends StatelessWidget {
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ElevatedButton(
-          onPressed: () {
-            
+          onPressed: () async {
+            await controller.addPlant(addPlantController.selectedPlant.value);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor:

@@ -16,8 +16,8 @@ class ColorConstant {
   static Color danger50 = const Color(0xffFEF2F2);
   static Color danger100 = const Color(0xffFEE2E2);
   static Color white = const Color(0xffffffff);
-  static Color blue500 = const Color (0xffF0F9FF);
-  static Color neutral500 = const Color (0xff6B7280);
+  static Color blue500 = const Color(0xffF0F9FF);
+  static Color neutral500 = const Color(0xff6B7280);
   static Color danger200 = const Color(0xffFECACA);
   static Color danger300 = const Color(0xffFCA5A5);
   static Color danger400 = const Color(0xffF87171);

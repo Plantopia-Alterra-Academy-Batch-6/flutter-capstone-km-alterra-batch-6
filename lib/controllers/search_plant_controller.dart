@@ -15,7 +15,6 @@ class SearchPlantController extends GetxController {
   RxBool isFirstTimeOpen = true.obs;
   RxBool isHaveResult = false.obs; 
   RxBool isPageLoading = false.obs;
-  RxInt searchedPlantId = 0.obs;
 
   Future<void> searchPlant(String plantName) async {
     try {

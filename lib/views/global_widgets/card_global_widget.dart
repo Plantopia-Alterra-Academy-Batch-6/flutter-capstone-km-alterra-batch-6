@@ -39,17 +39,17 @@ class CardGlobalWidget extends StatelessWidget {
                 height: 130,
                 width: 93,
               ),
-              //  CachedNetworkImage(
+              //     CachedNetworkImage(
+              //   height: 130,
+              //   width: 93,
               //   imageUrl: plantImageUrl,
               //   placeholder: (context, url) {
               //     return const CircularProgressIndicator();
               //   },
               //   errorWidget: (context, url, error) {
-              //     return Text(
-              //       "Failed to load image",
-              //       style: TextStyleConstant.paragraph.copyWith(
-              //         color: ColorConstant.danger500,
-              //       ),
+              //     return Icon(
+              //       Icons.error,
+              //       color: ColorConstant.danger500,
               //     );
               //   },
               // )
