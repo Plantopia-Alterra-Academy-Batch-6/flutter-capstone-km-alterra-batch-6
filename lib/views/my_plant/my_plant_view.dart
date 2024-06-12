@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
+import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/controllers/my_plant_controller.dart';
+import 'package:plantopia/views/global_widgets/recommended_widget.dart';
+import 'package:plantopia/views/my_plant/widget/my_plant_list_widget.dart';
+import 'package:plantopia/views/my_plant/widget/search_bar_widget.dart';
+
+class MyPlantView extends StatelessWidget {
+  MyPlantView({super.key}) {
+    Get.lazyPut<MyPlantController>(() => MyPlantController());
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final MyPlantController myPlantController = Get.find<MyPlantController>();
+    return Scaffold(
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 24),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "My Plant",
+                  style: TextStyleConstant.heading3.copyWith(
+                    fontWeight: FontWeight.w700,
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                Obx(
+                  () => Text(
+                    '${myPlantController.listMyPlant.length} Plants',
+                    style: TextStyleConstant.subtitle,
+                  ),
+                ),
+                SearchBarWidget(),
+                MyPlantListWidget(),
+                const SizedBox(
+                  height: 10,
+                ),
+                const RecommendedWidget(),
+              ],
+            ),
+          ),
+        ),
+      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: () {},
+      //   backgroundColor: ColorConstant.primary500,
+      //   label: Text(
+      //     'Add Plant',
+      //     style: TextStyleConstant.subtitle.copyWith(
+      //       fontWeight: FontWeight.w700,
+      //       color: Colors.white,
+      //     ),
+      //   ),
+      //   icon: const Icon(
+      //     Icons.add_circle_outline,
+      //     color: Colors.white,
+      //   ),
+      // ),
+    );
+  }
+}

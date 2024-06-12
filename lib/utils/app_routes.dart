@@ -1,5 +1,17 @@
 class AppRoutes {
-  static String splash = '/splashView';
-  static String home = '/splashView';
+  static const String splashApp = '/splash';
+  static const String home = '/home';
+  static const String weather = '/weather';
+  static const String auth = '/auth';
+  static const String allowNotif = '/allowNotif';
+  static const String onboarding = '/onboarding';
+  static const String myPlant = '/myPlant';
+  static const String historyPlant = '/historyPlant';
+  static const String addPlant = '/addPlant';
+  static const String searchPlant = '/searchPlant';
+  static const String plantDetails = '/plantDetails';
+  static const String myPlantDetails = '/myPlantDetails';
+  static const String successAddPlant = '/successAddPlant';
+  static const String plantFilter = '/plantFilter';
   static String chatbot = '/chatbotView';
 }
