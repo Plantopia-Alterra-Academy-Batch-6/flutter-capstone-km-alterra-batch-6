@@ -103,7 +103,7 @@ Future<void> main() async {
           page: () => ChatbotView(),
         ),
       ],
-      initialRoute: AppRoutes.chatbot,
+      initialRoute: AppRoutes.splashApp,
     ),
   );
 }

@@ -58,44 +58,47 @@ class MyPlantWidget extends StatelessWidget {
                     }),
               );
             case Status.loaded:
-              return SizedBox(
-                height: 200,
-                width: double.infinity,
-                child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
-                    itemCount: myPlantController.listMyPlant.length,
-                    itemExtent: 156,
-                    itemBuilder: (context, int index) {
-                      return Padding(
-                          padding: const EdgeInsets.only(right: 12.0),
-                          child: InkWell(
-                            onTap: () {
-                              Get.toNamed(AppRoutes.myPlantDetails, arguments: {
-                                'myPlantDetails':
-                                    myPlantController.listMyPlant[index]
-                              })?.then((value) {
-                                myPlantController.getMyPlant();
-                              });
-                            },
-                            child: CardGlobalWidget(
-                                plantName: myPlantController
-                                        .listMyPlant[index].plant?.name ??
-                                    "-",
-                                plantCategory: myPlantController
-                                        .listMyPlant[index]
-                                        .plant
-                                        ?.plantCategory
-                                        ?.name ??
-                                    "-",
-                                plantImageUrl: myPlantController
-                                        .listMyPlant[index]
-                                        .plant
-                                        ?.plantImages?[0]
-                                        .fileName ??
-                                    "-"),
-                          ));
-                    }),
-              );
+              return myPlantController.listMyPlant.isEmpty
+                  ? const EmptyMyPlantWidget()
+                  : SizedBox(
+                      height: 200,
+                      width: double.infinity,
+                      child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: myPlantController.listMyPlant.length,
+                          itemExtent: 156,
+                          itemBuilder: (context, int index) {
+                            return Padding(
+                                padding: const EdgeInsets.only(right: 12.0),
+                                child: InkWell(
+                                  onTap: () {
+                                    Get.toNamed(AppRoutes.myPlantDetails,
+                                        arguments: {
+                                          'myPlantDetails': myPlantController
+                                              .listMyPlant[index]
+                                        })?.then((value) {
+                                      myPlantController.getMyPlant();
+                                    });
+                                  },
+                                  child: CardGlobalWidget(
+                                      plantName: myPlantController
+                                              .listMyPlant[index].plant?.name ??
+                                          "-",
+                                      plantCategory: myPlantController
+                                              .listMyPlant[index]
+                                              .plant
+                                              ?.plantCategory
+                                              ?.name ??
+                                          "-",
+                                      plantImageUrl: myPlantController
+                                              .listMyPlant[index]
+                                              .plant
+                                              ?.plantImages?[0]
+                                              .fileName ??
+                                          "-"),
+                                ));
+                          }),
+                    );
             case Status.error:
               return Text(
                 "Failed to load my plant data",

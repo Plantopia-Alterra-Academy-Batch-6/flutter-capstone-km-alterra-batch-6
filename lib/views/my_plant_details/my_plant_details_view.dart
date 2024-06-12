@@ -5,6 +5,7 @@ import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
+import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/my_plant_details/widget/about_plant_widget.dart';
 import 'package:plantopia/views/my_plant_details/widget/bottom_sheet_delete_widget.dart';
 import 'package:plantopia/views/my_plant_details/widget/faq_widget.dart';
@@ -88,7 +89,9 @@ class MyPlantDetailsView extends StatelessWidget {
             Expanded(
               flex: 1,
               child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Get.toNamed(AppRoutes.chatbot);
+                  },
                   style: ElevatedButton.styleFrom(
                     backgroundColor:
                         ColorConstant.primary500, // Button background color
