@@ -1,8 +1,9 @@
-
 part of '../profile_view.dart';
 
 class ProfileButtonLogoutWidget extends StatelessWidget {
-  const ProfileButtonLogoutWidget({super.key});
+  final ProfileController profileController;
+
+  const ProfileButtonLogoutWidget({super.key, required this.profileController});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class ProfileButtonLogoutWidget extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           SvgPicture.asset(
-                            ImageConstant.g12, 
+                            ImageConstant.g12,
                             width: 130,
                             height: 100,
                           ),
@@ -53,8 +54,7 @@ class ProfileButtonLogoutWidget extends StatelessWidget {
                           Text(
                             "Don't worry, all of your progress will be saved",
                             textAlign: TextAlign.center,
-                            style: TextStyleConstant.paragraph.copyWith(
-                            ),
+                            style: TextStyleConstant.paragraph.copyWith(),
                           ),
                           const SizedBox(height: 16),
                           Row(
@@ -81,9 +81,8 @@ class ProfileButtonLogoutWidget extends StatelessWidget {
                                   elevation: 0,
                                 ),
                                 onPressed: () async {
-                                  await UserTokenPref.clearToken();
-                                  Get.back();
-                                  Get.offAllNamed(AppRoutes.auth);
+                                  await profileController
+                                      .logout(); // Call logout method
                                 },
                                 child: Text(
                                   "Log Out",
