@@ -25,8 +25,6 @@ import 'package:plantopia/views/weather/weather_view.dart';
 
 import 'firebase_options.dart';
 
-
-
 Future<void> main() async {
   await dotenv.load(fileName: '.env');
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,7 +44,7 @@ Future<void> main() async {
       getPages: [
         GetPage(
           name: AppRoutes.home,
-          page: () => const HomeView(),
+          page: () => const BottomNavigationBarGlobalWidget(),
         ),
         GetPage(
           name: AppRoutes.weather,
@@ -64,10 +62,8 @@ Future<void> main() async {
           name: AppRoutes.allowNotif,
           page: () => const AllowNotificationView(),
         ),
+        GetPage(name: AppRoutes.onboarding, page: () => const OnboardingView()),
         GetPage(
-          name: AppRoutes.onboarding,
-          page: () => const OnboardingView()),
-       GetPage(
           name: AppRoutes.myPlant,
           page: () => MyPlantView(),
         ),

@@ -4,6 +4,7 @@ class ColorConstant {
   static Color primary50 = const Color(0xffECFDF5);
   static Color primary100 = const Color(0xffD1FAE5);
   static Color primary200 = const Color(0xffA7F3D0);
+  static Color primary250 = const Color(0xffB4E5BC);
   static Color primary300 = const Color(0xff6EE7B7);
   static Color primary400 = const Color(0xff34D399);
   static Color primary500 = const Color(0xff10B981);

@@ -22,15 +22,15 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () async {
-          await UserTokenPref.clearToken();
-          Get.offAllNamed(AppRoutes.splashApp);
-        },
-        child: const Icon(Icons.logout_rounded),
-      ),
-      body: const SafeArea(
+    return const Scaffold(
+      // floatingActionButton: FloatingActionButton(
+      //   onPressed: () async {
+      //     await UserTokenPref.clearToken();
+      //     Get.offAllNamed(AppRoutes.splashApp);
+      //   },
+      //   child: const Icon(Icons.logout_rounded),
+      // ),
+      body: SafeArea(
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.all(

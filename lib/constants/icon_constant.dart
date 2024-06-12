@@ -19,4 +19,16 @@ class IconConstant {
   static const String filter = 'assets/icons/filter.svg';
   static const String history = 'assets/icons/history.svg';
   static const String emptyHistoryPlant = 'assets/icons/empty_history_plant.svg';
+  static const String profile = 'assets/icons/profile.svg';
+  static const String manageNotification = 'assets/icons/manage_notification.svg';
+  static const String setLanguage = 'assets/icons/language.svg';
+  static const String inviteFriends = 'assets/icons/invite_friends.svg';
+  static const String plantBot = 'assets/icons/plant_bot.svg';
+  static const String help = 'assets/icons/help.svg';
+  static const String faq = 'assets/icons/faq.svg';
+  static const String appInfo = 'assets/icons/app_info.svg';
+  static const String rateApp = 'assets/icons/rate_app.svg';
+  static const String privacyPolicy = 'assets/icons/privacy_policy.svg';
+  static const String profileNavbar = 'assets/icons/profile_navbar.svg';
+  static const String editPencil = 'assets/icons/edit_pencil.svg';
 }
