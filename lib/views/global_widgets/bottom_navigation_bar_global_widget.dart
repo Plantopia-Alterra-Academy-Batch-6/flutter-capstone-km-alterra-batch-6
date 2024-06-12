@@ -37,7 +37,7 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
         return IndexedStack(
           index: controller.currentIndex.value,
           children: [
-            const HomeView(),
+             HomeView(),
             WeatherView(),
             MyPlantView(),
             const ProfileView()
