@@ -26,4 +26,8 @@ class IconConstant {
   static const String chat = 'assets/icons/chat.svg';
   static const String addPhoto = 'assets/icons/add_photo.svg';
   static const String confirmation = 'assets/icons/confirmation.svg';
+  static const String uploadPhoto = 'assets/icons/upload-photo.svg';
+  static const String send = 'assets/icons/send.svg';
+  static const String back = 'assets/icons/back.svg';
+  static const String close = 'assets/icons/close.svg';
 }

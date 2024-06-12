@@ -5,4 +5,6 @@ class ImageConstant {
   static const String plantDummy = 'assets/images/plant_dummy.png';
   static const String plantGuide = 'assets/images/plant_guide.png';
   static const String confirmation = 'assets/images/confirmation.png';
+  static const String chatbotOption1 = 'assets/vectors/chatbot-option-1.svg';
+  static const String chatbotOption2 = 'assets/vectors/chatbot-option-2.svg';
 }
