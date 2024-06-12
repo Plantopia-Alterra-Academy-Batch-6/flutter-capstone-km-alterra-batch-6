@@ -17,6 +17,12 @@ class TopicChoiceBottomSheet extends StatelessWidget {
     'Sunflower',
     'Orchid',
     'Lily',
+    'Rose',
+    'Tulip',
+    'Daisy',
+    'Sunflower',
+    'Orchid',
+    'Lily',
   ];
 
   TopicChoiceBottomSheet({
@@ -128,9 +134,10 @@ class TopicChoiceBottomSheet extends StatelessWidget {
             isBottomSheetClosed(true);
           }
         },
+        plantOptions: plantOptions,
       ),
       isDismissible: false,
-      isScrollControlled: true,
+      enableDrag: false,
       backgroundColor: Colors.transparent,
     ).then((value) {
       if (value != null) {

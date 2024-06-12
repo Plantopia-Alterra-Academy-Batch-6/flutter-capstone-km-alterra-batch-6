@@ -18,7 +18,6 @@ class ChatbotController extends GetxController {
     baseOption: HttpSetup(
       receiveTimeout: const Duration(seconds: 20),
     ),
-    enableLog: true,
   );
 
   var isLoading = false.obs;
@@ -42,6 +41,7 @@ class ChatbotController extends GetxController {
   void _showTopicChoice() {
     Get.bottomSheet(
       isDismissible: false,
+      enableDrag: false,
       TopicChoiceBottomSheet(
         onSelectTopic: (selectedTopic) {
           topic.value = selectedTopic;

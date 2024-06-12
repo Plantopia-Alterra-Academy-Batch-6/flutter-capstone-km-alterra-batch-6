@@ -43,9 +43,9 @@ class ChatbotView extends StatelessWidget {
       Positioned.fill(child: Obx(() {
         if (!controller.isBottomSheetClosed.value) {
           return Blur(
-            blur: controller.isBottomSheetClosed.value ? 0 : 5,
+            blur: controller.isBottomSheetClosed.value ? 0 : 3,
             child: Container(
-              color: const Color(0x1A1C1DE5),
+              color: Colors.black.withOpacity(0.6),
             ),
           );
         } else {

@@ -1,5 +1,6 @@
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
+import 'package:plantopia/constants/text_style_constant.dart';
 
 import '../../../constants/color_constant.dart';
 
@@ -29,8 +30,15 @@ class TypingIndicatorWidget extends StatelessWidget {
               ),
               const SizedBox(width: 3),
               Text(
-                '${user.firstName} is typing',
-                style: const TextStyle(
+                '${user.firstName}',
+                style: TextStyleConstant.regular.copyWith(
+                  color: ColorConstant.primary500,
+                  fontWeight: FontWeight.w700,
+                ),
+              ),
+              Text(
+                ' is typing',
+                style: TextStyleConstant.regular.copyWith(
                   color: ColorConstant.primary500,
                 ),
               )

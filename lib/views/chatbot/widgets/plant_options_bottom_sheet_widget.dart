@@ -6,29 +6,16 @@ import 'topic_choice_tile_widget.dart';
 
 class PlantOptionsBottomSheetWidget extends StatelessWidget {
   final Function(bool) isBottomSheetClosed;
+  final List<String> plantOptions;
 
   const PlantOptionsBottomSheetWidget({
     super.key,
     required this.isBottomSheetClosed,
+    required this.plantOptions,
   });
 
   @override
   Widget build(BuildContext context) {
-    List<String> plantOptions = [
-      'Rose',
-      'Tulip',
-      'Daisy',
-      'Sunflower',
-      'Orchid',
-      'Lily',
-      'Rose',
-      'Tulip',
-      'Daisy',
-      'Sunflower',
-      'Orchid',
-      'Lily',
-    ];
-
     return Container(
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -88,6 +75,7 @@ class PlantOptionsBottomSheetWidget extends StatelessWidget {
                             'Shiny red fruits thrives in \nall weather conditions.',
                         onTap: () {
                           Get.back(result: plantOptions[index]);
+                          isBottomSheetClosed(true);
                         },
                       );
                     },

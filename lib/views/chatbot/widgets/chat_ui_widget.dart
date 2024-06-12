@@ -22,7 +22,7 @@ class ChatUIWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Obx(() {
       if (controller.isLoading.value) {
-        return const Center(child: CircularProgressIndicator());
+        return const Center(child: SizedBox());
       }
       return Container(
         margin: const EdgeInsets.only(
@@ -30,7 +30,6 @@ class ChatUIWidget extends StatelessWidget {
           left: 16,
         ),
         child: DashChat(
-          quickReplyOptions: const QuickReplyOptions(),
           messageOptions: MessageOptions(
             showOtherUsersName: false,
             messagePadding: const EdgeInsets.only(
@@ -54,19 +53,6 @@ class ChatUIWidget extends StatelessWidget {
               nextMessage: nextMessage,
               currentUser: controller.currentUser,
             ),
-            messageTimeBuilder: (message, isOwnMessage) {
-              final time = TimeOfDay.fromDateTime(message.createdAt);
-              final formattedTime = time.format(context);
-              return Center(
-                child: Text(
-                  formattedTime,
-                  style: TextStyleConstant.regular.copyWith(
-                    fontSize: 40,
-                    color: const Color(0xFF6B7280),
-                  ),
-                ),
-              );
-            },
             textBeforeMedia: false,
           ),
           messageListOptions: MessageListOptions(
@@ -118,7 +104,6 @@ class ChatUIWidget extends StatelessWidget {
               top: 8,
               bottom: 8,
             ),
-            // onTextChange: controller.handleUserTyping,
           ),
           currentUser: controller.currentUser,
           onSend: controller.sendMessage,
