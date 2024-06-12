@@ -1,3 +1,4 @@
+
 part of '../profile_view.dart';
 
 class ProfileButtonLogoutWidget extends StatelessWidget {
@@ -18,56 +19,97 @@ class ProfileButtonLogoutWidget extends StatelessWidget {
             elevation: 0,
           ),
           onPressed: () {
-            showDialog(
-              context: context,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  backgroundColor: ColorConstant.neutral100,
-                  title: Text(
-                    "Log Out",
-                    style: TextStyleConstant.heading4
-                        .copyWith(fontWeight: FontWeight.w700),
+            Get.dialog(
+              Stack(
+                children: [
+                  BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+                    child: Container(
+                      color: Colors.black.withOpacity(0.5),
+                    ),
                   ),
-                  content: Text(
-                    "Are you sure to logout?",
-                    style: TextStyleConstant.subtitle,
-                  ),
-                  actions: [
-                    TextButton(
-                      onPressed: () {
-                        Get.back();
-                      },
-                      child: Text(
-                        "No",
-                        style: TextStyleConstant.subtitle.copyWith(
-                          color: ColorConstant.danger500,
-                          fontWeight: FontWeight.w700,
-                        ),
+                  Center(
+                    child: AlertDialog(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(16),
+                      ),
+                      backgroundColor: ColorConstant.white,
+                      content: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          SvgPicture.asset(
+                            ImageConstant.g12, 
+                            width: 130,
+                            height: 100,
+                          ),
+                          Text(
+                            "Are you sure you want to log out?",
+                            textAlign: TextAlign.center,
+                            style: TextStyleConstant.heading4.copyWith(
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                          const SizedBox(height: 4),
+                          Text(
+                            "Don't worry, all of your progress will be saved",
+                            textAlign: TextAlign.center,
+                            style: TextStyleConstant.paragraph.copyWith(
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              TextButton(
+                                onPressed: () {
+                                  Get.back();
+                                },
+                                child: Text(
+                                  "Cancel",
+                                  style: TextStyleConstant.subtitle.copyWith(
+                                    color: ColorConstant.primary500,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ),
+                              ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: ColorConstant.danger500,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  elevation: 0,
+                                ),
+                                onPressed: () async {
+                                  await UserTokenPref.clearToken();
+                                  Get.back();
+                                  Get.offAllNamed(AppRoutes.auth);
+                                },
+                                child: Text(
+                                  "Log Out",
+                                  style: TextStyleConstant.subtitle.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
                       ),
                     ),
-                    TextButton(
-                      onPressed: () async {
-                        await UserTokenPref.clearToken();
-                        Get.back();
-                        Get.offAllNamed(AppRoutes.auth);
-                      },
-                      child: Text(
-                        "Yes",
-                        style: TextStyleConstant.subtitle.copyWith(
-                          color: ColorConstant.primary900,
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ),
-                  ],
-                );
-              },
+                  ),
+                ],
+              ),
+              barrierDismissible: false,
             );
           },
           child: Text(
             'Log Out',
             style: TextStyleConstant.subtitle.copyWith(
-                fontWeight: FontWeight.w700, color: ColorConstant.danger500),
+              fontWeight: FontWeight.w700,
+              color: ColorConstant.danger500,
+            ),
           ),
         ),
       ),
