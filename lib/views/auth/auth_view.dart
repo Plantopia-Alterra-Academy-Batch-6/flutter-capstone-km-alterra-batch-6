@@ -55,7 +55,7 @@ class _AuthViewState extends State<AuthView> {
                                 color: Color(0xFFF3F4F6),
                               ),
                               constraints:
-                                  const BoxConstraints.expand(height: 45),
+                                  const BoxConstraints.expand(height: 47),
                               child: TabBar(
                                   onTap: (value) {
                                     authController.authSection.value = value;
@@ -80,7 +80,7 @@ class _AuthViewState extends State<AuthView> {
                                       fontWeight: FontWeight.w600),
                                   tabs: const [
                                     Tab(
-                                      child: Text("Login"),
+                                      child: Text("Log in"),
                                     ),
                                     Tab(
                                       child: Text("Sign Up"),

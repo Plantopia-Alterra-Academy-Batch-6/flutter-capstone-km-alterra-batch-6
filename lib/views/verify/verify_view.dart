@@ -31,7 +31,7 @@ class _VerificationViewState extends State<VerificationView> {
 
   void startTimer() {
     setState(() {
-      _start = 10; // Mengatur waktu menjadi 60 detik
+      _start = 30; 
     });
 
     _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {

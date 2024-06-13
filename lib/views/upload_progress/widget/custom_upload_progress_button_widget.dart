@@ -7,7 +7,8 @@ class CustomUploadProgressButtonWidget extends StatelessWidget {
   final void Function()? onPressed;
   const CustomUploadProgressButtonWidget({
     super.key,
-    this.isActive = false, this.onPressed,
+    this.isActive = false,
+    this.onPressed,
   });
 
   @override
@@ -24,6 +25,7 @@ class CustomUploadProgressButtonWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
             )),
         onPressed: onPressed,
+        // onPressed: onPressed,
         child: Text(
           "Save",
           style: TextStyleConstant.subtitle.copyWith(

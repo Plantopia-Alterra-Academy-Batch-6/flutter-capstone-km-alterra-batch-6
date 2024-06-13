@@ -1,37 +1,46 @@
 import 'dart:io';
 
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/controllers/upload_progress_controller.dart';
+import 'package:plantopia/views/upload_progress/widget/all_photos_widget.dart';
+import 'package:plantopia/views/upload_progress/widget/custom_snackbar_progress_widget.dart';
 import 'package:plantopia/views/upload_progress/widget/custom_upload_progress_button_widget.dart';
+import 'package:plantopia/views/upload_progress/widget/dotted_border_image_widget.dart';
+import 'package:plantopia/views/upload_progress/widget/error_size_photo.dart';
 
 class UploadProgressView extends StatefulWidget {
-  const UploadProgressView({super.key});
+  UploadProgressView({super.key}) {
+    Get.lazyPut<UploadProgressController>(() => UploadProgressController());
+  }
 
   @override
   _UploadProgressViewState createState() => _UploadProgressViewState();
 }
 
 class _UploadProgressViewState extends State<UploadProgressView> {
+  XFile? pickedFile;
   File? _image;
   bool isImageLarge = false;
   bool isActiveButton = false;
+  final UploadProgressController uploadProgressController =
+      Get.put(UploadProgressController());
 
   Future<void> _pickImage() async {
     var maxFileSizeInBytes = 2 * 1048576;
     final ImagePicker picker = ImagePicker();
-    final XFile? pickedFile =
-        await picker.pickImage(source: ImageSource.gallery);
+    pickedFile = await picker.pickImage(source: ImageSource.gallery);
     var imagePath = await pickedFile!.readAsBytes();
 
-    var fileSize = imagePath.length; // Get the file size in bytes
+    var fileSize = imagePath.length;
     if (fileSize <= maxFileSizeInBytes) {
       setState(() {
         isImageLarge = false;
-        _image = File(pickedFile.path);
+        _image = File(pickedFile!.path);
         isActiveButton = true;
       });
     } else {
@@ -41,6 +50,12 @@ class _UploadProgressViewState extends State<UploadProgressView> {
         isActiveButton = false;
       });
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    uploadProgressController.getPlantProgress(1);
   }
 
   @override
@@ -73,52 +88,7 @@ class _UploadProgressViewState extends State<UploadProgressView> {
                 GestureDetector(
                   onTap: _pickImage,
                   child: _image == null
-                      ? DottedBorder(
-                          color: ColorConstant.neutral300,
-                          radius: const Radius.circular(6),
-                          borderType: BorderType.RRect,
-                          strokeWidth: 1.2,
-                          dashPattern: const [11],
-                          child: SizedBox(
-                              height: 300,
-                              width: double.infinity,
-                              child: Center(
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    SvgPicture.asset(
-                                        "assets/icons/upload_photo.svg"),
-                                    const SizedBox(
-                                      height: 9.76,
-                                    ),
-                                    RichText(
-                                      text: const TextSpan(
-                                        text: 'Upload Your First Plant Image',
-                                        style: TextStyle(
-                                          color: Colors.black,
-                                          fontSize: 12,
-                                        ),
-                                        children: <TextSpan>[
-                                          TextSpan(
-                                            text: '*',
-                                            style: TextStyle(
-                                              color: Colors.red,
-                                              fontSize: 12,
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                    Text(
-                                      "(max. 2 MB)",
-                                      style: TextStyleConstant.caption.copyWith(
-                                          color: ColorConstant.neutral500,
-                                          fontSize: 12),
-                                    )
-                                  ],
-                                ),
-                              )),
-                        )
+                      ? const DottedBorderImageWidget()
                       : Container(
                           clipBehavior: Clip.antiAlias,
                           decoration: BoxDecoration(
@@ -134,73 +104,31 @@ class _UploadProgressViewState extends State<UploadProgressView> {
                 const SizedBox(
                   height: 5.0,
                 ),
-                isImageLarge
-                    ? Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          SvgPicture.asset("assets/icons/error-image.svg"),
-                          const SizedBox(
-                            width: 4.0,
-                          ),
-                          Text(
-                            textAlign: TextAlign.center,
-                            "Your photo is too large! It must be under 2 MB. ",
-                            style: TextStyleConstant.paragraph.copyWith(
-                              fontSize: 14.0,
-                              color: ColorConstant.danger500,
-                            ),
-                          ),
-                        ],
-                      )
-                    : Container(),
+                isImageLarge ? const ErrorSizePhotoWidget() : Container(),
                 const SizedBox(
                   height: 20.0,
                 ),
                 CustomUploadProgressButtonWidget(
                   isActive: isActiveButton,
-                  onPressed: () => alertsuccess(context),
+                  onPressed: () async {
+                    if (_image != null) {
+                      bool result = await uploadProgressController
+                          .uploadProgress("1", pickedFile!);
+                      if (result) {
+                        alertsuccess(context);
+                        setState(() {
+                          _image = null;
+                          isActiveButton = false;
+                        });
+                      }
+                    } else {
+                      CustomSnackbarProgressWidget.show(context, onPressed: () {
+                        _pickImage();
+                      });
+                    }
+                  },
                 ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                Text(
-                  "All Photos",
-                  style: TextStyleConstant.title
-                      .copyWith(fontWeight: FontWeight.w700),
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                Center(
-                  child: Column(
-                    children: [
-                      Text(
-                        textAlign: TextAlign.center,
-                        "You haven't added any photos yet. ",
-                        style: TextStyleConstant.paragraph.copyWith(
-                          fontSize: 14.0,
-                          color: ColorConstant.neutral400,
-                        ),
-                      ),
-                      Text(
-                        textAlign: TextAlign.center,
-                        " Upload your first plant photo and watch your ",
-                        style: TextStyleConstant.paragraph.copyWith(
-                          fontSize: 14.0,
-                          color: ColorConstant.neutral400,
-                        ),
-                      ),
-                      Text(
-                        textAlign: TextAlign.center,
-                        "garden grow! 🪴 ",
-                        style: TextStyleConstant.paragraph.copyWith(
-                          fontSize: 14.0,
-                          color: ColorConstant.neutral400,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                const AllPhotosWidget(),
               ],
             ),
           ),

@@ -1,19 +1,13 @@
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_plant_category_response.dart';
 import 'package:plantopia/models/get_plant_recommendations_response.dart';
 
 class AddPlantService {
   final Dio dio = Dio();
-
-  void addPlant(int id) {
-    const api =
-        "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/my/plants/add";
-    final headers = {
-      'Authorization': 'Bearer '
-    };
-    final body = {'plant_id': id};
-  }
 
   Future<PlantCategoriesResponse> getAllPlantCategory() async {
     const api =
@@ -29,10 +23,11 @@ class AddPlantService {
   }
 
   Future<PlantRecommendationsResponse> getPlantRecommendations() async {
+    final token = await UserTokenPref.getToken();
     const api =
         'https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/recommendations';
     var header = {
-      'Authorization': 'Bearer ${dotenv.get('bearerToken')}',
+      'Authorization': 'Bearer $token',
     };
 
     final dio = Dio();

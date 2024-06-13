@@ -15,8 +15,11 @@ import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widg
 import 'package:plantopia/views/history_plant/history_plant_view.dart';
 import 'package:plantopia/views/home/home_view.dart';
 import 'package:plantopia/views/my_plant/my_plant_view.dart';
+import 'package:plantopia/views/my_plant_details/my_plant_details_view.dart';
 import 'package:plantopia/views/onboarding/onboarding_view.dart';
 import 'package:plantopia/views/plant_details/plant_details_view.dart';
+import 'package:plantopia/views/plant_details/success_add_plant_view.dart';
+import 'package:plantopia/views/plant_filter/plant_filter_view.dart';
 import 'package:plantopia/views/search_plant/search_plant_view.dart';
 import 'package:plantopia/views/upload_progress/upload_progress_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
@@ -38,55 +41,67 @@ Future<void> main() async {
 
   runApp(
     GetMaterialApp(
-      home: const BottomNavigationBarGlobalWidget(),
-      getPages: [
-        GetPage(
-          name: AppRoutes.home,
-          page: () => const HomeView(),
-        ),
-        GetPage(
-          name: AppRoutes.weather,
-          page: () => WeatherView(),
-        ),
-        GetPage(
-          name: AppRoutes.splashApp,
-          page: () => const SplashScreenView(),
-        ),
-        GetPage(
-          name: AppRoutes.auth,
-          page: () => const AuthView(),
-        ),
-        GetPage(
-          name: AppRoutes.allowNotif,
-          page: () => const AllowNotificationView(),
-        ),
-        GetPage(name: AppRoutes.onboarding, page: () => const OnboardingView()),
-        GetPage(
-          name: AppRoutes.myPlant,
-          page: () => MyPlantView(),
-        ),
-        GetPage(
-          name: AppRoutes.historyPlant,
-          page: () => const HistoryPlantView(),
-        ),
-        GetPage(
-          name: AppRoutes.addPlant,
-          page: () => AddPlantView(),
-        ),
-        GetPage(
-          name: AppRoutes.searchPlant,
-          page: () => SearchPlantView(),
-        ),
-        GetPage(
-          name: AppRoutes.plantDetails,
-          page: () => PlantDetailsView(),
-        ),
-        GetPage(
-          name: AppRoutes.uploadProgress,
-          page: () => const UploadProgressView(),
-        ),
-      ],
-      initialRoute: AppRoutes.splashApp,
-    ),
+        home: const BottomNavigationBarGlobalWidget(),
+        getPages: [
+          GetPage(
+            name: AppRoutes.home,
+            page: () => const HomeView(),
+          ),
+          GetPage(
+            name: AppRoutes.weather,
+            page: () => WeatherView(),
+          ),
+          GetPage(
+            name: AppRoutes.splashApp,
+            page: () => const SplashScreenView(),
+          ),
+          GetPage(
+            name: AppRoutes.auth,
+            page: () => const AuthView(),
+          ),
+          GetPage(
+            name: AppRoutes.allowNotif,
+            page: () => const AllowNotificationView(),
+          ),
+          GetPage(
+              name: AppRoutes.onboarding, page: () => const OnboardingView()),
+          GetPage(
+            name: AppRoutes.myPlant,
+            page: () => MyPlantView(),
+          ),
+          GetPage(
+            name: AppRoutes.historyPlant,
+            page: () => const HistoryPlantView(),
+          ),
+          GetPage(
+            name: AppRoutes.addPlant,
+            page: () => AddPlantView(),
+          ),
+          GetPage(
+            name: AppRoutes.searchPlant,
+            page: () => SearchPlantView(),
+          ),
+          GetPage(
+            name: AppRoutes.plantDetails,
+            page: () => PlantDetailsView(),
+          ),
+          GetPage(
+            name: AppRoutes.myPlantDetails,
+            page: () => const MyPlantDetailsView(),
+          ),
+          GetPage(
+            name: AppRoutes.successAddPlant,
+            page: () => const SuccessAddPlantView(),
+          ),
+          GetPage(
+            name: AppRoutes.plantFilter,
+            page: () => const PlantFilterView(),
+          ),
+          GetPage(
+            name: AppRoutes.uploadProgress,
+            page: () => UploadProgressView(),
+          ),
+        ],
+        initialRoute: AppRoutes.splashApp),
   );
 }

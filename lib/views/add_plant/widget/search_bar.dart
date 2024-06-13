@@ -50,7 +50,10 @@ class SearchBarWidget extends StatelessWidget {
           width: 20,
           height: 20,
           child: InkWell(
-            onTap: () {},
+            borderRadius: BorderRadius.circular(180),
+            onTap: () {
+              Get.toNamed(AppRoutes.plantFilter);
+            },
             child: SvgPicture.asset(
               IconConstant.filter,
             ),
