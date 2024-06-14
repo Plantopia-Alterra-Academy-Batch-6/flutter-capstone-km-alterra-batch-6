@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_plant_progress_response_model.dart';
 import 'package:plantopia/service/auth_service.dart';
 
@@ -9,12 +10,11 @@ class UploadProgressService {
   static Future<GetPlantProgressResponseModel?> getPlantProgress(
       plantId) async {
     try {
-      String token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9jdGF2aWFub3J5YW4wMzBAZ21haWwuY29tIiwiaWQiOjMsInJvbGUiOiJ1c2VyIn0.7SvvgU6pwwe6cLg-M97O9PT5vHcKlizflp5M4XlPwHE";
+      final String? bearerToken = await UserTokenPref.getToken();
       final String url =
           "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/progress/$plantId";
       Map<String, dynamic> headers = {
-        'Authorization': 'Bearer $token',
+        'Authorization': 'Bearer $bearerToken',
         'Content-Type': 'application/json',
       };
       final response = await dio.get(
@@ -36,12 +36,10 @@ class UploadProgressService {
   }
 
   static Future<CustomException> uploadProgress(
-      {required String plantId, required XFile image}) async {
+      {required plantId, required XFile image}) async {
     try {
-      // final String? bearerToken = await UserTokenPref.getToken();
+      final String? bearerToken = await UserTokenPref.getToken();
 
-      String bearerToken =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9jdGF2aWFub3J5YW4wMzBAZ21haWwuY29tIiwiaWQiOjMsInJvbGUiOiJ1c2VyIn0.7SvvgU6pwwe6cLg-M97O9PT5vHcKlizflp5M4XlPwHE";
       const String url =
           "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/progress";
 
@@ -53,7 +51,6 @@ class UploadProgressService {
         ),
       });
 
- 
       final response = await dio.post(
         url,
         data: formData,
@@ -65,15 +62,18 @@ class UploadProgressService {
         ),
       );
 
-
       if (response.statusCode == 201) {
+        print("success");
         return CustomException('Success', 200);
       } else {
         throw CustomException('there is an error ', 400);
       }
     } on DioException catch (e) {
+      print(e.response?.data);
       throw CustomException(e.response?.data, e.response?.statusCode ?? 400);
     } catch (e) {
+      print(e);
+
       throw CustomException('there is an error : $e', 400);
     }
   }

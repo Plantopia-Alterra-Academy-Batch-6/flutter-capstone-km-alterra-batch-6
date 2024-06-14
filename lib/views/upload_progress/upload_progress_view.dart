@@ -1,9 +1,6 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/upload_progress_controller.dart';
@@ -13,53 +10,15 @@ import 'package:plantopia/views/upload_progress/widget/custom_upload_progress_bu
 import 'package:plantopia/views/upload_progress/widget/dotted_border_image_widget.dart';
 import 'package:plantopia/views/upload_progress/widget/error_size_photo.dart';
 
-class UploadProgressView extends StatefulWidget {
+class UploadProgressView extends StatelessWidget {
   UploadProgressView({super.key}) {
     Get.lazyPut<UploadProgressController>(() => UploadProgressController());
   }
-
-  @override
-  _UploadProgressViewState createState() => _UploadProgressViewState();
-}
-
-class _UploadProgressViewState extends State<UploadProgressView> {
-  XFile? pickedFile;
-  File? _image;
-  bool isImageLarge = false;
-  bool isActiveButton = false;
-  final UploadProgressController uploadProgressController =
-      Get.put(UploadProgressController());
-
-  Future<void> _pickImage() async {
-    var maxFileSizeInBytes = 2 * 1048576;
-    final ImagePicker picker = ImagePicker();
-    pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    var imagePath = await pickedFile!.readAsBytes();
-
-    var fileSize = imagePath.length;
-    if (fileSize <= maxFileSizeInBytes) {
-      setState(() {
-        isImageLarge = false;
-        _image = File(pickedFile!.path);
-        isActiveButton = true;
-      });
-    } else {
-      setState(() {
-        _image = null;
-        isImageLarge = true;
-        isActiveButton = false;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    uploadProgressController.getPlantProgress(1);
-  }
-
   @override
   Widget build(BuildContext context) {
+    final UploadProgressController controller =
+        Get.put(UploadProgressController());
+    final plantId = Get.arguments["id"];
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
@@ -85,48 +44,56 @@ class _UploadProgressViewState extends State<UploadProgressView> {
                 const SizedBox(
                   height: 16.0,
                 ),
-                GestureDetector(
-                  onTap: _pickImage,
-                  child: _image == null
-                      ? const DottedBorderImageWidget()
-                      : Container(
-                          clipBehavior: Clip.antiAlias,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6)),
-                          height: 300,
-                          width: double.infinity,
-                          child: Image.file(
-                            _image!,
-                            fit: BoxFit.cover,
+                Obx(
+                  () => GestureDetector(
+                    onTap: controller.pickImage,
+                    child: controller.image.value == null
+                        ? const DottedBorderImageWidget()
+                        : Container(
+                            clipBehavior: Clip.antiAlias,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6)),
+                            height: 300,
+                            width: double.infinity,
+                            child: Image.file(
+                              controller.image.value!,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
+                  ),
                 ),
                 const SizedBox(
                   height: 5.0,
                 ),
-                isImageLarge ? const ErrorSizePhotoWidget() : Container(),
+                Obx(
+                  () => controller.isImageLarge.value
+                      ? const ErrorSizePhotoWidget()
+                      : Container(),
+                ),
                 const SizedBox(
                   height: 20.0,
                 ),
-                CustomUploadProgressButtonWidget(
-                  isActive: isActiveButton,
-                  onPressed: () async {
-                    if (_image != null) {
-                      bool result = await uploadProgressController
-                          .uploadProgress("1", pickedFile!);
-                      if (result) {
-                        alertsuccess(context);
-                        setState(() {
-                          _image = null;
-                          isActiveButton = false;
+                Obx(
+                  () => CustomUploadProgressButtonWidget(
+                    isLoading: controller.isButtonLoading.value,
+                    isActive: controller.isActiveButton.value,
+                    onPressed: () async {
+                      if (controller.image.value != null) {
+                        bool result = await controller.uploadProgress(plantId);
+                        if (result) {
+                          alertsuccess(context);
+
+                          controller.image.value = null;
+                          controller.isActiveButton.value = false;
+                        }
+                      } else {
+                        CustomSnackbarProgressWidget.show(context,
+                            onPressed: () {
+                          controller.pickImage();
                         });
                       }
-                    } else {
-                      CustomSnackbarProgressWidget.show(context, onPressed: () {
-                        _pickImage();
-                      });
-                    }
-                  },
+                    },
+                  ),
                 ),
                 const AllPhotosWidget(),
               ],

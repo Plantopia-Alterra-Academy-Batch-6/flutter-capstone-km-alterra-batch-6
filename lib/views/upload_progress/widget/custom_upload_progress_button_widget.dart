@@ -4,11 +4,13 @@ import 'package:plantopia/constants/text_style_constant.dart';
 
 class CustomUploadProgressButtonWidget extends StatelessWidget {
   final bool isActive;
+  final bool isLoading;
   final void Function()? onPressed;
   const CustomUploadProgressButtonWidget({
     super.key,
     this.isActive = false,
     this.onPressed,
+    this.isLoading = false,
   });
 
   @override
@@ -26,11 +28,15 @@ class CustomUploadProgressButtonWidget extends StatelessWidget {
             )),
         onPressed: onPressed,
         // onPressed: onPressed,
-        child: Text(
-          "Save",
-          style: TextStyleConstant.subtitle.copyWith(
-              color: isActive ? ColorConstant.white : ColorConstant.neutral400),
-        ),
+        child: isLoading
+            ? const CircularProgressIndicator()
+            : Text(
+                "Save",
+                style: TextStyleConstant.subtitle.copyWith(
+                    color: isActive
+                        ? ColorConstant.white
+                        : ColorConstant.neutral400),
+              ),
       ),
     );
   }

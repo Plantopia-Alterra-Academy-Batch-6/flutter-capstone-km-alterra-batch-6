@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class CustomAppbarVerifyWidget extends StatelessWidget {
-  const CustomAppbarVerifyWidget({Key? key}) : super(key: key);
+  const CustomAppbarVerifyWidget({super.key});
 
   @override
   Widget build(BuildContext context) {

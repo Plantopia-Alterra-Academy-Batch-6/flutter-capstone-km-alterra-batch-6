@@ -18,12 +18,27 @@ class IconConstant {
   static const String search = 'assets/icons/search.svg';
   static const String filter = 'assets/icons/filter.svg';
   static const String history = 'assets/icons/history.svg';
-  static const String emptyHistoryPlant =
-      'assets/icons/empty_history_plant.svg';
+  static const String emptyHistoryPlant = 'assets/icons/empty_history_plant.svg';
   static const String waterDrop = 'assets/icons/water_drop.svg';
   static const String schedule = 'assets/icons/schedule.svg';
   static const String calendar = 'assets/icons/calendar.svg';
   static const String chat = 'assets/icons/chat.svg';
   static const String addPhoto = 'assets/icons/add_photo.svg';
   static const String confirmation = 'assets/icons/confirmation.svg';
+  static const String uploadPhoto = 'assets/icons/upload-photo.svg';
+  static const String send = 'assets/icons/send.svg';
+  static const String back = 'assets/icons/back.svg';
+  static const String close = 'assets/icons/close.svg';
+  static const String profile = 'assets/icons/profile.svg';
+  static const String manageNotification = 'assets/icons/manage_notification.svg';
+  static const String setLanguage = 'assets/icons/language.svg';
+  static const String inviteFriends = 'assets/icons/invite_friends.svg';
+  static const String plantBot = 'assets/icons/plant_bot.svg';
+  static const String help = 'assets/icons/help.svg';
+  static const String faq = 'assets/icons/faq.svg';
+  static const String appInfo = 'assets/icons/app_info.svg';
+  static const String rateApp = 'assets/icons/rate_app.svg';
+  static const String privacyPolicy = 'assets/icons/privacy_policy.svg';
+  static const String profileNavbar = 'assets/icons/profile_navbar.svg';
+  static const String editPencil = 'assets/icons/edit_pencil.svg';
 }

@@ -20,7 +20,7 @@ class _SplashScreenViewState extends State<SplashScreenView> {
       getUserId().then((value) async {
         await Future.delayed(const Duration(seconds: 3));
         if (value != null) {
-          Get.offNamed(AppRoutes.allowNotif);
+          Get.offNamed(AppRoutes.home);
         } else {
           Get.offNamed(AppRoutes.onboarding);
         }

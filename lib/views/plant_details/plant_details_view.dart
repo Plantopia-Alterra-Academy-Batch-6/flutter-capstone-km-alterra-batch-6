@@ -4,8 +4,6 @@ import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/plant_details_controller.dart';
-import 'package:plantopia/controllers/search_plant_controller.dart';
-import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/plant_details/widget/about_plant_widget.dart';
 import 'package:plantopia/views/plant_details/widget/faq_widget.dart';
 import 'package:plantopia/views/plant_details/widget/image_carousel_widget.dart';

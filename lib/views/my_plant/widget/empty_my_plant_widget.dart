@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:plantopia/utils/app_routes.dart';
 
 class EmptyMyPlantWidget extends StatelessWidget {
   const EmptyMyPlantWidget({super.key});
@@ -42,7 +44,9 @@ class EmptyMyPlantWidget extends StatelessWidget {
             height: 12,
           ),
           InkWell(
-            onTap: () {},
+            onTap: () {
+              Get.toNamed(AppRoutes.addPlant);
+            },
             child: Ink(
               decoration: BoxDecoration(
                 color: ColorConstant.primary100,

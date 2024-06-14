@@ -31,7 +31,7 @@ class _VerificationViewState extends State<VerificationView> {
 
   void startTimer() {
     setState(() {
-      _start = 30; 
+      _start = 10; // Mengatur waktu menjadi 60 detik
     });
 
     _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
@@ -72,7 +72,7 @@ class _VerificationViewState extends State<VerificationView> {
                 height: 40.0,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                padding: const EdgeInsets.only(left: 8.0),
                 child: Obx(
                   () => OtpTextField(
                     autoFocus: true,
@@ -87,7 +87,7 @@ class _VerificationViewState extends State<VerificationView> {
                     keyboardType: TextInputType.number,
                     disabledBorderColor: Colors.red,
                     contentPadding: const EdgeInsets.symmetric(
-                      vertical: 14,
+                      vertical: 15,
                     ),
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
