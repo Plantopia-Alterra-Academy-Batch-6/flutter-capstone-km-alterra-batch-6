@@ -7,8 +7,10 @@ import 'package:plantopia/controllers/my_plant_controller.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_icon_global_widget.dart';
 import 'package:plantopia/views/home/home_view.dart';
 import 'package:plantopia/views/my_plant/my_plant_view.dart';
+import 'package:plantopia/views/profile/profile_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 import 'package:plantopia/controllers/weather_controller.dart';
+
 
 // ignore: must_be_immutable
 class BottomNavigationBarGlobalWidget extends StatelessWidget {
@@ -35,10 +37,10 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
         return IndexedStack(
           index: controller.currentIndex.value,
           children: [
-            const HomeView(),
+             HomeView(),
             WeatherView(),
             MyPlantView(),
-            const SizedBox.shrink(),
+            const ProfileView()
           ],
         );
       }),
@@ -81,8 +83,8 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
               controller: controller,
             ),
             _buildBottomNavigationBarItem(
-              iconAssetPath: IconConstant.locationAlt,
-              selectedIconAssetPath: IconConstant.locationAlt,
+              iconAssetPath: IconConstant.profileNavbar,
+              selectedIconAssetPath: IconConstant.profileNavbar,
               label: 'Profile',
               index: 3,
               controller: controller,

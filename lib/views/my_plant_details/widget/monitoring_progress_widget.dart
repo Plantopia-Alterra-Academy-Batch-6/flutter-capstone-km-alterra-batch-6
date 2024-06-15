@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:plantopia/constants/color_constant.dart';
-import 'package:plantopia/constants/icon_constant.dart';
+import 'package:get/get.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/models/get_my_plant_response_model.dart';
+import 'package:plantopia/utils/app_routes.dart';
+import 'package:plantopia/views/upload_progress/widget/dotted_border_image_widget.dart';
 
 class MonitoringProgressWidget extends StatelessWidget {
-  const MonitoringProgressWidget({super.key});
+  const MonitoringProgressWidget({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    final Map arguments = Get.arguments;
+    final PlantElement detailMyPlant = arguments['myPlantDetails'];
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
@@ -25,35 +31,15 @@ class MonitoringProgressWidget extends StatelessWidget {
         const SizedBox(
           height: 16,
         ),
-        Container(
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(
-              8,
-            ),
-            border: Border.all(
-              width: 1,
-              color: ColorConstant.neutral300,
-            ),
+        GestureDetector(
+          onTap: () {
+            Get.toNamed(AppRoutes.uploadProgress,
+                arguments: {'id': detailMyPlant.plant?.id});
+          },
+          child: const DottedBorderImageWidget(
+            height: 180,
           ),
-          width: double.infinity,
-          height: 180,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                IconConstant.addPhoto,
-              ),
-              const SizedBox(
-                height: 8,
-              ),
-              Text(
-                "Upload Your First Plant Image*\n(max. 2 MB)",
-                style: TextStyleConstant.caption,
-                textAlign: TextAlign.center,
-              ),
-            ],
-          ),
-        )
+        ),
       ],
     );
   }

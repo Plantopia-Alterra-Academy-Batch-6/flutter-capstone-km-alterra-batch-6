@@ -1,3 +1,4 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'dart:async';
@@ -8,10 +9,15 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/models/login_params_model.dart';
+import 'package:plantopia/views/verify/widget/confirm_description_verify_widget.dart';
+import 'package:plantopia/views/verify/widget/custom_appbar_verify_widget.dart';
 
 class VerificationView extends StatefulWidget {
   final LoginParamsModel loginParamsModel;
-  const VerificationView({Key? key, required this.loginParamsModel});
+  const VerificationView({
+    super.key,
+    required this.loginParamsModel,
+  });
 
   @override
   State<VerificationView> createState() => _VerificationViewState();
@@ -66,41 +72,40 @@ class _VerificationViewState extends State<VerificationView> {
                 height: 40.0,
               ),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                padding: const EdgeInsets.only(left: 8.0),
                 child: Obx(
-                  () => Expanded(
-                    child: OtpTextField(
-                      autoFocus: true,
-                      numberOfFields: 6,
-                      filled: true,
-                      showFieldAsBox: true,
-                      fieldWidth: 53,
-                      borderWidth: 0.5,
-                      enabledBorderColor: authController.borderVerifyColor.value,
-                      focusedBorderColor: Colors.black,
-                      cursorColor: Colors.black,
-                      keyboardType: TextInputType.number,
-                      disabledBorderColor: Colors.red,
-                      contentPadding: const EdgeInsets.symmetric(
-                        vertical: 14,
-                      ),
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      textStyle: TextStyle(color: colorCurrent ?? Colors.black),
-                      borderRadius: BorderRadius.circular(12),
-                      onSubmit: (String otpUser) async {
-                        final LoginParamsModel? result =
-                            await authController.verification(
-                                loginParams: widget.loginParamsModel, otp: otpUser);
-        
-                        if (result != null) {
-                          alertsuccess(context);
-        
-                          //melakukan login otomatis ketika akun telah verifikasi
-                          await authController.login(loginParams: result);
-                        }
-                      },
+                  () => OtpTextField(
+                    autoFocus: true,
+                    numberOfFields: 6,
+                    filled: true,
+                    showFieldAsBox: true,
+                    fieldWidth: 53,
+                    borderWidth: 0.5,
+                    enabledBorderColor: authController.borderVerifyColor.value,
+                    focusedBorderColor: Colors.black,
+                    cursorColor: Colors.black,
+                    keyboardType: TextInputType.number,
+                    disabledBorderColor: Colors.red,
+                    contentPadding: const EdgeInsets.symmetric(
+                      vertical: 15,
                     ),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    textStyle: TextStyle(color: colorCurrent ?? Colors.black),
+                    borderRadius: BorderRadius.circular(12),
+                    onSubmit: (String otpUser) async {
+                      final LoginParamsModel? result =
+                          await authController.verification(
+                              loginParams: widget.loginParamsModel,
+                              otp: otpUser);
+
+                      if (result != null) {
+                        alertsuccess(context);
+
+                        //melakukan login otomatis ketika akun telah verifikasi
+                        await authController.login(loginParams: result);
+                      }
+                    },
                   ),
                 ),
               ),
@@ -117,7 +122,7 @@ class _VerificationViewState extends State<VerificationView> {
                   ),
                   TextButton(
                     style: ButtonStyle(
-                      padding: MaterialStateProperty.all(EdgeInsets.zero),
+                      padding: WidgetStateProperty.all(EdgeInsets.zero),
                     ),
                     onPressed: _start == 0
                         ? () async {
@@ -180,73 +185,6 @@ class _VerificationViewState extends State<VerificationView> {
           ),
         );
       },
-    );
-  }
-}
-
-class ConfirmDescriptionWidget extends StatelessWidget {
-  const ConfirmDescriptionWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Text(
-          "Confirm Your Credentials",
-          style: TextStyle(fontWeight: FontWeight.w700, fontSize: 24),
-        ),
-        SizedBox(
-          height: 8.0,
-        ),
-        SizedBox(
-          width: 270,
-          child: Text(
-            textAlign: TextAlign.center,
-            'We’ve send code to your email,  please type the code here',
-            style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class CustomAppbarVerifyWidget extends StatelessWidget {
-  const CustomAppbarVerifyWidget({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Container(
-            width: 40,
-            height: 40,
-            decoration: BoxDecoration(
-              border: Border.all(color: const Color(0xFF030712)),
-              borderRadius: BorderRadius.circular(12),
-            ),
-            child: IconButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-              icon: const Icon(
-                Icons.arrow_back_ios_new_rounded,
-                size: 15,
-              ),
-            ),
-          ),
-          const Text(
-            "Verify Identity",
-            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20),
-          ),
-          const SizedBox(
-            width: 40.0,
-          ),
-        ],
-      ),
     );
   }
 }

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/onboarding/widgets/carousel_widget.dart';
+import 'package:plantopia/views/onboarding/widgets/custom_button_onboarding_widget.dart';
 
 class OnboardingView extends StatelessWidget {
   const OnboardingView({super.key});
@@ -21,6 +23,9 @@ class OnboardingView extends StatelessWidget {
               child: SingleChildScrollView(
                 child: Column(
                   children: [
+                    const SizedBox(
+                      height: 16.0,
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16.0),
                       child: Row(
@@ -54,9 +59,7 @@ class OnboardingView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Container(
-                      child: const CarouselWidget(),
-                    ),
+                    const CarouselWidget(),
                   ],
                 ),
               ),
@@ -66,61 +69,26 @@ class OnboardingView extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Flexible(
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 40,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          elevation: 0,
-                          backgroundColor: const Color(0xFFD1FAE5),
-                        ),
-                        onPressed: () {
-                          authController.authSection.value = 0;
-                          Get.toNamed(AppRoutes.auth);
-                        },
-                        child: Text(
-                          'Log in',
-                          style: GoogleFonts.nunito(
-                            fontWeight: FontWeight.w700,
-                            color: const Color(0xFF10B981),
-                          ),
-                        ),
-                      ),
-                    ),
+                  CustomButtonOnBoardingWidget(
+                    text: "Log in",
+                    backgroundColor: ColorConstant.primary100,
+                    color: ColorConstant.primary500,
+                    onPressed: () {
+                      authController.authSection.value = 0;
+                      Get.toNamed(AppRoutes.auth);
+                    },
                   ),
                   const SizedBox(
                     width: 16.0,
                   ),
-                  Flexible(
-                    child: SizedBox(
-                      width: double.infinity,
-                      height: 40,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          elevation: 0,
-                          backgroundColor: const Color(0xFF10B981),
-                        ),
-                        onPressed: () async {
-                          authController.authSection.value = 1;
-
-                          Get.toNamed(AppRoutes.auth);
-                        },
-                        child: Text(
-                          'Sign Up',
-                          style: GoogleFonts.nunito(
-                            fontWeight: FontWeight.w700,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
+                  CustomButtonOnBoardingWidget(
+                    text: "Sign Up",
+                    backgroundColor: ColorConstant.primary500,
+                    color: ColorConstant.white,
+                    onPressed: () {
+                      authController.authSection.value = 1;
+                      Get.toNamed(AppRoutes.auth);
+                    },
                   ),
                 ],
               ),

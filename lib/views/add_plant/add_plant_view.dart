@@ -48,13 +48,14 @@ class AddPlantView extends StatelessWidget {
             ),
             body: SingleChildScrollView(
               child: Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SearchBarWidget(),
+                    const SearchBarWidget(),
                     const SizedBox(height: 28),
                     RecommendedCardWidget(),
+                     RecommendedCardWidget(),
                     const SizedBox(height: 32),
                     PlantCategoryWidget(),
                   ],
