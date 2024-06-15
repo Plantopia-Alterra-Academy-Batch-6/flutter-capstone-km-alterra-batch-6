@@ -49,8 +49,7 @@ class NotificationService {
     final token = await UserTokenPref.getToken();
     try {
       Map<String, dynamic> headers = {
-        'Authorization':
-            'Bearer $token',
+        'Authorization': 'Bearer $token',
       };
       final response = await dio.get(
           "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/notifications",
@@ -58,7 +57,8 @@ class NotificationService {
       if (response.statusCode == 200) {
         return GetNotificationResponse.fromJson(response.data);
       } else {
-        throw Exception('Failed to load notification data : ${response.statusCode}');
+        throw Exception(
+            'Failed to load notification data : ${response.statusCode}');
       }
     } catch (e) {
       throw Exception(e);
@@ -69,8 +69,7 @@ class NotificationService {
     final token = await UserTokenPref.getToken();
     try {
       Map<String, dynamic> headers = {
-        'Authorization':
-            'Bearer $token',
+        'Authorization': 'Bearer $token',
       };
       final response = await dio.get(
           "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/notifications/$id",
@@ -78,7 +77,54 @@ class NotificationService {
       if (response.statusCode == 200) {
         return response.data['data'];
       } else {
-        throw Exception('Failed to load notification data : ${response.statusCode}');
+        throw Exception(
+            'Failed to load notification data : ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<String> deleteAllNotification() async {
+    final token = await UserTokenPref.getToken();
+    try {
+      Map<String, dynamic> headers = {
+        'Authorization': 'Bearer $token',
+      };
+      final response = await dio.delete(
+          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/notifications",
+          options: Options(headers: headers));
+      if (response.statusCode == 200) {
+        return response.data['status'];
+      } else {
+        throw Exception(
+            'Failed to delete notification data : ${response.statusCode}');
+      }
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  static Future<bool> createCustomizeReminder({required int myPlantId, required String customizeTime, required bool isRecurring, required String type}) async {
+    final token = await UserTokenPref.getToken();
+    try {
+      Map<String, dynamic> headers = {
+        'Authorization': 'Bearer $token',
+      };
+      final response = await dio.post(
+          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/create-customize-watering-reminder",
+          data: {
+            "my_plant_id": myPlantId,
+            "time": customizeTime,
+            "recurring": isRecurring,
+            "type": type
+          },
+          options: Options(headers: headers));
+      if (response.statusCode == 200) {
+        return response.data['status'];
+      } else {
+        throw Exception(
+            'Failed to customize watering reminder : ${response.statusCode}');
       }
     } catch (e) {
       throw Exception(e);

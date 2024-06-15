@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:plantopia/service/my_plant_details_service.dart';
@@ -55,14 +56,17 @@ class MyPlantDetailsController extends GetxController {
 
   Future<void> deleteMyplant(int plantId) async {
     try {
-      final response = await MyPlantDetailsService.deleteMyPlant(plantId);
-      if (response == "success") {
-        isSuccess.value = true;
-      } else {
-        isSuccess.value = false;
-      }
+      await MyPlantDetailsService.deleteMyPlant(plantId);
     } catch (e) {
-      print("ini errornya disini $e");
+      Get.defaultDialog(
+        title: "Error",
+        middleText: "Failed to delete my plant, please try again!",
+        textConfirm: "OK",
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          Get.back();
+        },
+      );
     }
   }
 }
