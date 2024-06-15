@@ -24,10 +24,13 @@ class SuccessAddPlantView extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 4),
-            Text(
-              "You've successfully added a new plant to your collection",
-              style: TextStyleConstant.paragraph,
-              textAlign: TextAlign.center,
+            Padding(
+              padding: const EdgeInsets.only(left: 70, right: 70),
+              child: Text(
+                "You've successfully added a new plant to your collection",
+                style: TextStyleConstant.paragraph,
+                textAlign: TextAlign.center,
+              ),
             ),
             const SizedBox(height: 74),
             Padding(

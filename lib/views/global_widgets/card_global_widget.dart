@@ -34,10 +34,17 @@ class CardGlobalWidget extends StatelessWidget {
               //alignment: Alignment.bottomRight,
               bottom: -10,
               left: 70,
-              child: Image.asset(
-                ImageConstant.plantDummy,
+              child: Image.network(
+                plantImageUrl,
                 height: 130,
                 width: 93,
+                errorBuilder: (context, error, stackTrace) {
+                  return Image.asset(
+                    ImageConstant.plantDummy,
+                    height: 130,
+                    width: 93,
+                  );
+                },
               ),
               //     CachedNetworkImage(
               //   height: 130,

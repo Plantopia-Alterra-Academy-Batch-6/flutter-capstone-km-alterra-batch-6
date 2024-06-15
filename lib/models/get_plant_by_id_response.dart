@@ -69,8 +69,8 @@ class PlantData {
 
   factory PlantData.fromJson(Map<String, dynamic> json) {
     var plantInstructionsList = json['plant_instructions'] as List?;
-    var plantFaqsList = json['plant_faqs'] as List;
-    var plantImagesList = json['plant_images'] as List;
+    var plantFaqsList = json['plant_faqs'] as List?;
+    var plantImagesList = json['plant_images'] as List?;
 
     return PlantData(
       id: json['id'],
@@ -86,8 +86,8 @@ class PlantData {
       wateringSchedule: WateringSchedule.fromJson(json['watering_schedule']),
       plantInstructions: plantInstructionsList?.map((i) => PlantInstruction.fromJson(i)).toList(),
       additionalTips: json['additional_tips'],
-      plantFaqs: plantFaqsList.map((i) => PlantFaq.fromJson(i)).toList(),
-      plantImages: plantImagesList.map((i) => PlantImage.fromJson(i)).toList(),
+      plantFaqs: plantFaqsList?.map((i) => PlantFaq.fromJson(i)).toList(),
+      plantImages: plantImagesList?.map((i) => PlantImage.fromJson(i)).toList(),
       createdAt: json['created_at'],
     );
   }
