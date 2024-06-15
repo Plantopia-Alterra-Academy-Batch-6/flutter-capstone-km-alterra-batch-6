@@ -13,28 +13,32 @@ class MyPlantWidget extends StatelessWidget {
         const SizedBox(
           height: 24,
         ),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              "My Plant",
-              style: TextStyleConstant.heading4.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                "View more",
-                style: TextStyleConstant.paragraph.copyWith(
-                  color: ColorConstant.link500,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "My Plant",
+                style: TextStyleConstant.heading4.copyWith(
+                  fontWeight: FontWeight.w700,
                 ),
               ),
-            )
-          ],
-        ),
-        const SizedBox(
-          height: 12,
+              TextButton(
+                onPressed: () {
+                  Get.offAll(const BottomNavigationBarGlobalWidget(
+                    index: 2,
+                  ));
+                },
+                child: Text(
+                  "View more",
+                  style: TextStyleConstant.paragraph.copyWith(
+                    color: ColorConstant.link500,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
         Obx(() {
           switch (myPlantController.myPlantData.value) {
@@ -43,34 +47,62 @@ class MyPlantWidget extends StatelessWidget {
                 height: 200,
                 width: double.infinity,
                 child: ListView.builder(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
                     scrollDirection: Axis.horizontal,
-                    itemCount: myPlantController.listMyPlant.length,
+                    itemCount: 4,
                     itemExtent: 156,
                     itemBuilder: (context, int index) {
                       return const Padding(
                         padding: EdgeInsets.only(right: 8.0),
-                        child: ShimmerContainerGlobalWidget(
-                          width: 156,
-                          height: 200,
-                          radius: 24,
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.symmetric(
+                                  horizontal: 16.0, vertical: 23),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  ShimmerContainerGlobalWidget(
+                                    width: 100,
+                                    height: 30,
+                                    radius: 0,
+                                  ),
+                                  ShimmerContainerGlobalWidget(
+                                    width: 100,
+                                    height: 30,
+                                    radius: 0,
+                                  ),
+                                ],
+                              ),
+                            ),
+                            ShimmerContainerGlobalWidget(
+                              width: 156,
+                              height: 200,
+                              radius: 24,
+                            ),
+                          ],
                         ),
                       );
                     }),
               );
             case Status.loaded:
               return myPlantController.listMyPlant.isEmpty
-                  ? const EmptyMyPlantWidget()
+                  ? const Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16.0),
+                      child: EmptyMyPlantWidget(),
+                    )
                   : SizedBox(
                       height: 200,
                       width: double.infinity,
                       child: ListView.builder(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
                           scrollDirection: Axis.horizontal,
                           itemCount: myPlantController.listMyPlant.length,
                           itemExtent: 156,
                           itemBuilder: (context, int index) {
                             return Padding(
                                 padding: const EdgeInsets.only(right: 12.0),
-                                child: InkWell(
+                                child: GestureDetector(
                                   onTap: () {
                                     Get.toNamed(AppRoutes.myPlantDetails,
                                         arguments: {
@@ -106,9 +138,11 @@ class MyPlantWidget extends StatelessWidget {
                   color: ColorConstant.danger500,
                 ),
               );
-
             default:
-              return const EmptyMyPlantWidget();
+              return const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 16.0),
+                child: EmptyMyPlantWidget(),
+              );
           }
         }),
       ],

@@ -21,20 +21,21 @@ class MyPlantController extends GetxController {
   var activeIndex = (-1).obs;
 
   @override
-  void onInit() {
+  Future<void> onInit() async {
+    super.onInit();
+    getMyPlant();
+    getAllCategories();
+    getRecommendationPlant();
+  }
+  
+  Future<void> init() async {
     super.onInit();
     getMyPlant();
     getAllCategories();
     getRecommendationPlant();
   }
 
-  void init() {
-    getMyPlant();
-    getAllCategories();
-    getRecommendationPlant();
-  }
-
-  void getMyPlant() async {
+  Future<void> getMyPlant() async {
     try {
       myPlantData.value = Status.loading;
       final response = await MyPlantService.getMyPlant();
@@ -45,7 +46,7 @@ class MyPlantController extends GetxController {
     }
   }
 
-  void getRecommendationPlant() async {
+  Future<void> getRecommendationPlant() async {
     try {
       recommendationData.value = Status.loading;
       final response = await MyPlantService.getRecommendationPlant();
@@ -56,7 +57,7 @@ class MyPlantController extends GetxController {
     }
   }
 
-  void getPlantByCatergories(int id) async {
+  Future<void> getPlantByCatergories(int id) async {
     try {
       recommendationData.value = Status.loading;
       final response = await MyPlantService.getPlantByCategories(id);

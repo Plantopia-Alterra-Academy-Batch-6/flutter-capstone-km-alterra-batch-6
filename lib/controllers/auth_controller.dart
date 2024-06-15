@@ -28,8 +28,6 @@ class AuthController extends GetxController {
       if (token != null) {
         final UserModel? result = await AuthService.getUser(token);
         await UserTokenPref.setUserId(result?.id ?? -1);
-        print("ini token $token dan userId ${result?.id}");
-
         if (result != null) {
           currentUser.value = result;
           print("cek currentUser name :  ${currentUser.value?.name}");
@@ -53,6 +51,7 @@ class AuthController extends GetxController {
     try {
       final String result = await AuthService.login(loginParams: loginParams);
       await UserTokenPref.setToken(result);
+      getUser();
       loginFormController.onClose();
       Get.to(const AllowNotificationView());
     } catch (e) {
