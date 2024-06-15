@@ -55,7 +55,6 @@ class AddPlantView extends StatelessWidget {
                     const SearchBarWidget(),
                     const SizedBox(height: 28),
                     RecommendedCardWidget(),
-                     RecommendedCardWidget(),
                     const SizedBox(height: 32),
                     PlantCategoryWidget(),
                   ],
