@@ -17,8 +17,7 @@ class MyPlantDetailsService {
           options: Options(headers: headers));
       return response.data['status'];
     } catch (e) {
-      print("Failed to delete data $e");
-      return "Failed";
+      return "Failed to delete plant from my plant";
     }
   }
 }

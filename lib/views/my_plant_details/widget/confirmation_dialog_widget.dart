@@ -99,14 +99,15 @@ class ConfirmationDialogWidget extends StatelessWidget {
                       ),
                       Expanded(
                         child: ButtonWidget(
-                          onTap: () {
-                            myPlantDetailsController.deleteMyplant(plantId);
-                            myPlantController.init();
+                          onTap: () async {
+                            await myPlantDetailsController
+                                .deleteMyplant(plantId);
                             Get.offAll(
                               const BottomNavigationBarGlobalWidget(
                                 index: 2,
                               ),
                             );
+                            await myPlantController.init();
                           },
                           buttonName: "Delete",
                           boxDecoration: BoxDecoration(

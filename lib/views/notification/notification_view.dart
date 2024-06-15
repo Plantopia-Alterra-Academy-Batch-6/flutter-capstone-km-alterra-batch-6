@@ -32,7 +32,7 @@ class NotificationView extends StatelessWidget {
         ),
         centerTitle: true,
         actions: [
-          Obx(() => notifController.notifDummy.isNotEmpty
+          Obx(() => notifController.listNotif.isNotEmpty
               ? GestureDetector(
                   onTap: () async {
                     await Get.dialog(Center(
@@ -140,11 +140,11 @@ class NotificationView extends StatelessWidget {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Obx(() {
-          switch (notifController.notifStatus.value) {
-            case Status.loading:
-              return Column(
+      body: Obx(() {
+        switch (notifController.notifStatus.value) {
+          case Status.loading:
+            return SingleChildScrollView(
+              child: Column(
                 children: [
                   Align(
                       alignment: Alignment.centerRight,
@@ -174,46 +174,50 @@ class NotificationView extends StatelessWidget {
                     ),
                   )
                 ],
-              );
-            case Status.loaded:
-              return notifController.listNotif.isEmpty
-                  ? Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Image.asset(ImageConstant.emptyNotification),
-                          Text(
-                            "No Notifications Yet",
-                            style: TextStyleConstant.title,
-                          ),
-                          const SizedBox(
-                            height: 4,
-                          ),
-                          Container(
-                            padding: const EdgeInsets.symmetric(horizontal: 16),
-                            width: double.infinity,
-                            child: Text(
-                              "As you start using the app, we’ll keep you updated here. Enjoy exploring!",
-                              style: TextStyleConstant.subtitle,
-                              textAlign: TextAlign.center,
-                            ),
-                          )
-                        ],
+              ),
+            );
+          case Status.loaded:
+            return notifController.listNotif.isEmpty
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Expanded(flex: 1, child: SizedBox()),
+                      Image.asset(ImageConstant.emptyNotification),
+                      Text(
+                        "No Notifications Yet",
+                        style: TextStyleConstant.title,
                       ),
-                    )
-                  : Column(
+                      const SizedBox(
+                        height: 4,
+                      ),
+                      Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 16),
+                        width: double.infinity,
+                        child: Text(
+                          "As you start using the app, we’ll keep you updated here. Enjoy exploring!",
+                          style: TextStyleConstant.subtitle,
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                      const Expanded(flex: 2, child: SizedBox())
+                    ],
+                  )
+                : SingleChildScrollView(
+                    child: Column(
                       children: [
                         Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButton(
-                                onPressed: () {},
-                                child: Text(
-                                  "Mark all as read",
-                                  style: TextStyleConstant.paragraph.copyWith(
-                                    color: ColorConstant.primary500,
-                                  ),
-                                ),),),
+                          alignment: Alignment.centerRight,
+                          child: TextButton(
+                            onPressed: () {},
+                            child: Text(
+                              "Mark all as read",
+                              style: TextStyleConstant.paragraph.copyWith(
+                                color: ColorConstant.primary500,
+                              ),
+                            ),
+                          ),
+                        ),
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 16.0),
                           child: ListView.builder(
@@ -304,24 +308,24 @@ class NotificationView extends StatelessWidget {
                           ),
                         )
                       ],
-                    );
-            case Status.error:
-              return Expanded(
-                child: Center(
-                  child: Text(
-                    "Failed to load notification data",
-                    style: TextStyleConstant.heading4.copyWith(
-                      fontWeight: FontWeight.w700,
-                      color: ColorConstant.warning500,
                     ),
+                  );
+          case Status.error:
+            return Expanded(
+              child: Center(
+                child: Text(
+                  "Failed to load notification data",
+                  style: TextStyleConstant.heading4.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: ColorConstant.warning500,
                   ),
                 ),
-              );
-            default:
-              return const SizedBox();
-          }
-        }),
-      ),
+              ),
+            );
+          default:
+            return const SizedBox();
+        }
+      }),
     );
   }
 }
