@@ -66,7 +66,7 @@ class MyPlantDetailsView extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      AboutPlantWidget(),
+                      const AboutPlantWidget(),
                       PlantHistoryWidget(),
                       const PlantRequirementsWidget(),
                       const PlantCharacteristicsWidget(),
