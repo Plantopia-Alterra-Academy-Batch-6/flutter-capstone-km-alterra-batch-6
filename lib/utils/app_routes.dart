@@ -14,4 +14,5 @@ class AppRoutes {
   static const String successAddPlant = '/successAddPlant';
   static const String plantFilter = '/plantFilter';
   static const String chatbot = '/chatbotView';
+  static const String plantFilterResult = '/plantFilterResult';
 }

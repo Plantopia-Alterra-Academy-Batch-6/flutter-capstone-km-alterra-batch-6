@@ -16,19 +16,30 @@ class ImageCarouselWidget extends StatelessWidget {
         return Stack(
           children: [
             CarouselSlider.builder(
-              itemCount: controller.plantByIdResponse!.data!.plantImages?.length ?? 0,
+              itemCount:
+                  controller.plantByIdResponse!.data!.plantImages?.length ?? 0,
               itemBuilder: (context, index, realIndex) {
                 return Container(
                   width: double.infinity,
-                  decoration: const BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage('assets/images/tomato_dummy.png'),
-                      fit: BoxFit.cover,
-                    ),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(
+                        30), // Add border radius if needed
+                  ),
+                  child: Image.network(
+                    controller.plantByIdResponse!.data!.plantImages?[index]
+                            .fileName ??
+                        "",
+                    fit: BoxFit.cover,
+                    errorBuilder: (context, error, stackTrace) {
+                      return Image.asset(
+                          'assets/images/image_error_placeholder.png',
+                          fit: BoxFit.cover);
+                    },
                   ),
                 );
               },
               options: CarouselOptions(
+                enableInfiniteScroll: false,
                 height: 380,
                 viewportFraction: 1.0, // Ensure full-width images
                 onPageChanged: (index, reason) {
@@ -43,7 +54,9 @@ class ImageCarouselWidget extends StatelessWidget {
               child: Center(
                 child: AnimatedSmoothIndicator(
                   activeIndex: controller.activeIndex.value,
-                  count: controller.plantByIdResponse!.data!.plantImages?.length ?? 0,
+                  count:
+                      controller.plantByIdResponse!.data!.plantImages?.length ??
+                          0,
                   effect: ScrollingDotsEffect(
                     activeDotColor: Colors.green,
                     dotColor: Colors.white.withOpacity(0.5),
