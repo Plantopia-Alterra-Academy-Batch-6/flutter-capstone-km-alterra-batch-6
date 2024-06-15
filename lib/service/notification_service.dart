@@ -66,11 +66,11 @@ class NotificationService {
   }
 
   static Future<Notif> getNotificationById(int id) async {
-    // final token = await UserTokenPref.getToken();
+    final token = await UserTokenPref.getToken();
     try {
       Map<String, dynamic> headers = {
         'Authorization':
-            'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im9jdGF2aWFub3J5YW4wMzBAZ21haWwuY29tIiwiaWQiOjMsInJvbGUiOiJ1c2VyIn0.7SvvgU6pwwe6cLg-M97O9PT5vHcKlizflp5M4XlPwHE',
+            'Bearer $token',
       };
       final response = await dio.get(
           "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/notifications/$id",
