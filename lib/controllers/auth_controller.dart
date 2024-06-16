@@ -1,6 +1,7 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:plantopia/controllers/login_form_controller.dart';
 import 'package:plantopia/controllers/sign_up_form_controller.dart';
 import 'package:plantopia/helpers/fcm_token.dart';
@@ -10,6 +11,7 @@ import 'package:plantopia/models/signup_params_model.dart';
 import 'package:plantopia/models/user_model.dart';
 import 'package:plantopia/service/auth_service.dart';
 import 'package:plantopia/views/auth/allow_notif_view.dart';
+import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 import 'package:plantopia/views/verify/verify_view.dart';
 
 class AuthController extends GetxController {
@@ -52,7 +54,7 @@ class AuthController extends GetxController {
       final String result = await AuthService.login(loginParams: loginParams);
       await UserTokenPref.setToken(result);
       loginFormController.onClose();
-      Get.to(const AllowNotificationView());
+      checkAllowNotification();
     } catch (e) {
       if (e is CustomException) {
         if (e.code == 400) {
@@ -165,6 +167,18 @@ class AuthController extends GetxController {
     }
     return null;
   }
+
+  Future<void> checkAllowNotification() async {
+    PermissionStatus status = await Permission.notification.status;
+    if (status.isGranted) {
+      Get.offAll(const BottomNavigationBarGlobalWidget());
+    } else {
+      Get.to(const AllowNotificationView());
+    }
+  }
+
+
+
 
 //   final GoogleSignInService _googleSignInService = GoogleSignInService();
 //   final Rx<User?> _user = Rx<User?>(null);

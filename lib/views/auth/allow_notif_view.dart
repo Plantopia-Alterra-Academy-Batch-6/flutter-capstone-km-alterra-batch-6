@@ -93,7 +93,9 @@ class _AllowNotificationViewState extends State<AllowNotificationView> {
                   overlayColor: WidgetStateProperty.all(Colors.transparent),
                 ),
                 isSemanticButton: false,
-                onPressed: () {},
+                onPressed: () {
+                  Get.offAll(const BottomNavigationBarGlobalWidget());
+                },
                 child: const Text(
                   "Maybe Next Time",
                   style: TextStyle(color: Color(0xFF10B981)),
