@@ -93,7 +93,7 @@ Future<void> main() async {
         ),
         GetPage(
           name: AppRoutes.myPlantDetails,
-          page: () => const MyPlantDetailsView(),
+          page: () => MyPlantDetailsView(),
         ),
         GetPage(
           name: AppRoutes.successAddPlant,

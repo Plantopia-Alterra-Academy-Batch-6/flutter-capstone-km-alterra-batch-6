@@ -20,6 +20,26 @@ class PlantHistoryController extends GetxController {
     super.onInit();
     await getPlantingHistory();
     await plantingHistorySplit();
+    reverseAllLists();
+  }
+
+  void reverseList(RxList<PlantHistory> list) {
+    int length = list.length;
+    for (int i = 0; i < length ~/ 2; i++) {
+      PlantHistory temp = list[i];
+      list[i] = list[length - 1 - i];
+      list[length - 1 - i] = temp;
+    }
+  }
+
+  // Fungsi untuk membalik urutan indeks dalam semua RxList yang Anda miliki
+  void reverseAllLists() {
+    reverseList(todayHistory);
+    reverseList(yesterdayHistory);
+    reverseList(thisWeekHistory);
+    reverseList(thisMonthHistory);
+    reverseList(thisYearHistory);
+    reverseList(lastYearHistory);
   }
 
   String parseDate(DateTime dateTime) {
@@ -42,15 +62,7 @@ class PlantHistoryController extends GetxController {
     try {
       await PlantingHistoryService.addPlantingHistory(plantId);
     } catch (e) {
-      Get.defaultDialog(
-        title: "Error",
-        middleText: "Failed to add plant history please try again!",
-        textConfirm: "OK",
-        confirmTextColor: Colors.white,
-        onConfirm: () {
-          Get.back();
-        },
-      );
+      throw Exception(e);
     }
   }
 

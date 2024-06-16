@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/my_plant_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
@@ -12,7 +13,7 @@ class ListRecomendedPlantWidget extends StatelessWidget {
   ListRecomendedPlantWidget({super.key});
 
   final MyPlantController myPlantController = Get.put(MyPlantController());
-  //final AddPlantController addPlantController = Get.put(AddPlantController());
+  final AddPlantController addPlantController = Get.put(AddPlantController());
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +64,7 @@ class ListRecomendedPlantWidget extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 12.0),
                         child: GestureDetector(
                           onTap: () {
-                            //addPlantController.selectedPlant.value =
+                            addPlantController.selectedPlant.value =
                                 myPlantController
                                     .recommendationPlant[index].id!;
                             Get.toNamed(AppRoutes.plantDetails);
