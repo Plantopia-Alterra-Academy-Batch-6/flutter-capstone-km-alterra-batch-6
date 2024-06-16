@@ -61,30 +61,29 @@ class ListRecomendedPlantWidget extends StatelessWidget {
                   itemExtent: 156,
                   itemBuilder: (context, int index) {
                     return Padding(
-                      padding: const EdgeInsets.only(right: 12.0),
-                      child: GestureDetector(
-                        onTap: () {
-                          addPlantController.selectedPlant.value =
-                              myPlantController.recommendationPlant[index].id ??
-                                  -1;
-                          Get.toNamed(AppRoutes.plantDetails);
-                        },
-                        child: CardGlobalWidget(
-                            plantName: myPlantController
-                                    .recommendationPlant[index].name ??
-                                "-",
-                            plantCategory: myPlantController
-                                    .recommendationPlant[index]
-                                    .plantCategory
-                                    ?.name ??
-                                "-",
-                            plantImageUrl: myPlantController
-                                    .recommendationPlant[index]
-                                    .plantImages?[0]
-                                    .fileName ??
-                                "-"),
-                      ),
-                    );
+                        padding: const EdgeInsets.only(right: 12.0),
+                        child: GestureDetector(
+                          onTap: () {
+                            addPlantController.selectedPlant.value =
+                                myPlantController
+                                    .recommendationPlant[index].id!;
+                            Get.toNamed(AppRoutes.plantDetails);
+                          },
+                          child: CardGlobalWidget(
+                              plantName: myPlantController
+                                      .recommendationPlant[index].name ??
+                                  "-",
+                              plantCategory: myPlantController
+                                      .recommendationPlant[index]
+                                      .plantCategory
+                                      ?.name ??
+                                  "-",
+                              plantImageUrl: myPlantController
+                                      .recommendationPlant[index]
+                                      .plantImages?[0]
+                                      .fileName ??
+                                  "-"),
+                        ));
                   }),
             );
           }

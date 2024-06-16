@@ -108,9 +108,7 @@ class MyPlantWidget extends StatelessWidget {
                                         arguments: {
                                           'myPlantDetails': myPlantController
                                               .listMyPlant[index]
-                                        })?.then((value) {
-                                      myPlantController.getMyPlant();
-                                    });
+                                        });
                                   },
                                   child: CardGlobalWidget(
                                       plantName: myPlantController

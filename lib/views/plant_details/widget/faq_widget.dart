@@ -40,8 +40,7 @@ class FaqWidget extends StatelessWidget {
                         .copyWith(dividerColor: Colors.transparent),
                     child: ExpansionTile(
                       title: Text(
-                        controller.plantByIdResponse!.data!.plantFaqs![value]
-                            .question!,
+                        controller.filterHtmlTag(controller.plantByIdResponse!.data!.plantFaqs![value].question!),
                         style: TextStyleConstant.subtitle
                             .copyWith(fontWeight: FontWeight.w700),
                       ),
@@ -55,8 +54,7 @@ class FaqWidget extends StatelessWidget {
                           child: Row(
                             children: [
                               Text(
-                                controller.plantByIdResponse!.data!
-                                    .plantFaqs![value].answer!,
+                                controller.filterHtmlTag(controller.plantByIdResponse!.data!.plantFaqs![value].answer!),
                                 style: TextStyleConstant.subtitle.copyWith(
                                   fontWeight: FontWeight.w700,
                                   fontSize: 14,

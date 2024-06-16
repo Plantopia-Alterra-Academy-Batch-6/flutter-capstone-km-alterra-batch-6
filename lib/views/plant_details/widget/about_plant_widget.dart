@@ -23,7 +23,7 @@ class AboutPlantWidget extends StatelessWidget {
         ),
         const SizedBox(height: 8),
         Text(
-          controller.plantByIdResponse!.data!.description!,
+          controller.filterHtmlTag(controller.plantByIdResponse!.data!.description!),
           style: TextStyleConstant.paragraph,
         ),
       ],

@@ -10,7 +10,7 @@ import 'package:plantopia/models/signup_params_model.dart';
 import 'package:plantopia/models/user_model.dart';
 import 'package:plantopia/service/auth_service.dart';
 import 'package:plantopia/views/auth/allow_notif_view.dart';
-import 'package:plantopia/views/auth/verify_view.dart';
+import 'package:plantopia/views/verify/verify_view.dart';
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
@@ -28,9 +28,9 @@ class AuthController extends GetxController {
       if (token != null) {
         final UserModel? result = await AuthService.getUser(token);
         await UserTokenPref.setUserId(result?.id ?? -1);
+
         if (result != null) {
           currentUser.value = result;
-          print("cek currentUser name :  ${currentUser.value?.name}");
         }
       }
     } catch (e) {
@@ -58,11 +58,10 @@ class AuthController extends GetxController {
       if (e is CustomException) {
         if (e.code == 400) {
           loginFormController.errorPassword.value =
-              "masukkan email & password yang benar";
+              "Enter a valid email and password";
           loginFormController.borderEmail.value = Colors.red;
           loginFormController.borderPassword.value = Colors.red;
           authSection.value = 0;
-          Get.snackbar('Invalid', e.message);
         } else {
           Get.snackbar('Error', '$e');
         }
@@ -79,7 +78,6 @@ class AuthController extends GetxController {
       // melakukan refresh fcm token saat sign up untuk mendapatkan token baru
       String? newToken = await refreshFcmToken();
       signUpParamsModel.fcmToken = newToken;
-      print(newToken);
 
       UserModel? result = await AuthService.signUp(signUpParamsModel);
       currentUser.value = result;
@@ -91,7 +89,6 @@ class AuthController extends GetxController {
           password: signUpParamsModel.password!);
       Get.to(VerificationView(
         loginParamsModel: loginParams,
-        // otpServer: currentUser.value!.otp,
       ));
     } catch (e) {
       if (e is CustomException) {
@@ -100,7 +97,6 @@ class AuthController extends GetxController {
 
           signUpController.errorEmail.value = e.message;
           signUpController.borderEmail.value = Colors.red;
-          Get.snackbar('Failed', e.message);
         }
       } else {
         Get.snackbar('Error', '$e');

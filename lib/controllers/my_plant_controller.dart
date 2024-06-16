@@ -12,8 +12,10 @@ class MyPlantController extends GetxController {
   Rx<Status> myPlantData = Status.loading.obs;
   Rx<Status> recommendationData = Status.loading.obs;
   Rx<Status> categoryData = Status.loading.obs;
+
   RxList<PlantElement> listMyPlant = <PlantElement>[].obs;
   RxList<Plant> recommendationPlant = <Plant>[].obs;
+
   AddPlantService addPlantService = AddPlantService();
   PlantCategoriesResponse? plantCategoriesResponse;
   PlantRecommendationsResponse? plantRecommendationsResponse;
@@ -27,7 +29,7 @@ class MyPlantController extends GetxController {
     getAllCategories();
     getRecommendationPlant();
   }
-  
+
   Future<void> init() async {
     super.onInit();
     getMyPlant();
@@ -81,4 +83,6 @@ class MyPlantController extends GetxController {
       categoryData.value = Status.error;
     }
   }
+
+ 
 }

@@ -13,15 +13,18 @@ import 'package:plantopia/views/auth/allow_notif_view.dart';
 import 'package:plantopia/views/auth/auth_view.dart';
 import 'package:plantopia/views/chatbot/chatbot_view.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
+import 'package:plantopia/views/history_plant/history_plant_view.dart';
+import 'package:plantopia/views/my_plant/my_plant_view.dart';
 import 'package:plantopia/views/my_plant_details/my_plant_details_view.dart';
 import 'package:plantopia/views/notification/notification_view.dart';
 import 'package:plantopia/views/onboarding/onboarding_view.dart';
-import 'package:plantopia/views/history_plant/history_plant_view.dart';
-import 'package:plantopia/views/my_plant/my_plant_view.dart';
 import 'package:plantopia/views/plant_details/plant_details_view.dart';
 import 'package:plantopia/views/plant_details/success_add_plant_view.dart';
 import 'package:plantopia/views/plant_filter/plant_filter_view.dart';
+import 'package:plantopia/views/plant_filter_result/plant_filter_result_view.dart';
 import 'package:plantopia/views/search_plant/search_plant_view.dart';
+import 'package:plantopia/views/wateting_history/watering_history_view.dart';
+import 'package:plantopia/views/upload_progress/upload_progress_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 import 'firebase_options.dart';
 
@@ -64,14 +67,17 @@ Future<void> main() async {
           name: AppRoutes.allowNotif,
           page: () => const AllowNotificationView(),
         ),
-        GetPage(name: AppRoutes.onboarding, page: () => const OnboardingView()),
+        GetPage(
+          name: AppRoutes.onboarding,
+          page: () => const OnboardingView(),
+        ),
         GetPage(
           name: AppRoutes.myPlant,
           page: () => MyPlantView(),
         ),
         GetPage(
           name: AppRoutes.historyPlant,
-          page: () => const HistoryPlantView(),
+          page: () => HistoryPlantView(),
         ),
         GetPage(
           name: AppRoutes.addPlant,
@@ -87,7 +93,7 @@ Future<void> main() async {
         ),
         GetPage(
           name: AppRoutes.myPlantDetails,
-          page: () => const MyPlantDetailsView(),
+          page: () => MyPlantDetailsView(),
         ),
         GetPage(
           name: AppRoutes.successAddPlant,
@@ -95,7 +101,7 @@ Future<void> main() async {
         ),
         GetPage(
           name: AppRoutes.plantFilter,
-          page: () => const PlantFilterView(),
+          page: () => PlantFilterView(),
         ),
         GetPage(
           name: AppRoutes.chatbot,
@@ -104,6 +110,18 @@ Future<void> main() async {
         GetPage(
           name: AppRoutes.notification,
           page: () => NotificationView(),
+        ),
+        GetPage(
+          name: AppRoutes.wateringHistory,
+          page: () => WateringHistoryView(),
+        ),
+        GetPage(
+          name: AppRoutes.plantFilterResult,
+          page: () => PlantFilterResultView(),
+        ),
+        GetPage(
+          name: AppRoutes.uploadProgress,
+          page: () => UploadProgressView(),
         ),
       ],
       initialRoute: AppRoutes.splashApp,
