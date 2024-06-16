@@ -24,24 +24,32 @@ class RecommendedCardWidget extends StatelessWidget {
           height: 200,
           width: double.infinity,
           child: ListView.builder(
-              scrollDirection: Axis.horizontal,
-              itemCount: 5,
-              itemExtent: 156,
-              itemBuilder: (context, int index) {
-                return Padding(
-                    padding: const EdgeInsets.only(right: 12.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        controller.selectedPlant(controller.plantRecommendationsResponse!.data![index].id);
-                        Get.toNamed(AppRoutes.plantDetails);
-                      },
-                      child: CardGlobalWidget(
-                        plantName: controller.plantRecommendationsResponse!.data![index].name!,
-                        plantCategory: controller.plantRecommendationsResponse!.data![index].plantCategory!.name!,
-                        plantImageUrl: controller.plantRecommendationsResponse!.data![index].plantCategory!.imageUrl!,
-                      ),
-                    ));
-              }),
+            scrollDirection: Axis.horizontal,
+            itemCount: controller.plantRecommendationsResponse!.data!.length,
+            itemExtent: 156,
+            itemBuilder: (context, int index) {
+              return Padding(
+                padding: const EdgeInsets.only(right: 12.0),
+                child: GestureDetector(
+                  onTap: () {
+                    controller.selectedPlant(controller
+                        .plantRecommendationsResponse!.data![index].id);
+                    Get.toNamed(AppRoutes.plantDetails);
+                  },
+                  child: CardGlobalWidget(
+                    plantName: controller
+                        .plantRecommendationsResponse!.data![index].name!,
+                    plantCategory: controller.plantRecommendationsResponse!
+                        .data![index].plantCategory!.name!,
+                    plantImageUrl: controller.plantRecommendationsResponse?.data?[index].plantImages != null &&
+                      controller.plantRecommendationsResponse!.data![index].plantImages!.isNotEmpty
+                  ? controller.plantRecommendationsResponse!.data![index].plantImages![0].fileName ?? ""
+                  : "",
+                  ),
+                ),
+              );
+            },
+          ),
         )
       ],
     );

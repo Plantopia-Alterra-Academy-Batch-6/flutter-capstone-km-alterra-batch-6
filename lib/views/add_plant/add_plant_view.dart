@@ -5,6 +5,7 @@ import 'package:plantopia/views/add_plant/widget/plant_category.dart';
 import 'package:plantopia/views/add_plant/widget/recommended_card.dart';
 import 'package:plantopia/views/add_plant/widget/search_bar.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/views/global_widgets/center_circular_progress_global_widget.dart';
 
 class AddPlantView extends StatelessWidget {
   AddPlantView({super.key});
@@ -29,9 +30,7 @@ class AddPlantView extends StatelessWidget {
               ),
               centerTitle: true,
             ),
-            body: const Center(
-              child: CircularProgressIndicator(),
-            ),
+            body: const CenterCircularProgressGlobalWidget(),
           );
         } else {
           return Scaffold(
@@ -56,7 +55,6 @@ class AddPlantView extends StatelessWidget {
                     const SearchBarWidget(),
                     const SizedBox(height: 28),
                     RecommendedCardWidget(),
-                     RecommendedCardWidget(),
                     const SizedBox(height: 32),
                     PlantCategoryWidget(),
                   ],

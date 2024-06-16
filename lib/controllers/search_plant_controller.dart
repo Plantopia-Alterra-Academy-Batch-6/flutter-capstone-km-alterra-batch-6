@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/helpers/shared_pref_helper.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/models/get_search_plant_response.dart';
@@ -12,9 +13,16 @@ class SearchPlantController extends GetxController {
   SearchedPlantResponse? searchedPlantResponse;
   PlantByIdResponse? plantByIdResponse;
   TextEditingController searchPlantText = TextEditingController();
+  final addPlantController = Get.put(AddPlantController());
   RxBool isFirstTimeOpen = true.obs;
   RxBool isHaveResult = false.obs; 
   RxBool isPageLoading = false.obs;
+
+  @override
+  void onClose() {
+    addPlantController.isFilterSearchResulted(false);
+    super.onClose();
+  }
 
   Future<void> searchPlant(String plantName) async {
     try {
