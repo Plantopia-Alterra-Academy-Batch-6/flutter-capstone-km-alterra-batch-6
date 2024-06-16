@@ -8,8 +8,8 @@ import 'package:plantopia/views/forgot_password/widget/custom_appbar_forgot_pass
 import 'package:plantopia/views/forgot_password/widget/custom_button_forgot_password_widget.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_formfield_forgot_password_widget.dart';
 
-class ForgotPasswordView extends StatelessWidget {
-  const ForgotPasswordView({super.key});
+class SetNewPasswordView extends StatelessWidget {
+  const SetNewPasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -38,8 +38,8 @@ class ForgotPasswordView extends StatelessWidget {
                           borderColor:
                               forgotPasswordController.borderEmail.value,
                           controller: emailController,
-                          keyboardType: TextInputType.emailAddress,
-                          hintText: 'Email',
+                          keyboardType: TextInputType.text,
+                          hintText: 'Password',
                           errorText: forgotPasswordController.errorEmail.value,
                           onChanged: (e) async {
                             forgotPasswordController.setEmail(e);
