@@ -26,9 +26,9 @@ class MyPlantWidget extends StatelessWidget {
               ),
               TextButton(
                 onPressed: () {
-                  Get.offAll(const BottomNavigationBarGlobalWidget(
-                    index: 2,
-                  ));
+                  Get.offAll(() => const BottomNavigationBarGlobalWidget(
+                        index: 2,
+                      ));
                 },
                 child: Text(
                   "View more",

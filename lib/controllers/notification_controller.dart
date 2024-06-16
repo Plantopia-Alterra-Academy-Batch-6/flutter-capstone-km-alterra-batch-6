@@ -58,11 +58,17 @@ class NotificationController extends GetxController {
       );
     }
   }
-  Future<void> customizeWateringReminder(int id, String time, bool isRecurring, String type) async {
+
+  Future<void> customizeWateringReminder(
+      int id, String time, bool isRecurring, String type) async {
     try {
-      await NotificationService.createCustomizeReminder(myPlantId: id, customizeTime: time, isRecurring: isRecurring, type: type);
+      await NotificationService.createCustomizeReminder(
+          myPlantId: id,
+          customizeTime: time,
+          isRecurring: isRecurring,
+          type: type);
     } catch (e) {
-       Get.defaultDialog(
+      Get.defaultDialog(
         title: "Error",
         middleText: "Failed to add customize reminder, please try again!",
         textConfirm: "OK",

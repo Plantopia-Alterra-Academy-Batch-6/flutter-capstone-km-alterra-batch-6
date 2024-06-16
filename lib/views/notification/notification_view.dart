@@ -146,16 +146,6 @@ class NotificationView extends StatelessWidget {
             return SingleChildScrollView(
               child: Column(
                 children: [
-                  Align(
-                      alignment: Alignment.centerRight,
-                      child: TextButton(
-                          onPressed: () {},
-                          child: Text(
-                            "Mark all as read",
-                            style: TextStyleConstant.paragraph.copyWith(
-                              color: ColorConstant.primary500,
-                            ),
-                          ))),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
                     child: ListView.builder(
