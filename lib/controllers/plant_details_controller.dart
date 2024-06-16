@@ -1,4 +1,3 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -10,6 +9,8 @@ import 'package:plantopia/controllers/search_plant_controller.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/service/plant_details_service.dart';
 import 'package:plantopia/utils/app_routes.dart';
+import 'package:html/parser.dart' as html_parser;
+import 'package:html/dom.dart' as dom;
 
 class PlantDetailsController extends GetxController {
   final addPlantController = Get.put(AddPlantController());
@@ -25,6 +26,11 @@ class PlantDetailsController extends GetxController {
   void onInit() {
     getPlantDetails();
     super.onInit();
+  }
+
+  String filterHtmlTag(String htmlString) {
+    dom.Document document = html_parser.parse(htmlString);
+    return document.body?.text ?? '';
   }
 
   void getPlantDetails() async {
