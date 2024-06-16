@@ -18,8 +18,8 @@ class PlantHistoryController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    await getPlantingHistory();
     await plantingHistorySplit();
-    getPlantingHistory();
   }
 
   String parseDate(DateTime dateTime) {

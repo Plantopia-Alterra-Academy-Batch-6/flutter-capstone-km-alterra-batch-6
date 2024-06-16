@@ -15,4 +15,5 @@ class AppRoutes {
   static const String plantFilter = '/plantFilter';
   static const String chatbot = '/chatbotView';
   static const String notification = '/notification';
+  static const String wateringHistory = '/wateringHistory';
 }

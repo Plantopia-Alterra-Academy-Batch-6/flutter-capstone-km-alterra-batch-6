@@ -39,7 +39,9 @@ class MyPlantDetailsView extends StatelessWidget {
         centerTitle: true,
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+              Get.toNamed(AppRoutes.wateringHistory);
+            },
             icon: SvgPicture.asset(
               IconConstant.history,
             ),

@@ -22,6 +22,7 @@ import 'package:plantopia/views/plant_details/plant_details_view.dart';
 import 'package:plantopia/views/plant_details/success_add_plant_view.dart';
 import 'package:plantopia/views/plant_filter/plant_filter_view.dart';
 import 'package:plantopia/views/search_plant/search_plant_view.dart';
+import 'package:plantopia/views/wateting_history/watering_history_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 import 'firebase_options.dart';
 
@@ -71,7 +72,7 @@ Future<void> main() async {
         ),
         GetPage(
           name: AppRoutes.historyPlant,
-          page: () =>  HistoryPlantView(),
+          page: () => HistoryPlantView(),
         ),
         GetPage(
           name: AppRoutes.addPlant,
@@ -104,6 +105,10 @@ Future<void> main() async {
         GetPage(
           name: AppRoutes.notification,
           page: () => NotificationView(),
+        ),
+        GetPage(
+          name: AppRoutes.wateringHistory,
+          page: () => WateringHistoryView(),
         ),
       ],
       initialRoute: AppRoutes.splashApp,
