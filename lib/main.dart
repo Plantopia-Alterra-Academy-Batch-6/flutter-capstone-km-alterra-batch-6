@@ -18,8 +18,6 @@ import 'package:plantopia/views/my_plant/my_plant_view.dart';
 import 'package:plantopia/views/my_plant_details/my_plant_details_view.dart';
 import 'package:plantopia/views/notification/notification_view.dart';
 import 'package:plantopia/views/onboarding/onboarding_view.dart';
-import 'package:plantopia/views/history_plant/history_plant_view.dart';
-import 'package:plantopia/views/my_plant/my_plant_view.dart';
 import 'package:plantopia/views/plant_details/plant_details_view.dart';
 import 'package:plantopia/views/plant_details/success_add_plant_view.dart';
 import 'package:plantopia/views/plant_filter/plant_filter_view.dart';

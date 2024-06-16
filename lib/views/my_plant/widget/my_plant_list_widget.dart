@@ -74,16 +74,16 @@ class MyPlantListWidget extends StatelessWidget {
                           });
                         },
                         child: CardGlobalWidget(
-                            plantName: myPlantController
-                                    .listMyPlant[index].plant?.name ??
-                                "",
-                            plantCategory: myPlantController.listMyPlant[index]
-                                    .plant?.plantCategory?.name ??
-                                "",
-                            plantImageUrl: ""
-                            //  myPlantController
-                            //     .listMyPlant[index].plant?.plantImages?[0].fileName ?? "",
-                            ),
+                          plantName: myPlantController
+                                  .listMyPlant[index].plant?.name ??
+                              "",
+                          plantCategory: myPlantController.listMyPlant[index]
+                                  .plant?.plantCategory?.name ??
+                              "",
+                          plantImageUrl: myPlantController.listMyPlant[index]
+                                  .plant?.plantImages?[0].fileName ??
+                              "",
+                        ),
                       );
                     });
               }
