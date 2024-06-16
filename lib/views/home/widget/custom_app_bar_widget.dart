@@ -8,7 +8,7 @@ class CustomAppBarWidget extends StatelessWidget {
     final AuthController authController = Get.put(AuthController());
     authController.getUser();
     return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Obx(
@@ -51,10 +51,15 @@ class CustomAppBarWidget extends StatelessWidget {
                   ],
                 ),
         ),
-        SvgPicture.asset(
-          IconConstant.notification,
-          height: 24,
-          width: 24,
+        InkWell(
+          onTap: () {
+            Get.toNamed(AppRoutes.notification);
+          },
+          child: SvgPicture.asset(
+            IconConstant.notification,
+            height: 24,
+            width: 24,
+          ),
         ),
       ],
     );

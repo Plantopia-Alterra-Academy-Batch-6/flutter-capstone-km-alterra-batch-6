@@ -72,7 +72,9 @@ class _AllowNotificationViewState extends State<AllowNotificationView> {
                     await Permission.notification.request();
 
                 if (status.isGranted) {
-                  Get.offAll(const BottomNavigationBarGlobalWidget());
+                  Get.offAll(const BottomNavigationBarGlobalWidget(
+                    index: 0,
+                  ));
                 } else if (status.isDenied) {
                   Get.snackbar(
                     'Permission Denied',

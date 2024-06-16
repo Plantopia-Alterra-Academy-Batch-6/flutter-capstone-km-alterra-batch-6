@@ -20,6 +20,7 @@ class CategoryPlantWidget extends StatelessWidget {
             height: 35,
             width: double.infinity,
             child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
                 itemCount:
                     myPlantController.plantCategoriesResponse?.data.length,
@@ -48,57 +49,62 @@ class CategoryPlantWidget extends StatelessWidget {
               height: 35,
               width: double.infinity,
               child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(horizontal: 16),
                   scrollDirection: Axis.horizontal,
                   itemCount:
                       myPlantController.plantCategoriesResponse?.data.length,
                   itemBuilder: (context, int index) {
-                    return Obx(
-                      () => Container(
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 12,
-                        ),
-                        decoration: BoxDecoration(
-                            border: myPlantController.activeIndex.value == index
-                                ? Border.all(color: ColorConstant.primary500)
-                                : Border.all(
-                                    color: ColorConstant.primary100,
-                                  ),
-                            color: index == myPlantController.activeIndex.value
-                                ? ColorConstant.primary100
-                                : Colors.white,
-                            borderRadius: BorderRadius.circular(
-                              50,
-                            )),
-                        child: InkWell(
-                          onTap: () {
-                            if (myPlantController.activeIndex.value == index) {
-                              myPlantController.getRecommendationPlant();
-                              myPlantController.currentIndex(-1);
-                            } else {
-                              myPlantController.currentIndex(index);
-                            }
-                            if (myPlantController
-                                    .plantCategoriesResponse?.data[index].id !=
-                                null) {
-                              myPlantController.getPlantByCatergories(
-                                  myPlantController
-                                      .plantCategoriesResponse!.data[index].id);
-                            }
-                            print(
-                                "ini categori id ${myPlantController.plantCategoriesResponse?.data[index].id}");
-                          },
-                          child: Center(
-                            child: Text(
-                              myPlantController.plantCategoriesResponse
-                                      ?.data[index].name ??
-                                  "-",
-                              style:
+                    return Padding(
+                      padding: const EdgeInsets.only(right: 8.0),
+                      child: Obx(
+                        () => Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 12,
+                          ),
+                          decoration: BoxDecoration(
+                              border: myPlantController.activeIndex.value ==
+                                      index
+                                  ? Border.all(color: ColorConstant.primary500)
+                                  : Border.all(
+                                      color: ColorConstant.neutral300,
+                                    ),
+                              color:
                                   index == myPlantController.activeIndex.value
-                                      ? TextStyleConstant.paragraph.copyWith(
-                                          fontWeight: FontWeight.w700,
-                                          color: ColorConstant.primary500,
-                                        )
-                                      : TextStyleConstant.paragraph,
+                                      ? ColorConstant.primary100
+                                      : Colors.white,
+                              borderRadius: BorderRadius.circular(
+                                50,
+                              )),
+                          child: InkWell(
+                            onTap: () {
+                              if (myPlantController.activeIndex.value ==
+                                  index) {
+                                myPlantController.getRecommendationPlant();
+                                myPlantController.currentIndex(-1);
+                              } else {
+                                myPlantController.currentIndex(index);
+                              }
+                              if (myPlantController.plantCategoriesResponse
+                                      ?.data[index].id !=
+                                  null) {
+                                myPlantController.getPlantByCatergories(
+                                    myPlantController.plantCategoriesResponse!
+                                        .data[index].id);
+                              }
+                            },
+                            child: Center(
+                              child: Text(
+                                myPlantController.plantCategoriesResponse
+                                        ?.data[index].name ??
+                                    "-",
+                                style:
+                                    index == myPlantController.activeIndex.value
+                                        ? TextStyleConstant.paragraph.copyWith(
+                                            fontWeight: FontWeight.w700,
+                                            color: ColorConstant.primary500,
+                                          )
+                                        : TextStyleConstant.paragraph,
+                              ),
                             ),
                           ),
                         ),

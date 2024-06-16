@@ -25,9 +25,12 @@ class MyPlantListWidget extends StatelessWidget {
           switch (myPlantController.myPlantData.value) {
             case Status.loading:
               return GridView.builder(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
                   physics: const NeverScrollableScrollPhysics(),
                   shrinkWrap: true,
-                  itemCount: myPlantController.listMyPlant.length,
+                  itemCount: 4,
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                       mainAxisExtent: 200,
                       crossAxisSpacing: 16,
@@ -42,9 +45,15 @@ class MyPlantListWidget extends StatelessWidget {
                   });
             case Status.loaded:
               if (myPlantController.listMyPlant.isEmpty) {
-                return const EmptyMyPlantWidget();
+                return const Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16),
+                  child: EmptyMyPlantWidget(),
+                );
               } else {
                 return GridView.builder(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ),
                     physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: myPlantController.listMyPlant.length,
@@ -55,7 +64,7 @@ class MyPlantListWidget extends StatelessWidget {
                             mainAxisSpacing: 16,
                             crossAxisCount: 2),
                     itemBuilder: (context, int index) {
-                      return InkWell(
+                      return GestureDetector(
                         onTap: () {
                           Get.toNamed(AppRoutes.myPlantDetails, arguments: {
                             'myPlantDetails':

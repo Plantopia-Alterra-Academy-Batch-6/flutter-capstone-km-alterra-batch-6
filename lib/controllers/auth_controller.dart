@@ -51,6 +51,7 @@ class AuthController extends GetxController {
     try {
       final String result = await AuthService.login(loginParams: loginParams);
       await UserTokenPref.setToken(result);
+      getUser();
       loginFormController.onClose();
       Get.to(const AllowNotificationView());
     } catch (e) {

@@ -11,16 +11,19 @@ class PlantGuideWidget extends StatelessWidget {
         const SizedBox(
           height: 24,
         ),
-        Column(
-          children: [
-            Text(
-              'Plant Guide',
-              style: TextStyleConstant.heading4.copyWith(
-                fontWeight: FontWeight.w700,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Column(
+            children: [
+              Text(
+                'Plant Guide',
+                style: TextStyleConstant.heading4.copyWith(
+                  fontWeight: FontWeight.w700,
+                ),
               ),
-            ),
-            // TODO 1: Add DotIndicatorWidget
-          ],
+              // TODO 1: Add DotIndicatorWidget
+            ],
+          ),
         ),
         const SizedBox(
           height: 12,
@@ -28,6 +31,7 @@ class PlantGuideWidget extends StatelessWidget {
         SizedBox(
           height: 76,
           child: ListView(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
             // TODO 2: Make it full width
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,

@@ -3,7 +3,9 @@ import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
+import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/my_plant_controller.dart';
+import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/controllers/plant_details_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
@@ -25,14 +27,16 @@ class ListRecomendedPlantWidget extends StatelessWidget {
             height: 200,
             width: double.infinity,
             child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
-                itemCount: myPlantController.recommendationPlant.length,
+                itemCount: 3,
                 itemExtent: 156,
                 itemBuilder: (context, int index) {
                   return const Padding(
-                      padding: EdgeInsets.only(right: 12.0),
-                      child: ShimmerContainerGlobalWidget(
-                          width: double.infinity, height: 200, radius: 24));
+                    padding: EdgeInsets.only(right: 12.0),
+                    child: ShimmerContainerGlobalWidget(
+                        width: double.infinity, height: 200, radius: 24),
+                  );
                 }),
           );
         case Status.loaded:
@@ -52,6 +56,9 @@ class ListRecomendedPlantWidget extends StatelessWidget {
               height: 200,
               width: double.infinity,
               child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
                   scrollDirection: Axis.horizontal,
                   itemCount: myPlantController.recommendationPlant.length,
                   itemExtent: 156,
