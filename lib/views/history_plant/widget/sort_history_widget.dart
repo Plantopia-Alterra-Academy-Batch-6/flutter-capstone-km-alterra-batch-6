@@ -30,7 +30,7 @@ class SortHistoryWidget extends StatelessWidget {
             sortingName,
             style: TextStyleConstant.title.copyWith(
               fontWeight: FontWeight.w700,
-              color: ColorConstant.primary500,
+              color: ColorConstant.neutral500,
             ),
           ),
           ListView.builder(

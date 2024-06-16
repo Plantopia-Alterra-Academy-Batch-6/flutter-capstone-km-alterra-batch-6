@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
-import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plantopia/controllers/plant_history_controller.dart';
@@ -21,6 +20,7 @@ class HistoryPlantView extends StatelessWidget {
     return Scaffold(
         backgroundColor: ColorConstant.white,
         appBar: AppBar(
+          forceMaterialTransparency: true,
           backgroundColor: ColorConstant.white,
           centerTitle: true,
           title: Text(
@@ -78,7 +78,9 @@ class HistoryPlantView extends StatelessWidget {
                         ],
                       ),
                     )
-                  : bodyBuild(context);
+                  : SingleChildScrollView(
+                      child: bodyBuild(context),
+                    );
             case Status.error:
               return Column(
                 mainAxisAlignment: MainAxisAlignment.center,
