@@ -5,7 +5,9 @@ import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/controllers/my_plant_controller.dart';
 import 'package:plantopia/controllers/my_plant_details_controller.dart';
+import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 import 'package:plantopia/views/my_plant_details/widget/button_widget.dart';
 
 class ConfirmationDialogWidget extends StatelessWidget {
@@ -15,10 +17,10 @@ class ConfirmationDialogWidget extends StatelessWidget {
   final MyPlantDetailsController myPlantDetailsController =
       Get.put(MyPlantDetailsController());
 
+  final MyPlantController myPlantController = Get.put(MyPlantController());
+
   @override
   Widget build(BuildContext context) {
-    // final Map arguments = Get.arguments;
-    // final PlantElement detailMyPlant = arguments['myPlantDetails'];
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -53,8 +55,8 @@ class ConfirmationDialogWidget extends StatelessWidget {
                         child: Text(
                           "Are You Sure You Want to Delete Plant Data?",
                           style: TextStyleConstant.heading4.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
+                              fontWeight: FontWeight.w700,
+                              decoration: TextDecoration.none),
                           textAlign: TextAlign.center,
                         ),
                       )),
@@ -67,7 +69,9 @@ class ConfirmationDialogWidget extends StatelessWidget {
                       child: Center(
                         child: Text(
                           "All of the information will be erased and cannot be restored",
-                          style: TextStyleConstant.paragraph,
+                          style: TextStyleConstant.paragraph.copyWith(
+                            decoration: TextDecoration.none,
+                          ),
                           textAlign: TextAlign.center,
                         ),
                       )),
@@ -86,8 +90,8 @@ class ConfirmationDialogWidget extends StatelessWidget {
                           boxDecoration:
                               const BoxDecoration(color: Colors.white),
                           textStyle: TextStyleConstant.subtitle.copyWith(
-                            color: ColorConstant.primary500,
-                          ),
+                              color: ColorConstant.primary500,
+                              decoration: TextDecoration.none),
                         ),
                       ),
                       const SizedBox(
@@ -95,19 +99,27 @@ class ConfirmationDialogWidget extends StatelessWidget {
                       ),
                       Expanded(
                         child: ButtonWidget(
-                            onTap: () {
-                              myPlantDetailsController.deleteMyplant(plantId);
-                              Get.back();
-                            },
-                            buttonName: "Delete",
-                            boxDecoration: BoxDecoration(
-                              color: ColorConstant.danger500,
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            textStyle: TextStyleConstant.subtitle.copyWith(
-                              color: Colors.white,
-                              fontSize: 16,
-                            )),
+                          onTap: () async {
+                            await myPlantDetailsController
+                                .deleteMyplant(plantId);
+                            Get.offAll(
+                              const BottomNavigationBarGlobalWidget(
+                                index: 2,
+                              ),
+                            );
+                            await myPlantController.init();
+                          },
+                          buttonName: "Delete",
+                          boxDecoration: BoxDecoration(
+                            color: ColorConstant.danger500,
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          textStyle: TextStyleConstant.subtitle.copyWith(
+                            color: Colors.white,
+                            fontSize: 16,
+                            decoration: TextDecoration.none,
+                          ),
+                        ),
                       ),
                     ],
                   ))

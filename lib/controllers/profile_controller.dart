@@ -6,6 +6,7 @@ class ProfileController extends GetxController {
 
   Future<void> logout() async {
     await UserTokenPref.clearToken();
+    await UserTokenPref.clearUserId();
     Get.offAllNamed(AppRoutes.auth);
   }
 }

@@ -41,4 +41,5 @@ class IconConstant {
   static const String privacyPolicy = 'assets/icons/privacy_policy.svg';
   static const String profileNavbar = 'assets/icons/profile_navbar.svg';
   static const String editPencil = 'assets/icons/edit_pencil.svg';
+  static const String trash = 'assets/icons/trash.svg';
 }

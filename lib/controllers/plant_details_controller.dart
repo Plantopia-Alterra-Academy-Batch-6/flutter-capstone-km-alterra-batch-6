@@ -1,17 +1,20 @@
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
+import 'package:plantopia/controllers/my_plant_controller.dart';
 import 'package:plantopia/controllers/search_plant_controller.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/service/plant_details_service.dart';
 import 'package:plantopia/utils/app_routes.dart';
+import 'package:html/parser.dart' as html_parser;
+import 'package:html/dom.dart' as dom;
 
 class PlantDetailsController extends GetxController {
   final addPlantController = Get.put(AddPlantController());
+  final myPlantController = Get.put(MyPlantController());
   PlantDetailsService plantDetailsService = PlantDetailsService();
   PlantByIdResponse? plantByIdResponse;
   RxBool isPageLoading = false.obs;
@@ -23,6 +26,11 @@ class PlantDetailsController extends GetxController {
   void onInit() {
     getPlantDetails();
     super.onInit();
+  }
+
+  String filterHtmlTag(String htmlString) {
+    dom.Document document = html_parser.parse(htmlString);
+    return document.body?.text ?? '';
   }
 
   void getPlantDetails() async {
@@ -41,6 +49,7 @@ class PlantDetailsController extends GetxController {
   Future<void> addPlant(int id) async {
     try {
       await plantDetailsService.addPlant(id);
+      await myPlantController.getMyPlant();
       Get.toNamed(AppRoutes.successAddPlant);
     } on Exception {
       Get.defaultDialog(

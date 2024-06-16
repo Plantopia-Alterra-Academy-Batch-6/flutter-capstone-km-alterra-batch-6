@@ -11,31 +11,30 @@ class RecommendedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Recommended',
-              style: TextStyleConstant.heading4.copyWith(
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-            TextButton(
-              onPressed: () {},
-              child: Text(
-                "View More",
-                style: TextStyleConstant.paragraph.copyWith(
-                  color: ColorConstant.link500,
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 16),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                'Recommended',
+                style: TextStyleConstant.heading4.copyWith(
+                  fontWeight: FontWeight.w700,
                 ),
               ),
-            )
-          ],
+              TextButton(
+                onPressed: () {},
+                child: Text(
+                  "View More",
+                  style: TextStyleConstant.paragraph.copyWith(
+                    color: ColorConstant.link500,
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
-        const SizedBox(
-          height: 12,
-        ),
-         CategoryPlantWidget(),
+        CategoryPlantWidget(),
         const SizedBox(
           height: 18,
         ),
