@@ -85,10 +85,10 @@ packages:
     dependency: "direct main"
     description:
       name: chat_gpt_sdk
-      sha256: "93bd2c38fe31a11e8c22bea6d5a635cc2c68de27a9e11000c7f124223379e894"
+      sha256: "2b68d97354a0dde1a13844ff4e611be3b4aa9f9d8a8ea1fbd750bef3314a7d74"
       url: "https://pub.dev"
     source: hosted
-    version: "3.0.8"
+    version: "3.0.9"
   clock:
     dependency: transitive
     description:
@@ -529,7 +529,7 @@ packages:
     source: hosted
     version: "0.12.4"
   html:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: html
       sha256: "3a7812d5bcd2894edf53dfaf8cd640876cf6cef50a8f238745c8b8120ea74d3a"
@@ -1153,18 +1153,18 @@ packages:
     dependency: transitive
     description:
       name: video_player
-      sha256: db6a72d8f4fd155d0189845678f55ad2fd54b02c10dcafd11c068dbb631286c0
+      sha256: aced48e701e24c02b0b7f881a8819e4937794e46b5a5821005e2bf3b40a324cc
       url: "https://pub.dev"
     source: hosted
-    version: "2.8.6"
+    version: "2.8.7"
   video_player_android:
     dependency: transitive
     description:
       name: video_player_android
-      sha256: "4f77780499ebbdb3a8387f3de7a9d07a7665cfb3a3741177c44a52353fe41d64"
+      sha256: "9529001630e42988f755772972d5014d30121610700e8e502278a245939f8fc8"
       url: "https://pub.dev"
     source: hosted
-    version: "2.4.16"
+    version: "2.5.0"
   video_player_avfoundation:
     dependency: transitive
     description:
