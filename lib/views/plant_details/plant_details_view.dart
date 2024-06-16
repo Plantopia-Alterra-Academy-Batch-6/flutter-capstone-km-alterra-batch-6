@@ -4,6 +4,7 @@ import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/plant_details_controller.dart';
+import 'package:plantopia/controllers/plant_history_controller.dart';
 import 'package:plantopia/views/global_widgets/center_circular_progress_global_widget.dart';
 import 'package:plantopia/views/global_widgets/center_error_message_global_widget.dart';
 import 'package:plantopia/views/plant_details/widget/about_plant_widget.dart';
@@ -18,6 +19,8 @@ class PlantDetailsView extends StatelessWidget {
   PlantDetailsView({super.key});
 
   final controller = Get.put(PlantDetailsController());
+  final PlantHistoryController plantHistoryController =
+      Get.put(PlantHistoryController());
   final addPlantController = Get.put(AddPlantController());
 
   final ValueNotifier<bool> isBottomBarVisible = ValueNotifier(true);
@@ -32,14 +35,16 @@ class PlantDetailsView extends StatelessWidget {
         automaticallyImplyLeading: true,
         title: Text(
           "Plant Details",
-          style: TextStyleConstant.heading4.copyWith(fontWeight: FontWeight.w700),
+          style:
+              TextStyleConstant.heading4.copyWith(fontWeight: FontWeight.w700),
         ),
         centerTitle: true,
       ),
       body: NotificationListener<ScrollNotification>(
         onNotification: (scrollNotification) {
           if (scrollNotification is ScrollUpdateNotification) {
-            if (scrollNotification.metrics.pixels == scrollNotification.metrics.maxScrollExtent) {
+            if (scrollNotification.metrics.pixels ==
+                scrollNotification.metrics.maxScrollExtent) {
               isBottomBarVisible.value = true;
             } else if (scrollNotification.scrollDelta! > 0) {
               isBottomBarVisible.value = false;
@@ -54,16 +59,17 @@ class PlantDetailsView extends StatelessWidget {
             () {
               if (controller.isPageLoading.isTrue) {
                 return const CenterCircularProgressGlobalWidget();
-              } 
-              if (controller.isDataError.isTrue) {
-                return const CenterErrorMessageGlobalWidget(pageName: "Plant Details");
               }
-              else {
+              if (controller.isDataError.isTrue) {
+                return const CenterErrorMessageGlobalWidget(
+                    pageName: "Plant Details");
+              } else {
                 return Column(
                   children: [
                     ImageCarouselWidget(),
                     Transform.translate(
-                      offset: const Offset(0, -30), // Moves the container up by 20 pixels
+                      offset: const Offset(
+                          0, -30), // Moves the container up by 20 pixels
                       child: Container(
                         width: double.infinity,
                         decoration: const BoxDecoration(
@@ -101,17 +107,25 @@ class PlantDetailsView extends StatelessWidget {
         builder: (context, isVisible, child) {
           return AnimatedContainer(
             duration: const Duration(milliseconds: 300),
-            height: isVisible ? 76.0 : 0.0, // Ensure the height is appropriate for visibility
+            height: isVisible
+                ? 76.0
+                : 0.0, // Ensure the height is appropriate for visibility
             child: isVisible
                 ? Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: 16.0, vertical: 8.0),
                     child: ElevatedButton(
                       onPressed: () async {
-                        await controller.addPlant(addPlantController.selectedPlant.value);
+                        await controller
+                            .addPlant(addPlantController.selectedPlant.value);
+                        await plantHistoryController.addPlantingHistory(
+                            controller.plantByIdResponse?.data?.id ?? -1);
                       },
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: ColorConstant.primary500, // Button background color
-                        fixedSize: const Size(double.infinity, 60), // Button size
+                        backgroundColor:
+                            ColorConstant.primary500, // Button background color
+                        fixedSize:
+                            const Size(double.infinity, 60), // Button size
                         padding: const EdgeInsets.all(16.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),

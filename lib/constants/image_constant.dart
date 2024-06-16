@@ -8,5 +8,11 @@ class ImageConstant {
   static const String confirmation = 'assets/images/confirmation.png';
   static const String chatbotOption1 = 'assets/vectors/chatbot-option-1.svg';
   static const String chatbotOption2 = 'assets/vectors/chatbot-option-2.svg';
- 
+  static const String emptyNotification =
+      'assets/images/empty_notification.png';
+  static const String waterDropletUnread =
+      'assets/images/water_droplet_unread.png';
+  static const String waterDropletReaded =
+      'assets/images/water_droplet_readed.png';
+  static const String successWatering = 'assets/images/success_watering.png';
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 
 import 'package:plantopia/controllers/bottom_navigation_bar_controller.dart';
@@ -11,7 +12,6 @@ import 'package:plantopia/views/profile/profile_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 import 'package:plantopia/controllers/weather_controller.dart';
 
-
 // ignore: must_be_immutable
 class BottomNavigationBarGlobalWidget extends StatelessWidget {
   final int? index;
@@ -21,15 +21,13 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
     this.index,
   });
 
-  
   @override
   Widget build(BuildContext context) {
-    final BottomNavigationBarController controller = Get.put(BottomNavigationBarController());
+    final BottomNavigationBarController controller =
+        Get.put(BottomNavigationBarController());
 
     final WeatherController weatherController = Get.put(WeatherController());
-    final MyPlantController myPlantController = Get.put(MyPlantController());
 
-    // Set the initial index
     controller.setCurrentIndex(index ?? 0);
 
     return Scaffold(
@@ -37,7 +35,7 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
         return IndexedStack(
           index: controller.currentIndex.value,
           children: [
-             HomeView(),
+            HomeView(),
             WeatherView(),
             MyPlantView(),
             const ProfileView()
@@ -46,16 +44,13 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
       }),
       bottomNavigationBar: Obx(() {
         return BottomNavigationBar(
+          backgroundColor: ColorConstant.white,
           currentIndex: controller.currentIndex.value,
           onTap: (index) {
             controller.setCurrentIndex(index);
 
-            if (index == 0) {
-              myPlantController.init();
-            } else if (index == 1) {
+            if (index == 1) {
               weatherController.initLocationAndWeatherData();
-            } else if (index == 2) {
-              myPlantController.init();
             }
           },
           elevation: 0.0,
