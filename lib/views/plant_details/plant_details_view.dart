@@ -4,6 +4,7 @@ import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/plant_details_controller.dart';
+import 'package:plantopia/controllers/plant_history_controller.dart';
 import 'package:plantopia/views/plant_details/widget/about_plant_widget.dart';
 import 'package:plantopia/views/plant_details/widget/faq_widget.dart';
 import 'package:plantopia/views/plant_details/widget/image_carousel_widget.dart';
@@ -16,6 +17,8 @@ class PlantDetailsView extends StatelessWidget {
   PlantDetailsView({super.key});
 
   final controller = Get.put(PlantDetailsController());
+  final PlantHistoryController plantHistoryController =
+      Get.put(PlantHistoryController());
   final addPlantController = Get.put(AddPlantController());
 
   @override
@@ -85,6 +88,8 @@ class PlantDetailsView extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () async {
             await controller.addPlant(addPlantController.selectedPlant.value);
+            await plantHistoryController.addPlantingHistory(
+                controller.plantByIdResponse?.data?.id ?? -1);
           },
           style: ElevatedButton.styleFrom(
             backgroundColor:

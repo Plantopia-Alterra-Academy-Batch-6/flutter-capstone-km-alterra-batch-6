@@ -71,7 +71,7 @@ Future<void> main() async {
         ),
         GetPage(
           name: AppRoutes.historyPlant,
-          page: () => const HistoryPlantView(),
+          page: () =>  HistoryPlantView(),
         ),
         GetPage(
           name: AppRoutes.addPlant,
