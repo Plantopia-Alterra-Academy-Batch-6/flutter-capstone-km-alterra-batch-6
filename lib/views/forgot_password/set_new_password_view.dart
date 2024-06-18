@@ -1,29 +1,34 @@
-import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:plantopia/constants/color_constant.dart';
-import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/forgot_password_controller.dart';
+import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_appbar_forgot_password_widget.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_button_forgot_password_widget.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_formfield_forgot_password_widget.dart';
+import 'package:plantopia/views/global_widgets/custom_snackbar_bottom_widget.dart';
 
 class SetNewPasswordView extends StatelessWidget {
   const SetNewPasswordView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final ForgotPasswordController forgotPasswordController =
+    final ForgotPasswordController controller =
         Get.put(ForgotPasswordController());
 
-    TextEditingController emailController = TextEditingController();
+    TextEditingController passwordController = TextEditingController();
+    final Map arguments = Get.arguments;
+    final String email = arguments['email'];
 
     return Scaffold(
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const CustomAppbarForgotPasswordWidget(),
+              const CustomAppbarForgotPasswordWidget(
+                title: "Set a new password",
+                subtitle:
+                    "Create a new password. For your safety, avoid using old passwords",
+              ),
               const SizedBox(
                 height: 30.0,
               ),
@@ -33,16 +38,27 @@ class SetNewPasswordView extends StatelessWidget {
                   children: [
                     Obx(
                       () => CustomFormfieldForgotPasswordWidget(
-                          textColor:
-                              forgotPasswordController.textEmailColor.value,
-                          borderColor:
-                              forgotPasswordController.borderEmail.value,
-                          controller: emailController,
+                          showPassword: controller.showPassword.value,
+                          suffixIcon: IconButton(
+                              onPressed: () {
+                                controller.showPassword.value =
+                                    !controller.showPassword.value;
+                              },
+                              icon: Icon(
+                                controller.showPassword.value
+                                    ? Icons.visibility_off
+                                    : Icons.visibility,
+                                color: controller.showPassword.value
+                                    ? Colors.black26
+                                    : Colors.black54,
+                                size: 20,
+                              )),
+                          controller: passwordController,
                           keyboardType: TextInputType.text,
                           hintText: 'Password',
-                          errorText: forgotPasswordController.errorEmail.value,
+                          errorText: controller.errorPassword.value,
                           onChanged: (e) async {
-                            forgotPasswordController.setEmail(e);
+                            controller.setPassword(e);
                           }),
                     ),
                     const SizedBox(
@@ -50,40 +66,24 @@ class SetNewPasswordView extends StatelessWidget {
                     ),
                     Obx(
                       () => CustomButtonForgotPasswordWidget(
-                          onPressed: () {},
-                          isActive: forgotPasswordController
-                              .isEnableButtonEmail.value,
-                          text: "Get Instruction"),
+                        isLoading: controller.isLoading.value,
+                          onPressed: () async {
+                            final bool result =
+                                await controller.postForgotPassword(
+                                    email: email,
+                                    password: passwordController.text);
+                            if (result) {
+                              CustomSnackbarBottomWidget.show(context,
+                                  title: "Password Updated Successfully");
+                              Get.offNamed(AppRoutes.auth);
+                            } else {
+                              CustomSnackbarBottomWidget.show(context,
+                                  title: "Failed to change new password");
+                            }
+                          },
+                          isActive: controller.isEnableButtonPassword.value,
+                          text: "Update Password"),
                     ),
-                    const SizedBox(
-                      height: 28.0,
-                    ),
-                    DottedBorder(
-                        color: ColorConstant.danger500,
-                        radius: const Radius.circular(6),
-                        borderType: BorderType.RRect,
-                        strokeWidth: 1.2,
-                        dashPattern: const [11],
-                        child: Container(
-                          padding: const EdgeInsets.all(8.0),
-                          height: 86,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text("Password Tips",
-                                  style: TextStyleConstant.subtitle.copyWith(
-                                      color: ColorConstant.danger500,
-                                      fontWeight: FontWeight.w700)),
-                              const SizedBox(
-                                height: 2.0,
-                              ),
-                              Text(
-                                  "Create a memorable and secure password to reduce the need for resets.",
-                                  style: TextStyleConstant.paragraph.copyWith(
-                                      color: ColorConstant.danger500)),
-                            ],
-                          ),
-                        ))
                   ],
                 ),
               ),

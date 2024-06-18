@@ -1,6 +1,6 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
-
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 
 class CustomFormfieldForgotPasswordWidget extends StatelessWidget {
@@ -11,10 +11,8 @@ class CustomFormfieldForgotPasswordWidget extends StatelessWidget {
   final String? errorText;
   final TextEditingController? controller;
   final void Function(String)? onChanged;
-  final Color borderColor;
-  final Color? textColor;
   final String? initialValue;
-  final FocusNode? focusNode;
+
   const CustomFormfieldForgotPasswordWidget(
       {super.key,
       required this.hintText,
@@ -24,10 +22,9 @@ class CustomFormfieldForgotPasswordWidget extends StatelessWidget {
       this.errorText,
       this.controller,
       this.onChanged,
-      this.focusNode,
       this.initialValue,
-      this.textColor,
-      this.borderColor = Colors.black});
+
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,41 +33,57 @@ class CustomFormfieldForgotPasswordWidget extends StatelessWidget {
       children: [
         Text(
           hintText,
-          style: TextStyleConstant.paragraph
-              .copyWith(color: textColor, fontWeight: FontWeight.w700),
+          style:
+              TextStyleConstant.paragraph.copyWith(fontWeight: FontWeight.w700),
         ),
         const SizedBox(
           height: 4.0,
         ),
         TextFormField(
           initialValue: initialValue,
-          style: TextStyle(color: textColor),
+          style: TextStyle(
+              color: errorText != null ? Colors.red : ColorConstant.neutral950),
           onChanged: onChanged,
           controller: controller,
           keyboardType: keyboardType,
           obscureText: showPassword,
           obscuringCharacter: '*',
-          focusNode: focusNode,
           cursorColor: const Color(0xFFD1D5DB),
           decoration: InputDecoration(
             hintText: hintText,
+            hintStyle: TextStyleConstant.subtitle
+                .copyWith(color: ColorConstant.neutral400),
             suffixIcon: suffixIcon,
-            errorText: errorText,
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Color(0xFFD1D5DB))),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: borderColor)),
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: ColorConstant.neutral100),
+            ),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: borderColor)),
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(
+                  color: errorText != null
+                      ? Colors.red
+                      : ColorConstant.neutral950),
+            ),
             focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Colors.red)),
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(
+                  color: errorText != null
+                      ? Colors.red
+                      : ColorConstant.neutral950),
+            ),
+            errorText: errorText,
             errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Colors.red)),
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: Colors.red),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(
+                  color: errorText != null
+                      ? Colors.red
+                      : ColorConstant.neutral400),
+            ),
           ),
         ),
       ],

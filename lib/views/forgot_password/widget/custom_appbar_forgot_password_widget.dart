@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 
 class CustomAppbarForgotPasswordWidget extends StatelessWidget {
+  final String title;
+  final String subtitle;
   const CustomAppbarForgotPasswordWidget({
-    super.key,
+    super.key, required this.title, required this.subtitle
   });
 
   @override
@@ -30,14 +32,14 @@ class CustomAppbarForgotPasswordWidget extends StatelessWidget {
               const SizedBox(
                 height: 20.0,
               ),
-              Text('Forgot Password',
+              Text(title,
                   style: TextStyleConstant.heading3
                       .copyWith(fontWeight: FontWeight.w700)),
               const SizedBox(
                 height: 7.0,
               ),
               Text(
-                "Enter your email and get instruction for resetting your password",
+                subtitle,
                 style: TextStyleConstant.paragraph.copyWith(),
               ),
             ],

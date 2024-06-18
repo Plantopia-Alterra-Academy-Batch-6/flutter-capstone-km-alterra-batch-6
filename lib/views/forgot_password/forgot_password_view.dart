@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/forgot_password_controller.dart';
+import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_appbar_forgot_password_widget.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_button_forgot_password_widget.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_formfield_forgot_password_widget.dart';
@@ -23,7 +24,11 @@ class ForgotPasswordView extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              const CustomAppbarForgotPasswordWidget(),
+              const CustomAppbarForgotPasswordWidget(
+                title: "Forgot Password",
+                subtitle:
+                    "Enter your email and get instruction for resetting your password",
+              ),
               const SizedBox(
                 height: 30.0,
               ),
@@ -33,10 +38,6 @@ class ForgotPasswordView extends StatelessWidget {
                   children: [
                     Obx(
                       () => CustomFormfieldForgotPasswordWidget(
-                          textColor:
-                              forgotPasswordController.textEmailColor.value,
-                          borderColor:
-                              forgotPasswordController.borderEmail.value,
                           controller: emailController,
                           keyboardType: TextInputType.emailAddress,
                           hintText: 'Email',
@@ -50,7 +51,13 @@ class ForgotPasswordView extends StatelessWidget {
                     ),
                     Obx(
                       () => CustomButtonForgotPasswordWidget(
-                          onPressed: () {},
+                        isLoading: forgotPasswordController.isLoading.value,
+                          onPressed: () async {
+                            await forgotPasswordController.resendOTP(context,
+                                email: emailController.text);
+
+                  
+                          },
                           isActive: forgotPasswordController
                               .isEnableButtonEmail.value,
                           text: "Get Instruction"),

@@ -9,6 +9,7 @@ import 'package:plantopia/models/login_params_model.dart';
 import 'package:plantopia/views/auth/widgets/custom_auth_button_widget.dart';
 import 'package:plantopia/views/auth/widgets/custom_auth_text_form_field_widget.dart';
 import 'package:plantopia/views/auth/widgets/custom_login_google_widget.dart';
+import 'package:plantopia/views/auth/widgets/custom_text_button_forgot_password_widget.dart';
 
 class LoginSectionWidget extends StatefulWidget {
   const LoginSectionWidget({super.key});
@@ -43,19 +44,20 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
       children: [
         Form(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
                 height: 20.0,
               ),
               Obx(
                 () => CustomAuthTextFormFieldWidget(
-                  borderColor: loginFormController.borderEmail.value,
                   hintText: 'Email',
+                  isEnable: loginFormController.isEnableButtonEmail.value,
                   keyboardType: TextInputType.emailAddress,
                   errorText: loginFormController.errorEmail.value,
                   controller: emailController,
-                  onChanged: (value) {
-                    loginFormController.validatorEmail(value);
+                  onChanged: (value) async {
+                    loginFormController.setEmail(value);
                   },
                 ),
               ),
@@ -64,13 +66,13 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
               ),
               Obx(
                 () => CustomAuthTextFormFieldWidget(
-                  borderColor: loginFormController.borderPassword.value,
                   hintText: 'Password',
+                  isEnable: loginFormController.isEnableButtonPassword.value,
                   showPassword: showPassword,
                   controller: passwordController,
                   errorText: loginFormController.errorPassword.value,
-                  onChanged: (value) {
-                    loginFormController.validatorPassword(value);
+                  onChanged: (value) async {
+                    loginFormController.setPassword(value);
                   },
                   suffixIcon: IconButton(
                       onPressed: () {
@@ -85,8 +87,9 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                       )),
                 ),
               ),
+              const CustomTextButtonForgotPasswordWidget(),
               const SizedBox(
-                height: 47.0,
+                height: 24.0,
               ),
               Obx(
                 () => CustomAuthButtonWidget(
@@ -104,12 +107,14 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
               const SizedBox(
                 height: 14.0,
               ),
-              Text(
-                'Or',
-                style: GoogleFonts.nunito(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xFF9ba5b7)),
+              Center(
+                child: Text(
+                  'Or',
+                  style: GoogleFonts.nunito(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.w400,
+                      color: const Color(0xFF9ba5b7)),
+                ),
               ),
               const SizedBox(
                 height: 14.0,

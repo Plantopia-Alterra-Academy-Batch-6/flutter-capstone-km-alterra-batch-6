@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/controllers/login_form_controller.dart';
 import 'package:plantopia/views/auth/widgets/custom_auth_appbar_widget.dart';
@@ -29,8 +30,9 @@ class _AuthViewState extends State<AuthView> {
         body: SafeArea(
       child: Obx(
         () => authController.isLoading.value
-            ? const Center(
-                child: CircularProgressIndicator(),
+            ? Center(
+                child:
+                    CircularProgressIndicator(color: ColorConstant.primary500),
               )
             : SingleChildScrollView(
                 child: Column(

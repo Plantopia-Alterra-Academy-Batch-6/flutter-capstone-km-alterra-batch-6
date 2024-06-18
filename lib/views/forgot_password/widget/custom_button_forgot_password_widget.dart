@@ -7,6 +7,7 @@ class CustomButtonForgotPasswordWidget extends StatelessWidget {
   final String text;
   final double? borderRadiusCircular;
   final bool isActive;
+  final bool isLoading;
 
   const CustomButtonForgotPasswordWidget({
     super.key,
@@ -14,6 +15,7 @@ class CustomButtonForgotPasswordWidget extends StatelessWidget {
     required this.text,
     this.borderRadiusCircular,
     this.isActive = false,
+    this.isLoading = false,
   });
 
   @override
@@ -32,13 +34,17 @@ class CustomButtonForgotPasswordWidget extends StatelessWidget {
               backgroundColor: isActive
                   ? ColorConstant.primary500
                   : ColorConstant.neutral100),
-          onPressed: isActive ? onPressed : () {},
-          child: Text(text,
-              style: TextStyleConstant.subtitle.copyWith(
-                  fontWeight: FontWeight.w700,
-                  color: isActive
-                      ? ColorConstant.white
-                      : ColorConstant.neutral400)),
+          onPressed: isActive && !isLoading ? onPressed : () {},
+          child: isLoading
+              ? CircularProgressIndicator(
+                  color: ColorConstant.white,
+                )
+              : Text(text,
+                  style: TextStyleConstant.subtitle.copyWith(
+                      fontWeight: FontWeight.w700,
+                      color: isActive
+                          ? ColorConstant.white
+                          : ColorConstant.neutral400)),
         ));
   }
 }

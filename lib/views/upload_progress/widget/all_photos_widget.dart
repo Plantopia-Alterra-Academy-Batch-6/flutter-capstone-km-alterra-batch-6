@@ -6,6 +6,7 @@ import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/upload_progress_controller.dart';
 import 'package:plantopia/models/get_plant_progress_response_model.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
+import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
 import 'package:plantopia/views/upload_progress/widget/empty_all_photos_widget.dart';
 
 class AllPhotosWidget extends StatelessWidget {
@@ -36,7 +37,10 @@ class AllPhotosWidget extends StatelessWidget {
           switch (uploadProgressController.plantProgressData.value) {
             case Status.loading:
               return const SizedBox(
-                  height: 60, width: 60, child: CircularProgressIndicator());
+                  height: 60,
+                  width: 60,
+                  child: ShimmerContainerGlobalWidget(
+                      width: 60, height: 60, radius: 12));
             case Status.loaded:
               return plantProgress.isEmpty
                   ? const EmptyAllPhotosWidget()
@@ -58,7 +62,8 @@ class AllPhotosWidget extends StatelessWidget {
                             imageUrl: plantProgress[index].imageUrl ?? "",
                             fit: BoxFit.cover,
                             placeholder: (context, url) =>
-                                const CircularProgressIndicator(),
+                                const ShimmerContainerGlobalWidget(
+                                    width: 60, height: 60, radius: 12),
                             errorWidget: (context, url, error) =>
                                 const Icon(Icons.error),
                           ),

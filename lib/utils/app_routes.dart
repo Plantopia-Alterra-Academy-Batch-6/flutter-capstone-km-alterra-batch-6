@@ -19,4 +19,6 @@ class AppRoutes {
   static const String plantFilterResult = '/plantFilterResult';
   static const String uploadProgress = '/uploadProgress';
   static const String forgotPassword = '/forgotPassword';
+  static const String verifyForgotPassword = '/verifyForgotPassword';
+  static const String setNewPassword = '/setNewPassword';
 }

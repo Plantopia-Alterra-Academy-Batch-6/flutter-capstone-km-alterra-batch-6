@@ -61,8 +61,7 @@ class AuthController extends GetxController {
         if (e.code == 400) {
           loginFormController.errorPassword.value =
               "Enter a valid email and password";
-          loginFormController.borderEmail.value = Colors.red;
-          loginFormController.borderPassword.value = Colors.red;
+          loginFormController.errorEmail.value = "";
           authSection.value = 0;
         } else {
           Get.snackbar('Error', '$e');
@@ -98,7 +97,6 @@ class AuthController extends GetxController {
           final signUpController = Get.find<SignUpFormController>();
 
           signUpController.errorEmail.value = e.message;
-          signUpController.borderEmail.value = Colors.red;
         }
       } else {
         Get.snackbar('Error', '$e');
@@ -177,9 +175,6 @@ class AuthController extends GetxController {
       Get.to(const AllowNotificationView());
     }
   }
-
-
-
 
 //   final GoogleSignInService _googleSignInService = GoogleSignInService();
 //   final Rx<User?> _user = Rx<User?>(null);
