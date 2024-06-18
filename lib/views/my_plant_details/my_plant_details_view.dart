@@ -84,12 +84,12 @@ class MyPlantDetailsView extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const AboutPlantWidget(),
+                        AboutPlantWidget(),
                         PlantHistoryWidget(),
                         const PlantRequirementsWidget(),
                         const PlantCharacteristicsWidget(),
                         const PlantGuideCardWidget(),
-                        const MonitoringProgressWidget(),
+                        MonitoringProgressWidget(),
                         const PlantCareWidget(),
                         FaqWidget(),
                       ],

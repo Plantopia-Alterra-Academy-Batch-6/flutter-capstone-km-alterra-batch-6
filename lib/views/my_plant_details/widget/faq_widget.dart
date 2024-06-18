@@ -24,55 +24,55 @@ class FaqWidget extends StatelessWidget {
               TextStyleConstant.heading4.copyWith(fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 14),
-        Column(
-          children: List.generate(
-            detailMyPlant.plant?.plantFaqs?.length ?? 0,
-            (value) {
-              return Padding(
-                padding: const EdgeInsets.only(bottom: 14),
-                child: Container(
-                  decoration: BoxDecoration(
-                    border: Border.all(
-                        color: controller.customIcon.value
-                            ? Colors.black
-                            : ColorConstant.neutral500),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Theme(
-                    data: Theme.of(context)
-                        .copyWith(dividerColor: Colors.transparent),
-                    child: ExpansionTile(
-                      title: Text(
-                        detailMyPlant.plant?.plantFaqs?[value].question ?? "-",
-                        style: TextStyleConstant.subtitle
-                            .copyWith(fontWeight: FontWeight.w700),
-                      ),
-                      trailing: Icon(controller.customIcon.value
-                          ? Icons.keyboard_arrow_up
-                          : Icons.keyboard_arrow_down),
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(
-                              left: 16, right: 16, bottom: 16),
-                          child: Row(
-                            children: [
-                              Text(
-                                  detailMyPlant
-                                          .plant?.plantFaqs?[value].answer! ??
-                                      "-",
-                                  style: TextStyleConstant.paragraph),
-                            ],
-                          ),
+        Obx(
+          () => Column(
+            children: List.generate(
+              detailMyPlant.plant?.plantFaqs?.length ?? 0,
+              (value) {
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 14),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                          color: controller.customIcon.value
+                              ? Colors.black
+                              : ColorConstant.neutral500),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Theme(
+                      data: Theme.of(context)
+                          .copyWith(dividerColor: Colors.transparent),
+                      child: ExpansionTile(
+                        title: Text(
+                          controller.filterHtmlTag(
+                              detailMyPlant.plant?.plantFaqs?[value].question ??
+                                  "-"),
+                          style: TextStyleConstant.subtitle
+                              .copyWith(fontWeight: FontWeight.w700),
                         ),
-                      ],
-                      onExpansionChanged: (value) {
-                        controller.customIcon(value);
-                      },
+                        trailing: Icon(controller.customIcon.value
+                            ? Icons.keyboard_arrow_up
+                            : Icons.keyboard_arrow_down),
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 16, right: 16, bottom: 16),
+                            child: Text(
+                                controller.filterHtmlTag(detailMyPlant
+                                        .plant?.plantFaqs?[value].answer! ??
+                                    "-"),
+                                style: TextStyleConstant.paragraph),
+                          ),
+                        ],
+                        onExpansionChanged: (value) {
+                          controller.customIcon(value);
+                        },
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
         ),
       ],

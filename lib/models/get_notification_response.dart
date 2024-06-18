@@ -37,6 +37,7 @@ class Notif {
     String? title;
     String? body;
     int? userId;
+    int? plantId;
     bool? isRead;
     DateTime? createdAt;
 
@@ -45,6 +46,7 @@ class Notif {
         this.title,
         this.body,
         this.userId,
+        this.plantId,
         this.isRead,
         this.createdAt,
     });
@@ -54,6 +56,7 @@ class Notif {
         title: json["title"],
         body: json["body"],
         userId: json["user_id"],
+        plantId: json["plant_id"],
         isRead: json["is_read"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     );
@@ -63,10 +66,8 @@ class Notif {
         "title": title,
         "body": body,
         "user_id": userId,
+        "plant_id": plantId,
         "is_read": isRead,
         "created_at": createdAt?.toIso8601String(),
     };
 }
-
-
-

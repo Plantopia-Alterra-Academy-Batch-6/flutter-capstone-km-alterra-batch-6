@@ -1,17 +1,38 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:html/parser.dart' as html_parser;
+import 'package:html/dom.dart' as dom;
 import 'package:intl/intl.dart';
+import 'package:plantopia/models/get_plant_progress_response_model.dart';
 import 'package:plantopia/service/my_plant_details_service.dart';
+import 'package:plantopia/service/upload_progress_service.dart';
 
 class MyPlantDetailsController extends GetxController {
   RxInt activeIndex = 0.obs;
   RxBool customIcon = false.obs;
   RxBool isSuccess = false.obs;
+  RxList<PlantProgress> progressPlant = <PlantProgress>[].obs;
+
+  Future<void> getPlantProgress(int plantId) async {
+    try {
+      final GetPlantProgressResponseModel? result =
+          await UploadProgressService.getPlantProgress(plantId);
+      List<PlantProgress>? progressPlantResult = result?.data?.plantProgress;
+      progressPlant.value = progressPlantResult ?? [];
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  String filterHtmlTag(String htmlString) {
+    dom.Document document = html_parser.parse(htmlString);
+    return document.body?.text ?? '';
+  }
 
   String parseHour(String wateringSchedule) {
     DateTime time = DateFormat.Hm().parse(wateringSchedule);
 
-    DateFormat formatter = DateFormat('h a');
+    DateFormat formatter = DateFormat('hh:mm a');
 
     String formattedTime = formatter.format(time);
 

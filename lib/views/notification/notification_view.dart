@@ -54,7 +54,11 @@ class NotificationView extends StatelessWidget {
                               ),
                               child: Column(
                                 children: [
-                                  SvgPicture.asset(ImageConstant.confirmation),
+                                  SvgPicture.asset(
+                                    IconConstant.confirmation,
+                                    width: 150,
+                                    height: 150,
+                                  ),
                                   const SizedBox(
                                     height: 20,
                                   ),
@@ -64,8 +68,12 @@ class NotificationView extends StatelessWidget {
                                       width: double.infinity,
                                       child: Center(
                                         child: Text(
-                                          "Are you sure you want to delete all notifications?",
-                                          style: TextStyleConstant.heading4,
+                                          "Are you sure you want to\ndelete all notifications?",
+                                          style: TextStyleConstant.heading4
+                                              .copyWith(
+                                                  fontWeight: FontWeight.w700,
+                                                  decoration:
+                                                      TextDecoration.none),
                                           textAlign: TextAlign.center,
                                         ),
                                       )),
@@ -79,7 +87,10 @@ class NotificationView extends StatelessWidget {
                                       child: Center(
                                         child: Text(
                                           "All of the information will be erased and cannot be restored",
-                                          style: TextStyleConstant.paragraph,
+                                          style: TextStyleConstant.paragraph
+                                              .copyWith(
+                                            decoration: TextDecoration.none,
+                                          ),
                                           textAlign: TextAlign.center,
                                         ),
                                       )),
@@ -99,6 +110,7 @@ class NotificationView extends StatelessWidget {
                                               color: Colors.white),
                                           textStyle: TextStyleConstant.subtitle
                                               .copyWith(
+                                            decoration: TextDecoration.none,
                                             color: ColorConstant.primary500,
                                           ),
                                         ),
@@ -109,7 +121,8 @@ class NotificationView extends StatelessWidget {
                                       Expanded(
                                         child: ButtonWidget(
                                           onTap: () {
-                                            notifController.notifDummy.clear();
+                                            notifController
+                                                .deleteAllNotification();
                                             Get.back();
                                           },
                                           buttonName: "Delete",
@@ -120,6 +133,7 @@ class NotificationView extends StatelessWidget {
                                           ),
                                           textStyle: TextStyleConstant.subtitle
                                               .copyWith(
+                                            decoration: TextDecoration.none,
                                             color: Colors.white,
                                           ),
                                         ),
@@ -218,13 +232,20 @@ class NotificationView extends StatelessWidget {
                               return Padding(
                                 padding: const EdgeInsets.only(bottom: 8.0),
                                 child: GestureDetector(
-                                  onTap: () {
+                                  onTap: () async {
+                                    print(
+                                        "hello ${notifController.listNotif[index].plantId ?? -1}");
                                     Get.bottomSheet(
                                       BottomSheet1Widget(
                                         notifId: notifController
                                                 .listNotif[index].id ??
                                             -1,
                                       ),
+                                    );
+                                    await notifController.getPlantDetails(
+                                      notifController
+                                              .listNotif[index].plantId ??
+                                          -1,
                                     );
                                   },
                                   child: Container(

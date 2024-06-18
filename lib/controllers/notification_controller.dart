@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/models/get_notification_response.dart';
+import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/service/notification_service.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 
 class NotificationController extends GetxController {
   RxList<Notif> listNotif = <Notif>[].obs;
   Rx<Status> notifStatus = Status.loading.obs;
+  Rx<Status> plantStatus = Status.loading.obs;
   RxBool isSuccess = false.obs;
+  PlantByIdResponse? plantByIdResponse;
+
   var dateTime = DateTime.now().obs;
   var selectedOption = 1.obs;
   var notifDummy = ["A", "B", "C"].obs;
@@ -77,6 +81,17 @@ class NotificationController extends GetxController {
           Get.back();
         },
       );
+    }
+  }
+
+  Future<void> getPlantDetails(int plantId) async {
+    try {
+      plantStatus.value = Status.loading;
+      plantByIdResponse = await NotificationService.getPlantById(plantId);
+      plantStatus.value = Status.loaded;
+    } catch (e) {
+      plantStatus.value = Status.error;
+      throw Exception(e);
     }
   }
 }

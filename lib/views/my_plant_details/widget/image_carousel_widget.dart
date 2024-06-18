@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -23,9 +24,11 @@ class ImageCarouselWidget extends StatelessWidget {
               itemBuilder: (context, index, realIndex) {
                 return Container(
                   width: double.infinity,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     image: DecorationImage(
-                      image: AssetImage('assets/images/tomato_dummy.png'),
+                      image: CachedNetworkImageProvider(
+                          detailMyPlant.plant?.plantImages?[index].fileName ??
+                              ""),
                       fit: BoxFit.cover,
                     ),
                   ),

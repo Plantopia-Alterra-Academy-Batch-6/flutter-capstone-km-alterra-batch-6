@@ -76,7 +76,7 @@ class _VerificationViewState extends State<VerificationView> {
                 child: Obx(
                   () => OtpTextField(
                     autoFocus: true,
-                    numberOfFields: 6,
+                    numberOfFields: 4,
                     filled: true,
                     showFieldAsBox: true,
                     fieldWidth: 53,

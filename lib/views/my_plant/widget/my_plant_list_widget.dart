@@ -5,8 +5,8 @@ import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/my_plant_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
-import 'package:plantopia/views/global_widgets/card_global_widget.dart';
 import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
+import 'package:plantopia/views/my_plant/widget/card_my_plant_widget.dart';
 import 'package:plantopia/views/my_plant/widget/empty_my_plant_widget.dart';
 
 class MyPlantListWidget extends StatelessWidget {
@@ -73,7 +73,7 @@ class MyPlantListWidget extends StatelessWidget {
                             myPlantController.getMyPlant();
                           });
                         },
-                        child: CardGlobalWidget(
+                        child: CardMyPlantWidget(
                           plantName: myPlantController
                                   .listMyPlant[index].plant?.name ??
                               "",

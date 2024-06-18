@@ -75,23 +75,27 @@ class Data {
 class PlantElement {
     int? id;
     PlantPlant? plant;
+    String? customizeName;
     DateTime? createdAt;
 
     PlantElement({
         this.id,
         this.plant,
+        this.customizeName,
         this.createdAt,
     });
 
     factory PlantElement.fromJson(Map<String, dynamic> json) => PlantElement(
         id: json["id"],
         plant: json["plant"] == null ? null : PlantPlant.fromJson(json["plant"]),
+        customizeName: json["customize_name"],
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "plant": plant?.toJson(),
+        "customize_name": customizeName,
         "created_at": createdAt?.toIso8601String(),
     };
 }
@@ -102,13 +106,14 @@ class PlantPlant {
     String? description;
     bool? isToxic;
     int? harvestDuration;
-    PlantCategory? plantCategory;
+    Category? plantCategory;
     String? climateCondition;
     String? plantingTime;
     String? sunlight;
     PlantCharacteristic? plantCharacteristic;
     WateringSchedule? wateringSchedule;
     List<PlantInstruction>? plantInstructions;
+    String? additionalTips;
     List<PlantFaq>? plantFaqs;
     List<PlantImage>? plantImages;
     DateTime? createdAt;
@@ -126,6 +131,7 @@ class PlantPlant {
         this.plantCharacteristic,
         this.wateringSchedule,
         this.plantInstructions,
+        this.additionalTips,
         this.plantFaqs,
         this.plantImages,
         this.createdAt,
@@ -137,13 +143,14 @@ class PlantPlant {
         description: json["description"],
         isToxic: json["is_toxic"],
         harvestDuration: json["harvest_duration"],
-        plantCategory: json["plant_category"] == null ? null : PlantCategory.fromJson(json["plant_category"]),
+        plantCategory: json["plant_category"] == null ? null : Category.fromJson(json["plant_category"]),
         climateCondition: json["climate_condition"],
         plantingTime: json["planting_time"],
         sunlight: json["sunlight"],
         plantCharacteristic: json["plant_characteristic"] == null ? null : PlantCharacteristic.fromJson(json["plant_characteristic"]),
         wateringSchedule: json["watering_schedule"] == null ? null : WateringSchedule.fromJson(json["watering_schedule"]),
         plantInstructions: json["plant_instructions"] == null ? [] : List<PlantInstruction>.from(json["plant_instructions"]!.map((x) => PlantInstruction.fromJson(x))),
+        additionalTips: json["additional_tips"],
         plantFaqs: json["plant_faqs"] == null ? [] : List<PlantFaq>.from(json["plant_faqs"]!.map((x) => PlantFaq.fromJson(x))),
         plantImages: json["plant_images"] == null ? [] : List<PlantImage>.from(json["plant_images"]!.map((x) => PlantImage.fromJson(x))),
         createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
@@ -162,33 +169,38 @@ class PlantPlant {
         "plant_characteristic": plantCharacteristic?.toJson(),
         "watering_schedule": wateringSchedule?.toJson(),
         "plant_instructions": plantInstructions == null ? [] : List<dynamic>.from(plantInstructions!.map((x) => x.toJson())),
+        "additional_tips": additionalTips,
         "plant_faqs": plantFaqs == null ? [] : List<dynamic>.from(plantFaqs!.map((x) => x.toJson())),
         "plant_images": plantImages == null ? [] : List<dynamic>.from(plantImages!.map((x) => x.toJson())),
         "created_at": createdAt?.toIso8601String(),
     };
 }
 
-class PlantCategory {
+class Category {
     int? id;
     String? name;
     String? imageUrl;
+    String? description;
 
-    PlantCategory({
+    Category({
         this.id,
         this.name,
         this.imageUrl,
+        this.description,
     });
 
-    factory PlantCategory.fromJson(Map<String, dynamic> json) => PlantCategory(
+    factory Category.fromJson(Map<String, dynamic> json) => Category(
         id: json["id"],
         name: json["name"],
         imageUrl: json["image_url"],
+        description: json["description"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "name": name,
         "image_url": imageUrl,
+        "description": description,
     };
 }
 
@@ -291,40 +303,40 @@ class PlantImage {
 class PlantInstruction {
     int? id;
     int? plantId;
+    Category? instructionCategory;
     int? stepNumber;
     String? stepTitle;
     String? stepDescription;
     String? stepImageUrl;
-    String? additionalTips;
 
     PlantInstruction({
         this.id,
         this.plantId,
+        this.instructionCategory,
         this.stepNumber,
         this.stepTitle,
         this.stepDescription,
         this.stepImageUrl,
-        this.additionalTips,
     });
 
     factory PlantInstruction.fromJson(Map<String, dynamic> json) => PlantInstruction(
         id: json["id"],
         plantId: json["plant_id"],
+        instructionCategory: json["instruction_category"] == null ? null : Category.fromJson(json["instruction_category"]),
         stepNumber: json["step_number"],
         stepTitle: json["step_title"],
         stepDescription: json["step_description"],
         stepImageUrl: json["step_image_url"],
-        additionalTips: json["additional_tips"],
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "plant_id": plantId,
+        "instruction_category": instructionCategory?.toJson(),
         "step_number": stepNumber,
         "step_title": stepTitle,
         "step_description": stepDescription,
         "step_image_url": stepImageUrl,
-        "additional_tips": additionalTips,
     };
 }
 
