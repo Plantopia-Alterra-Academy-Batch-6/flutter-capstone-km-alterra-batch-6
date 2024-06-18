@@ -13,7 +13,6 @@ class ListRecomendedPlantWidget extends StatelessWidget {
   ListRecomendedPlantWidget({super.key});
 
   final MyPlantController myPlantController = Get.put(MyPlantController());
-  final AddPlantController addPlantController = Get.put(AddPlantController());
 
   @override
   Widget build(BuildContext context) {
@@ -64,6 +63,7 @@ class ListRecomendedPlantWidget extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 12.0),
                         child: GestureDetector(
                           onTap: () {
+                            final AddPlantController addPlantController = Get.put(AddPlantController());
                             addPlantController.selectedPlant.value =
                                 myPlantController
                                     .recommendationPlant[index].id!;

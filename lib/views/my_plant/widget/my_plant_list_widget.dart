@@ -51,41 +51,40 @@ class MyPlantListWidget extends StatelessWidget {
                 );
               } else {
                 return GridView.builder(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 16,
-                    ),
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    itemCount: myPlantController.listMyPlant.length,
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                            mainAxisExtent: 200,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 16,
-                            crossAxisCount: 2),
-                    itemBuilder: (context, int index) {
-                      return GestureDetector(
-                        onTap: () {
-                          Get.toNamed(AppRoutes.myPlantDetails, arguments: {
-                            'myPlantDetails':
-                                myPlantController.listMyPlant[index]
-                          })?.then((value) {
-                            myPlantController.getMyPlant();
-                          });
-                        },
-                        child: CardGlobalWidget(
-                          plantName: myPlantController
-                                  .listMyPlant[index].plant?.name ??
-                              "",
-                          plantCategory: myPlantController.listMyPlant[index]
-                                  .plant?.plantCategory?.name ??
-                              "",
-                          plantImageUrl: myPlantController.listMyPlant[index]
-                                  .plant?.plantImages?[0].fileName ??
-                              "",
-                        ),
-                      );
-                    });
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
+                  physics: const NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
+                  itemCount: myPlantController.listMyPlant.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      mainAxisExtent: 200,
+                      crossAxisSpacing: 16,
+                      mainAxisSpacing: 16,
+                      crossAxisCount: 2),
+                  itemBuilder: (context, int index) {
+                    return GestureDetector(
+                      onTap: () {
+                        Get.toNamed(AppRoutes.myPlantDetails, arguments: {
+                          'myPlantDetails': myPlantController.listMyPlant[index]
+                        })?.then((value) {
+                          myPlantController.getMyPlant();
+                        });
+                      },
+                      child: CardGlobalWidget(
+                        plantName:
+                            myPlantController.listMyPlant[index].plant?.name ??
+                                "",
+                        plantCategory: myPlantController.listMyPlant[index]
+                                .plant?.plantCategory?.name ??
+                            "",
+                        plantImageUrl: myPlantController.listMyPlant[index]
+                                .plant?.plantImages?[0].fileName ??
+                            "",
+                      ),
+                    );
+                  },
+                );
               }
             case Status.error:
               return Center(

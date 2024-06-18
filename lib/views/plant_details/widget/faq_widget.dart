@@ -53,11 +53,13 @@ class FaqWidget extends StatelessWidget {
                               left: 16, right: 16, bottom: 16),
                           child: Row(
                             children: [
-                              Text(
-                                controller.filterHtmlTag(controller.plantByIdResponse!.data!.plantFaqs![value].answer!),
-                                style: TextStyleConstant.subtitle.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                  fontSize: 14,
+                              Expanded(
+                                child: Text(
+                                  controller.filterHtmlTag(controller.plantByIdResponse!.data!.plantFaqs![value].answer!),
+                                  style: TextStyleConstant.subtitle.copyWith(
+                                    fontWeight: FontWeight.w700,
+                                    fontSize: 14,
+                                  ),
                                 ),
                               ),
                             ],
