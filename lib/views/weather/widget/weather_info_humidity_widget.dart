@@ -13,82 +13,76 @@ class WeatherInfoHumidityWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double humidity = weatherData.main?.humidity?.toDouble() ?? 0.0;
-
+    final double humidity = weatherData.data?.humidity?.toDouble() ?? 0.0;
 
     return Center(
-        child: Container(
-          width: 156,
-          height: 130,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: ColorConstant.neutral300,
-              width: 1.0,
-            ),
-            borderRadius: BorderRadius.circular(16.0),
+      child: Container(
+        width: 156,
+        height: 130,
+        decoration: BoxDecoration(
+          border: Border.all(
+            color: ColorConstant.neutral300,
+            width: 1.0,
           ),
-          child: Stack(
-            children: [
-               Positioned(
-                top: 15,
-                left: 16,
-                child: Text(
-                  'Humidity',
-                  style: TextStyleConstant.caption.copyWith(color:ColorConstant.neutral500 )
-                ),
-                
-              ),
-              
-              Positioned(
-                top: 32,
-                left: 16,
-                child: Text(
-                  '$humidity%',
-                  style: TextStyleConstant.title.copyWith(fontWeight: FontWeight.w700,)
-                  
-                ),
-              ),
-              Positioned(
-                top: 77,
-                left: 99,
-                child: SvgPicture.asset(
-                  IconConstant.humidity,
-                  width: 15,
-                  height: 18,
-                ),
-              ),
-              Positioned(
-                right: 16.0,
-                bottom: 12.0,
-                child: SizedBox(
-                  width: 64,
-                  height: 64,
-                  child: SfRadialGauge(
-                    axes: <RadialAxis>[
-                      RadialAxis(
-                        showLabels: false,
-                        showTicks: false,
-                        maximum: 100,
-                        axisLineStyle: const AxisLineStyle(
-                          thickness: 6,
-                        ),
-                        pointers: <GaugePointer>[
-                          RangePointer(
-                            value: humidity ,
-                            cornerStyle: CornerStyle.bothCurve,
-                            color: ColorConstant.link500,
-                            width: 6.0,
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
+          borderRadius: BorderRadius.circular(16.0),
         ),
-      
+        child: Stack(
+          children: [
+            Positioned(
+              top: 15,
+              left: 16,
+              child: Text('Humidity',
+                  style: TextStyleConstant.caption
+                      .copyWith(color: ColorConstant.neutral500)),
+            ),
+            Positioned(
+              top: 32,
+              left: 16,
+              child: Text('$humidity%',
+                  style: TextStyleConstant.title.copyWith(
+                    fontWeight: FontWeight.w700,
+                  )),
+            ),
+            Positioned(
+              top: 77,
+              left: 99,
+              child: SvgPicture.asset(
+                IconConstant.humidity,
+                width: 15,
+                height: 18,
+              ),
+            ),
+            Positioned(
+              right: 16.0,
+              bottom: 12.0,
+              child: SizedBox(
+                width: 64,
+                height: 64,
+                child: SfRadialGauge(
+                  axes: <RadialAxis>[
+                    RadialAxis(
+                      showLabels: false,
+                      showTicks: false,
+                      maximum: 100,
+                      axisLineStyle: const AxisLineStyle(
+                        thickness: 6,
+                      ),
+                      pointers: <GaugePointer>[
+                        RangePointer(
+                          value: humidity,
+                          cornerStyle: CornerStyle.bothCurve,
+                          color: ColorConstant.link500,
+                          width: 6.0,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -6,16 +6,12 @@ class CurrentWeatherLocationWidget extends StatelessWidget {
 
   const CurrentWeatherLocationWidget({
     super.key,
-    required this.locationName,
-    required this.locationCode,
+    this.locationName,
+    this.locationCode,
   });
 
   @override
   Widget build(BuildContext context) {
-    final countryName = CountryCode.fromCountryCode(
-          locationCode ?? '',
-        ).name ??
-        '';
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -27,7 +23,7 @@ class CurrentWeatherLocationWidget extends StatelessWidget {
           width: 4,
         ),
         Text(
-          '$locationName, $countryName',
+          '$locationName',
           style: TextStyleConstant.paragraph.copyWith(
             fontWeight: FontWeight.w700,
             color: ColorConstant.neutral0,
