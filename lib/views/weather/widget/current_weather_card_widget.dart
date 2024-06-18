@@ -23,14 +23,9 @@ class CurrentWeatherCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime dateTime = weatherData.data?.createdAt ?? DateTime.now();
 
-    // Adjust time to GMT+7
-    dateTime = dateTime.toUtc().add(const Duration(hours: 7));
-
-    // Print the current time in GMT+7
-    print('Current time in GMT+7: ${dateTime.hour}:${dateTime.minute}:${dateTime.second}');
     
+    dateTime = dateTime.toUtc().add(const Duration(hours: 7));
     String formattedDate = DateFormat('EEEE, dd MMMM yyyy').format(dateTime);
-
     final int hour = dateTime.hour;
     String backgroundImage;
 
