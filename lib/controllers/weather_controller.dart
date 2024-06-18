@@ -1,24 +1,24 @@
 import 'package:get/get.dart';
 import 'package:plantopia/helpers/shared_pref_helper.dart';
+import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_current_weather_response_model.dart';
-import 'package:plantopia/models/get_forecast_by_day_response_model.dart';
-import 'package:plantopia/models/get_forecast_by_hour_response_model.dart';
+import 'package:plantopia/models/get_daily_weather_response_model.dart';
+import 'package:plantopia/models/get_hourly_weather_response_model.dart';
 import 'package:plantopia/service/weather_service.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:geolocator/geolocator.dart';
 
-// TODO: Error handling
 class WeatherController extends GetxController {
   Rx<Status> currentWeatherStatus = Status.loading.obs;
-  Rx<Status> forecastByHour = Status.loading.obs;
-  Rx<Status> forecastByDay = Status.loading.obs;
+  Rx<Status> hourlyWeather = Status.loading.obs;
+  Rx<Status> dailyWeather = Status.loading.obs;
   Rx<GetCurrentWeatherResponseModel> weatherData =
       GetCurrentWeatherResponseModel().obs;
-  Rx<GetForecastByHourResponseModel> forecastByHourData =
-      GetForecastByHourResponseModel().obs;
-  Rx<GetForecastByDayResponseModel> forecastByDayData =
-      GetForecastByDayResponseModel().obs;
+  Rx<GetHourlyWeatherResponseModel> hourlyWeatherData =
+      GetHourlyWeatherResponseModel().obs;
+  Rx<GetDailyWeatherResponseModel> dailyWeatherData =
+      GetDailyWeatherResponseModel().obs;
   RxBool locationPermissionGranted = false.obs;
   Rx<Position?> userLocation = Rx<Position?>(null);
   RxBool locationPermissionDenied = false.obs;
@@ -44,7 +44,8 @@ class WeatherController extends GetxController {
         Position position = await Geolocator.getCurrentPosition(
             desiredAccuracy: LocationAccuracy.high);
         userLocation.value = position;
-        SharedPrefHelper.saveUserLocation(position.latitude, position.longitude);
+        SharedPrefHelper.saveUserLocation(
+            position.latitude, position.longitude);
         await getWeatherData(position.latitude, position.longitude);
       } catch (e) {
         _setErrorStatus();
@@ -56,18 +57,21 @@ class WeatherController extends GetxController {
 
   Future<void> getWeatherData(double lat, double lon) async {
     currentWeatherStatus.value = Status.loading;
-    forecastByHour.value = Status.loading;
-    forecastByDay.value = Status.loading;
+    hourlyWeather.value = Status.loading;
+    dailyWeather.value = Status.loading;
     await Future.wait([
       getCurrentWeatherData(lat, lon),
-      getForecastByHourData(lat, lon),
-      getForecastByDayData(lat, lon),
+      getHourlyWeatherData(lat, lon),
+      getDailyWeatherData(lat, lon),
     ]);
   }
 
   Future<void> getCurrentWeatherData(double lat, double lon) async {
     try {
-      final response = await WeatherService().getCurrentWeather(lat: lat, lon: lon);
+      final token = await UserTokenPref.getToken();
+
+      final response = await WeatherService()
+          .getCurrentWeather(token: token, lat: lat, lon: lon);
       weatherData.value = response;
       currentWeatherStatus.value = Status.loaded;
     } catch (e) {
@@ -75,29 +79,35 @@ class WeatherController extends GetxController {
     }
   }
 
-  Future<void> getForecastByHourData(double lat, double lon) async {
+  Future<void> getHourlyWeatherData(double lat, double lon) async {
     try {
-      final response = await WeatherService().getForecastByHour(lat: lat, lon: lon);
-      forecastByHourData.value = response;
-      forecastByHour.value = Status.loaded;
+      final token = await UserTokenPref.getToken();
+
+      final response = await WeatherService()
+          .getHourlyWeather(token: token, lat: lat, lon: lon);
+      hourlyWeatherData.value = response;
+      hourlyWeather.value = Status.loaded;
     } catch (e) {
-      forecastByHour.value = Status.error;
+      hourlyWeather.value = Status.error;
     }
   }
 
-  Future<void> getForecastByDayData(double lat, double lon) async {
+  Future<void> getDailyWeatherData(double lat, double lon) async {
     try {
-      final response = await WeatherService().getForcastByDay(lat: lat, lon: lon);
-      forecastByDayData.value = response;
-      forecastByDay.value = Status.loaded;
+      final token = await UserTokenPref.getToken();
+
+      final response = await WeatherService()
+          .getDailyWeather(token: token, lat: lat, lon: lon);
+      dailyWeatherData.value = response;
+      dailyWeather.value = Status.loaded;
     } catch (e) {
-      forecastByDay.value = Status.error;
+      dailyWeather.value = Status.error;
     }
   }
 
   void _setErrorStatus() {
     currentWeatherStatus.value = Status.error;
-    forecastByHour.value = Status.error;
-    forecastByDay.value = Status.error;
+    hourlyWeather.value = Status.error;
+    dailyWeather.value = Status.error;
   }
 }

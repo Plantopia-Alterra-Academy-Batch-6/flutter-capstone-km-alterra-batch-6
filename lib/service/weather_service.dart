@@ -1,38 +1,36 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:plantopia/models/get_current_weather_response_model.dart';
-import 'package:plantopia/models/get_forecast_by_day_response_model.dart';
-import 'package:plantopia/models/get_forecast_by_hour_response_model.dart';
+import 'package:plantopia/models/get_daily_weather_response_model.dart';
+import 'package:plantopia/models/get_hourly_weather_response_model.dart';
 import 'package:plantopia/utils/base_url_util.dart';
 
 class WeatherService {
   final Dio dio = Dio();
-  final String apiKey = dotenv.get('apiKey');
-
   Future<GetCurrentWeatherResponseModel> getCurrentWeather(
-      {double? lat, double? lon}) async {
+      {String? token, double? lat, double? lon}) async {
     try {
-      String url =
-          '${BaseUrlUtil.baseUrl}/weather?lat=$lat&lon=$lon&appid=$apiKey&units=metric';
-      final response = await dio.get(url);
+      String url = '${BaseUrlUtil.currentWeatherUrl}?lat=$lat&lon=$lon';
+      Options options = Options(headers: {'Authorization': 'Bearer $token'});
+      final response = await dio.get(url, options: options);
       if (response.statusCode == 200) {
         return GetCurrentWeatherResponseModel.fromJson(response.data);
       } else {
         throw Exception('Failed to load weather: ${response.statusCode}');
       }
+      
     } catch (e) {
       throw Exception('Failed to load weather: $e');
     }
   }
 
-  Future<GetForecastByHourResponseModel> getForecastByHour(
-      {double? lat, double? lon}) async {
+  Future<GetHourlyWeatherResponseModel> getHourlyWeather(
+      {String? token, double? lat, double? lon}) async {
     try {
-      String url =
-          '${BaseUrlUtil.baseUrl}/forecast/hourly?lat=$lat&lon=$lon&appid=$apiKey&units=metric&cnt=24';
-      final response = await dio.get(url);
+      String url = '${BaseUrlUtil.hourlyWeather}?lat=$lat&lon=$lon';
+      Options options = Options(headers: {'Authorization': 'Bearer $token'});
+      final response = await dio.get(url, options: options);
       if (response.statusCode == 200) {
-        return GetForecastByHourResponseModel.fromJson(response.data);
+        return GetHourlyWeatherResponseModel.fromJson(response.data);
       } else {
         throw Exception('Failed to load weather: ${response.statusCode}');
       }
@@ -41,14 +39,15 @@ class WeatherService {
     }
   }
 
-  Future<GetForecastByDayResponseModel> getForcastByDay(
-      {double? lat, double? lon}) async {
+  Future<GetDailyWeatherResponseModel> getDailyWeather(
+      {String? token, double? lat, double? lon}) async {
     try {
-      String url =
-          '${BaseUrlUtil.baseUrl}/forecast/climate?lat=$lat&lon=$lon&appid=$apiKey&units=metric&cnt=7';
-      final response = await dio.get(url);
+      String url = '${BaseUrlUtil.dailyWeather}?lat=$lat&lon=$lon';
+      Options options = Options(headers: {'Authorization': 'Bearer $token'});
+
+      final response = await dio.get(url, options: options);
       if (response.statusCode == 200) {
-        return GetForecastByDayResponseModel.fromJson(response.data);
+        return GetDailyWeatherResponseModel.fromJson(response.data);
       } else {
         throw Exception('Failed to load weather: ${response.statusCode}');
       }

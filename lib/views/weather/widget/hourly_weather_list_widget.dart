@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
-import 'package:plantopia/models/get_forecast_by_hour_response_model.dart';
+import 'package:plantopia/models/get_hourly_weather_response_model.dart';
 import 'package:plantopia/views/weather/widget/weather_date_time_widget.dart';
 import 'package:plantopia/views/weather/widget/weather_image_widget.dart';
 import 'package:plantopia/views/weather/widget/weather_temperature_widget.dart';
 import 'package:intl/intl.dart';
 
-part 'forecast_by_hour_list_item_widget.dart';
+part 'hourly_weather_list_item_widget.dart';
 
-class ForecastByHourListWidget extends StatelessWidget {
-  final GetForecastByHourResponseModel forecastByHourModel;
-  const ForecastByHourListWidget({
+class HourlyWeatherListWidget extends StatelessWidget {
+  final GetHourlyWeatherResponseModel weatherData;
+  const HourlyWeatherListWidget({
     super.key,
-    required this.forecastByHourModel,
+    required this.weatherData,
   });
 
   @override
@@ -23,12 +23,13 @@ class ForecastByHourListWidget extends StatelessWidget {
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
-        itemCount: forecastByHourModel.list?.length ?? 0,
+        itemCount: weatherData.data?.length ?? 0,
         itemBuilder: (context, index) {
-          final forecastByHourModelItem = forecastByHourModel.list?[index];
+          final weatherDataItem =
+              weatherData.data?[index];
           final isFirstItem = index == 0;
-          return ForecastByHourListItemWidget(
-            forecastByHourListElement: forecastByHourModelItem ?? ListElement(),
+          return HourlyWeatherListItemWidget(
+            hourlyWeather: weatherDataItem,
             isFirstItem: isFirstItem,
           );
         },

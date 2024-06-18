@@ -22,6 +22,7 @@ import 'package:plantopia/views/plant_details/plant_details_view.dart';
 import 'package:plantopia/views/plant_details/success_add_plant_view.dart';
 import 'package:plantopia/views/plant_filter/plant_filter_view.dart';
 import 'package:plantopia/views/plant_filter_result/plant_filter_result_view.dart';
+import 'package:plantopia/views/plant_guide/plant_guide_view.dart';
 import 'package:plantopia/views/search_plant/search_plant_view.dart';
 import 'package:plantopia/views/wateting_history/watering_history_view.dart';
 import 'package:plantopia/views/upload_progress/upload_progress_view.dart';
@@ -122,6 +123,10 @@ Future<void> main() async {
         GetPage(
           name: AppRoutes.uploadProgress,
           page: () => UploadProgressView(),
+        ),
+        GetPage(
+          name: AppRoutes.plantGuide,
+          page: () => PlantGuideView(),
         ),
       ],
       initialRoute: AppRoutes.splashApp,
