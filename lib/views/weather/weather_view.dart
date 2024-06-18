@@ -5,11 +5,11 @@ import 'package:plantopia/controllers/weather_controller.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 import 'package:plantopia/views/weather/weather_detail_view.dart';
 import 'package:plantopia/views/weather/widget/current_weather_card_widget.dart';
-import 'package:plantopia/views/weather/widget/forecast_by_hour_list_widget.dart';
+import 'package:plantopia/views/weather/widget/hourly_weather_list_widget.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/views/weather/widget/weather_info_humidity_widget.dart';
 import 'package:plantopia/views/weather/widget/weather_info_real_feel_widget.dart';
-import 'package:plantopia/views/weather/widget/weather_info_sunset_sunrise_widget.dart';
+import 'package:plantopia/views/weather/widget/weather_info_sunrise_widget.dart';
 import 'package:plantopia/views/weather/widget/weather_info_wind_speed_widget.dart';
 
 part 'widget/permission_location_widget.dart';
@@ -24,14 +24,15 @@ class WeatherView extends StatelessWidget {
     final WeatherController weatherController = Get.find<WeatherController>();
 
     return Scaffold(
+      backgroundColor: Colors.white,
       body: Obx(
         () {
           if (weatherController.locationPermissionDenied.value) {
             return PermissionLocationWidget(
               onPressed: () async {
                 weatherController.currentWeatherStatus.value = Status.loading;
-                weatherController.forecastByHour.value = Status.loading;
-                weatherController.forecastByDay.value = Status.loading;
+                weatherController.hourlyWeather.value = Status.loading;
+                weatherController.dailyWeather.value = Status.loading;
                 await weatherController.requestLocationPermission();
                 if (weatherController.locationPermissionGranted.value) {
                   await weatherController.getUserLocationAndWeather();
@@ -52,8 +53,11 @@ class WeatherView extends StatelessWidget {
                       );
                     },
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    padding: const EdgeInsets.symmetric(horizontal: 18),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -86,10 +90,10 @@ class WeatherView extends StatelessWidget {
                   Obx(
                     () {
                       return _buildStatusWidget(
-                        weatherController.forecastByHour.value,
-                        () => ForecastByHourListWidget(
-                          forecastByHourModel:
-                              weatherController.forecastByHourData.value,
+                        weatherController.hourlyWeather.value,
+                        () => HourlyWeatherListWidget(
+                          weatherData:
+                              weatherController.hourlyWeatherData.value,
                         ),
                       );
                     },

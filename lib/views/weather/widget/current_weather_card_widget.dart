@@ -7,7 +7,6 @@ import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/models/get_current_weather_response_model.dart';
 import 'package:plantopia/views/weather/widget/weather_date_time_widget.dart';
 import 'package:plantopia/views/weather/widget/weather_temperature_widget.dart';
-import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_svg/svg.dart';
 
 part 'current_weather_location_widget.dart';
@@ -22,13 +21,30 @@ class CurrentWeatherCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final DateTime dateTime =
-        DateTime.fromMillisecondsSinceEpoch((weatherData.dt ?? 0) * 1000);
+    DateTime dateTime = weatherData.data?.createdAt ?? DateTime.now();
+
+    // Adjust time to GMT+7
+    dateTime = dateTime.toUtc().add(const Duration(hours: 7));
+
+    // Print the current time in GMT+7
+    print('Current time in GMT+7: ${dateTime.hour}:${dateTime.minute}:${dateTime.second}');
+    
     String formattedDate = DateFormat('EEEE, dd MMMM yyyy').format(dateTime);
+
+    final int hour = dateTime.hour;
+    String backgroundImage;
+
+    if (hour >= 6 && hour < 15) {
+      backgroundImage = ImageConstant.weatherBackgroundLight;
+    } else if (hour >= 15 && hour < 18) {
+      backgroundImage = ImageConstant.weatherBackgroundAfternoon;
+    } else {
+      backgroundImage = ImageConstant.weatherBackgroundNight;
+    }
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(ImageConstant.background),
+          image: AssetImage(backgroundImage),
           fit: BoxFit.cover,
         ),
       ),
@@ -37,8 +53,7 @@ class CurrentWeatherCardWidget extends StatelessWidget {
           children: [
             const SizedBox(height: 16),
             CurrentWeatherLocationWidget(
-              locationName: weatherData.name,
-              locationCode: weatherData.sys?.country,
+              locationName: weatherData.data?.city,
             ),
             const SizedBox(height: 8),
             WeatherDateTimeWidget(
@@ -48,10 +63,10 @@ class CurrentWeatherCardWidget extends StatelessWidget {
               ),
             ),
             WeatherTemperatureWidget(
-                temperature: weatherData.main?.temp,
+                temperature: weatherData.data?.temperature?.toDouble() ?? 0,
                 textStyle: TextStyleConstant.superLarge),
             CurrentWeatherDescriptionWidget(
-              description: weatherData.weather?.first.description,
+              description: weatherData.data?.description,
             ),
             const SizedBox(height: 24),
           ],
