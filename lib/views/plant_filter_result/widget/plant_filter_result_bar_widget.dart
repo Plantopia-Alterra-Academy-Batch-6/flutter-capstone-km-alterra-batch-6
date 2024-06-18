@@ -4,6 +4,7 @@ import 'package:plantopia/constants/icon_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
+import 'package:plantopia/controllers/plant_filter_search_result_controller.dart';
 import 'package:plantopia/controllers/search_plant_controller.dart';
 import 'package:plantopia/controllers/search_plant_filter_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
@@ -13,6 +14,8 @@ class PlantFilterResultBarWidget extends StatelessWidget {
 
   final controller = Get.put(SearchPlantFilterController());
   final addPlantController = Get.put(AddPlantController());
+  final searchPlantFilterController = Get.put(SearchPlantFilterController());
+  final plantFilterSearchResultController = Get.put(PlantFilterSearchResultController());
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +32,8 @@ class PlantFilterResultBarWidget extends StatelessWidget {
               InkWell(
                 onTap: () {
                   controller.searchPlantText.clear();
+                  searchPlantFilterController.isPlantFound(false);
+                  plantFilterSearchResultController.isHaveResult(true);
                 },
                 child: const Icon(Icons.clear, color: Colors.black),
               ),
@@ -37,8 +42,8 @@ class PlantFilterResultBarWidget extends StatelessWidget {
             hintStyle: WidgetStateProperty.all(
               TextStyleConstant.paragraph,
             ),
-            onSubmitted: (value) {
-              
+            onSubmitted: (value) async {
+              await controller.searchPlant(value);
             },
             elevation: WidgetStateProperty.all(0),
             shape: WidgetStateProperty.all(

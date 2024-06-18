@@ -28,34 +28,36 @@ class SearchPlantView extends StatelessWidget {
         ),
         centerTitle: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SearchBarWidget(),
-            const SizedBox(height: 26),
-            Obx(
-              () {
-                if (controller.isPageLoading.isTrue) {
-                  return const ShimmerContainerGlobalWidget(
-                    width: 156,
-                    height: 200,
-                    radius: 30,
-                  );
-                }
-                if (controller.isFirstTimeOpen.isTrue) {
-                  return PlantCategoryWidget();
-                }
-                if (controller.isHaveResult.isTrue) {
-                  return SearchPlantResultWidget();
-                } 
-                else {
-                  return const NoResultGlobalWidget();
-                }
-              },
-            )
-          ],
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              SearchBarWidget(),
+              const SizedBox(height: 26),
+              Obx(
+                () {
+                  if (controller.isPageLoading.isTrue) {
+                    return const ShimmerContainerGlobalWidget(
+                      width: 156,
+                      height: 200,
+                      radius: 30,
+                    );
+                  }
+                  if (controller.isFirstTimeOpen.isTrue) {
+                    return PlantCategoryWidget();
+                  }
+                  if (controller.isHaveResult.isTrue) {
+                    return SearchPlantResultWidget();
+                  } 
+                  else {
+                    return const NoResultGlobalWidget();
+                  }
+                },
+              )
+            ],
+          ),
         ),
       ),
     );

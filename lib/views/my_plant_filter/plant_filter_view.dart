@@ -12,8 +12,8 @@ import 'package:plantopia/views/plant_filter/widget/plant_harvest_duration_widge
 import 'package:plantopia/views/plant_filter/widget/plant_sunlight_req_widget.dart';
 import 'package:plantopia/views/plant_filter/widget/plant_toxicity_widget.dart';
 
-class PlantFilterView extends StatelessWidget {
-  PlantFilterView({super.key});
+class MyPlantFilter extends StatelessWidget {
+  MyPlantFilter({super.key});
 
   final addPlantController = Get.put(AddPlantController());
   final plantFilterSearchResultController =

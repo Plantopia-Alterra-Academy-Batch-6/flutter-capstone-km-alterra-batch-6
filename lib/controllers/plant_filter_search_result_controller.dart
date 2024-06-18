@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/plant_filter_controller.dart';
 import 'package:plantopia/models/get_plant_filter_search_result_response.dart';
 import 'package:plantopia/service/plant_filter_search_result_service.dart';
@@ -10,6 +11,8 @@ class PlantFilterSearchResultController extends GetxController {
   PlantFilterSearchResultService plantFilterSearchResultService =
       PlantFilterSearchResultService();
   final plantFilterController = Get.put(PlantFilterController());
+  final addPlantController = Get.put(AddPlantController());
+
   PlantFilterSearchResultResponse? searchedPlantResponse;
 
   Future<void> updateQuery(String newCategoryIndex) async {
