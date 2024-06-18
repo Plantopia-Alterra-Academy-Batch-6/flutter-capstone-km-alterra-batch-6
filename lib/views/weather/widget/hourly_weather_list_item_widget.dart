@@ -1,18 +1,18 @@
-part of 'forecast_by_hour_list_widget.dart';
+part of 'hourly_weather_list_widget.dart';
 
-class ForecastByHourListItemWidget extends StatelessWidget {
-  final ListElement forecastByHourListElement;
+class HourlyWeatherListItemWidget extends StatelessWidget {
+  final HourlyWeather? hourlyWeather;
   final bool isFirstItem;
-  const ForecastByHourListItemWidget({
+  const HourlyWeatherListItemWidget({
     super.key,
-    required this.forecastByHourListElement,
+    required this.hourlyWeather,
     required this.isFirstItem,
   });
 
   @override
   Widget build(BuildContext context) {
-    final DateTime dateTime = DateTime.fromMillisecondsSinceEpoch(
-        (forecastByHourListElement.dt ?? 0) * 1000);
+
+    final DateTime dateTime = hourlyWeather?.timestamp ?? DateTime.now();
     String formattedTime = DateFormat('HH:mm').format(dateTime);
     return Padding(
       padding: const EdgeInsets.only(right: 16),
@@ -39,13 +39,13 @@ class ForecastByHourListItemWidget extends StatelessWidget {
               height: 8,
             ),
             WeatherImageWidget(
-              description: forecastByHourListElement.weather?.first.description,
+              description: hourlyWeather?.description.toString(),
             ),
             const SizedBox(
               height: 8,
             ),
             WeatherTemperatureWidget(
-              temperature: forecastByHourListElement.main?.temp,
+              temperature: hourlyWeather?.temperature,
             ),
           ],
         ),

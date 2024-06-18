@@ -1,42 +1,42 @@
 // To parse this JSON data, do
 //
-//     final getCurrentWeatherResponseModel = getCurrentWeatherResponseModelFromJson(jsonString);
+//     final getDailyWeatherResponseModel = getDailyWeatherResponseModelFromJson(jsonString);
 
 import 'dart:convert';
 
-GetCurrentWeatherResponseModel getCurrentWeatherResponseModelFromJson(String str) => GetCurrentWeatherResponseModel.fromJson(json.decode(str));
+GetDailyWeatherResponseModel getDailyWeatherResponseModelFromJson(String str) => GetDailyWeatherResponseModel.fromJson(json.decode(str));
 
-String getCurrentWeatherResponseModelToJson(GetCurrentWeatherResponseModel data) => json.encode(data.toJson());
+String getDailyWeatherResponseModelToJson(GetDailyWeatherResponseModel data) => json.encode(data.toJson());
 
-class GetCurrentWeatherResponseModel {
+class GetDailyWeatherResponseModel {
     final String? message;
     final int? code;
     final String? status;
-    final Data? data;
+    final List<DailyWeather>? data;
 
-    GetCurrentWeatherResponseModel({
+    GetDailyWeatherResponseModel({
         this.message,
         this.code,
         this.status,
         this.data,
     });
 
-    factory GetCurrentWeatherResponseModel.fromJson(Map<String, dynamic> json) => GetCurrentWeatherResponseModel(
+    factory GetDailyWeatherResponseModel.fromJson(Map<String, dynamic> json) => GetDailyWeatherResponseModel(
         message: json["message"],
         code: json["code"],
         status: json["status"],
-        data: json["data"] == null ? null : Data.fromJson(json["data"]),
+        data: json["data"] == null ? [] : List<DailyWeather>.from(json["data"]!.map((x) => DailyWeather.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
         "message": message,
         "code": code,
         "status": status,
-        "data": data?.toJson(),
+        "data": data == null ? [] : List<dynamic>.from(data!.map((x) => x.toJson())),
     };
 }
 
-class Data {
+class DailyWeather {
     final int? id;
     final String? city;
     final double? temperature;
@@ -46,11 +46,11 @@ class Data {
     final double? windSpeed;
     final String? main;
     final String? description;
-    final String? icon;
     final int? sunrise;
-    final DateTime? createdAt;
+    final String? icon;
+    final DateTime? date;
 
-    Data({
+    DailyWeather({
         this.id,
         this.city,
         this.temperature,
@@ -60,12 +60,12 @@ class Data {
         this.windSpeed,
         this.main,
         this.description,
-        this.icon,
         this.sunrise,
-        this.createdAt,
+        this.icon,
+        this.date,
     });
 
-    factory Data.fromJson(Map<String, dynamic> json) => Data(
+    factory DailyWeather.fromJson(Map<String, dynamic> json) => DailyWeather(
         id: json["id"],
         city: json["city"],
         temperature: json["temperature"]?.toDouble(),
@@ -75,9 +75,9 @@ class Data {
         windSpeed: json["wind_speed"]?.toDouble(),
         main: json["main"],
         description: json["description"],
-        icon: json["icon"],
         sunrise: json["sunrise"],
-        createdAt: json["created_at"] == null ? null : DateTime.parse(json["created_at"]),
+        icon: json["icon"],
+        date: json["date"] == null ? null : DateTime.parse(json["date"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -90,8 +90,8 @@ class Data {
         "wind_speed": windSpeed,
         "main": main,
         "description": description,
-        "icon": icon,
         "sunrise": sunrise,
-        "created_at": createdAt?.toIso8601String(),
+        "icon": icon,
+        "date": date?.toIso8601String(),
     };
 }
