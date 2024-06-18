@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/controllers/add_plant_controller.dart';
+import 'package:plantopia/utils/app_routes.dart';
 
 class PlantGuideCardWidget extends StatelessWidget {
-  const PlantGuideCardWidget({super.key});
+  PlantGuideCardWidget({super.key});
+
+  final addPlantController = Get.put(AddPlantController());
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +18,9 @@ class PlantGuideCardWidget extends StatelessWidget {
         const SizedBox(height: 24),
         InkWell(
           onTap: () {
-            //TODO: go to plant guide page
+            Get.toNamed(AppRoutes.plantGuide, arguments: {
+              'plantId': addPlantController.selectedPlant.value,
+            });
           },
           child: Container(
             decoration: BoxDecoration(
