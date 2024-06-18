@@ -18,4 +18,6 @@ class AppRoutes {
   static const String wateringHistory = '/wateringHistory';
   static const String plantFilterResult = '/plantFilterResult';
   static const String uploadProgress = '/uploadProgress';
+  static const String plantGuide = '/plantGuideView';
+
 }

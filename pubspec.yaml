@@ -41,7 +41,9 @@ dependencies:
   dotted_border: ^2.1.0
   image_picker: ^1.1.2
   html: ^0.15.4
-  
+  flutter_widget_from_html_core: ^0.15.1
+
+
 
 dev_dependencies:
   flutter_test:

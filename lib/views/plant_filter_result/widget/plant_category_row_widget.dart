@@ -6,6 +6,7 @@ import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/plant_filter_controller.dart';
 import 'package:plantopia/controllers/plant_filter_search_result_controller.dart';
+import 'package:plantopia/controllers/search_plant_filter_controller.dart';
 
 class PlantCategoryRowWidget extends StatelessWidget {
   PlantCategoryRowWidget({super.key}) {
@@ -23,8 +24,9 @@ class PlantCategoryRowWidget extends StatelessWidget {
   }
 
   final addPlantController = Get.put(AddPlantController());
-    final plantFilterController = Get.put(PlantFilterController());
-    final plantFilterSearchResultController = Get.put(PlantFilterSearchResultController());
+  final plantFilterController = Get.put(PlantFilterController());
+  final plantFilterSearchResultController = Get.put(PlantFilterSearchResultController());
+  final searchPlantFilterController = Get.put(SearchPlantFilterController());
 
   @override
   Widget build(BuildContext context) {
@@ -48,6 +50,7 @@ class PlantCategoryRowWidget extends StatelessWidget {
                           plantFilterController.selectedCategory.value = -1; // Reset selection
 
                           plantFilterSearchResultController.updateQuery('');
+                          searchPlantFilterController.isPlantFound(false);
                         } else {
                           plantFilterController.selectedCategory.value = addPlantController
                               .plantCategoriesResponse!.data[index].id;
@@ -56,6 +59,7 @@ class PlantCategoryRowWidget extends StatelessWidget {
                           plantFilterSearchResultController.updateQuery(
                             plantFilterController.selectedCategory.value.toString(),
                           );
+                          searchPlantFilterController.isPlantFound(false);
                         }
                       },
                       child: IntrinsicWidth(

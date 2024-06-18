@@ -17,6 +17,8 @@ class CardGlobalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 156,
+      height: 200,
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(

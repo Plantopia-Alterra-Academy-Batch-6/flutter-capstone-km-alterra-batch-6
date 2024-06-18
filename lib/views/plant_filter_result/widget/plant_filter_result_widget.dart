@@ -17,9 +17,10 @@ class PlantFilterResultWidget extends StatelessWidget {
       child: GridView.builder(
         scrollDirection: Axis.vertical,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          childAspectRatio: 156 / 200,
           crossAxisCount: 2,
-          crossAxisSpacing: 10.0,
-          mainAxisSpacing: 10.0,
+          crossAxisSpacing: 16.0,
+          mainAxisSpacing: 16.0,
         ),
         itemCount: controller.searchedPlantResponse!.data!.length,
         itemBuilder: (context, int index) {
@@ -28,17 +29,14 @@ class PlantFilterResultWidget extends StatelessWidget {
               addPlantController.selectedPlant.value = controller.searchedPlantResponse!.data![index].id!;
               Get.toNamed(AppRoutes.plantDetails);
             },
-            child: SizedBox(
-              height: 156,
-              child: CardGlobalWidget(
-                plantName: controller.searchedPlantResponse!.data![index].name!,
-                plantCategory: controller
-                    .searchedPlantResponse!.data![index].plantCategory!.name!,
-                plantImageUrl: controller.searchedPlantResponse?.data?[index].plantImages != null &&
-                      controller.searchedPlantResponse!.data![index].plantImages!.isNotEmpty
-                  ? controller.searchedPlantResponse!.data![index].plantImages![0].file_name ?? ""
-                  : "",
-              ),
+            child: CardGlobalWidget(
+              plantName: controller.searchedPlantResponse!.data![index].name!,
+              plantCategory: controller
+                  .searchedPlantResponse!.data![index].plantCategory!.name!,
+              plantImageUrl: controller.searchedPlantResponse?.data?[index].plantImages != null &&
+                    controller.searchedPlantResponse!.data![index].plantImages!.isNotEmpty
+                ? controller.searchedPlantResponse!.data![index].plantImages![0].file_name ?? ""
+                : "",
             ),
           );
         },
