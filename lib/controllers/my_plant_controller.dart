@@ -22,6 +22,15 @@ class MyPlantController extends GetxController {
   RxBool isPageLoading = false.obs;
   var activeIndex = (-1).obs;
 
+  RxBool isSearchFound = false.obs;
+
+  dynamic searchResultJson = {
+    'id': 0,
+    'name': '',
+    'image_url': '',
+    'category': '',
+  };
+
   @override
   Future<void> onInit() async {
     super.onInit();
@@ -84,5 +93,18 @@ class MyPlantController extends GetxController {
     }
   }
 
- 
+  Future<void> searchPlant(String value) async {
+    var totalData = listMyPlant.length;
+    
+    for (int i = 0; i < totalData; i++) {
+      if (listMyPlant[i].plant!.name!.toLowerCase() == value.toLowerCase() || listMyPlant[i].plant!.name!.toLowerCase().contains(value.toLowerCase()) && listMyPlant[i].plant!.name!.toLowerCase().startsWith(value.toLowerCase())) {
+        searchResultJson['id'] = listMyPlant[i].id;
+        searchResultJson['name'] = listMyPlant[i].plant!.name;
+        searchResultJson['image_url'] = listMyPlant[i].plant?.plantImages?.first.fileName ?? "";
+        searchResultJson['category'] = listMyPlant[i].plant?.plantCategory?.name ?? "";
+        isSearchFound(true);
+      }
+    }
+  }
+
 }

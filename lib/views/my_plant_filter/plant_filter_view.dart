@@ -5,12 +5,11 @@ import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/plant_filter_controller.dart';
 import 'package:plantopia/controllers/plant_filter_search_result_controller.dart';
-import 'package:plantopia/controllers/search_plant_filter_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
-import 'package:plantopia/views/plant_filter/widget/plant_category_widget.dart';
-import 'package:plantopia/views/plant_filter/widget/plant_harvest_duration_widget.dart';
-import 'package:plantopia/views/plant_filter/widget/plant_sunlight_req_widget.dart';
-import 'package:plantopia/views/plant_filter/widget/plant_toxicity_widget.dart';
+import 'package:plantopia/views/my_plant_filter/widget/plant_category_widget.dart';
+import 'package:plantopia/views/my_plant_filter/widget/plant_harvest_duration_widget.dart';
+import 'package:plantopia/views/my_plant_filter/widget/plant_sunlight_req_widget.dart';
+import 'package:plantopia/views/my_plant_filter/widget/plant_toxicity_widget.dart';
 
 class MyPlantFilter extends StatelessWidget {
   MyPlantFilter({super.key});
@@ -51,13 +50,13 @@ class MyPlantFilter extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PlantCategoryWidget(),
+              MyPlantCategoryWidget(),
               const SizedBox(height: 32),
-              PlantSunlightReqWidget(),
+              MyPlantSunlightReqWidget(),
               const SizedBox(height: 32),
-              PlantHarvestDurationWidget(),
+              MyPlantHarvestDurationWidget(),
               const SizedBox(height: 32),
-              PlantToxicityWidget(),
+              MyPlantToxicityWidget(),
             ],
           ),
         ),

@@ -42,6 +42,16 @@ class PlantFilterResultBarWidget extends StatelessWidget {
             hintStyle: WidgetStateProperty.all(
               TextStyleConstant.paragraph,
             ),
+            onChanged: (value) async {
+              if (value.isEmpty) {
+                controller.isPlantFound(false);
+                searchPlantFilterController.isPlantFound(false);
+                plantFilterSearchResultController.isHaveResult(true);
+              } else {
+                controller.isPlantFound(false);
+                await controller.searchPlant(value);
+              }
+            },
             onSubmitted: (value) async {
               await controller.searchPlant(value);
             },

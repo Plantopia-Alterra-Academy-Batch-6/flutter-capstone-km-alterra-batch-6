@@ -5,8 +5,8 @@ import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/plant_filter_controller.dart';
 
-class PlantHarvestDurationWidget extends StatelessWidget {
-  PlantHarvestDurationWidget({super.key});
+class MyPlantHarvestDurationWidget extends StatelessWidget {
+  MyPlantHarvestDurationWidget({super.key});
 
   final plantFilterController = Get.put(PlantFilterController());
 

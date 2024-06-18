@@ -26,7 +26,7 @@ class SearchPlantFilterController extends GetxController {
     var data = plantFilterSearchResultController.searchedPlantResponse?.data ?? [];
     if (data.isNotEmpty) {
       for (var plant in data) {
-        if (plant.name!.toLowerCase() == value.toLowerCase() || plant.name!.toLowerCase().contains(value.toLowerCase())) {
+        if (plant.name!.toLowerCase() == value.toLowerCase() || plant.name!.toLowerCase().contains(value.toLowerCase()) && plant.name!.toLowerCase().startsWith(value.toLowerCase())) {
           searchResultJson['id'] = plant.id;
           searchResultJson['name'] = plant.name;
           searchResultJson['image_url'] = plant.plantImages?.first.file_name ?? '';

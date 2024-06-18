@@ -7,6 +7,7 @@ import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/global_widgets/recommended_widget.dart';
 import 'package:plantopia/views/my_plant/widget/my_plant_list_widget.dart';
 import 'package:plantopia/views/my_plant/widget/search_bar_widget.dart';
+import 'package:plantopia/views/my_plant/widget/single_result_widget.dart';
 
 class MyPlantView extends StatelessWidget {
   MyPlantView({super.key}) {
@@ -56,7 +57,14 @@ class MyPlantView extends StatelessWidget {
                   ),
                   child: SearchBarWidget(),
                 ),
-                MyPlantListWidget(),
+                Obx(() {
+                  if (myPlantController.isSearchFound.isTrue) {
+                    return SingleResultWidget();
+                  } else {
+                    return MyPlantListWidget();
+                  }
+                },),
+                
                 const SizedBox(
                   height: 10,
                 ),

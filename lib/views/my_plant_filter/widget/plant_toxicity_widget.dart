@@ -5,8 +5,8 @@ import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/plant_filter_controller.dart';
 
-class PlantToxicityWidget extends StatelessWidget {
-  PlantToxicityWidget({super.key});
+class MyPlantToxicityWidget extends StatelessWidget {
+  MyPlantToxicityWidget({super.key});
 
   final plantFilterController = Get.put(PlantFilterController());
 

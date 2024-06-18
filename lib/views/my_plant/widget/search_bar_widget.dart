@@ -25,50 +25,54 @@ class SearchBarWidget extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: TextFormField(
+                child: SearchBar(
                   controller: _myPlantController.searchController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: ColorConstant.neutral300,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        8,
-                      ),
+                  backgroundColor: WidgetStateProperty.all(Colors.white),
+                  leading: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                    child: SvgPicture.asset(
+                      IconConstant.search,
+                      height: 16,
+                      width: 16,
                     ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: ColorConstant.neutral300,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        8,
-                      ),
-                    ),
-                    hintText: "Search",
-                    prefixIconConstraints: const BoxConstraints(
-                      minHeight: 16,
-                      minWidth: 16,
-                    ),
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                      child: SvgPicture.asset(
-                        IconConstant.search,
-                      ),
-                    ),
-                    suffixIconConstraints: const BoxConstraints(
-                      minHeight: 16,
-                      minWidth: 16,
-                    ),
-                    suffixIcon: Padding(
+                  ),
+                  trailing: [
+                    Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 14.0),
                       child: InkWell(
                         onTap: () {},
                         child: SvgPicture.asset(
                           IconConstant.filter,
+                          height: 16,
+                          width: 16,
                         ),
                       ),
                     ),
+                  ],
+                  hintText: "Search",
+                  hintStyle: WidgetStateProperty.all(
+                    TextStyle(color: ColorConstant.neutral300),
                   ),
+                  onChanged: (value) async {
+                    if (value.isEmpty) {
+                      _myPlantController.isSearchFound(false);
+                    } else {
+                      _myPlantController.isSearchFound(false);
+                      await _myPlantController.searchPlant(value);
+                    }
+                  },
+                  onSubmitted: (value) async {
+                    await _myPlantController.searchPlant(value);
+                  },
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      side: const BorderSide(
+                        color: Color(0xffD1D5DB),
+                      ),
+                    ),
+                  ),
+                  elevation: WidgetStateProperty.all(0),
                 ),
               ),
               const SizedBox(
