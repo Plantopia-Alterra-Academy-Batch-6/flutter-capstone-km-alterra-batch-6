@@ -2,13 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/controllers/sign_up_form_controller.dart';
 import 'package:plantopia/models/signup_params_model.dart';
 import 'package:plantopia/views/auth/widgets/custom_auth_button_widget.dart';
 import 'package:plantopia/views/auth/widgets/custom_auth_text_form_field_widget.dart';
 import 'package:plantopia/views/auth/widgets/custom_login_google_widget.dart';
+import 'package:plantopia/views/auth/widgets/custom_text_button_forgot_password_widget.dart';
 
 class SignUpSectionWidget extends StatefulWidget {
   const SignUpSectionWidget({super.key});
@@ -18,7 +18,6 @@ class SignUpSectionWidget extends StatefulWidget {
 }
 
 class _SignUpSectionWidgetState extends State<SignUpSectionWidget> {
-  bool showPassword = true;
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -45,17 +44,18 @@ class _SignUpSectionWidgetState extends State<SignUpSectionWidget> {
       children: [
         Form(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
                 height: 20.0,
               ),
               Obx(
                 () => CustomAuthTextFormFieldWidget(
-                  borderColor: signUpController.borderName.value,
+                  isEnable: signUpController.isEnableButtonName.value,
                   controller: nameController,
                   hintText: 'Name',
                   errorText: signUpController.errorName.value,
-                  onChanged: (e) => signUpController.validatorName(e),
+                  onChanged: (e) => signUpController.setName(e),
                 ),
               ),
               const SizedBox(
@@ -63,12 +63,12 @@ class _SignUpSectionWidgetState extends State<SignUpSectionWidget> {
               ),
               Obx(
                 () => CustomAuthTextFormFieldWidget(
-                  borderColor: signUpController.borderEmail.value,
+                  isEnable: signUpController.isEnableButtonEmail.value,
                   controller: emailController,
                   keyboardType: TextInputType.emailAddress,
                   hintText: 'Email',
                   errorText: signUpController.errorEmail.value,
-                  onChanged: (e) => signUpController.validatorEmail(e),
+                  onChanged: (e) => signUpController.setEmail(e),
                 ),
               ),
               const SizedBox(
@@ -76,27 +76,31 @@ class _SignUpSectionWidgetState extends State<SignUpSectionWidget> {
               ),
               Obx(
                 () => CustomAuthTextFormFieldWidget(
-                  borderColor: signUpController.borderPassword.value,
+                  isEnable: signUpController.isEnableButtonPassword.value,
                   controller: passwordController,
                   hintText: 'Password',
-                  showPassword: showPassword,
+                  showPassword: signUpController.showPassword.value,
                   errorText: signUpController.errorPassword.value,
-                  onChanged: (e) => signUpController.validatorPassword(e),
+                  onChanged: (e) => signUpController.setPassword(e),
                   suffixIcon: IconButton(
                       onPressed: () {
-                        setState(() {
-                          showPassword = !showPassword;
-                        });
+                        signUpController.showPassword.value =
+                            !signUpController.showPassword.value;
                       },
                       icon: Icon(
-                        showPassword ? Icons.visibility_off : Icons.visibility,
-                        color: showPassword ? Colors.black26 : Colors.black54,
+                        signUpController.showPassword.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: signUpController.showPassword.value
+                            ? Colors.black26
+                            : Colors.black54,
                         size: 20,
                       )),
                 ),
               ),
+              const CustomTextButtonForgotPasswordWidget(),
               const SizedBox(
-                height: 47.0,
+                height: 24.0,
               ),
               Obx(
                 () => CustomAuthButtonWidget(
@@ -111,19 +115,6 @@ class _SignUpSectionWidgetState extends State<SignUpSectionWidget> {
                           password: passwordController.text);
                       await authController.signUp(data);
                     }),
-              ),
-              const SizedBox(
-                height: 14.0,
-              ),
-              Text(
-                'Or',
-                style: GoogleFonts.nunito(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xFF9ba5b7)),
-              ),
-              const SizedBox(
-                height: 14.0,
               ),
               const CustomLoginGoogleWidget()
             ],

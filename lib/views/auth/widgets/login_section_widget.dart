@@ -2,13 +2,13 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/controllers/login_form_controller.dart';
 import 'package:plantopia/models/login_params_model.dart';
 import 'package:plantopia/views/auth/widgets/custom_auth_button_widget.dart';
 import 'package:plantopia/views/auth/widgets/custom_auth_text_form_field_widget.dart';
 import 'package:plantopia/views/auth/widgets/custom_login_google_widget.dart';
+import 'package:plantopia/views/auth/widgets/custom_text_button_forgot_password_widget.dart';
 
 class LoginSectionWidget extends StatefulWidget {
   const LoginSectionWidget({super.key});
@@ -20,7 +20,7 @@ class LoginSectionWidget extends StatefulWidget {
 class _LoginSectionWidgetState extends State<LoginSectionWidget> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool showPassword = true;
+
   final AuthController authController = Get.put(AuthController());
   final LoginFormController loginFormController =
       Get.put(LoginFormController());
@@ -43,19 +43,21 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
       children: [
         Form(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
                 height: 20.0,
               ),
               Obx(
                 () => CustomAuthTextFormFieldWidget(
-                  borderColor: loginFormController.borderEmail.value,
                   hintText: 'Email',
+                  isEmailFailed: loginFormController.isFailedEmail.value,
+                  isEnable: loginFormController.isEnableButtonEmail.value,
                   keyboardType: TextInputType.emailAddress,
                   errorText: loginFormController.errorEmail.value,
                   controller: emailController,
-                  onChanged: (value) {
-                    loginFormController.validatorEmail(value);
+                  onChanged: (value) async {
+                    loginFormController.setEmail(value);
                   },
                 ),
               ),
@@ -64,29 +66,33 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
               ),
               Obx(
                 () => CustomAuthTextFormFieldWidget(
-                  borderColor: loginFormController.borderPassword.value,
                   hintText: 'Password',
-                  showPassword: showPassword,
+                  isEnable: loginFormController.isEnableButtonPassword.value,
+                  showPassword: loginFormController.showPassword.value,
                   controller: passwordController,
                   errorText: loginFormController.errorPassword.value,
-                  onChanged: (value) {
-                    loginFormController.validatorPassword(value);
+                  onChanged: (value) async {
+                    loginFormController.setPassword(value);
                   },
                   suffixIcon: IconButton(
                       onPressed: () {
-                        setState(() {
-                          showPassword = !showPassword;
-                        });
+                        loginFormController.showPassword.value =
+                            !loginFormController.showPassword.value;
                       },
                       icon: Icon(
-                        showPassword ? Icons.visibility_off : Icons.visibility,
-                        color: showPassword ? Colors.black26 : Colors.black54,
+                        loginFormController.showPassword.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: loginFormController.showPassword.value
+                            ? Colors.black26
+                            : Colors.black54,
                         size: 20,
                       )),
                 ),
               ),
+              const CustomTextButtonForgotPasswordWidget(),
               const SizedBox(
-                height: 47.0,
+                height: 24.0,
               ),
               Obx(
                 () => CustomAuthButtonWidget(
@@ -97,22 +103,10 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     LoginParamsModel loginParams = LoginParamsModel(
                         email: emailController.text,
                         password: passwordController.text);
-                    await authController.login(loginParams: loginParams);
+                    await authController.login(
+                        loginParams: loginParams, isOnLogin: true);
                   },
                 ),
-              ),
-              const SizedBox(
-                height: 14.0,
-              ),
-              Text(
-                'Or',
-                style: GoogleFonts.nunito(
-                    fontSize: 16.0,
-                    fontWeight: FontWeight.w400,
-                    color: const Color(0xFF9ba5b7)),
-              ),
-              const SizedBox(
-                height: 14.0,
               ),
               const CustomLoginGoogleWidget()
             ],

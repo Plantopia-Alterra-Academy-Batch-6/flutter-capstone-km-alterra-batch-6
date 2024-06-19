@@ -26,10 +26,11 @@ class CustomUploadProgressButtonWidget extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
             )),
-        onPressed: onPressed,
-        // onPressed: onPressed,
+        onPressed: isLoading ? () {} : onPressed,
         child: isLoading
-            ? const CircularProgressIndicator()
+            ? CircularProgressIndicator(
+                color: ColorConstant.white,
+              )
             : Text(
                 "Save",
                 style: TextStyleConstant.subtitle.copyWith(

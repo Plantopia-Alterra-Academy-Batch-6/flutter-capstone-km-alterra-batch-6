@@ -1,19 +1,49 @@
+import 'dart:async';
+
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
+import 'package:plantopia/service/forgot_password_service.dart';
 
-class LoginFormController extends GetxController {
+class ForgotPasswordController extends GetxController {
+  RxBool isLoading = false.obs;
+  @override
+  void onClose() {
+    errorEmail.value = null;
+    isEnableButtonEmail.value = false;
+    errorPassword.value = null;
+    isEnableButtonPassword.value = false;
+    super.onClose();
+  }
+
+  Future<bool> postForgotPassword(
+      {required String email, required String password}) async {
+    isLoading.value = true;
+    try {
+      final result = await ForgotPasswordService.postForgotPassword(
+          email: email, password: password);
+
+      if (result.code == 200) {
+        return true;
+      } else {
+        return false;
+      }
+    } catch (e) {
+      return false;
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  RxBool showPassword = false.obs;
   final enableColor = ColorConstant.primary500;
-  RxBool showPassword =true.obs;
   final errorEmail = Rxn<String>();
   RxBool isEnableButtonEmail = false.obs;
   final errorPassword = Rxn<String>();
   RxBool isEnableButtonPassword = false.obs;
   RxString emailInit = ''.obs;
   RxString passwordInit = ''.obs;
-  RxBool isFailedEmail = false.obs;
 
-
-  LoginFormController() {
+  ForgotPasswordController() {
     debounce(emailInit, (value) {
       validatorEmail(value);
     }, time: const Duration(milliseconds: 800));
@@ -38,7 +68,6 @@ class LoginFormController extends GetxController {
       errorEmail.value = 'Please provide a correct email address';
       isEnableButtonEmail.value = false;
     } else {
-      isFailedEmail.value = false;
       errorEmail.value = null;
       isEnableButtonEmail.value = true;
     }
@@ -55,14 +84,5 @@ class LoginFormController extends GetxController {
       errorPassword.value = null;
       isEnableButtonPassword.value = true;
     }
-  }
-
-  @override
-  void onClose() {
-    errorEmail.value = null;
-    isEnableButtonEmail.value = false;
-    errorPassword.value = null;
-    isEnableButtonPassword.value = false;
-    super.onClose();
   }
 }

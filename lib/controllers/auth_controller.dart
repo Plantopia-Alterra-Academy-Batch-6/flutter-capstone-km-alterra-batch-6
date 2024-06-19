@@ -1,24 +1,119 @@
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:plantopia/controllers/login_form_controller.dart';
 import 'package:plantopia/controllers/sign_up_form_controller.dart';
-import 'package:plantopia/helpers/fcm_token.dart';
+import 'package:plantopia/controllers/verify_controller.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/login_params_model.dart';
 import 'package:plantopia/models/signup_params_model.dart';
 import 'package:plantopia/models/user_model.dart';
 import 'package:plantopia/service/auth_service.dart';
+import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/auth/allow_notif_view.dart';
-import 'package:plantopia/views/verify/verify_view.dart';
+import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
+import 'package:plantopia/views/verify/widget/custom_dialog_success_widget.dart';
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
   Rxn<UserModel> currentUser = Rxn<UserModel>();
-  RxString currentFcmToken = "".obs;
-
   RxInt authSection = 0.obs;
-  final borderVerifyColor = Rx<Color>(Colors.black);
+
+  // Login
+  Future<void> login(
+      {required LoginParamsModel loginParams,
+      bool isOnLogin = false,
+      bool backToLogin = false}) async {
+    isLoading.value = true;
+    final loginFormController = Get.find<LoginFormController>();
+    try {
+      String? newToken = await refreshFcmToken();
+      loginParams.fcmToken = newToken;
+      final String result = await AuthService.login(loginParams: loginParams);
+      await UserTokenPref.setToken(result);
+      loginFormController.onClose();
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Get.dialog(
+          CustomDialogSuccess(
+            isOnLogin: isOnLogin,
+          ),
+        );
+      });
+      getUser();
+      checkAllowNotification();
+    } catch (e) {
+      if (e is CustomException) {
+        if (e.code == 400) {
+          loginFormController.errorPassword.value =
+              "Enter a valid email and password";
+          loginFormController.isFailedEmail.value = true;
+          authSection.value = 0;
+          if (backToLogin) {
+            Get.offAllNamed(AppRoutes.auth);
+          }
+        } else if (e.code == 401) {
+          // disini saya melakukan pengecekan ketika mendapat error 401 maka langsung ke halaman verifikasi
+          final VerifyController verifyController = Get.put(VerifyController());
+          verifyController.resendOTP(email: loginParams.email!);
+          loginFormController.errorPassword.value =
+              "Enter a valid email and password";
+          loginFormController.isFailedEmail.value = true;
+          authSection.value = 0;
+          Get.toNamed(AppRoutes.verify, arguments: {
+            'loginParams': loginParams,
+            'isNotVerifiedWhenLogin': true
+          });
+        } else {
+          Get.snackbar('Error', '$e');
+        }
+      }
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> checkAllowNotification() async {
+    PermissionStatus status = await Permission.notification.status;
+    if (status.isGranted) {
+      Get.offAll(const BottomNavigationBarGlobalWidget());
+    } else {
+      Get.to(const AllowNotificationView());
+    }
+  }
+
+  // Sign Up
+  Future<void> signUp(SignUpParamsModel signUpParamsModel) async {
+    isLoading.value = true;
+    try {
+      // melakukan refresh fcm token saat sign up untuk mendapatkan token baru
+      String? newToken = await refreshFcmToken();
+      signUpParamsModel.fcmToken = newToken;
+      UserModel? result = await AuthService.signUp(signUpParamsModel);
+      currentUser.value = result;
+
+      // mengirimkan login params ke verifikasi page supaya jika berhasil verify, akan otomatis login menggunakan login params ini
+      LoginParamsModel loginParams = LoginParamsModel(
+          email: signUpParamsModel.email!,
+          password: signUpParamsModel.password!);
+
+      Get.toNamed(AppRoutes.verify, arguments: {'loginParams': loginParams});
+    } catch (e) {
+      if (e is CustomException) {
+        if (e.code == 409) {
+          final signUpController = Get.find<SignUpFormController>();
+
+          signUpController.errorEmail.value = e.message;
+        }
+      } else {
+        Get.snackbar('Error', '$e');
+      }
+      authSection.value = 1;
+    } finally {
+      isLoading.value = false;
+    }
+  }
 
   // Mendapatkan user
   Future<void> getUser() async {
@@ -44,121 +139,12 @@ class AuthController extends GetxController {
     }
   }
 
-  // Login
-  Future<void> login({required LoginParamsModel loginParams}) async {
-    isLoading.value = true;
-    final loginFormController = Get.find<LoginFormController>();
-    try {
-      final String result = await AuthService.login(loginParams: loginParams);
-      await UserTokenPref.setToken(result);
-      getUser();
-      loginFormController.onClose();
-      Get.to(const AllowNotificationView());
-    } catch (e) {
-      if (e is CustomException) {
-        if (e.code == 400) {
-          loginFormController.errorPassword.value =
-              "Enter a valid email and password";
-          loginFormController.borderEmail.value = Colors.red;
-          loginFormController.borderPassword.value = Colors.red;
-          authSection.value = 0;
-        } else {
-          Get.snackbar('Error', '$e');
-        }
-      }
-    } finally {
-      isLoading.value = false;
-    }
-  }
-
-  // Sign Up
-  Future<void> signUp(SignUpParamsModel signUpParamsModel) async {
-    isLoading.value = true;
-    try {
-      // melakukan refresh fcm token saat sign up untuk mendapatkan token baru
-      String? newToken = await refreshFcmToken();
-      signUpParamsModel.fcmToken = newToken;
-
-      UserModel? result = await AuthService.signUp(signUpParamsModel);
-      currentUser.value = result;
-
-      // mengirimkan login params ke verifikasi page supaya jika berhasil verify
-      // akan otomatis login menggunakan login params ini
-      LoginParamsModel loginParams = LoginParamsModel(
-          email: signUpParamsModel.email!,
-          password: signUpParamsModel.password!);
-      Get.to(VerificationView(
-        loginParamsModel: loginParams,
-      ));
-    } catch (e) {
-      if (e is CustomException) {
-        if (e.code == 409) {
-          final signUpController = Get.find<SignUpFormController>();
-
-          signUpController.errorEmail.value = e.message;
-          signUpController.borderEmail.value = Colors.red;
-        }
-      } else {
-        Get.snackbar('Error', '$e');
-      }
-      authSection.value = 1;
-    } finally {
-      isLoading.value = false;
-    }
-  }
-
-  // Verifikasi
-  Future<LoginParamsModel?> verification(
-      {required LoginParamsModel loginParams, required String otp}) async {
-    isLoading.value = true;
-    try {
-      final CustomException result =
-          await AuthService.verification(email: loginParams.email, otp: otp);
-      if (result.code == 200) {
-        borderVerifyColor.value = const Color(0xFF10B981);
-
-        // menyimpan fcm token ke dalam shared preference
-        await FcmTokenPref.setToken(currentFcmToken.value);
-
-        return loginParams;
-      }
-    } catch (e) {
-      if (e is CustomException) {
-        borderVerifyColor.value = Colors.red;
-        Get.snackbar('failed to Verification [${e.code}]', e.message);
-      }
-    } finally {
-      isLoading.value = false;
-    }
-    return null;
-  }
-
-  Future<void> resendOTP({required String email}) async {
-    try {
-      final CustomException? result = await AuthService.resendOTP(email: email);
-      if (result != null) {
-        Get.snackbar(result.message, result.code.toString());
-      }
-    } catch (e) {
-      if (e is CustomException) {
-        if (e.code == 400) {
-          Get.snackbar('failed to resend OTP', e.message);
-        } else {
-          Get.snackbar('failed to resend OTP', '$e');
-        }
-      }
-    }
-  }
-
   // refresh fcm token
   Future<String?> refreshFcmToken() async {
     try {
       final newToken = await FirebaseMessaging.instance
           .deleteToken()
           .then((value) => FirebaseMessaging.instance.getToken());
-
-      // menyimpan newtoken ke dalam controller,currentFcmToken ini akan saya gunakan saat berhasil verifikasi
-      newToken != null ? currentFcmToken.value = newToken : null;
 
       return newToken;
     } catch (e) {

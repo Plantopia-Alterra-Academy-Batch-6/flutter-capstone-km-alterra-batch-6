@@ -16,6 +16,7 @@ class OnboardingView extends StatelessWidget {
     final AuthController authController = Get.put(AuthController());
 
     return Scaffold(
+      backgroundColor: ColorConstant.white,
       body: SafeArea(
         child: Column(
           children: [
