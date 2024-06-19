@@ -39,6 +39,7 @@ class PlantCategoryWidget extends StatelessWidget {
                   onTap: () {
                     plantFilterController.selectedCategory.value = controller.plantCategoriesResponse!.data[index].id;
                     plantFilterSearchResultController.updateQuery('${controller.plantCategoriesResponse!.data[index].id}');
+                    controller.isFilterSearchResulted(true);
                     Get.toNamed(AppRoutes.plantFilterResult);
                   },
                   child: Container(

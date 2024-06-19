@@ -42,4 +42,9 @@ class IconConstant {
   static const String profileNavbar = 'assets/icons/profile_navbar.svg';
   static const String editPencil = 'assets/icons/edit_pencil.svg';
   static const String trash = 'assets/icons/trash.svg';
+  static const String plantCare = 'assets/icons/plant_care.svg';
+  static const String soilPreparation = 'assets/icons/soil_preparation.svg';
+  static const String harvest = 'assets/icons/harvest.svg';
+  static const String plantingSeeds = 'assets/icons/planting_seeds.svg';
+
 }

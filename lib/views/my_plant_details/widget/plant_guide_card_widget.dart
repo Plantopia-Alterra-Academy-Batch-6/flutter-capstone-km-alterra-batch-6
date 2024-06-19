@@ -1,21 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/models/get_my_plant_response_model.dart';
+import 'package:plantopia/utils/app_routes.dart';
 
 class PlantGuideCardWidget extends StatelessWidget {
   const PlantGuideCardWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // final Map arguments = Get.arguments;
-    // final PlantElement detailMyPlant = arguments['myPlantDetails'];
-    //get the plant id throught that
+    final Map arguments = Get.arguments;
+    final PlantElement detailMyPlant = arguments['myPlantDetails'];
+    int plantId = detailMyPlant.plant?.plantInstructions?.first.plantId ?? 0;
     return Column(
       children: [
         const SizedBox(height: 24),
         InkWell(
           onTap: () {
-            //TODO: go to plant guide page
+            print(plantId);
+             Get.toNamed(AppRoutes.plantGuide, arguments: {
+              'plantId': plantId,
+            });
           },
           child: Container(
             decoration: BoxDecoration(
