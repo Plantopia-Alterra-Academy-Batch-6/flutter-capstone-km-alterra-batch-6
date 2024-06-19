@@ -5,7 +5,6 @@ import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/forgot_password_controller.dart';
 import 'package:plantopia/controllers/verify_controller.dart';
-import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_appbar_forgot_password_widget.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_button_forgot_password_widget.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_formfield_forgot_password_widget.dart';
@@ -17,8 +16,7 @@ class ForgotPasswordView extends StatelessWidget {
   Widget build(BuildContext context) {
     final ForgotPasswordController forgotPasswordController =
         Get.put(ForgotPasswordController());
-    final VerifyController verifyController =
-        Get.put(VerifyController());
+    final VerifyController verifyController = Get.put(VerifyController());
 
     TextEditingController emailController = TextEditingController();
 
@@ -55,12 +53,10 @@ class ForgotPasswordView extends StatelessWidget {
                     ),
                     Obx(
                       () => CustomButtonForgotPasswordWidget(
-                        isLoading: forgotPasswordController.isLoading.value,
+                          isLoading: forgotPasswordController.isLoading.value,
                           onPressed: () async {
                             await verifyController.resendOTP(
                                 email: emailController.text);
-
-                  
                           },
                           isActive: forgotPasswordController
                               .isEnableButtonEmail.value,

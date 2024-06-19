@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/controllers/login_form_controller.dart';
 import 'package:plantopia/models/login_params_model.dart';
@@ -77,11 +76,16 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                   },
                   suffixIcon: IconButton(
                       onPressed: () {
-                        loginFormController.showPassword.value =  !loginFormController.showPassword.value;
+                        loginFormController.showPassword.value =
+                            !loginFormController.showPassword.value;
                       },
                       icon: Icon(
-                        loginFormController.showPassword.value ? Icons.visibility_off : Icons.visibility,
-                        color: loginFormController.showPassword.value ? Colors.black26 : Colors.black54,
+                        loginFormController.showPassword.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: loginFormController.showPassword.value
+                            ? Colors.black26
+                            : Colors.black54,
                         size: 20,
                       )),
                 ),
@@ -99,11 +103,11 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     LoginParamsModel loginParams = LoginParamsModel(
                         email: emailController.text,
                         password: passwordController.text);
-                    await authController.login(loginParams: loginParams,isOnLogin: true);
+                    await authController.login(
+                        loginParams: loginParams, isOnLogin: true);
                   },
                 ),
               ),
-
               const CustomLoginGoogleWidget()
             ],
           ),

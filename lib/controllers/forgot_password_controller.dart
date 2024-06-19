@@ -1,27 +1,19 @@
 import 'dart:async';
 
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
-import 'package:plantopia/service/auth_service.dart';
 import 'package:plantopia/service/forgot_password_service.dart';
-import 'package:plantopia/service/verify_service.dart';
-import 'package:plantopia/utils/app_routes.dart';
-import 'package:plantopia/views/global_widgets/custom_snackbar_bottom_widget.dart';
 
 class ForgotPasswordController extends GetxController {
   RxBool isLoading = false.obs;
   @override
   void onClose() {
-
     errorEmail.value = null;
     isEnableButtonEmail.value = false;
     errorPassword.value = null;
     isEnableButtonPassword.value = false;
     super.onClose();
   }
-
-
 
   Future<bool> postForgotPassword(
       {required String email, required String password}) async {
