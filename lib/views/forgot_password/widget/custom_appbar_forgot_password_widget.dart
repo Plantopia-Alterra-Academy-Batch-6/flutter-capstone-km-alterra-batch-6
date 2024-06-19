@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/utils/app_routes.dart';
 
 class CustomAppbarForgotPasswordWidget extends StatelessWidget {
   final String title;
   final String subtitle;
-  const CustomAppbarForgotPasswordWidget({
-    super.key, required this.title, required this.subtitle
-  });
+  const CustomAppbarForgotPasswordWidget(
+      {super.key, required this.title, required this.subtitle});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,7 @@ class CustomAppbarForgotPasswordWidget extends StatelessWidget {
         ),
         IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Get.offNamed(AppRoutes.auth);
             },
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,

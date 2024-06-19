@@ -17,9 +17,7 @@ import 'package:plantopia/views/verify/widget/custom_dialog_success_widget.dart'
 
 class AuthController extends GetxController {
   RxBool isLoading = false.obs;
-
   Rxn<UserModel> currentUser = Rxn<UserModel>();
-
   RxInt authSection = 0.obs;
 
   // Login
@@ -52,12 +50,10 @@ class AuthController extends GetxController {
               "Enter a valid email and password";
           loginFormController.isFailedEmail.value = true;
           authSection.value = 0;
-
           if (backToLogin) {
             Get.offAllNamed(AppRoutes.auth);
           }
         } else if (e.code == 401) {
-
           // disini saya melakukan pengecekan ketika mendapat error 401 maka langsung ke halaman verifikasi
           final VerifyController verifyController = Get.put(VerifyController());
           verifyController.resendOTP(email: loginParams.email!);

@@ -53,7 +53,7 @@ class ForgotPasswordView extends StatelessWidget {
                     ),
                     Obx(
                       () => CustomButtonForgotPasswordWidget(
-                          isLoading: forgotPasswordController.isLoading.value,
+                          isLoading: verifyController.isLoading.value,
                           onPressed: () async {
                             await verifyController.resendOTP(
                                 email: emailController.text);

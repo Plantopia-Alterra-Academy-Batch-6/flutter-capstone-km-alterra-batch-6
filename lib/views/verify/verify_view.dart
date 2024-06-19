@@ -75,9 +75,7 @@ class VerifyView extends StatelessWidget {
                         final LoginParamsModel? result =
                             await controller.verificationRegister(
                                 loginParams: loginParams!, otp: otpUser);
-
                         print(result?.toJson());
-
                         //melakukan login otomatis ketika akun telah verifikasi
                         if (result != null) {
                           await authController.login(

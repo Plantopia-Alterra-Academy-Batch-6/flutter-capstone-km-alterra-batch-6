@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
+import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/forgot_password_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_appbar_forgot_password_widget.dart';
@@ -68,7 +69,7 @@ class SetNewPasswordView extends StatelessWidget {
                     ),
                     Obx(
                       () => CustomButtonForgotPasswordWidget(
-                        isLoading: controller.isLoading.value,
+                          isLoading: controller.isLoading.value,
                           onPressed: () async {
                             final bool result =
                                 await controller.postForgotPassword(
@@ -86,6 +87,24 @@ class SetNewPasswordView extends StatelessWidget {
                           isActive: controller.isEnableButtonPassword.value,
                           text: "Update Password"),
                     ),
+                    const SizedBox(
+                      height: 14.0,
+                    ),
+                    Center(
+                      child: TextButton(
+                          style: TextButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(horizontal: 2),
+                            tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                          ),
+                          onPressed: () {
+                            Get.toNamed(AppRoutes.forgotPassword);
+                          },
+                          child: Text(
+                            "Cancel",
+                            style: TextStyleConstant.subtitle
+                                .copyWith(color: ColorConstant.primary500),
+                          )),
+                    )
                   ],
                 ),
               ),
