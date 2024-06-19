@@ -12,6 +12,13 @@ class MyPlantDetailsController extends GetxController {
   RxBool customIcon = false.obs;
   RxBool isSuccess = false.obs;
   RxList<PlantProgress> progressPlant = <PlantProgress>[].obs;
+  TextEditingController changeNameController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    changeNameController.dispose();
+  }
 
   Future<void> getPlantProgress(int plantId) async {
     try {
@@ -82,6 +89,22 @@ class MyPlantDetailsController extends GetxController {
       Get.defaultDialog(
         title: "Error",
         middleText: "Failed to delete my plant, please try again!",
+        textConfirm: "OK",
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          Get.back();
+        },
+      );
+    }
+  }
+
+  Future<void> createCustomizeName(int plantId, String newName) async {
+    try {
+      await MyPlantDetailsService.createCustomName(plantId, newName);
+    } catch (e) {
+      Get.defaultDialog(
+        title: "Error",
+        middleText: "Failed to customize plant name, please try again!",
         textConfirm: "OK",
         confirmTextColor: Colors.white,
         onConfirm: () {

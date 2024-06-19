@@ -29,7 +29,7 @@ import 'package:plantopia/views/upload_progress/upload_progress_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 import 'firebase_options.dart';
 
-Future<void> main() async {
+Future<void> main() async { 
   await dotenv.load(fileName: '.env');
   WidgetsFlutterBinding.ensureInitialized();
 

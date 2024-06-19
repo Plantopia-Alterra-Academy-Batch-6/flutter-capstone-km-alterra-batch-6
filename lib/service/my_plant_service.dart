@@ -11,6 +11,7 @@ class MyPlantService {
     try {
       final token = await UserTokenPref.getToken();
       final userId = await UserTokenPref.getUserId();
+      print("ini token $token $userId");
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
       };

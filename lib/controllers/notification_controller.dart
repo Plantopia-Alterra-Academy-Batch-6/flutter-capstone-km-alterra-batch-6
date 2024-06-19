@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:plantopia/models/get_notification_response.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/service/notification_service.dart';
@@ -13,8 +14,7 @@ class NotificationController extends GetxController {
   PlantByIdResponse? plantByIdResponse;
 
   var dateTime = DateTime.now().obs;
-  var selectedOption = 1.obs;
-  var notifDummy = ["A", "B", "C"].obs;
+  var selectedOption = false.obs;
 
   @override
   Future<void> onInit() async {
@@ -22,7 +22,48 @@ class NotificationController extends GetxController {
     getAllNotification();
   }
 
-  void setSelectedOption(int index) {
+  String notifDate(DateTime notifDate) {
+    String notifAge = "";
+    DateTime now = DateTime.now();
+    Duration difference = now.difference(notifDate);
+
+    int years = difference.inDays ~/ 365;
+    int months = (difference.inDays % 365) ~/ 30;
+    int weeks = ((difference.inDays % 365) % 30) ~/ 7;
+    int days = ((difference.inDays % 365) % 30) % 7;
+    int hours = difference.inHours;
+    int minutes = difference.inMinutes.remainder(60);
+    int seconds = difference.inSeconds.remainder(60);
+
+    if (years > 0) {
+      notifAge = '${years}d';
+    } else if (months > 0) {
+      notifAge = '${months}m';
+    } else if (weeks > 0) {
+      notifAge = '${weeks}w ';
+    } else if (days > 0) {
+      notifAge = '${days}d';
+    } else if (hours > 0) {
+      notifAge = '${hours}h';
+    } else if (minutes > 0) {
+      notifAge = '${minutes}m';
+    } else if (seconds > 0) {
+      notifAge = '${seconds}s';
+    }
+    return notifAge;
+  }
+
+  String parseHour(String wateringSchedule) {
+    DateTime time = DateFormat.Hm().parse(wateringSchedule);
+
+    DateFormat formatter = DateFormat('hh:mm a');
+
+    String formattedTime = formatter.format(time);
+
+    return formattedTime;
+  }
+
+  void setSelectedOption(bool index) {
     selectedOption.value = index;
   }
 

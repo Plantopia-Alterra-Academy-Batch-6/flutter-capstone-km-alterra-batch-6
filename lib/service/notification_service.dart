@@ -48,8 +48,8 @@ class NotificationService {
   }
 
   static Future<GetNotificationResponse> getAllNotification() async {
-    // final token = await UserTokenPref.getToken();
-    final String token = dotenv.get('TOKEN');
+    final token = await UserTokenPref.getToken();
+    // final String token = dotenv.get('TOKEN');
     try {
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
@@ -69,8 +69,8 @@ class NotificationService {
   }
 
   static Future<Notif> getNotificationById(int id) async {
-    // final token = await UserTokenPref.getToken();
-    final String token = dotenv.get('TOKEN');
+    final token = await UserTokenPref.getToken();
+    // final String token = dotenv.get('TOKEN');
     try {
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
@@ -114,8 +114,8 @@ class NotificationService {
       required String customizeTime,
       required bool isRecurring,
       required String type}) async {
-    // final token = await UserTokenPref.getToken();
-    final String token = dotenv.get('TOKEN');
+    final token = await UserTokenPref.getToken();
+    // final String token = dotenv.get('TOKEN');
     try {
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',

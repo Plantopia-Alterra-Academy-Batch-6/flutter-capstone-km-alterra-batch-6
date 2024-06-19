@@ -1,8 +1,8 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_time_picker_spinner/flutter_time_picker_spinner.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
-import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/notification_controller.dart';
 import 'package:plantopia/views/notification/widget/button_widget.dart';
@@ -28,10 +28,13 @@ class BottomSheet2Widget extends StatelessWidget {
           children: [
             Row(
               children: [
-                Image.asset(
-                  ImageConstant.plantDummy,
+                CachedNetworkImage(
+                  imageUrl: notifController
+                          .plantByIdResponse?.data?.plantImages?[0].fileName ??
+                      "",
                   width: 50,
                   height: 50,
+                  fit: BoxFit.cover,
                 ),
                 const SizedBox(
                   width: 16,
@@ -41,11 +44,13 @@ class BottomSheet2Widget extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Tomato",
-                        style: TextStyleConstant.subtitle,
+                        notifController.plantByIdResponse?.data?.name ?? "-",
+                        style: TextStyleConstant.subtitle.copyWith(
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                       Text(
-                        "Default reminder : 08.00 am",
+                        "Default reminder : ${notifController.plantByIdResponse?.data?.wateringSchedule?.wateringTime ?? "-"}",
                         style: TextStyleConstant.caption
                             .copyWith(color: ColorConstant.neutral500),
                       )
@@ -67,7 +72,8 @@ class BottomSheet2Widget extends StatelessWidget {
                 children: [
                   Text(
                     "Reminder Setting",
-                    style: TextStyleConstant.paragraph,
+                    style: TextStyleConstant.paragraph
+                        .copyWith(fontWeight: FontWeight.w700),
                   ),
                   const SizedBox(
                     height: 4,
@@ -87,7 +93,9 @@ class BottomSheet2Widget extends StatelessWidget {
                       color: ColorConstant.neutral400,
                     ),
                     minutesInterval: 15,
-                    highlightedTextStyle: TextStyleConstant.heading3,
+                    highlightedTextStyle: TextStyleConstant.heading3.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
                     spacing: 32,
                     itemHeight: 30,
                     itemWidth: 30,
@@ -99,45 +107,29 @@ class BottomSheet2Widget extends StatelessWidget {
             Obx(
               () => Column(
                 children: [
-                  Row(
-                    children: [
-                      Radio<int>(
-                        fillColor:
-                            WidgetStatePropertyAll(ColorConstant.primary500),
-                        value: 1,
-                        groupValue: notifController.selectedOption.value,
-                        onChanged: (value) {
-                          notifController.setSelectedOption(value!);
-                        },
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        "Set this as default",
-                        style: TextStyleConstant.subtitle,
-                      )
-                    ],
+                  RadioListTile(
+                    title: Text(
+                      "Set this as default",
+                      style: TextStyleConstant.subtitle,
+                    ),
+                    fillColor: WidgetStatePropertyAll(ColorConstant.primary500),
+                    value: true,
+                    groupValue: notifController.selectedOption.value,
+                    onChanged: (value) {
+                      notifController.setSelectedOption(value!);
+                    },
                   ),
-                  Row(
-                    children: [
-                      Radio<int>(
-                        fillColor:
-                            WidgetStatePropertyAll(ColorConstant.primary500),
-                        value: 2,
-                        groupValue: notifController.selectedOption.value,
-                        onChanged: (value) {
-                          notifController.setSelectedOption(value!);
-                        },
-                      ),
-                      const SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        "Just Once",
-                        style: TextStyleConstant.subtitle,
-                      )
-                    ],
+                  RadioListTile(
+                    title: Text(
+                      "Just Once",
+                      style: TextStyleConstant.subtitle,
+                    ),
+                    fillColor: WidgetStatePropertyAll(ColorConstant.primary500),
+                    value: false,
+                    groupValue: notifController.selectedOption.value,
+                    onChanged: (value) {
+                      notifController.setSelectedOption(value!);
+                    },
                   ),
                 ],
               ),
@@ -169,6 +161,27 @@ class BottomSheet2Widget extends StatelessWidget {
                     while (Get.isBottomSheetOpen == true) {
                       Get.back();
                     }
+                    final snackBar = SnackBar(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(
+                          6,
+                        ),
+                      ),
+                      behavior: SnackBarBehavior.floating,
+                      margin: const EdgeInsets.all(16),
+                      backgroundColor: ColorConstant.primary500,
+                      content: Text(
+                        'Watering will be reminded in 1 hour',
+                        style: TextStyleConstant.paragraph.copyWith(
+                          color: ColorConstant.white,
+                        ),
+                      ),
+                      action: SnackBarAction(
+                        label: '',
+                        onPressed: () {},
+                      ),
+                    );
+                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
                   buttonName: "Save",
                   boxDecoration: BoxDecoration(

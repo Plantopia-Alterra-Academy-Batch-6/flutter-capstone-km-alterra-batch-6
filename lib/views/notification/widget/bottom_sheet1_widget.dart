@@ -1,7 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
-import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/notification_controller.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
@@ -10,9 +10,10 @@ import 'package:plantopia/views/notification/widget/bottom_sheet3_widget.dart';
 import 'package:plantopia/views/notification/widget/button_widget.dart';
 
 class BottomSheet1Widget extends StatelessWidget {
-  BottomSheet1Widget({super.key, required this.notifId});
-
+  BottomSheet1Widget(
+      {super.key, required this.notifId, required this.messages});
   final int notifId;
+  final String messages;
 
   final NotificationController notifController =
       Get.put(NotificationController());
@@ -35,6 +36,7 @@ class BottomSheet1Widget extends StatelessWidget {
             Status.loaded => Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Align(
                       alignment: Alignment.centerRight,
@@ -54,25 +56,30 @@ class BottomSheet1Widget extends StatelessWidget {
                       child: Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: Image.asset(
-                              ImageConstant.plantDummy,
-                              width: 150,
-                              height: 160,
-                            ),
-                          ),
+                              padding: const EdgeInsets.all(8.0),
+                              child: CachedNetworkImage(
+                                imageUrl: notifController.plantByIdResponse
+                                        ?.data?.plantImages?[0].fileName ??
+                                    "-",
+                                width: 150,
+                                height: 150,
+                                fit: BoxFit.cover,
+                              )),
                           Expanded(
                               child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                "Tomato",
+                                notifController.plantByIdResponse?.data?.name ??
+                                    "-",
                                 style: TextStyleConstant.heading4.copyWith(
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
                               Text(
-                                "Solanacae",
+                                notifController.plantByIdResponse?.data
+                                        ?.plantCategory?.name ??
+                                    "-",
                                 style: TextStyleConstant.caption
                                     .copyWith(color: ColorConstant.neutral400),
                               ),
@@ -88,8 +95,15 @@ class BottomSheet1Widget extends StatelessWidget {
                                 height: 2,
                               ),
                               Text(
-                                "08:00 AM",
-                                style: TextStyleConstant.caption,
+                                notifController.parseHour(notifController
+                                        .plantByIdResponse
+                                        ?.data
+                                        ?.wateringSchedule
+                                        ?.wateringTime ??
+                                    ""),
+                                style: TextStyleConstant.caption.copyWith(
+                                  fontWeight: FontWeight.w700,
+                                ),
                               )
                             ],
                           ))
@@ -100,12 +114,9 @@ class BottomSheet1Widget extends StatelessWidget {
                       height: 16,
                     ),
                     Text(
-                      "Your tomato is thirsty...",
+                      messages,
                       style: TextStyleConstant.subtitle,
-                    ),
-                    Text(
-                      "How if we give it some water now?",
-                      style: TextStyleConstant.subtitle,
+                      textAlign: TextAlign.center,
                     ),
                     const SizedBox(
                       height: 24,
@@ -151,8 +162,8 @@ class BottomSheet1Widget extends StatelessWidget {
                               }
                               await notifController
                                   .getNotificationById(notifId);
-                              await Get.bottomSheet(const BottomSheet3Widget());
                               await notifController.getAllNotification();
+                              await Get.bottomSheet(const BottomSheet3Widget());
                             },
                           )),
                         ],

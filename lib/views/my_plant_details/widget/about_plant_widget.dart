@@ -20,7 +20,9 @@ class AboutPlantWidget extends StatelessWidget {
         const SizedBox(height: 20),
         Center(
           child: Text(
-            (detailMyPlant.plant?.name ?? "-"),
+            detailMyPlant.customizeName != ""
+                ? detailMyPlant.customizeName ?? "-"
+                : detailMyPlant.plant?.name ?? "-",
             style: TextStyleConstant.heading3
                 .copyWith(fontWeight: FontWeight.w700),
           ),

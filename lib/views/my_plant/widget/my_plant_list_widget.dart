@@ -75,8 +75,14 @@ class MyPlantListWidget extends StatelessWidget {
                         },
                         child: CardMyPlantWidget(
                           plantName: myPlantController
-                                  .listMyPlant[index].plant?.name ??
-                              "",
+                                      .listMyPlant[index].customizeName !=
+                                  ""
+                              ? myPlantController
+                                      .listMyPlant[index].customizeName ??
+                                  "-"
+                              : myPlantController
+                                      .listMyPlant[index].plant?.name ??
+                                  "-",
                           plantCategory: myPlantController.listMyPlant[index]
                                   .plant?.plantCategory?.name ??
                               "",

@@ -14,15 +14,18 @@ class SingleResultWidget extends StatelessWidget {
       padding: const EdgeInsets.only(top: 24, left: 16, bottom: 10),
       child: GestureDetector(
         onTap: () {
-      
         },
         child: SizedBox(
           height: 200,
           width: 156,
           child: CardGlobalWidget(
-            plantName: myPlantController.searchResultJson['name'],
+            plantName:
+                myPlantController.searchResultJson['customize_name'] != ""
+                    ? myPlantController.searchResultJson['customize_name']
+                    : myPlantController.searchResultJson['name'],
             plantCategory: myPlantController.searchResultJson['category'],
-            plantImageUrl: myPlantController.searchResultJson['image_url'] ?? "",
+            plantImageUrl:
+                myPlantController.searchResultJson['image_url'] ?? "",
           ),
         ),
       ),

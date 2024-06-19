@@ -20,4 +20,19 @@ class MyPlantDetailsService {
       return "Failed to delete plant from my plant";
     }
   }
+
+  static Future<void> createCustomName(int userPlantId, String name) async {
+    try {
+      final token = await UserTokenPref.getToken();
+      Map<String, dynamic> headers = {
+        'Authorization': 'Bearer $token',
+      };
+      await dio.put(
+          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/my/plants/$userPlantId/customize-name",
+          data: {"customize_name": name},
+          options: Options(headers: headers));
+    } catch (e) {
+      throw Exception("Failed to delete plant from my plant");
+    }
+  }
 }

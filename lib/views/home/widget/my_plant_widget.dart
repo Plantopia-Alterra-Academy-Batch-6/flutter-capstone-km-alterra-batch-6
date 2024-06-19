@@ -112,8 +112,15 @@ class MyPlantWidget extends StatelessWidget {
                                   },
                                   child: CardGlobalWidget(
                                       plantName: myPlantController
-                                              .listMyPlant[index].plant?.name ??
-                                          "-",
+                                                  .listMyPlant[index]
+                                                  .customizeName !=
+                                              ""
+                                          ? myPlantController.listMyPlant[index]
+                                                  .customizeName ??
+                                              "-"
+                                          : myPlantController.listMyPlant[index]
+                                                  .plant?.name ??
+                                              "-",
                                       plantCategory: myPlantController
                                               .listMyPlant[index]
                                               .plant

@@ -25,6 +25,7 @@ class MyPlantController extends GetxController {
   RxBool isSearchFound = false.obs;
 
   dynamic searchResultJson = {
+    "customize_name": '',
     'id': 0,
     'name': '',
     'image_url': '',
@@ -95,16 +96,37 @@ class MyPlantController extends GetxController {
 
   Future<void> searchPlant(String value) async {
     var totalData = listMyPlant.length;
-    
+
     for (int i = 0; i < totalData; i++) {
-      if (listMyPlant[i].plant!.name!.toLowerCase() == value.toLowerCase() || listMyPlant[i].plant!.name!.toLowerCase().contains(value.toLowerCase()) && listMyPlant[i].plant!.name!.toLowerCase().startsWith(value.toLowerCase())) {
+      if (listMyPlant[i].plant!.name!.toLowerCase() == value.toLowerCase() ||
+          listMyPlant[i]
+                  .plant!
+                  .name!
+                  .toLowerCase()
+                  .contains(value.toLowerCase()) &&
+              listMyPlant[i]
+                  .plant!
+                  .name!
+                  .toLowerCase()
+                  .startsWith(value.toLowerCase()) ||
+          listMyPlant[i].customizeName?.toLowerCase() == value.toLowerCase() ||
+          listMyPlant[i]
+                  .customizeName!
+                  .toLowerCase()
+                  .contains(value.toLowerCase()) &&
+              listMyPlant[i]
+                  .customizeName!
+                  .toLowerCase()
+                  .startsWith(value.toLowerCase())) {
         searchResultJson['id'] = listMyPlant[i].id;
+        searchResultJson['customize_name'] = listMyPlant[i].customizeName;
         searchResultJson['name'] = listMyPlant[i].plant!.name;
-        searchResultJson['image_url'] = listMyPlant[i].plant?.plantImages?.first.fileName ?? "";
-        searchResultJson['category'] = listMyPlant[i].plant?.plantCategory?.name ?? "";
+        searchResultJson['image_url'] =
+            listMyPlant[i].plant?.plantImages?.first.fileName ?? "";
+        searchResultJson['category'] =
+            listMyPlant[i].plant?.plantCategory?.name ?? "";
         isSearchFound(true);
       }
     }
   }
-
 }
