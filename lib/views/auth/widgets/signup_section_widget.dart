@@ -2,7 +2,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/controllers/sign_up_form_controller.dart';
 import 'package:plantopia/models/signup_params_model.dart';
@@ -19,7 +18,6 @@ class SignUpSectionWidget extends StatefulWidget {
 }
 
 class _SignUpSectionWidgetState extends State<SignUpSectionWidget> {
-  bool showPassword = true;
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
@@ -81,18 +79,21 @@ class _SignUpSectionWidgetState extends State<SignUpSectionWidget> {
                   isEnable: signUpController.isEnableButtonPassword.value,
                   controller: passwordController,
                   hintText: 'Password',
-                  showPassword: showPassword,
+                  showPassword: signUpController.showPassword.value,
                   errorText: signUpController.errorPassword.value,
                   onChanged: (e) => signUpController.setPassword(e),
                   suffixIcon: IconButton(
                       onPressed: () {
-                        setState(() {
-                          showPassword = !showPassword;
-                        });
+                        signUpController.showPassword.value =
+                            !signUpController.showPassword.value;
                       },
                       icon: Icon(
-                        showPassword ? Icons.visibility_off : Icons.visibility,
-                        color: showPassword ? Colors.black26 : Colors.black54,
+                        signUpController.showPassword.value
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: signUpController.showPassword.value
+                            ? Colors.black26
+                            : Colors.black54,
                         size: 20,
                       )),
                 ),
@@ -114,21 +115,6 @@ class _SignUpSectionWidgetState extends State<SignUpSectionWidget> {
                           password: passwordController.text);
                       await authController.signUp(data);
                     }),
-              ),
-              const SizedBox(
-                height: 14.0,
-              ),
-              Center(
-                child: Text(
-                  'Or',
-                  style: GoogleFonts.nunito(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w400,
-                      color: const Color(0xFF9ba5b7)),
-                ),
-              ),
-              const SizedBox(
-                height: 14.0,
               ),
               const CustomLoginGoogleWidget()
             ],

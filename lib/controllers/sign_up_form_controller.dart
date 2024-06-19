@@ -3,6 +3,7 @@ import 'package:plantopia/constants/color_constant.dart';
 
 class SignUpFormController extends GetxController {
   final isValidOtp = Rxn<bool>();
+  RxBool showPassword = true.obs;
 
   void validatorOtp(String otp, String validOtp) {
     if (otp == validOtp) {
@@ -67,9 +68,7 @@ class SignUpFormController extends GetxController {
     } else if (!value.isEmail) {
       errorEmail.value = 'Please provide a correct email address';
       isEnableButtonEmail.value = false;
- 
     } else {
-
       errorEmail.value = null;
       isEnableButtonEmail.value = true;
     }
@@ -79,15 +78,12 @@ class SignUpFormController extends GetxController {
     if (value.isEmpty) {
       errorPassword.value = "Password can't be empty";
       isEnableButtonPassword.value = false;
- 
     } else if (value.length < 8 || value.length > 16) {
       errorPassword.value = 'Password should contain 8-16 characters ';
       isEnableButtonPassword.value = false;
-
     } else {
       errorPassword.value = null;
       isEnableButtonPassword.value = true;
-  
     }
   }
 

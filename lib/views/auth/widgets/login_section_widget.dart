@@ -21,7 +21,7 @@ class LoginSectionWidget extends StatefulWidget {
 class _LoginSectionWidgetState extends State<LoginSectionWidget> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
-  bool showPassword = true;
+
   final AuthController authController = Get.put(AuthController());
   final LoginFormController loginFormController =
       Get.put(LoginFormController());
@@ -52,6 +52,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
               Obx(
                 () => CustomAuthTextFormFieldWidget(
                   hintText: 'Email',
+                  isEmailFailed: loginFormController.isFailedEmail.value,
                   isEnable: loginFormController.isEnableButtonEmail.value,
                   keyboardType: TextInputType.emailAddress,
                   errorText: loginFormController.errorEmail.value,
@@ -68,7 +69,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                 () => CustomAuthTextFormFieldWidget(
                   hintText: 'Password',
                   isEnable: loginFormController.isEnableButtonPassword.value,
-                  showPassword: showPassword,
+                  showPassword: loginFormController.showPassword.value,
                   controller: passwordController,
                   errorText: loginFormController.errorPassword.value,
                   onChanged: (value) async {
@@ -76,13 +77,11 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                   },
                   suffixIcon: IconButton(
                       onPressed: () {
-                        setState(() {
-                          showPassword = !showPassword;
-                        });
+                        loginFormController.showPassword.value =  !loginFormController.showPassword.value;
                       },
                       icon: Icon(
-                        showPassword ? Icons.visibility_off : Icons.visibility,
-                        color: showPassword ? Colors.black26 : Colors.black54,
+                        loginFormController.showPassword.value ? Icons.visibility_off : Icons.visibility,
+                        color: loginFormController.showPassword.value ? Colors.black26 : Colors.black54,
                         size: 20,
                       )),
                 ),
@@ -100,25 +99,11 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                     LoginParamsModel loginParams = LoginParamsModel(
                         email: emailController.text,
                         password: passwordController.text);
-                    await authController.login(loginParams: loginParams);
+                    await authController.login(loginParams: loginParams,isOnLogin: true);
                   },
                 ),
               ),
-              const SizedBox(
-                height: 14.0,
-              ),
-              Center(
-                child: Text(
-                  'Or',
-                  style: GoogleFonts.nunito(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.w400,
-                      color: const Color(0xFF9ba5b7)),
-                ),
-              ),
-              const SizedBox(
-                height: 14.0,
-              ),
+
               const CustomLoginGoogleWidget()
             ],
           ),

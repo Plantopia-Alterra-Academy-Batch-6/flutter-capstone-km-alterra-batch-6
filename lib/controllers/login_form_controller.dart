@@ -1,14 +1,17 @@
- import 'package:get/get.dart';
+import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 
 class LoginFormController extends GetxController {
   final enableColor = ColorConstant.primary500;
+  RxBool showPassword =true.obs;
   final errorEmail = Rxn<String>();
   RxBool isEnableButtonEmail = false.obs;
   final errorPassword = Rxn<String>();
   RxBool isEnableButtonPassword = false.obs;
   RxString emailInit = ''.obs;
   RxString passwordInit = ''.obs;
+  RxBool isFailedEmail = false.obs;
+
 
   LoginFormController() {
     debounce(emailInit, (value) {
@@ -35,6 +38,7 @@ class LoginFormController extends GetxController {
       errorEmail.value = 'Please provide a correct email address';
       isEnableButtonEmail.value = false;
     } else {
+      isFailedEmail.value = false;
       errorEmail.value = null;
       isEnableButtonEmail.value = true;
     }

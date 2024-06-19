@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/forgot_password_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/forgot_password/widget/custom_appbar_forgot_password_widget.dart';
@@ -20,6 +21,7 @@ class SetNewPasswordView extends StatelessWidget {
     final String email = arguments['email'];
 
     return Scaffold(
+      backgroundColor: ColorConstant.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(

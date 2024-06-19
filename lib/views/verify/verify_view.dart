@@ -1,61 +1,36 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
+import 'package:plantopia/controllers/verify_controller.dart';
 import 'package:plantopia/models/login_params_model.dart';
 import 'package:plantopia/views/verify/widget/confirm_description_verify_widget.dart';
 import 'package:plantopia/views/verify/widget/custom_appbar_verify_widget.dart';
 
-class VerificationView extends StatefulWidget {
-  final LoginParamsModel loginParamsModel;
-  const VerificationView({
-    super.key,
-    required this.loginParamsModel,
-  });
+// ignore: must_be_immutable
+class VerifyView extends StatelessWidget {
+  final VerifyController controller = Get.put(VerifyController());
+  VerifyView({super.key});
 
-  @override
-  State<VerificationView> createState() => _VerificationViewState();
-}
-
-class _VerificationViewState extends State<VerificationView> {
-  Color? colorCurrent;
-  final AuthController authController = Get.put(AuthController());
-  Timer? _timer;
-  int _start = 0;
-
-  void startTimer() {
-    setState(() {
-      _start = 10; // Mengatur waktu menjadi 60 detik
-    });
-
-    _timer = Timer.periodic(const Duration(seconds: 1), (Timer timer) {
-      if (_start == 0) {
-        setState(() {
-          timer.cancel();
-        });
-      } else {
-        setState(() {
-          _start--;
-        });
-      }
-    });
-  }
-
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
+  String? email;
+  LoginParamsModel? loginParams;
 
   @override
   Widget build(BuildContext context) {
+    final AuthController authController = Get.put(AuthController());
+    final Map arguments = Get.arguments;
+    if (arguments['loginParams'] != null) {
+      loginParams = arguments['loginParams'];
+    } else {
+      email = arguments['email'];
+    }
+
     return Scaffold(
+      backgroundColor: ColorConstant.white,
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -72,38 +47,49 @@ class _VerificationViewState extends State<VerificationView> {
                 height: 40.0,
               ),
               Padding(
-                padding: const EdgeInsets.only(left: 8.0),
+                padding: const EdgeInsets.only(
+                  left: 30.0,
+                  right: 20.0,
+                ),
                 child: Obx(
                   () => OtpTextField(
                     autoFocus: true,
-                    numberOfFields: 6,
+                    numberOfFields: 4,
                     filled: true,
                     showFieldAsBox: true,
-                    fieldWidth: 53,
-                    borderWidth: 0.5,
-                    enabledBorderColor: authController.borderVerifyColor.value,
+                    fieldWidth: 70,
+                    borderWidth: 0.8,
+                    borderColor: ColorConstant.danger500,
+                    enabledBorderColor: controller.borderVerifyColor.value,
                     focusedBorderColor: Colors.black,
                     cursorColor: Colors.black,
                     keyboardType: TextInputType.number,
                     disabledBorderColor: Colors.red,
-                    contentPadding: const EdgeInsets.symmetric(
-                      vertical: 15,
-                    ),
+                    contentPadding: const EdgeInsets.symmetric(vertical: 22),
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    textStyle: TextStyle(color: colorCurrent ?? Colors.black),
+                    textStyle: TextStyle(color: controller.numberColor.value),
                     borderRadius: BorderRadius.circular(12),
                     onSubmit: (String otpUser) async {
-                      final LoginParamsModel? result =
-                          await authController.verification(
-                              loginParams: widget.loginParamsModel,
-                              otp: otpUser);
+                      if (arguments['loginParams'] != null) {
+                        final LoginParamsModel? result =
+                            await controller.verificationRegister(
+                                loginParams: loginParams!, otp: otpUser);
 
-                      if (result != null) {
-                        alertsuccess(context);
+                        print(result?.toJson());
 
                         //melakukan login otomatis ketika akun telah verifikasi
-                        await authController.login(loginParams: result);
+                        if (result != null) {
+                          await authController.login(
+                              loginParams: result,
+                              backToLogin:
+                                  arguments['isNotVerifiedWhenLogin'] != null
+                                      ? true
+                                      : false);
+                        }
+                      } else {
+                        await controller.verificationForgotPassword(
+                            email: email!, otp: otpUser);
                       }
                     },
                   ),
@@ -120,71 +106,40 @@ class _VerificationViewState extends State<VerificationView> {
                     "Didn’t receive the code? ",
                     style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
                   ),
-                  TextButton(
-                    style: ButtonStyle(
-                      padding: WidgetStateProperty.all(EdgeInsets.zero),
-                    ),
-                    onPressed: _start == 0
-                        ? () async {
-                            await authController.resendOTP(
-                                email: widget.loginParamsModel.email);
-                            startTimer();
-                          }
-                        : null,
-                    child: Text(
-                      _start == 0 ? "Resend it" : "Resend in $_start",
-                      style: TextStyle(
-                        color:
-                            _start == 0 ? const Color(0xFF10B981) : Colors.grey,
-                        fontWeight: FontWeight.w700,
+                  Obx(
+                    () => TextButton(
+                      style: ButtonStyle(
+                        padding: WidgetStateProperty.all(EdgeInsets.zero),
+                      ),
+                      onPressed: controller.start.value == 0
+                          ? () async {
+                              if (arguments['loginParams'] != null) {
+                                await controller.resendOTP(
+                                    email: loginParams!.email!);
+                              } else {
+                                await controller.resendOTP(email: email!);
+                              }
+                            }
+                          : null,
+                      child: Text(
+                        controller.start.value == 0
+                            ? "Resend it"
+                            : "Resend in ${controller.start.value}",
+                        style: TextStyle(
+                          color: controller.start.value == 0
+                              ? ColorConstant.primary500
+                              : Colors.grey,
+                          fontWeight: FontWeight.w700,
+                        ),
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ],
           ),
         ),
       ),
-    );
-  }
-
-  void alertsuccess(context) {
-    showDialog(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          contentPadding: const EdgeInsets.all(24),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SvgPicture.asset('assets/onboarding/success.svg'),
-              const Text(
-                "Yay!",
-                style: TextStyle(
-                  color: Color(0xFF545F71),
-                  fontWeight: FontWeight.w700,
-                  fontSize: 24,
-                ),
-              ),
-              const SizedBox(
-                height: 4.0,
-              ),
-              const SizedBox(
-                width: 250,
-                child: Text(
-                  textAlign: TextAlign.center,
-                  'You’ve successfully signed up. Excited to grow with you! 🌿',
-                  style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16),
-                ),
-              ),
-              const SizedBox(
-                height: 10.0,
-              ),
-            ],
-          ),
-        );
-      },
     );
   }
 }

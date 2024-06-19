@@ -25,11 +25,16 @@ class AuthService {
         throw '';
       }
     } on DioException catch (e) {
-      if (e.response?.statusCode == 400) {
-        throw CustomException('Email not validated yet', 400);
-      } else {
-        throw CustomException(
-            'there is an error : $e', e.response!.statusCode!);
+      print(e.response?.data['message']);
+      if (e.response?.data['message'] == "record not found") {
+        throw CustomException('record not found', 400);
+      } else if(e.response?.data['message'] == "Invalid email or password") {
+        throw CustomException('record not found', 400);
+      }else if (e.response?.data['message'] == "Email not validated yet") {
+        throw CustomException('Email not validated yet', 401);
+      }
+       else {
+        throw CustomException(e.response?.data['message'], 402);
       }
     } catch (e) {
       throw 'there is an error : $e';
@@ -38,7 +43,6 @@ class AuthService {
 
   static Future<UserModel?> signUp(SignUpParamsModel signUpParamsModel) async {
     try {
-
       String url =
           "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/register";
 

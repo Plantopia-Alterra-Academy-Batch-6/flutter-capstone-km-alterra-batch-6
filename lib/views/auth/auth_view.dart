@@ -27,6 +27,7 @@ class _AuthViewState extends State<AuthView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: ColorConstant.white,
         body: SafeArea(
       child: Obx(
         () => authController.isLoading.value
