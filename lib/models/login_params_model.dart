@@ -1,54 +1,36 @@
+// To parse this JSON data, do
+//
+//     final loginParamsModel = loginParamsModelFromJson(jsonString);
+
 import 'dart:convert';
 
+LoginParamsModel loginParamsModelFromJson(String str) =>
+    LoginParamsModel.fromJson(json.decode(str));
+
+String loginParamsModelToJson(LoginParamsModel data) =>
+    json.encode(data.toJson());
+
 class LoginParamsModel {
-  final String email;
-    final String password;
+  final String? email;
+  final String? password;
+   String? fcmToken;
 
   LoginParamsModel({
-    required this.email,
-    required this.password,
+    this.email,
+    this.password,
+    this.fcmToken,
   });
 
-  LoginParamsModel copyWith({
-    String? email,
-    String? password,
-  }) {
-    return LoginParamsModel(
-      email: email ?? this.email,
-      password: password ?? this.password,
-    );
-  }
+  factory LoginParamsModel.fromJson(Map<String, dynamic> json) =>
+      LoginParamsModel(
+        email: json["email"],
+        password: json["password"],
+        fcmToken: json["fcm_token"],
+      );
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'email': email,
-      'password': password,
-    };
-  }
-
-  factory LoginParamsModel.fromMap(Map<String, dynamic> map) {
-    return LoginParamsModel(
-      email: map['email'] as String,
-      password: map['password'] as String,
-    );
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory LoginParamsModel.fromJson(String source) => LoginParamsModel.fromMap(json.decode(source) as Map<String, dynamic>);
-
-  @override
-  String toString() => 'LoginParamsModel(email: $email, password: $password)';
-
-  @override
-  bool operator ==(covariant LoginParamsModel other) {
-    if (identical(this, other)) return true;
-  
-    return 
-      other.email == email &&
-      other.password == password;
-  }
-
-  @override
-  int get hashCode => email.hashCode ^ password.hashCode;
+  Map<String, dynamic> toJson() => {
+        "email": email,
+        "password": password,
+        "fcm_token": fcmToken,
+      };
 }

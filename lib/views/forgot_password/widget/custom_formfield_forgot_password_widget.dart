@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 
-class CustomAuthTextFormFieldWidget extends StatelessWidget {
+class CustomFormfieldForgotPasswordWidget extends StatelessWidget {
   final String hintText;
   final Widget? suffixIcon;
   final TextInputType? keyboardType;
@@ -12,11 +12,8 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
   final TextEditingController? controller;
   final void Function(String)? onChanged;
   final String? initialValue;
-  final bool isEnable;
-  final Color? borderColor;
-  final bool isEmailFailed;
 
-  const CustomAuthTextFormFieldWidget(
+  const CustomFormfieldForgotPasswordWidget(
       {super.key,
       required this.hintText,
       this.suffixIcon,
@@ -26,9 +23,8 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
       this.controller,
       this.onChanged,
       this.initialValue,
-      this.isEnable = false,
-      this.isEmailFailed = false,
-      this.borderColor = Colors.grey});
+
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -46,13 +42,7 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
         TextFormField(
           initialValue: initialValue,
           style: TextStyle(
-              color: isEmailFailed
-                  ? Colors.red
-                  : errorText != null
-                      ? Colors.red
-                      : isEnable
-                          ? ColorConstant.primary500
-                          : ColorConstant.neutral950),
+              color: errorText != null ? Colors.red : ColorConstant.neutral950),
           onChanged: onChanged,
           controller: controller,
           keyboardType: keyboardType,
@@ -71,24 +61,16 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
             focusedBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
-                  color: isEmailFailed
+                  color: errorText != null
                       ? Colors.red
-                      : errorText != null
-                          ? Colors.red
-                          : isEnable
-                              ? ColorConstant.primary500
-                              : ColorConstant.neutral950),
+                      : ColorConstant.neutral950),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
-                  color: isEmailFailed
+                  color: errorText != null
                       ? Colors.red
-                      : errorText != null
-                          ? Colors.red
-                          : isEnable
-                              ? ColorConstant.primary500
-                              : ColorConstant.neutral950),
+                      : ColorConstant.neutral950),
             ),
             errorText: errorText,
             errorBorder: OutlineInputBorder(
@@ -98,13 +80,9 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
-                  color: isEmailFailed
+                  color: errorText != null
                       ? Colors.red
-                      : errorText != null
-                          ? Colors.red
-                          : isEnable
-                              ? ColorConstant.primary500
-                              : ColorConstant.neutral400),
+                      : ColorConstant.neutral400),
             ),
           ),
         ),

@@ -25,14 +25,16 @@ class AddPlantController extends GetxController {
     isPageLoading(true);
     try {
       plantCategoriesResponse = await addPlantService.getAllPlantCategory();
-      plantRecommendationsResponse = await addPlantService.getPlantRecommendations();
+      plantRecommendationsResponse =
+          await addPlantService.getPlantRecommendations();
       isPageLoading(false);
     } on Exception {
       Get.back(canPop: true);
       Get.defaultDialog(
         title: "Network Error Occured!",
         titleStyle: TextStyleConstant.heading4,
-        middleText: "Please check your internet connection, or contact the developers if this issue still exist!",
+        middleText:
+            "Please check your internet connection, or contact the developers if this issue still exist!",
         middleTextStyle: TextStyleConstant.paragraph,
         textConfirm: "OK",
         confirmTextColor: Colors.white,
@@ -43,5 +45,4 @@ class AddPlantController extends GetxController {
       );
     }
   }
-
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/views/auth/widgets/custom_auth_button_widget.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
@@ -21,6 +22,7 @@ class _AllowNotificationViewState extends State<AllowNotificationView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: ColorConstant.white,
       appBar: AppBar(
         leading: Container(),
       ),
@@ -95,7 +97,9 @@ class _AllowNotificationViewState extends State<AllowNotificationView> {
                   overlayColor: WidgetStateProperty.all(Colors.transparent),
                 ),
                 isSemanticButton: false,
-                onPressed: () {},
+                onPressed: () {
+                  Get.offAll(const BottomNavigationBarGlobalWidget());
+                },
                 child: const Text(
                   "Maybe Next Time",
                   style: TextStyle(color: Color(0xFF10B981)),

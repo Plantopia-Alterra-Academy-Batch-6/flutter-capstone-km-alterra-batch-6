@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/utils/app_routes.dart';
 
@@ -38,8 +39,9 @@ class _SplashScreenViewState extends State<SplashScreenView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: ColorConstant.white,
         body: Center(
-      child: SvgPicture.asset('assets/icons/logo_splashscreen.svg'),
-    ));
+          child: SvgPicture.asset('assets/icons/logo_splashscreen.svg'),
+        ));
   }
 }
