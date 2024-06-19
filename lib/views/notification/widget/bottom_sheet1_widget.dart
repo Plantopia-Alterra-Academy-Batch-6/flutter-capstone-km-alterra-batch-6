@@ -139,7 +139,8 @@ class BottomSheet1Widget extends StatelessWidget {
                                 color: ColorConstant.primary500,
                               ),
                               onTap: () {
-                                Get.bottomSheet(BottomSheet2Widget());
+                                Get.bottomSheet(BottomSheet2Widget(),
+                                    isDismissible: false);
                               },
                             ),
                           ),
@@ -160,10 +161,10 @@ class BottomSheet1Widget extends StatelessWidget {
                               while (Get.isBottomSheetOpen == true) {
                                 Get.back();
                               }
+                              Get.bottomSheet(const BottomSheet3Widget());
                               await notifController
                                   .getNotificationById(notifId);
                               await notifController.getAllNotification();
-                              await Get.bottomSheet(const BottomSheet3Widget());
                             },
                           )),
                         ],

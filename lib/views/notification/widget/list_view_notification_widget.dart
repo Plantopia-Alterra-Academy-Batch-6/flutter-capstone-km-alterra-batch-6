@@ -20,7 +20,9 @@ class ListViewNotificationWidget extends StatelessWidget {
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
-              onPressed: () {},
+              onPressed: () async {
+                await notifController.markAllAsRead();
+              },
               child: Text(
                 "Mark all as read",
                 style: TextStyleConstant.paragraph.copyWith(

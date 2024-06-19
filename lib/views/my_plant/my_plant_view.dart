@@ -21,6 +21,7 @@ class MyPlantView extends StatelessWidget {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: SingleChildScrollView(
+          controller: myPlantController.scrollController,
           child: Padding(
             padding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
             child: Column(
@@ -57,14 +58,16 @@ class MyPlantView extends StatelessWidget {
                   ),
                   child: SearchBarWidget(),
                 ),
-                Obx(() {
-                  if (myPlantController.isSearchFound.isTrue) {
-                    return SingleResultWidget();
-                  } else {
-                    return MyPlantListWidget();
-                  }
-                },),
-                
+                Obx(
+                  () {
+                    if (myPlantController.isSearchFound.isTrue &&
+                        myPlantController.searchController.text != "") {
+                      return SingleResultWidget();
+                    } else {
+                      return MyPlantListWidget();
+                    }
+                  },
+                ),
                 const SizedBox(
                   height: 10,
                 ),
@@ -74,22 +77,35 @@ class MyPlantView extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          Get.toNamed(AppRoutes.addPlant);
-        },
-        backgroundColor: ColorConstant.primary500,
-        label: Text(
-          'Add Plant',
-          style: TextStyleConstant.subtitle.copyWith(
-            fontWeight: FontWeight.w700,
-            color: Colors.white,
-          ),
-        ),
-        icon: const Icon(
-          Icons.add_circle_outline,
-          color: Colors.white,
-        ),
+      floatingActionButton: Obx(
+        () => myPlantController.showFloatingButton.value
+            ? FloatingActionButton.extended(
+                onPressed: () {
+                  Get.toNamed(AppRoutes.addPlant);
+                },
+                backgroundColor: ColorConstant.primary500,
+                label: Text(
+                  'Add Plant',
+                  style: TextStyleConstant.subtitle.copyWith(
+                    fontWeight: FontWeight.w700,
+                    color: Colors.white,
+                  ),
+                ),
+                icon: const Icon(
+                  Icons.add_circle_outline,
+                  color: Colors.white,
+                ),
+              )
+            : FloatingActionButton(
+                backgroundColor: ColorConstant.primary500,
+                onPressed: () {
+                  Get.toNamed(AppRoutes.addPlant);
+                },
+                child: const Icon(
+                  Icons.add_circle_outline,
+                  color: Colors.white,
+                ),
+              ),
       ),
     );
   }

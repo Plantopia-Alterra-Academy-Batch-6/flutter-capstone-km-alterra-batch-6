@@ -141,6 +141,9 @@ class BottomSheet2Widget extends StatelessWidget {
               children: [
                 Expanded(
                     child: ButtonWidget(
+                  onTap: () {
+                    Get.back();
+                  },
                   buttonName: "Cancel",
                   boxDecoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(8),

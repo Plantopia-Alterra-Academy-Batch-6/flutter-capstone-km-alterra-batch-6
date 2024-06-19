@@ -26,6 +26,7 @@ class SortHistoryWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          const SizedBox(height: 12,),
           Text(
             sortingName,
             style: TextStyleConstant.title.copyWith(

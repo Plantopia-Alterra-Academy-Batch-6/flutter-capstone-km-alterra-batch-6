@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
 import 'package:plantopia/models/get_plant_category_response.dart';
@@ -12,6 +13,11 @@ class MyPlantController extends GetxController {
   Rx<Status> myPlantData = Status.loading.obs;
   Rx<Status> recommendationData = Status.loading.obs;
   Rx<Status> categoryData = Status.loading.obs;
+
+  ScrollController scrollController = ScrollController();
+
+  RxBool showFloatingButton =
+      true.obs; // State untuk mengontrol tampilan Floating Action Button
 
   RxList<PlantElement> listMyPlant = <PlantElement>[].obs;
   RxList<Plant> recommendationPlant = <Plant>[].obs;
@@ -38,6 +44,18 @@ class MyPlantController extends GetxController {
     getMyPlant();
     getAllCategories();
     getRecommendationPlant();
+
+    scrollController.addListener(() {
+      // Jika posisi scroll berubah, periksa apakah harus menampilkan Floating Action Button
+      if (scrollController.position.userScrollDirection ==
+          ScrollDirection.reverse) {
+        showFloatingButton.value =
+            false; // Sembunyikan Floating Action Button saat menggulir ke bawah
+      } else if (scrollController.position.userScrollDirection ==
+          ScrollDirection.forward) {
+        showFloatingButton.value = true; //
+      }
+    });
   }
 
   Future<void> init() async {

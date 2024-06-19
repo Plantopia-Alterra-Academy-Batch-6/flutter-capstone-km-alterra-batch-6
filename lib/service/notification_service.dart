@@ -1,9 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
+import 'package:plantopia/models/get_late_watering_response.dart';
 import 'package:plantopia/models/get_notification_response.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
 
@@ -153,6 +153,26 @@ class NotificationService {
       }
     } on DioException {
       throw Exception("Failed to get plant id");
+    }
+  }
+
+  static Future<GetLaterWateringResponse> getLateWatering() async {
+    try {
+      final token = await UserTokenPref.getToken();
+      Map<String, dynamic> headers = {
+        'Authorization': 'Bearer $token',
+      };
+      final response = await dio.get(
+          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/check-watering",
+          options: Options(headers: headers));
+
+      if (response.statusCode == 200) {
+        return GetLaterWateringResponse.fromJson(response.data);
+      } else {
+        throw Exception("Failed to get late reminder: ${response.statusCode}");
+      }
+    } on DioException {
+      throw Exception("Failed to get late reminder");
     }
   }
 }

@@ -97,7 +97,7 @@ class PlantRequirementsWidget extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.w600),
                 ),
                 trailing: Text(
-                  '${(detailMyPlant.plant!.harvestDuration! / 30).truncate()} Months',
+                  '${detailMyPlant.plant!.harvestDuration} Months',
                   style: TextStyleConstant.subtitle
                       .copyWith(fontWeight: FontWeight.w400),
                 ),

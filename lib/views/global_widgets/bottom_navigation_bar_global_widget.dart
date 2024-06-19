@@ -4,7 +4,7 @@ import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 
 import 'package:plantopia/controllers/bottom_navigation_bar_controller.dart';
-import 'package:plantopia/controllers/my_plant_controller.dart';
+import 'package:plantopia/controllers/notification_controller.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_icon_global_widget.dart';
 import 'package:plantopia/views/home/home_view.dart';
 import 'package:plantopia/views/my_plant/my_plant_view.dart';
@@ -27,11 +27,14 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
         Get.put(BottomNavigationBarController());
 
     final WeatherController weatherController = Get.put(WeatherController());
+    final NotificationController notificationController =
+        Get.put(NotificationController());
 
     controller.setCurrentIndex(index ?? 0);
 
     return Scaffold(
       body: Obx(() {
+        notificationController.lateWatering();
         return IndexedStack(
           index: controller.currentIndex.value,
           children: [

@@ -8,6 +8,7 @@ import 'package:plantopia/controllers/watering_history_controller.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
 import 'package:plantopia/views/wateting_history/widget/sort_watering_history_widget.dart';
+import 'package:plantopia/views/wateting_history/widget/split_watering_history_widget.dart';
 
 class WateringHistoryView extends StatelessWidget {
   WateringHistoryView({super.key});
@@ -30,7 +31,47 @@ class WateringHistoryView extends StatelessWidget {
           ),
         ),
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.filter_list))
+          PopupMenuButton(
+            padding: EdgeInsets.zero, // Mengatur padding ke EdgeInsets.zero
+            position: PopupMenuPosition.under,
+            color: ColorConstant.white,
+            icon: const Icon(Icons.filter_list, color: Colors.black),
+            itemBuilder: (BuildContext context) {
+              return [
+                PopupMenuItem(
+                  height: 40,
+                  value: 1,
+                  child: Center(
+                    child: Text('A to Z',
+                        style: TextStyleConstant.subtitle
+                            .copyWith(fontWeight: FontWeight.w600)),
+                  ),
+                ),
+                PopupMenuItem(
+                  height: 40,
+                  value: 2,
+                  child: Center(
+                    child: Text('Z to A',
+                        style: TextStyleConstant.subtitle
+                            .copyWith(fontWeight: FontWeight.w600)),
+                  ),
+                ),
+              ];
+            },
+            onSelected: (value) {
+              switch (value) {
+                case 1:
+                  wateringHistoryController.sortAtoZ();
+                  break;
+                case 2:
+                  wateringHistoryController.sortZtoA();
+                  break;
+
+                default:
+              }
+              print('You selected filter: $value');
+            },
+          ),
         ],
       ),
       body: Obx(() {
@@ -103,36 +144,38 @@ class WateringHistoryView extends StatelessWidget {
   }
 
   Widget bodyBuild(context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          SortWateringHistoryWidget(
-            sortListHistory: wateringHistoryController.todayHistory,
-            sortingName: 'Today',
-          ),
-          SortWateringHistoryWidget(
-            sortListHistory: wateringHistoryController.yesterdayHistory,
-            sortingName: 'Yesterday',
-          ),
-          SortWateringHistoryWidget(
-            sortListHistory: wateringHistoryController.thisWeekHistory,
-            sortingName: 'This Week',
-          ),
-          SortWateringHistoryWidget(
-            sortListHistory: wateringHistoryController.thisMonthHistory,
-            sortingName: 'This Month',
-          ),
-          SortWateringHistoryWidget(
-            sortListHistory: wateringHistoryController.thisYearHistory,
-            sortingName: 'This Year',
-          ),
-          SortWateringHistoryWidget(
-            sortListHistory: wateringHistoryController.lastYearHistory,
-            sortingName: 'Last Year',
-          ),
-        ],
-      ),
-    );
+    return wateringHistoryController.isFiltering.value
+        ? SortWateringHistoryWidget()
+        : Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              children: [
+                SplitWateringHistoryWidget(
+                  sortListHistory: wateringHistoryController.todayHistory,
+                  sortingName: 'Today',
+                ),
+                SplitWateringHistoryWidget(
+                  sortListHistory: wateringHistoryController.yesterdayHistory,
+                  sortingName: 'Yesterday',
+                ),
+                SplitWateringHistoryWidget(
+                  sortListHistory: wateringHistoryController.thisWeekHistory,
+                  sortingName: 'This Week',
+                ),
+                SplitWateringHistoryWidget(
+                  sortListHistory: wateringHistoryController.thisMonthHistory,
+                  sortingName: 'This Month',
+                ),
+                SplitWateringHistoryWidget(
+                  sortListHistory: wateringHistoryController.thisYearHistory,
+                  sortingName: 'This Year',
+                ),
+                SplitWateringHistoryWidget(
+                  sortListHistory: wateringHistoryController.lastYearHistory,
+                  sortingName: 'Last Year',
+                ),
+              ],
+            ),
+          );
   }
 }

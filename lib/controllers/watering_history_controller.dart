@@ -14,12 +14,30 @@ class WateringHistoryController extends GetxController {
   RxList<WateringHistory> lastYearHistory = <WateringHistory>[].obs;
   RxList<WateringHistory> listWateringHistory = <WateringHistory>[].obs;
   Rx<Status> wateringDataStatus = Status.loading.obs;
+  RxBool isFiltering = false.obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
-    await getAllWateringHistory();
     await splitWateringHistory();
+  }
+
+  Future<void> sortAtoZ() async {
+    listWateringHistory.sort(
+      (a, b) => a.plant!.name!
+          .toLowerCase()
+          .compareTo(b.plant!.name?.toLowerCase() ?? "-"),
+    );
+    isFiltering.value = true;
+  }
+
+  Future<void> sortZtoA() async {
+    listWateringHistory.sort(
+      (a, b) => b.plant!.name!
+          .toLowerCase()
+          .compareTo(a.plant!.name?.toLowerCase() ?? "-"),
+    );
+    isFiltering.value = true;
   }
 
   String parseDate(DateTime dateTime) {
@@ -31,17 +49,6 @@ class WateringHistoryController extends GetxController {
     DateFormat formatter = DateFormat('h:mm a');
     String formattedTime = formatter.format(wateringTime);
     return formattedTime;
-  }
-
-  Future<void> getAllWateringHistory() async {
-    try {
-      wateringDataStatus.value = Status.loading;
-      final response = await WateringHistoryService.getWateringHistory();
-      listWateringHistory.value = response.data ?? [];
-      wateringDataStatus.value = Status.loaded;
-    } catch (e) {
-      wateringDataStatus.value = Status.error;
-    }
   }
 
   static Future<void> postWatering(int plantId) async {
@@ -65,20 +72,19 @@ class WateringHistoryController extends GetxController {
       wateringDataStatus.value = Status.loading;
       DateTime now = DateTime.now();
       final response = await WateringHistoryService.getWateringHistory();
+      listWateringHistory.value = response.data ?? [];
       for (WateringHistory wateringHistory in response.data ?? []) {
         final wateringHistoryTime = wateringHistory.createdAt ?? DateTime(-1);
         Duration difference = now.difference(wateringHistoryTime);
         int years = difference.inDays ~/ 365;
-        int months = (difference.inDays % 365) ~/ 30;
-        int weeks = ((difference.inDays % 365) % 30) ~/ 7;
         int days = ((difference.inDays % 365) % 30) % 7;
         if (years > 1) {
           lastYearHistory.add(wateringHistory);
-        } else if (years > 0 && years <= 1) {
+        } else if (days > 30 && days <= 365) {
           thisYearHistory.add(wateringHistory);
-        } else if (months > 0) {
+        } else if (days > 7 && days <= 30) {
           thisMonthHistory.add(wateringHistory);
-        } else if (weeks > 0) {
+        } else if (days > 1 && days <= 7) {
           thisWeekHistory.add(wateringHistory);
         } else if (days == 1) {
           yesterdayHistory.add(wateringHistory);

@@ -18,6 +18,7 @@ class NotificationView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    notifController.getAllNotification();
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,

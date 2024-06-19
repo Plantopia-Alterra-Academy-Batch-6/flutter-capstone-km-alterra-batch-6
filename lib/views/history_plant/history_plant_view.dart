@@ -7,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plantopia/controllers/plant_history_controller.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
+import 'package:plantopia/views/history_plant/widget/filtering_widget.dart';
 import 'package:plantopia/views/history_plant/widget/sort_history_widget.dart';
 
 class HistoryPlantView extends StatelessWidget {
@@ -30,7 +31,72 @@ class HistoryPlantView extends StatelessWidget {
             ),
           ),
           actions: [
-            IconButton(onPressed: () {}, icon: const Icon(Icons.filter_list))
+            PopupMenuButton(
+              padding: EdgeInsets.zero, // Mengatur padding ke EdgeInsets.zero
+              position: PopupMenuPosition.under,
+              color: ColorConstant.white,
+              icon: const Icon(Icons.filter_list, color: Colors.black),
+              itemBuilder: (BuildContext context) {
+                return [
+                  PopupMenuItem(
+                    padding: EdgeInsets.zero,
+                    value: 1,
+                    child: Center(
+                      child: Text(
+                        'Latest',
+                        style: TextStyleConstant.subtitle
+                            .copyWith(fontWeight: FontWeight.w600),
+                      ),
+                    ),
+                  ),
+                  PopupMenuItem(
+                    height: 40,
+                    value: 2,
+                    child: Center(
+                      child: Text('Oldest',
+                          style: TextStyleConstant.subtitle
+                              .copyWith(fontWeight: FontWeight.w600)),
+                    ),
+                  ),
+                  PopupMenuItem(
+                    height: 40,
+                    value: 3,
+                    child: Center(
+                      child: Text('A to Z',
+                          style: TextStyleConstant.subtitle
+                              .copyWith(fontWeight: FontWeight.w600)),
+                    ),
+                  ),
+                  PopupMenuItem(
+                    height: 40,
+                    value: 4,
+                    child: Center(
+                      child: Text('Z to A',
+                          style: TextStyleConstant.subtitle
+                              .copyWith(fontWeight: FontWeight.w600)),
+                    ),
+                  ),
+                ];
+              },
+              onSelected: (value) {
+                switch (value) {
+                  case 1:
+                    plantHistoryController.isFiltering.value = false;
+                    break;
+                  case 2:
+                    plantHistoryController.getPlantingHistory();
+                    break;
+                  case 3:
+                    plantHistoryController.sortAtoZ();
+                    break;
+                  case 4:
+                    plantHistoryController.sortZtoA();
+                    break;
+                  default:
+                }
+                print('You selected filter: $value');
+              },
+            ),
           ],
         ),
         body: Obx(() {
@@ -102,36 +168,43 @@ class HistoryPlantView extends StatelessWidget {
   }
 
   Widget bodyBuild(context) {
-    return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        children: [
-          SortHistoryWidget(
-            sortListHistory: plantHistoryController.todayHistory,
-            sortingName: 'Today',
-          ),
-          SortHistoryWidget(
-            sortListHistory: plantHistoryController.yesterdayHistory,
-            sortingName: 'Yesterday',
-          ),
-          SortHistoryWidget(
-            sortListHistory: plantHistoryController.thisWeekHistory,
-            sortingName: 'This Week',
-          ),
-          SortHistoryWidget(
-            sortListHistory: plantHistoryController.thisMonthHistory,
-            sortingName: 'This Month',
-          ),
-          SortHistoryWidget(
-            sortListHistory: plantHistoryController.thisYearHistory,
-            sortingName: 'This Year',
-          ),
-          SortHistoryWidget(
-            sortListHistory: plantHistoryController.lastYearHistory,
-            sortingName: 'Last Year',
-          ),
-        ],
-      ),
-    );
+    if (plantHistoryController.isFiltering.value) {
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: FilteringWidget(),
+      );
+    } else {
+      return Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            SortHistoryWidget(
+              sortListHistory: plantHistoryController.todayHistory,
+              sortingName: 'Today',
+            ),
+            SortHistoryWidget(
+              sortListHistory: plantHistoryController.yesterdayHistory,
+              sortingName: 'Yesterday',
+            ),
+            SortHistoryWidget(
+              sortListHistory: plantHistoryController.thisWeekHistory,
+              sortingName: 'This Week',
+            ),
+            SortHistoryWidget(
+              sortListHistory: plantHistoryController.thisMonthHistory,
+              sortingName: 'This Month',
+            ),
+            SortHistoryWidget(
+              sortListHistory: plantHistoryController.thisYearHistory,
+              sortingName: 'This Year',
+            ),
+            SortHistoryWidget(
+              sortListHistory: plantHistoryController.lastYearHistory,
+              sortingName: 'Last Year',
+            ),
+          ],
+        ),
+      );
+    }
   }
 }

@@ -1,5 +1,5 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get/get_rx/get_rx.dart';
 import 'package:intl/intl.dart';
 import 'package:plantopia/models/get_panting_history_response.dart';
 import 'package:plantopia/service/planting_history_service.dart';
@@ -14,16 +14,35 @@ class PlantHistoryController extends GetxController {
   RxList<PlantHistory> lastYearHistory = <PlantHistory>[].obs;
   RxList<PlantHistory> listPlantingHistory = <PlantHistory>[].obs;
   Rx<Status> plantingHistoryData = Status.loading.obs;
+  RxInt selectedFilter = 1.obs;
+  RxBool isFiltering = false.obs;
 
   @override
   Future<void> onInit() async {
     super.onInit();
-    await getPlantingHistory();
     await plantingHistorySplit();
     reverseAllLists();
   }
 
-  void reverseList(RxList<PlantHistory> list) {
+  Future<void> sortAtoZ() async {
+    listPlantingHistory.sort(
+      (a, b) => a.plantName!
+          .toLowerCase()
+          .compareTo(b.plantName?.toLowerCase() ?? "-"),
+    );
+    isFiltering.value = true;
+  }
+
+  Future<void> sortZtoA() async {
+    listPlantingHistory.sort(
+      (a, b) => b.plantName!
+          .toLowerCase()
+          .compareTo(a.plantName?.toLowerCase() ?? "-"),
+    );
+    isFiltering.value = true;
+  }
+
+  Future<void> reverseList(RxList<PlantHistory> list) async {
     int length = list.length;
     for (int i = 0; i < length ~/ 2; i++) {
       PlantHistory temp = list[i];
@@ -33,7 +52,7 @@ class PlantHistoryController extends GetxController {
   }
 
   // Fungsi untuk membalik urutan indeks dalam semua RxList yang Anda miliki
-  void reverseAllLists() {
+  void reverseAllLists() async {
     reverseList(todayHistory);
     reverseList(yesterdayHistory);
     reverseList(thisWeekHistory);
@@ -49,10 +68,9 @@ class PlantHistoryController extends GetxController {
 
   Future<void> getPlantingHistory() async {
     try {
-      plantingHistoryData.value = Status.loading;
       final response = await PlantingHistoryService.getPlantingHistory();
       listPlantingHistory.value = response.data ?? [];
-      plantingHistoryData.value = Status.loaded;
+      isFiltering.value = true;
     } catch (e) {
       plantingHistoryData.value = Status.error;
     }
@@ -71,20 +89,19 @@ class PlantHistoryController extends GetxController {
       plantingHistoryData.value = Status.loading;
       DateTime now = DateTime.now();
       final response = await PlantingHistoryService.getPlantingHistory();
+      listPlantingHistory.value = response.data ?? [];
       for (PlantHistory plant in response.data ?? []) {
         final plantHistoryTime = plant.createdAt ?? DateTime(-1);
         Duration difference = now.difference(plantHistoryTime);
         int years = difference.inDays ~/ 365;
-        int months = (difference.inDays % 365) ~/ 30;
-        int weeks = ((difference.inDays % 365) % 30) ~/ 7;
         int days = ((difference.inDays % 365) % 30) % 7;
         if (years > 1) {
           lastYearHistory.add(plant);
-        } else if (years > 0 && years <= 1) {
+        } else if (days > 31 && years <= 365) {
           thisYearHistory.add(plant);
-        } else if (months > 0) {
+        } else if (days > 7 && days <= 30) {
           thisMonthHistory.add(plant);
-        } else if (weeks > 0) {
+        } else if (days > 1 && days <= 7) {
           thisWeekHistory.add(plant);
         } else if (days == 1) {
           yesterdayHistory.add(plant);
@@ -93,6 +110,7 @@ class PlantHistoryController extends GetxController {
         }
       }
       plantingHistoryData.value = Status.loaded;
+      isFiltering.value = false;
     } catch (e) {
       plantingHistoryData.value = Status.error;
     }

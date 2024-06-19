@@ -90,7 +90,7 @@ class MyPlantDetailsView extends StatelessWidget {
                         const PlantCharacteristicsWidget(),
                         const PlantGuideCardWidget(),
                         MonitoringProgressWidget(),
-                        const PlantCareWidget(),
+                        PlantCareWidget(),
                         FaqWidget(),
                       ],
                     ),
