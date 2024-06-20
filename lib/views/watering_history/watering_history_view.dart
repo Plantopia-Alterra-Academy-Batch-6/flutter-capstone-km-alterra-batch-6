@@ -7,8 +7,8 @@ import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/watering_history_controller.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
-import 'package:plantopia/views/wateting_history/widget/sort_watering_history_widget.dart';
-import 'package:plantopia/views/wateting_history/widget/split_watering_history_widget.dart';
+import 'package:plantopia/views/watering_history/widget/sort_watering_history_widget.dart';
+import 'package:plantopia/views/watering_history/widget/split_watering_history_widget.dart';
 
 class WateringHistoryView extends StatelessWidget {
   WateringHistoryView({super.key});

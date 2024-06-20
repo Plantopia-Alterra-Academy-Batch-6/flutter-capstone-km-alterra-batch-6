@@ -24,6 +24,24 @@ class PlantHistoryController extends GetxController {
     reverseAllLists();
   }
 
+  String extractPlantName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(0, index).trim();
+    } else {
+      return input.trim();
+    }
+  }
+
+  String extractFamilyName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(index + 1).trim();
+    } else {
+      return '';
+    }
+  }
+
   Future<void> sortAtoZ() async {
     listPlantingHistory.sort(
       (a, b) => a.plantName!

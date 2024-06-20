@@ -21,9 +21,9 @@ class SingleResultWidget extends StatelessWidget {
           child: CardGlobalWidget(
             plantName:
                 myPlantController.searchResultJson['customize_name'] != ""
-                    ? myPlantController.searchResultJson['customize_name']
-                    : myPlantController.searchResultJson['name'],
-            plantCategory: myPlantController.searchResultJson['category'],
+                    ? myPlantController.extractPlantName(myPlantController.searchResultJson['customize_name'])
+                    : myPlantController.extractPlantName(myPlantController.searchResultJson['name']),
+            plantCategory: myPlantController.extractFamilyName(myPlantController.searchResultJson['name']),
             plantImageUrl:
                 myPlantController.searchResultJson['image_url'] ?? "",
           ),

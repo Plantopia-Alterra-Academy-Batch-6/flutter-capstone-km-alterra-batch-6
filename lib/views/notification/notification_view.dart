@@ -12,9 +12,7 @@ import 'package:plantopia/views/notification/widget/list_view_notification_widge
 class NotificationView extends StatelessWidget {
   NotificationView({super.key});
 
-  final NotificationController notifController =
-      Get.put(NotificationController());
-  final int selectedOption = 1;
+  final NotificationController notifController = Get.find();
 
   @override
   Widget build(BuildContext context) {

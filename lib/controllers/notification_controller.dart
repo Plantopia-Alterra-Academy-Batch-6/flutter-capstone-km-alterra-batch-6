@@ -5,7 +5,6 @@ import 'package:intl/intl.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
-import 'package:plantopia/models/get_late_watering_response.dart';
 import 'package:plantopia/models/get_notification_response.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/service/notification_service.dart';
@@ -19,14 +18,61 @@ class NotificationController extends GetxController {
   Rx<Status> plantStatus = Status.loading.obs;
   RxBool isSuccess = false.obs;
   PlantByIdResponse? plantByIdResponse;
-  var dateTime = DateTime.now().obs;
+  Rx<DateTime> dateTime = DateTime.now().obs;
   var selectedOption = false.obs;
+
+  @override
+  void onInit() {
+    Future.delayed(const Duration(seconds: 5), () {
+      lateWatering();
+    });
+    super.onInit();
+  }
 
   Future<void> markAllAsRead() async {
     for (var value in listNotif) {
       await getNotificationById(value.id ?? -1);
     }
     await getAllNotification();
+  }
+
+  String formatTime(DateTime dateTime) {
+    return DateFormat.Hm().format(dateTime);
+  }
+
+  String extractPlantName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(0, index).trim();
+    } else {
+      return input.trim();
+    }
+  }
+
+  String extractFamilyName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(index + 1).trim();
+    } else {
+      return '';
+    }
+  }
+
+  String snackBarReminder(DateTime time) {
+    DateTime now = DateTime.now();
+    Duration difference = now.difference(time);
+
+    int hours = difference.inHours;
+    int minutes = difference.inMinutes;
+    if (hours.isNegative) {
+      hours = hours < 0 ? -hours : hours;
+      return '$hours hour';
+    } else if (hours != 0) {
+      hours = hours < 0 ? -hours : hours;
+      hours = 24 - hours;
+      return "$hours hour";
+    }
+    return "$minutes minutes";
   }
 
   String notifDate(DateTime notifDate) {
@@ -74,11 +120,22 @@ class NotificationController extends GetxController {
     selectedOption.value = index;
   }
 
+  Future<List<Notif>> reverseList(List<Notif> list) async {
+    int length = list.length;
+    for (int i = 0; i < length ~/ 2; i++) {
+      Notif temp = list[i];
+      list[i] = list[length - 1 - i];
+      list[length - 1 - i] = temp;
+    }
+    return list;
+  }
+
   Future<void> getAllNotification() async {
     try {
       notifStatus.value = Status.loading;
       final response = await NotificationService.getAllNotification();
-      listNotif.value = response.data ?? [];
+      final List<Notif> resultData = await reverseList(response.data ?? []);
+      listNotif.value = resultData;
       notifStatus.value = Status.loaded;
     } catch (_) {
       notifStatus.value = Status.error;
@@ -162,14 +219,17 @@ class NotificationController extends GetxController {
   Future<void> lateWatering() async {
     try {
       final response = await NotificationService.getLateWatering();
+      await getAllNotification();
+
       for (var value in listNotif) {
-        if (value.id == response.data?.id && value.isRead == false) {
+        if (value.id == response.data?.id) {
           Get.dialog(
               barrierDismissible: false,
               Center(
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Container(
+                    height: 472,
                     padding: const EdgeInsets.all(16),
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(16),
@@ -195,13 +255,17 @@ class NotificationController extends GetxController {
                         Text(
                           response.data?.title ?? "-",
                           style: TextStyleConstant.heading4.copyWith(
-                            fontWeight: FontWeight.w700,
-                          ),
+                              fontWeight: FontWeight.w700,
+                              decoration: TextDecoration.none),
                           textAlign: TextAlign.center,
+                        ),
+                        const SizedBox(
+                          height: 2,
                         ),
                         Text(
                           response.data?.body ?? "-",
-                          style: TextStyleConstant.paragraph,
+                          style: TextStyleConstant.paragraph
+                              .copyWith(decoration: TextDecoration.none),
                           textAlign: TextAlign.center,
                         ),
                         ButtonWidget(
@@ -209,38 +273,44 @@ class NotificationController extends GetxController {
                             Get.back();
                             await getNotificationById(value.id ?? -1);
                             await postWatering(value.plantId ?? -1);
-                            Get.dialog(Container(
-                              decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              height: 323,
-                              width: double.infinity,
-                              child: Padding(
-                                padding: const EdgeInsets.all(16.0),
-                                child: Column(
-                                  children: [
-                                    Image.asset(
-                                      ImageConstant.successWatering,
-                                      height: 200,
-                                    ),
-                                    const SizedBox(
-                                      height: 16,
-                                    ),
-                                    Text("Hurray! 💦",
-                                        style:
-                                            TextStyleConstant.heading4.copyWith(
-                                          fontWeight: FontWeight.w700,
-                                        )),
-                                    const SizedBox(
-                                      height: 4,
-                                    ),
-                                    Text(
-                                      "Your plant has been watered!\nKeep up the good care! 🙌",
-                                      style: TextStyleConstant.paragraph,
-                                      textAlign: TextAlign.center,
-                                    ),
-                                  ],
+                            Get.dialog(Center(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: Colors.white,
+                                  borderRadius: BorderRadius.circular(16),
+                                ),
+                                height: 323,
+                                width: double.infinity,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Column(
+                                    children: [
+                                      Image.asset(
+                                        ImageConstant.successWatering,
+                                        height: 200,
+                                      ),
+                                      const SizedBox(
+                                        height: 16,
+                                      ),
+                                      Text("Hurray! 💦",
+                                          style: TextStyleConstant.heading4
+                                              .copyWith(
+                                            decoration: TextDecoration.none,
+                                            fontWeight: FontWeight.w700,
+                                          )),
+                                      const SizedBox(
+                                        height: 4,
+                                      ),
+                                      Text(
+                                        "Your plant has been watered!\nKeep up the good care! 🙌",
+                                        style: TextStyleConstant.paragraph
+                                            .copyWith(
+                                                decoration:
+                                                    TextDecoration.none),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ));
@@ -249,8 +319,9 @@ class NotificationController extends GetxController {
                           boxDecoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
                               color: ColorConstant.primary500),
-                          textStyle: TextStyleConstant.subtitle
-                              .copyWith(color: ColorConstant.white),
+                          textStyle: TextStyleConstant.subtitle.copyWith(
+                              color: ColorConstant.white,
+                              decoration: TextDecoration.none),
                         ),
                         ButtonWidget(
                           onTap: () {
@@ -261,8 +332,8 @@ class NotificationController extends GetxController {
                             color: ColorConstant.white,
                           ),
                           textStyle: TextStyleConstant.subtitle.copyWith(
-                            color: ColorConstant.primary500,
-                          ),
+                              color: ColorConstant.primary500,
+                              decoration: TextDecoration.none),
                         ),
                       ],
                     ),
@@ -273,7 +344,6 @@ class NotificationController extends GetxController {
         }
       }
     } catch (e) {
-      plantStatus.value = Status.error;
       throw Exception(e);
     }
   }

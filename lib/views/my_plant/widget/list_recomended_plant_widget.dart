@@ -63,21 +63,22 @@ class ListRecomendedPlantWidget extends StatelessWidget {
                         padding: const EdgeInsets.only(right: 12.0),
                         child: GestureDetector(
                           onTap: () {
-                            final AddPlantController addPlantController = Get.put(AddPlantController());
+                            final AddPlantController addPlantController =
+                                Get.put(AddPlantController());
                             addPlantController.selectedPlant.value =
                                 myPlantController
                                     .recommendationPlant[index].id!;
                             Get.toNamed(AppRoutes.plantDetails);
                           },
                           child: CardGlobalWidget(
-                              plantName: myPlantController
-                                      .recommendationPlant[index].name ??
-                                  "-",
+                              plantName: myPlantController.extractPlantName(
+                                  myPlantController
+                                          .recommendationPlant[index].name ??
+                                      "-"),
                               plantCategory: myPlantController
-                                      .recommendationPlant[index]
-                                      .plantCategory
-                                      ?.name ??
-                                  "-",
+                                  .extractFamilyName(myPlantController
+                                          .recommendationPlant[index].name ??
+                                      "-"),
                               plantImageUrl: myPlantController
                                       .recommendationPlant[index]
                                       .plantImages?[0]

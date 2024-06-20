@@ -69,23 +69,24 @@ class MyPlantListWidget extends StatelessWidget {
                           Get.toNamed(AppRoutes.myPlantDetails, arguments: {
                             'myPlantDetails':
                                 myPlantController.listMyPlant[index]
-                          })?.then((value) {
-                            myPlantController.getMyPlant();
                           });
                         },
                         child: CardMyPlantWidget(
                           plantName: myPlantController
                                       .listMyPlant[index].customizeName !=
                                   ""
-                              ? myPlantController
-                                      .listMyPlant[index].customizeName ??
-                                  "-"
-                              : myPlantController
+                              ? myPlantController.extractPlantName(
+                                  myPlantController
+                                          .listMyPlant[index].customizeName ??
+                                      "-")
+                              : myPlantController.extractPlantName(
+                                  myPlantController
+                                          .listMyPlant[index].plant?.name ??
+                                      "-"),
+                          plantCategory: myPlantController.extractFamilyName(
+                              myPlantController
                                       .listMyPlant[index].plant?.name ??
-                                  "-",
-                          plantCategory: myPlantController.listMyPlant[index]
-                                  .plant?.plantCategory?.name ??
-                              "",
+                                  ""),
                           plantImageUrl: myPlantController.listMyPlant[index]
                                   .plant?.plantImages?[0].fileName ??
                               "",

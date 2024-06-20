@@ -22,6 +22,24 @@ class WateringHistoryController extends GetxController {
     await splitWateringHistory();
   }
 
+  String extractPlantName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(0, index).trim();
+    } else {
+      return input.trim();
+    }
+  }
+
+  String extractFamilyName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(index + 1).trim();
+    } else {
+      return '';
+    }
+  }
+
   Future<void> sortAtoZ() async {
     listWateringHistory.sort(
       (a, b) => a.plant!.name!
@@ -96,13 +114,5 @@ class WateringHistoryController extends GetxController {
     } catch (e) {
       wateringDataStatus.value = Status.error;
     }
-  }
-
-  Future<void> refreshPlantingHistory() async {
-    todayHistory.value = [];
-    yesterdayHistory.value = [];
-    thisWeekHistory.value = [];
-    thisMonthHistory.value = [];
-    thisYearHistory.value = [];
   }
 }

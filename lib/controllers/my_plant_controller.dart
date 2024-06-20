@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
 import 'package:plantopia/models/get_plant_category_response.dart';
 import 'package:plantopia/models/get_plant_recommendations_response.dart';
 import 'package:plantopia/service/add_plant_service.dart';
+import 'package:plantopia/service/auth_service.dart';
 import 'package:plantopia/service/my_plant_service.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 
@@ -37,10 +39,12 @@ class MyPlantController extends GetxController {
     'image_url': '',
     'category': '',
   };
+  final AuthController authController = Get.put(AuthController());
 
   @override
   Future<void> onInit() async {
     super.onInit();
+    await authController.getUser();
     getMyPlant();
     getAllCategories();
     getRecommendationPlant();
@@ -56,6 +60,24 @@ class MyPlantController extends GetxController {
         showFloatingButton.value = true; //
       }
     });
+  }
+
+  String extractPlantName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(0, index).trim();
+    } else {
+      return input.trim();
+    }
+  }
+
+  String extractFamilyName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(index + 1).trim();
+    } else {
+      return '';
+    }
   }
 
   Future<void> init() async {

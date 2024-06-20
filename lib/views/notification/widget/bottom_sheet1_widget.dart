@@ -16,7 +16,7 @@ class BottomSheet1Widget extends StatelessWidget {
   final String messages;
 
   final NotificationController notifController =
-      Get.put(NotificationController());
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +56,9 @@ class BottomSheet1Widget extends StatelessWidget {
                       child: Row(
                         children: [
                           Padding(
-                              padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(8.0),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
                               child: CachedNetworkImage(
                                 imageUrl: notifController.plantByIdResponse
                                         ?.data?.plantImages?[0].fileName ??
@@ -64,22 +66,26 @@ class BottomSheet1Widget extends StatelessWidget {
                                 width: 150,
                                 height: 150,
                                 fit: BoxFit.cover,
-                              )),
+                              ),
+                            ),
+                          ),
                           Expanded(
                               child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                notifController.plantByIdResponse?.data?.name ??
-                                    "-",
+                                notifController.extractPlantName(notifController
+                                        .plantByIdResponse?.data?.name ??
+                                    "-"),
                                 style: TextStyleConstant.heading4.copyWith(
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
                               Text(
-                                notifController.plantByIdResponse?.data
-                                        ?.plantCategory?.name ??
-                                    "-",
+                                notifController.extractFamilyName(
+                                    notifController
+                                            .plantByIdResponse?.data?.name ??
+                                        "-"),
                                 style: TextStyleConstant.caption
                                     .copyWith(color: ColorConstant.neutral400),
                               ),
@@ -139,7 +145,7 @@ class BottomSheet1Widget extends StatelessWidget {
                                 color: ColorConstant.primary500,
                               ),
                               onTap: () {
-                                Get.bottomSheet(BottomSheet2Widget(),
+                                Get.bottomSheet(BottomSheet2Widget(notifId: notifId,),
                                     isDismissible: false);
                               },
                             ),

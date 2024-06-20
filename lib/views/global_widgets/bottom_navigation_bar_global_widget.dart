@@ -27,14 +27,12 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
         Get.put(BottomNavigationBarController());
 
     final WeatherController weatherController = Get.put(WeatherController());
-    final NotificationController notificationController =
-        Get.put(NotificationController());
+  
 
     controller.setCurrentIndex(index ?? 0);
 
     return Scaffold(
       body: Obx(() {
-        notificationController.lateWatering();
         return IndexedStack(
           index: controller.currentIndex.value,
           children: [

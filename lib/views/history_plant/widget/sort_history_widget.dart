@@ -26,7 +26,9 @@ class SortHistoryWidget extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const SizedBox(height: 12,),
+          const SizedBox(
+            height: 12,
+          ),
           Text(
             sortingName,
             style: TextStyleConstant.title.copyWith(
@@ -53,32 +55,36 @@ class SortHistoryWidget extends StatelessWidget {
                       child: Row(
                         children: [
                           Container(
-                            decoration: BoxDecoration(
+                            decoration: ShapeDecoration(
                               color: ColorConstant.white,
-                              border: Border.all(
-                                width: 1,
-                                color: ColorConstant.neutral200,
-                              ),
-                              borderRadius: BorderRadius.circular(
-                                8,
+                              shape: RoundedRectangleBorder(
+                                side: BorderSide(
+                                  width: 1,
+                                  color: ColorConstant.neutral200,
+                                ),
+                                borderRadius: BorderRadius.circular(8),
                               ),
                             ),
-                            child: CachedNetworkImage(
-                              fit: BoxFit.cover,
-                              imageUrl: sortListHistory[index].imageUrl ?? "-",
-                              width: 147,
-                              height: 160,
-                              progressIndicatorBuilder:
-                                  (context, url, progress) {
-                                return const ShimmerContainerGlobalWidget(
-                                    width: 147, height: 160, radius: 0);
-                              },
-                              errorWidget: (context, url, error) {
-                                return Icon(
-                                  Icons.error,
-                                  color: ColorConstant.danger500,
-                                );
-                              },
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(8),
+                              child: CachedNetworkImage(
+                                fit: BoxFit.cover,
+                                imageUrl:
+                                    sortListHistory[index].imageUrl ?? "-",
+                                width: 147,
+                                height: 160,
+                                progressIndicatorBuilder:
+                                    (context, url, progress) {
+                                  return const ShimmerContainerGlobalWidget(
+                                      width: 147, height: 160, radius: 0);
+                                },
+                                errorWidget: (context, url, error) {
+                                  return Icon(
+                                    Icons.error,
+                                    color: ColorConstant.danger500,
+                                  );
+                                },
+                              ),
                             ),
                           ),
                           const SizedBox(
@@ -90,13 +96,13 @@ class SortHistoryWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                sortListHistory[index].plantName ?? "-",
+                                plantHistoryController.extractPlantName(sortListHistory[index].plantName ?? "-"),
                                 style: TextStyleConstant.heading4.copyWith(
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
                               Text(
-                                sortListHistory[index].plantCategory ?? "-",
+                                plantHistoryController.extractFamilyName(sortListHistory[index].plantName ?? "-"),
                                 style: TextStyleConstant.footer.copyWith(
                                   color: ColorConstant.neutral400,
                                 ),

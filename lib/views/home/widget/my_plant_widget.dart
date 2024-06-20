@@ -101,39 +101,41 @@ class MyPlantWidget extends StatelessWidget {
                           itemExtent: 156,
                           itemBuilder: (context, int index) {
                             return Padding(
-                                padding: const EdgeInsets.only(right: 12.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Get.toNamed(AppRoutes.myPlantDetails,
-                                        arguments: {
-                                          'myPlantDetails': myPlantController
+                              padding: const EdgeInsets.only(right: 12.0),
+                              child: GestureDetector(
+                                onTap: () {
+                                  Get.toNamed(AppRoutes.myPlantDetails,
+                                      arguments: {
+                                        'myPlantDetails':
+                                            myPlantController.listMyPlant[index]
+                                      });
+                                },
+                                child: CardGlobalWidget(
+                                  plantName: myPlantController
                                               .listMyPlant[index]
-                                        });
-                                  },
-                                  child: CardGlobalWidget(
-                                      plantName: myPlantController
-                                                  .listMyPlant[index]
-                                                  .customizeName !=
-                                              ""
-                                          ? myPlantController.listMyPlant[index]
+                                              .customizeName !=
+                                          ""
+                                      ? myPlantController.extractPlantName(
+                                          myPlantController.listMyPlant[index]
                                                   .customizeName ??
-                                              "-"
-                                          : myPlantController.listMyPlant[index]
+                                              "-")
+                                      : myPlantController.extractPlantName(
+                                          myPlantController.listMyPlant[index]
                                                   .plant?.name ??
-                                              "-",
-                                      plantCategory: myPlantController
-                                              .listMyPlant[index]
-                                              .plant
-                                              ?.plantCategory
-                                              ?.name ??
-                                          "-",
-                                      plantImageUrl: myPlantController
-                                              .listMyPlant[index]
-                                              .plant
-                                              ?.plantImages?[0]
-                                              .fileName ??
-                                          "-"),
-                                ));
+                                              "-"),
+                                  plantCategory: myPlantController
+                                      .extractFamilyName(myPlantController
+                                              .listMyPlant[index].plant?.name ??
+                                          ""),
+                                  plantImageUrl: myPlantController
+                                          .listMyPlant[index]
+                                          .plant
+                                          ?.plantImages?[0]
+                                          .fileName ??
+                                      "",
+                                ),
+                              ),
+                            );
                           }),
                     );
             case Status.error:

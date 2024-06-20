@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_late_watering_response.dart';
@@ -36,11 +37,12 @@ class NotificationService {
         ),
       );
 
-      _notificationsPlugin.show(
+      await _notificationsPlugin.show(
         id,
         remoteMessage.notification?.title,
         remoteMessage.notification?.body,
         notificationDetails,
+        payload: remoteMessage.data['data'],
       );
     } catch (e) {
       debugPrint(e.toString());
@@ -109,7 +111,7 @@ class NotificationService {
     }
   }
 
-  static Future<bool> createCustomizeReminder(
+  static Future<void> createCustomizeReminder(
       {required int myPlantId,
       required String customizeTime,
       required bool isRecurring,
@@ -120,23 +122,17 @@ class NotificationService {
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
       };
-      final response = await dio.post(
+      await dio.post(
           "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/create-customize-watering-reminder",
           data: {
-            "my_plant_id": myPlantId,
+            "plant_id": myPlantId,
             "time": customizeTime,
             "recurring": isRecurring,
             "type": type
           },
           options: Options(headers: headers));
-      if (response.statusCode == 200) {
-        return response.data['status'];
-      } else {
-        throw Exception(
-            'Failed to customize watering reminder : ${response.statusCode}');
-      }
     } catch (e) {
-      throw Exception(e);
+      throw Exception('Failed to customize watering reminder $e');
     }
   }
 
@@ -159,19 +155,20 @@ class NotificationService {
   static Future<GetLaterWateringResponse> getLateWatering() async {
     try {
       final token = await UserTokenPref.getToken();
+      // final String token = dotenv.get('TOKEN');
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
       };
       final response = await dio.get(
           "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/check-watering",
           options: Options(headers: headers));
-
       if (response.statusCode == 200) {
         return GetLaterWateringResponse.fromJson(response.data);
       } else {
         throw Exception("Failed to get late reminder: ${response.statusCode}");
       }
     } on DioException {
+      print("disini error");
       throw Exception("Failed to get late reminder");
     }
   }

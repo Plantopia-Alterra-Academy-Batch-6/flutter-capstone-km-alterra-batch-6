@@ -21,6 +21,24 @@ class AddPlantController extends GetxController {
     super.onInit();
   }
 
+  String extractPlantName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(0, index).trim();
+    } else {
+      return input.trim();
+    }
+  }
+
+  String extractFamilyName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(index + 1).trim();
+    } else {
+      return '';
+    }
+  }
+
   Future<void> initAddPlantPage() async {
     isPageLoading(true);
     try {

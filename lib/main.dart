@@ -27,12 +27,12 @@ import 'package:plantopia/views/search_plant/search_plant_view.dart';
 import 'package:plantopia/views/splash_screen/splash_screen_view.dart';
 import 'package:plantopia/views/upload_progress/upload_progress_view.dart';
 import 'package:plantopia/views/verify/verify_view.dart';
-import 'package:plantopia/views/wateting_history/watering_history_view.dart';
+import 'package:plantopia/views/watering_history/watering_history_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 
 import 'firebase_options.dart';
 
-Future<void> main() async { 
+Future<void> main() async {
   await dotenv.load(fileName: '.env');
   WidgetsFlutterBinding.ensureInitialized();
 
@@ -46,9 +46,6 @@ Future<void> main() async {
 
   runApp(
     GetMaterialApp(
-      home: const BottomNavigationBarGlobalWidget(
-        index: 0,
-      ),
       getPages: [
         GetPage(
           name: AppRoutes.home,

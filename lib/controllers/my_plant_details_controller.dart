@@ -20,6 +20,15 @@ class MyPlantDetailsController extends GetxController {
     changeNameController.dispose();
   }
 
+  String extractPlantName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(0, index).trim();
+    } else {
+      return input.trim();
+    }
+  }
+
   Future<void> getPlantProgress(int plantId) async {
     try {
       final GetPlantProgressResponseModel? result =

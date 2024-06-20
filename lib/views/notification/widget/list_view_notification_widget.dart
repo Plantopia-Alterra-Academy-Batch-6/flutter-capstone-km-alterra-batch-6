@@ -10,7 +10,7 @@ class ListViewNotificationWidget extends StatelessWidget {
   ListViewNotificationWidget({super.key});
 
   final NotificationController notifController =
-      Get.put(NotificationController());
+      Get.find();
 
   @override
   Widget build(BuildContext context) {

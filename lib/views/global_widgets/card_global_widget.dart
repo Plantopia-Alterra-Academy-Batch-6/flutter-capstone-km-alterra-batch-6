@@ -80,6 +80,8 @@ class CardGlobalWidget extends StatelessWidget {
                     style: TextStyleConstant.subtitle.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     plantCategory,

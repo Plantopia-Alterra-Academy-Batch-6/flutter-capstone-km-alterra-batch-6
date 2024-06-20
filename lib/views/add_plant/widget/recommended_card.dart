@@ -37,14 +37,19 @@ class RecommendedCardWidget extends StatelessWidget {
                     Get.toNamed(AppRoutes.plantDetails);
                   },
                   child: CardGlobalWidget(
-                    plantName: controller
-                        .plantRecommendationsResponse!.data![index].name!,
-                    plantCategory: controller.plantRecommendationsResponse!
-                        .data![index].plantCategory!.name!,
-                    plantImageUrl: controller.plantRecommendationsResponse?.data?[index].plantImages != null &&
-                      controller.plantRecommendationsResponse!.data![index].plantImages!.isNotEmpty
-                  ? controller.plantRecommendationsResponse!.data![index].plantImages![0].fileName ?? ""
-                  : "",
+                    plantName: controller.extractPlantName(controller
+                        .plantRecommendationsResponse!.data![index].name!),
+                    plantCategory: controller.extractFamilyName(controller
+                        .plantRecommendationsResponse!.data![index].name!),
+                    plantImageUrl: controller.plantRecommendationsResponse
+                                    ?.data?[index].plantImages !=
+                                null &&
+                            controller.plantRecommendationsResponse!
+                                .data![index].plantImages!.isNotEmpty
+                        ? controller.plantRecommendationsResponse!.data![index]
+                                .plantImages![0].fileName ??
+                            ""
+                        : "",
                   ),
                 ),
               );

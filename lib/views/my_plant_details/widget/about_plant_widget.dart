@@ -21,8 +21,10 @@ class AboutPlantWidget extends StatelessWidget {
         Center(
           child: Text(
             detailMyPlant.customizeName != ""
-                ? detailMyPlant.customizeName ?? "-"
-                : detailMyPlant.plant?.name ?? "-",
+                ? myPlantDetailsController
+                    .extractPlantName(detailMyPlant.customizeName ?? "-")
+                : myPlantDetailsController
+                    .extractPlantName(detailMyPlant.plant?.name ?? "-"),
             style: TextStyleConstant.heading3
                 .copyWith(fontWeight: FontWeight.w700),
           ),

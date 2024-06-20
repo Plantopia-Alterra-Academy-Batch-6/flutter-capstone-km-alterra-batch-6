@@ -28,6 +28,15 @@ class PlantDetailsController extends GetxController {
     super.onInit();
   }
 
+  String extractPlantName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(0, index).trim();
+    } else {
+      return input.trim();
+    }
+  }
+
   String filterHtmlTag(String htmlString) {
     dom.Document document = html_parser.parse(htmlString);
     return document.body?.text ?? '';

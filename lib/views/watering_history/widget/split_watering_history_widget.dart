@@ -98,11 +98,25 @@ class SplitWateringHistoryWidget extends StatelessWidget {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                sortListHistory[index].plant?.name ?? "-",
-                                style: TextStyleConstant.heading4.copyWith(
-                                  fontWeight: FontWeight.w700,
-                                ),
+                              Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    wateringHistoryController.extractPlantName(
+                                        sortListHistory[index].plant?.name ??
+                                            "-"),
+                                    style: TextStyleConstant.heading4.copyWith(
+                                      fontWeight: FontWeight.w700,
+                                    ),
+                                  ),
+                                  Text(
+                                    wateringHistoryController.extractFamilyName(
+                                        sortListHistory[index].plant?.name ??
+                                            "-"),
+                                    style: TextStyleConstant.footer.copyWith(
+                                        color: ColorConstant.neutral400),
+                                  ),
+                                ],
                               ),
                               Container(
                                 decoration: BoxDecoration(

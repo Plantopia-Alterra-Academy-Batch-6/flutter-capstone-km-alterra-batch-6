@@ -8,10 +8,10 @@ import 'package:plantopia/controllers/notification_controller.dart';
 import 'package:plantopia/views/notification/widget/button_widget.dart';
 
 class BottomSheet2Widget extends StatelessWidget {
-  BottomSheet2Widget({super.key});
+  BottomSheet2Widget({super.key, required this.notifId});
+  final int notifId;
 
-  final NotificationController notifController =
-      Get.put(NotificationController());
+  final NotificationController notifController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -92,14 +92,16 @@ class BottomSheet2Widget extends StatelessWidget {
                     normalTextStyle: TextStyleConstant.paragraph.copyWith(
                       color: ColorConstant.neutral400,
                     ),
-                    minutesInterval: 15,
+                    minutesInterval: 60,
                     highlightedTextStyle: TextStyleConstant.heading3.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
                     spacing: 32,
                     itemHeight: 30,
                     itemWidth: 30,
-                    onTimeChange: (time) {},
+                    onTimeChange: (time) {
+                      notifController.dateTime.value = time;
+                    },
                   ),
                 ],
               ),
@@ -160,7 +162,15 @@ class BottomSheet2Widget extends StatelessWidget {
                 ),
                 Expanded(
                     child: ButtonWidget(
-                  onTap: () {
+                  onTap: () async {
+                    await notifController.customizeWateringReminder(
+                        notifController.plantByIdResponse?.data?.id ?? -1,
+                        notifController
+                            .formatTime(notifController.dateTime.value),
+                        notifController.selectedOption.value,
+                        notifController.plantByIdResponse?.data
+                                ?.wateringSchedule?.each ??
+                            "-");
                     while (Get.isBottomSheetOpen == true) {
                       Get.back();
                     }
@@ -174,7 +184,9 @@ class BottomSheet2Widget extends StatelessWidget {
                       margin: const EdgeInsets.all(16),
                       backgroundColor: ColorConstant.primary500,
                       content: Text(
-                        'Watering will be reminded in 1 hour',
+                        'Watering will be reminded in ${notifController.snackBarReminder(
+                          notifController.dateTime.value,
+                        )}',
                         style: TextStyleConstant.paragraph.copyWith(
                           color: ColorConstant.white,
                         ),
@@ -184,6 +196,7 @@ class BottomSheet2Widget extends StatelessWidget {
                         onPressed: () {},
                       ),
                     );
+                    if (!context.mounted) return;
                     ScaffoldMessenger.of(context).showSnackBar(snackBar);
                   },
                   buttonName: "Save",

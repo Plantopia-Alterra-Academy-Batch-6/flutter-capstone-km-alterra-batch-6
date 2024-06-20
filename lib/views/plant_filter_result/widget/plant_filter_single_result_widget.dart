@@ -23,8 +23,8 @@ class PlantFilterSingleResultWidget extends StatelessWidget {
         height: 200,
         width: 156,
         child: CardGlobalWidget(
-          plantName: controller.searchResultJson['name'],
-          plantCategory: controller.searchResultJson['category'],
+          plantName: addPlantController.extractPlantName(controller.searchResultJson['name']),
+          plantCategory: addPlantController.extractFamilyName(controller.searchResultJson['name']),
           plantImageUrl: controller.searchResultJson['image_url'] ?? "",
         ),
       ),

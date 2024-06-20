@@ -11,7 +11,7 @@ class DeleteNotificationWidget extends StatelessWidget {
   DeleteNotificationWidget({super.key});
 
   final NotificationController notifController =
-      Get.put(NotificationController());
+      Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -98,6 +98,7 @@ class DeleteNotificationWidget extends StatelessWidget {
                             child: ButtonWidget(
                               onTap: () {
                                 notifController.deleteAllNotification();
+                                notifController.getAllNotification();
                                 Get.back();
                               },
                               buttonName: "Delete",

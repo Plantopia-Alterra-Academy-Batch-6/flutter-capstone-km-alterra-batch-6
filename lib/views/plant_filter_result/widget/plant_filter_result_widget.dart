@@ -30,9 +30,9 @@ class PlantFilterResultWidget extends StatelessWidget {
               Get.toNamed(AppRoutes.plantDetails);
             },
             child: CardGlobalWidget(
-              plantName: controller.searchedPlantResponse!.data![index].name!,
-              plantCategory: controller
-                  .searchedPlantResponse!.data![index].plantCategory!.name!,
+              plantName: addPlantController.extractPlantName(controller.searchedPlantResponse!.data![index].name!),
+              plantCategory: addPlantController.extractFamilyName(controller
+                  .searchedPlantResponse!.data![index].name!),
               plantImageUrl: controller.searchedPlantResponse?.data?[index].plantImages != null &&
                     controller.searchedPlantResponse!.data![index].plantImages!.isNotEmpty
                 ? controller.searchedPlantResponse!.data![index].plantImages![0].file_name ?? ""
