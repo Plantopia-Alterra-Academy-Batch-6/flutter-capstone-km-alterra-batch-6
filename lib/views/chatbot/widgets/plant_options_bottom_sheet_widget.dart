@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/controllers/my_plant_details_controller.dart';
+import 'package:plantopia/models/get_my_plant_response_model.dart';
 import '../../../constants/icon_constant.dart';
 import 'topic_choice_tile_widget.dart';
 
 class PlantOptionsBottomSheetWidget extends StatelessWidget {
   final Function(bool) isBottomSheetClosed;
-  final List<String> plantOptions;
+  final List<PlantElement> plantOptions;
 
   const PlantOptionsBottomSheetWidget({
     super.key,
@@ -16,6 +18,8 @@ class PlantOptionsBottomSheetWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final MyPlantDetailsController myPlantDetailsController =
+        Get.put(MyPlantDetailsController());
     return Container(
         decoration: const BoxDecoration(
           color: Colors.white,
@@ -70,13 +74,21 @@ class PlantOptionsBottomSheetWidget extends StatelessWidget {
                     itemCount: plantOptions.length,
                     itemBuilder: (context, index) {
                       return TopicChoiceTileWidget(
-                        title: plantOptions[index],
-                        subTitle:
-                            'Shiny red fruits thrives in \nall weather conditions.',
+                        title: plantOptions[index].customizeName != ""
+                            ? plantOptions[index].customizeName ?? "-"
+                            : plantOptions[index].plant?.name ?? "",
+                        subTitle: plantOptions[index].plant?.description ?? "",
                         onTap: () {
-                          Get.back(result: plantOptions[index]);
+                          Get.back(
+                              result: myPlantDetailsController.extractPlantName(
+                                  plantOptions[index].plant?.name ?? "-"));
                           isBottomSheetClosed(true);
                         },
+                        imgUrl: plantOptions[index]
+                                .plant
+                                ?.plantImages?[0]
+                                .fileName ??
+                            '-',
                       );
                     },
                   ),

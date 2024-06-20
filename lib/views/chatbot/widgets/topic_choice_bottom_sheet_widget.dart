@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/controllers/my_plant_controller.dart';
+import 'package:plantopia/models/get_my_plant_response_model.dart';
 import '../../../constants/icon_constant.dart';
 import '../../../constants/image_constant.dart';
 import 'plant_options_bottom_sheet_widget.dart';
@@ -10,20 +12,8 @@ class TopicChoiceBottomSheet extends StatelessWidget {
   final Function(String) onSelectTopic;
   final Function(bool) isSecondBottomSheet;
   final Function(bool) isBottomSheetClosed;
-  final List<String> plantOptions = [
-    'Rose',
-    'Tulip',
-    'Daisy',
-    'Sunflower',
-    'Orchid',
-    'Lily',
-    'Rose',
-    'Tulip',
-    'Daisy',
-    'Sunflower',
-    'Orchid',
-    'Lily',
-  ];
+  final MyPlantController myPlantController = Get.find();
+
 
   TopicChoiceBottomSheet({
     super.key,
@@ -91,11 +81,11 @@ class TopicChoiceBottomSheet extends StatelessWidget {
                   TopicChoiceItem(
                     vector: ImageConstant.chatbotOption2,
                     text: 'Consultate about my plant',
-                    onTap: plantOptions.isNotEmpty
+                    onTap: myPlantController.listMyPlant.isNotEmpty
                         ? () => handleSelectTopic(
                             'Consultate about my plant', context)
                         : () {},
-                    isEnabled: plantOptions.isNotEmpty,
+                    isEnabled: myPlantController.listMyPlant.isNotEmpty,
                   ),
                 ],
               )
@@ -120,13 +110,13 @@ class TopicChoiceBottomSheet extends StatelessWidget {
   void handleSelectTopic(String topic, BuildContext context) {
     if (topic == 'Consultate about my plant') {
       Get.back();
-      _showPlantOptions(context, plantOptions);
+      _showPlantOptions(context, myPlantController.listMyPlant);
     } else {
       onSelectTopic(topic);
     }
   }
 
-  void _showPlantOptions(BuildContext context, List<String> plantOptions) {
+  void _showPlantOptions(BuildContext context, List<PlantElement> plantOptions) {
     Get.bottomSheet(
       PlantOptionsBottomSheetWidget(
         isBottomSheetClosed: (isClose) {
