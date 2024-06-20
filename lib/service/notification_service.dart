@@ -42,7 +42,6 @@ class NotificationService {
         remoteMessage.notification?.title,
         remoteMessage.notification?.body,
         notificationDetails,
-        payload: remoteMessage.data['data'],
       );
     } catch (e) {
       debugPrint(e.toString());
