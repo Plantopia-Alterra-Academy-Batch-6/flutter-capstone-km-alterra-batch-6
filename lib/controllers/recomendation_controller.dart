@@ -1,10 +1,10 @@
 import 'package:get/get.dart';
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
-import 'package:flutter/material.dart'; // Import Material package here if not imported already
+import 'package:flutter/material.dart'; 
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
-import 'package:url_launcher/url_launcher.dart'; // Import url_launcher package here if not imported already
+import 'package:url_launcher/url_launcher.dart'; 
 
 class RecomendationController extends GetxController {
   final openAI = OpenAI.instance.build(
