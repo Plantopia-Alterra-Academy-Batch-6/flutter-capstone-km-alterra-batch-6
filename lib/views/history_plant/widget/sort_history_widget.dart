@@ -96,13 +96,15 @@ class SortHistoryWidget extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                plantHistoryController.extractPlantName(sortListHistory[index].plantName ?? "-"),
+                                plantHistoryController.extractPlantName(
+                                    sortListHistory[index].plantName ?? "-"),
                                 style: TextStyleConstant.heading4.copyWith(
                                   fontWeight: FontWeight.w700,
                                 ),
                               ),
                               Text(
-                                plantHistoryController.extractFamilyName(sortListHistory[index].plantName ?? "-"),
+                                plantHistoryController.extractFamilyName(
+                                    sortListHistory[index].plantName ?? "-"),
                                 style: TextStyleConstant.footer.copyWith(
                                   color: ColorConstant.neutral400,
                                 ),

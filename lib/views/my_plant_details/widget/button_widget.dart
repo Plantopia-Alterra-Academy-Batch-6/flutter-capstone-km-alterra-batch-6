@@ -21,7 +21,10 @@ class ButtonWidget extends StatelessWidget {
           height: 52,
           decoration: boxDecoration,
           child: Center(
-            child: Text(buttonName, style: textStyle, ),
+            child: Text(
+              buttonName,
+              style: textStyle,
+            ),
           ),
         ));
   }

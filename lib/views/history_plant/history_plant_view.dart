@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -94,7 +95,9 @@ class HistoryPlantView extends StatelessWidget {
                     break;
                   default:
                 }
-                print('You selected filter: $value');
+                if (kDebugMode) {
+                  print('You selected filter: $value');
+                }
               },
             ),
           ],

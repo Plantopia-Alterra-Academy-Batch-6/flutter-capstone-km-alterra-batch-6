@@ -115,9 +115,7 @@ class WeatherView extends StatelessWidget {
                                         weatherController.weatherData.value,
                                   ),
                                 ),
-                                const SizedBox(
-                                    width:
-                                        16), 
+                                const SizedBox(width: 16),
                                 Expanded(
                                   child: WeatherInfoSunsetSunriseWidget(
                                     weatherData:

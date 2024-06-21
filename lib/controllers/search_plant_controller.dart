@@ -14,7 +14,7 @@ class SearchPlantController extends GetxController {
   TextEditingController searchPlantText = TextEditingController();
   final addPlantController = Get.put(AddPlantController());
   RxBool isFirstTimeOpen = true.obs;
-  RxBool isHaveResult = false.obs; 
+  RxBool isHaveResult = false.obs;
   RxBool isPageLoading = false.obs;
   RxList<String> searchHistory = <String>[].obs;
 
@@ -33,13 +33,13 @@ class SearchPlantController extends GetxController {
   Future<void> searchPlant(String plantName) async {
     try {
       isPageLoading(true);
-      searchedPlantResponse = await searchPlantService.searchPlantByName(plantName);
+      searchedPlantResponse =
+          await searchPlantService.searchPlantByName(plantName);
       isFirstTimeOpen(false);
       isHaveResult(true);
       isPageLoading(false);
 
       _addSearchHistory(plantName);
-
     } on DioException {
       isHaveResult(false);
       isPageLoading(false);

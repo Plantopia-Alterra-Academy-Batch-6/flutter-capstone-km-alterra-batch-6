@@ -47,7 +47,9 @@ class PlantData {
 
   factory PlantData.fromJson(Map<String, dynamic> json) {
     return PlantData(
-      plants: json['plants'] != null ? List<Plant>.from(json['plants'].map((item) => Plant.fromJson(item))) : null,
+      plants: json['plants'] != null
+          ? List<Plant>.from(json['plants'].map((item) => Plant.fromJson(item)))
+          : null,
       totalCount: json['total_count'],
       limit: json['limit'],
       page: json['page'],
@@ -119,15 +121,30 @@ class Plant {
       sunlight: json['sunlight'],
       plantingTime: json['planting_time'],
       plantCategoryId: json['plant_category_id'],
-      plantCategory: json['plant_category'] != null ? PlantCategory.fromJson(json['plant_category']) : null,
+      plantCategory: json['plant_category'] != null
+          ? PlantCategory.fromJson(json['plant_category'])
+          : null,
       climateCondition: json['climate_condition'],
       plantCharacteristicId: json['plant_characteristic_id'],
-      plantCharacteristic: json['plant_characteristic'] != null ? PlantCharacteristic.fromJson(json['plant_characteristic']) : null,
-      wateringSchedule: json['watering_schedule'] != null ? WateringSchedule.fromJson(json['watering_schedule']) : null,
-      plantInstructions: json['plant_instructions'] != null ? List<PlantInstruction>.from(json['plant_instructions'].map((item) => PlantInstruction.fromJson(item))) : null,
+      plantCharacteristic: json['plant_characteristic'] != null
+          ? PlantCharacteristic.fromJson(json['plant_characteristic'])
+          : null,
+      wateringSchedule: json['watering_schedule'] != null
+          ? WateringSchedule.fromJson(json['watering_schedule'])
+          : null,
+      plantInstructions: json['plant_instructions'] != null
+          ? List<PlantInstruction>.from(json['plant_instructions']
+              .map((item) => PlantInstruction.fromJson(item)))
+          : null,
       additionalTips: json['additional_tips'],
-      plantFaqs: json['plant_faqs'] != null ? List<PlantFaq>.from(json['plant_faqs'].map((item) => PlantFaq.fromJson(item))) : null,
-      plantImages: json['plant_images'] != null ? List<PlantImage>.from(json['plant_images'].map((item) => PlantImage.fromJson(item))) : null,
+      plantFaqs: json['plant_faqs'] != null
+          ? List<PlantFaq>.from(
+              json['plant_faqs'].map((item) => PlantFaq.fromJson(item)))
+          : null,
+      plantImages: json['plant_images'] != null
+          ? List<PlantImage>.from(
+              json['plant_images'].map((item) => PlantImage.fromJson(item)))
+          : null,
       createdAt: json['created_at'],
       updatedAt: json['updated_at'],
     );
@@ -148,7 +165,8 @@ class Plant {
       'plant_characteristic_id': plantCharacteristicId,
       'plant_characteristic': plantCharacteristic?.toJson(),
       'watering_schedule': wateringSchedule?.toJson(),
-      'plant_instructions': plantInstructions?.map((item) => item.toJson()).toList(),
+      'plant_instructions':
+          plantInstructions?.map((item) => item.toJson()).toList(),
       'additional_tips': additionalTips,
       'plant_faqs': plantFaqs?.map((item) => item.toJson()).toList(),
       'plant_images': plantImages?.map((item) => item.toJson()).toList(),
@@ -328,7 +346,9 @@ class PlantInstruction {
       id: json['id'],
       plantId: json['plant_id'],
       instructionCategoryId: json['instruction_category_id'],
-      instructionCategory: json['instruction_category'] != null ? InstructionCategory.fromJson(json['instruction_category']) : null,
+      instructionCategory: json['instruction_category'] != null
+          ? InstructionCategory.fromJson(json['instruction_category'])
+          : null,
       stepNumber: json['step_number'],
       stepTitle: json['step_title'],
       stepDescription: json['step_description'],

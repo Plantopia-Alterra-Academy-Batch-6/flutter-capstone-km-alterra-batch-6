@@ -11,6 +11,7 @@ import 'package:plantopia/views/my_plant_details/widget/bottom_sheet_delete_widg
 import 'package:plantopia/views/my_plant_details/widget/faq_widget.dart';
 import 'package:plantopia/views/my_plant_details/widget/image_carousel_widget.dart';
 import 'package:plantopia/views/my_plant_details/widget/monitoring_progress_widget.dart';
+import 'package:plantopia/views/my_plant_details/widget/my_plant_detail_recommendation_widget.dart';
 import 'package:plantopia/views/my_plant_details/widget/plant_care_widget.dart';
 import 'package:plantopia/views/my_plant_details/widget/plant_characteristics_widget.dart';
 import 'package:plantopia/views/my_plant_details/widget/plant_guide_card_widget.dart';
@@ -92,6 +93,7 @@ class MyPlantDetailsView extends StatelessWidget {
                         MonitoringProgressWidget(),
                         PlantCareWidget(),
                         FaqWidget(),
+                        const MyPlantDetailRecommendationWidget(),
                       ],
                     ),
                   ),

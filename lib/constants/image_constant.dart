@@ -22,4 +22,6 @@ class ImageConstant {
   static const String successWatering = 'assets/images/success_watering.png';
   static const String emptyPlant = 'assets/images/empty_plant.png';
   static const String emptyPlantCaring = 'assets/images/empty_plant_caring.png';
+  static const String sun = 'assets/images/sun.png';
+  static const String water = 'assets/images/water.png';
 }

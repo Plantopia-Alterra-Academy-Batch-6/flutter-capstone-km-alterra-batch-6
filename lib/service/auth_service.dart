@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:plantopia/models/login_params_model.dart';
 import 'package:plantopia/models/signup_params_model.dart';
 import 'package:plantopia/models/user_model.dart';
@@ -25,15 +26,16 @@ class AuthService {
         throw '';
       }
     } on DioException catch (e) {
-      print(e.response?.data['message']);
+      if (kDebugMode) {
+        print(e.response?.data['message']);
+      }
       if (e.response?.data['message'] == "record not found") {
         throw CustomException('record not found', 400);
-      } else if(e.response?.data['message'] == "Invalid email or password") {
+      } else if (e.response?.data['message'] == "Invalid email or password") {
         throw CustomException('record not found', 400);
-      }else if (e.response?.data['message'] == "Email not validated yet") {
+      } else if (e.response?.data['message'] == "Email not validated yet") {
         throw CustomException('Email not validated yet', 401);
-      }
-       else {
+      } else {
         throw CustomException(e.response?.data['message'], 402);
       }
     } catch (e) {
@@ -52,7 +54,9 @@ class AuthService {
           ),
           data: signUpParamsModelToJson(signUpParamsModel));
       final convertJsonToObject = jsonEncode(response.data['data']);
-      print(convertJsonToObject);
+      if (kDebugMode) {
+        print(convertJsonToObject);
+      }
       UserModel result = userModelFromJson(convertJsonToObject);
 
       return result;

@@ -4,7 +4,6 @@ import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 
 import 'package:plantopia/controllers/bottom_navigation_bar_controller.dart';
-import 'package:plantopia/controllers/notification_controller.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_icon_global_widget.dart';
 import 'package:plantopia/views/home/home_view.dart';
 import 'package:plantopia/views/my_plant/my_plant_view.dart';
@@ -27,7 +26,6 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
         Get.put(BottomNavigationBarController());
 
     final WeatherController weatherController = Get.put(WeatherController());
-  
 
     controller.setCurrentIndex(index ?? 0);
 
@@ -36,7 +34,7 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
         return IndexedStack(
           index: controller.currentIndex.value,
           children: [
-            HomeView(),
+            const HomeView(),
             WeatherView(),
             MyPlantView(),
             const ProfileView()
@@ -80,7 +78,7 @@ class BottomNavigationBarGlobalWidget extends StatelessWidget {
             ),
             _buildBottomNavigationBarItem(
               iconAssetPath: IconConstant.profileNavbar,
-              selectedIconAssetPath: IconConstant.profileNavbar,
+              selectedIconAssetPath: IconConstant.profileNavbarSelected,
               label: 'Profile',
               index: 3,
               controller: controller,

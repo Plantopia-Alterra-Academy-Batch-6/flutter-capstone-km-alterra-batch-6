@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -77,13 +78,19 @@ class MyPlantFilter extends StatelessWidget {
               await controller.createQueryParams();
               plantFilterSearchResultController.updateQuery(plantCategory);
 
-              print(addPlantController.isFilterSearchResulted.value);
+              if (kDebugMode) {
+                print(addPlantController.isFilterSearchResulted.value);
+              }
               if (addPlantController.isFilterSearchResulted.isTrue) {
                 // ignore: use_build_context_synchronously
                 Navigator.pop(context);
-                print("true");
+                if (kDebugMode) {
+                  print("true");
+                }
               } else {
-                print("false");
+                if (kDebugMode) {
+                  print("false");
+                }
                 addPlantController.isFilterSearchResulted(true);
                 Get.offNamed(AppRoutes.plantFilterResult);
               }

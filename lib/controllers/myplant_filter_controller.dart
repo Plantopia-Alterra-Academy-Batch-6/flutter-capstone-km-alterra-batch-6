@@ -1,5 +1,3 @@
 import 'package:get/get.dart';
 
-class MyplantFilterController extends GetxController {
-  
-}
+class MyplantFilterController extends GetxController {}

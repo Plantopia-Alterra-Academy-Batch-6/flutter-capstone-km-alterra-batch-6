@@ -13,10 +13,6 @@ class WeatherDateTimeWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      dateTime ?? '',
-      style: textStyle ??
-          TextStyleConstant.caption
-    );
+    return Text(dateTime ?? '', style: textStyle ?? TextStyleConstant.caption);
   }
 }

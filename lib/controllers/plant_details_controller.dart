@@ -1,11 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/my_plant_controller.dart';
-import 'package:plantopia/controllers/search_plant_controller.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/service/plant_details_service.dart';
 import 'package:plantopia/utils/app_routes.dart';

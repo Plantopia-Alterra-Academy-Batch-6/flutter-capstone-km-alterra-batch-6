@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -37,7 +36,8 @@ class SuccessAddPlantView extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 onPressed: () {
-                  Get.offAll(() => const BottomNavigationBarGlobalWidget(index: 2));
+                  Get.offAll(
+                      () => const BottomNavigationBarGlobalWidget(index: 2));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor:

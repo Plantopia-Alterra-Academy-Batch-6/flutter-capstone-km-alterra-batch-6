@@ -26,17 +26,24 @@ class PlantFilterResultWidget extends StatelessWidget {
         itemBuilder: (context, int index) {
           return GestureDetector(
             onTap: () {
-              addPlantController.selectedPlant.value = controller.searchedPlantResponse!.data![index].id!;
+              addPlantController.selectedPlant.value =
+                  controller.searchedPlantResponse!.data![index].id!;
               Get.toNamed(AppRoutes.plantDetails);
             },
             child: CardGlobalWidget(
-              plantName: addPlantController.extractPlantName(controller.searchedPlantResponse!.data![index].name!),
-              plantCategory: addPlantController.extractFamilyName(controller
-                  .searchedPlantResponse!.data![index].name!),
-              plantImageUrl: controller.searchedPlantResponse?.data?[index].plantImages != null &&
-                    controller.searchedPlantResponse!.data![index].plantImages!.isNotEmpty
-                ? controller.searchedPlantResponse!.data![index].plantImages![0].file_name ?? ""
-                : "",
+              plantName: addPlantController.extractPlantName(
+                  controller.searchedPlantResponse!.data![index].name!),
+              plantCategory: addPlantController.extractFamilyName(
+                  controller.searchedPlantResponse!.data![index].name!),
+              plantImageUrl:
+                  controller.searchedPlantResponse?.data?[index].plantImages !=
+                              null &&
+                          controller.searchedPlantResponse!.data![index]
+                              .plantImages!.isNotEmpty
+                      ? controller.searchedPlantResponse!.data![index]
+                              .plantImages![0].file_name ??
+                          ""
+                      : "",
             ),
           );
         },

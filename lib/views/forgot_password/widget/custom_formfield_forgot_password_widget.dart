@@ -13,17 +13,16 @@ class CustomFormfieldForgotPasswordWidget extends StatelessWidget {
   final void Function(String)? onChanged;
   final String? initialValue;
 
-  const CustomFormfieldForgotPasswordWidget(
-      {super.key,
-      required this.hintText,
-      this.suffixIcon,
-      this.keyboardType = TextInputType.text,
-      this.showPassword = false,
-      this.errorText,
-      this.controller,
-      this.onChanged,
-      this.initialValue,
-
+  const CustomFormfieldForgotPasswordWidget({
+    super.key,
+    required this.hintText,
+    this.suffixIcon,
+    this.keyboardType = TextInputType.text,
+    this.showPassword = false,
+    this.errorText,
+    this.controller,
+    this.onChanged,
+    this.initialValue,
   });
 
   @override

@@ -16,14 +16,16 @@ class AboutPlantWidget extends StatelessWidget {
         const SizedBox(height: 20), // Add some space to adjust for the overlap
         Center(
           child: Text(
-            controller.extractPlantName(controller.plantByIdResponse!.data!.name!),
+            controller
+                .extractPlantName(controller.plantByIdResponse!.data!.name!),
             style: TextStyleConstant.heading3
                 .copyWith(fontWeight: FontWeight.w700),
           ),
         ),
         const SizedBox(height: 8),
         Text(
-          controller.filterHtmlTag(controller.plantByIdResponse!.data!.description!),
+          controller
+              .filterHtmlTag(controller.plantByIdResponse!.data!.description!),
           style: TextStyleConstant.paragraph,
         ),
       ],

@@ -29,7 +29,7 @@ class PlantCharacteristicsWidget extends StatelessWidget {
                 fontWeight: FontWeight.w400, color: ColorConstant.neutral500),
           ),
           trailing: Text(
-            '${(detailMyPlant.plant?.plantCharacteristic?.height ?? 0 / 100 ).truncate()} meter',
+            '${(detailMyPlant.plant?.plantCharacteristic?.height ?? 0 / 100).truncate()} meter',
             style: TextStyleConstant.subtitle
                 .copyWith(fontWeight: FontWeight.w700),
           ),

@@ -2,11 +2,26 @@ part of '../home_view.dart';
 
 class CustomAppBarWidget extends StatelessWidget {
   const CustomAppBarWidget({super.key});
+  String getGreeting() {
+    final DateTime now = DateTime.now();
+    final int hour = now.hour;
+
+    if (hour >= 6 && hour < 12) {
+      return 'Good Morning';
+    } else if (hour >= 12 && hour < 18) {
+      return 'Good Afternoon';
+    } else if (hour >= 18 && hour < 22) {
+      return 'Good Evening';
+    } else {
+      return 'Good Night';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final AuthController authController = Get.put(AuthController());
     authController.getUser();
+    String greeting = getGreeting();
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -39,7 +54,7 @@ class CustomAppBarWidget extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Good Morning,",
+                          "$greeting,",
                           style: TextStyleConstant.subtitle.copyWith(
                             fontWeight: FontWeight.w700,
                           ),

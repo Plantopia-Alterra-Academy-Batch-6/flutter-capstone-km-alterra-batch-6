@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -69,7 +70,9 @@ class WateringHistoryView extends StatelessWidget {
 
                 default:
               }
-              print('You selected filter: $value');
+              if (kDebugMode) {
+                print('You selected filter: $value');
+              }
             },
           ),
         ],

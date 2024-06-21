@@ -6,7 +6,8 @@ import 'package:plantopia/controllers/plant_filter_search_result_controller.dart
 class SearchPlantFilterController extends GetxController {
   TextEditingController searchPlantText = TextEditingController();
   final addPlantController = Get.put(AddPlantController());
-  final plantFilterSearchResultController = Get.put(PlantFilterSearchResultController());
+  final plantFilterSearchResultController =
+      Get.put(PlantFilterSearchResultController());
   RxBool isPlantFound = false.obs;
 
   dynamic searchResultJson = {
@@ -23,13 +24,17 @@ class SearchPlantFilterController extends GetxController {
   }
 
   Future<void> searchPlant(String value) async {
-    var data = plantFilterSearchResultController.searchedPlantResponse?.data ?? [];
+    var data =
+        plantFilterSearchResultController.searchedPlantResponse?.data ?? [];
     if (data.isNotEmpty) {
       for (var plant in data) {
-        if (plant.name!.toLowerCase() == value.toLowerCase() || plant.name!.toLowerCase().contains(value.toLowerCase()) && plant.name!.toLowerCase().startsWith(value.toLowerCase())) {
+        if (plant.name!.toLowerCase() == value.toLowerCase() ||
+            plant.name!.toLowerCase().contains(value.toLowerCase()) &&
+                plant.name!.toLowerCase().startsWith(value.toLowerCase())) {
           searchResultJson['id'] = plant.id;
           searchResultJson['name'] = plant.name;
-          searchResultJson['image_url'] = plant.plantImages?.first.file_name ?? '';
+          searchResultJson['image_url'] =
+              plant.plantImages?.first.file_name ?? '';
           searchResultJson['category'] = plant.plantCategory!.name;
           isPlantFound(true);
         }
@@ -38,12 +43,9 @@ class SearchPlantFilterController extends GetxController {
       if (isPlantFound.isFalse) {
         plantFilterSearchResultController.isHaveResult(false);
       }
-      
-    }
-    else {
+    } else {
       isPlantFound(false);
       plantFilterSearchResultController.isHaveResult(false);
     }
-    
   }
 }

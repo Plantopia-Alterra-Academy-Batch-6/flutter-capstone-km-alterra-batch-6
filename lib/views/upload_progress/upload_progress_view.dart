@@ -81,6 +81,7 @@ class UploadProgressView extends StatelessWidget {
                       if (controller.image.value != null) {
                         bool result = await controller.uploadProgress(plantId);
                         if (result) {
+                          // ignore: use_build_context_synchronously
                           alertsuccess(context);
 
                           controller.image.value = null;

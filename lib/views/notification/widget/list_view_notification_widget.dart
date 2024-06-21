@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -9,8 +10,7 @@ import 'package:plantopia/views/notification/widget/bottom_sheet1_widget.dart';
 class ListViewNotificationWidget extends StatelessWidget {
   ListViewNotificationWidget({super.key});
 
-  final NotificationController notifController =
-      Get.find();
+  final NotificationController notifController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -42,8 +42,10 @@ class ListViewNotificationWidget extends StatelessWidget {
                   padding: const EdgeInsets.only(bottom: 8.0),
                   child: GestureDetector(
                     onTap: () async {
-                      print(
-                          "hello ${notifController.listNotif[index].plantId ?? -1}");
+                      if (kDebugMode) {
+                        print(
+                            "hello ${notifController.listNotif[index].plantId ?? -1}");
+                      }
                       Get.bottomSheet(
                         BottomSheet1Widget(
                           notifId: notifController.listNotif[index].id ?? -1,

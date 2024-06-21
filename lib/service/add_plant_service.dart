@@ -1,4 +1,3 @@
-
 import 'package:dio/dio.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_plant_category_response.dart';

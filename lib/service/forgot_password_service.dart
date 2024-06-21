@@ -4,7 +4,6 @@ import 'package:plantopia/service/auth_service.dart';
 class ForgotPasswordService {
   static Dio dio = Dio();
 
-
   static Future<CustomException> postForgotPassword(
       {required String email, required String password}) async {
     try {
@@ -33,6 +32,4 @@ class ForgotPasswordService {
       throw CustomException('there is an error : $e', 400);
     }
   }
-
-
 }

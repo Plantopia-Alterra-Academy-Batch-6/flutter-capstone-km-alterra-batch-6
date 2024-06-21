@@ -50,8 +50,7 @@ class SearchPlantView extends StatelessWidget {
                   }
                   if (controller.isHaveResult.isTrue) {
                     return SearchPlantResultWidget();
-                  } 
-                  else {
+                  } else {
                     return const NoResultGlobalWidget();
                   }
                 },

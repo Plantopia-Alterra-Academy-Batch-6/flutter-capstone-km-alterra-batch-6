@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -17,7 +16,8 @@ class PlantToxicityWidget extends StatelessWidget {
       children: [
         Text(
           "Plant Toxicity",
-          style: TextStyleConstant.subtitle.copyWith(fontWeight: FontWeight.w600),
+          style:
+              TextStyleConstant.subtitle.copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 12),
         Obx(
@@ -25,18 +25,22 @@ class PlantToxicityWidget extends StatelessWidget {
             children: List.generate(
               2,
               (int index) {
-                bool isSelected = plantFilterController.isPlantToxicitySelected.value &&
-                    plantFilterController.selectedToxicity.value == index;
+                bool isSelected =
+                    plantFilterController.isPlantToxicitySelected.value &&
+                        plantFilterController.selectedToxicity.value == index;
                 return Padding(
                   padding: const EdgeInsets.only(right: 8, bottom: 8),
                   child: GestureDetector(
                     onTap: () {
                       if (isSelected) {
-                        plantFilterController.isPlantToxicitySelected.value = false;
-                        plantFilterController.selectedToxicity.value = -1; // Reset selection
+                        plantFilterController.isPlantToxicitySelected.value =
+                            false;
+                        plantFilterController.selectedToxicity.value =
+                            -1; // Reset selection
                       } else {
                         plantFilterController.selectedToxicity.value = index;
-                        plantFilterController.isPlantToxicitySelected.value = true;
+                        plantFilterController.isPlantToxicitySelected.value =
+                            true;
                       }
                     },
                     child: IntrinsicWidth(

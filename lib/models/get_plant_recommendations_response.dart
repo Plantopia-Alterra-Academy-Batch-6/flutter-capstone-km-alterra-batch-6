@@ -112,7 +112,8 @@ class Plant {
       'sunlight': sunlight,
       'plant_characteristic': plantCharacteristic?.toJson(),
       'watering_schedule': wateringSchedule?.toJson(),
-      'plant_instructions': plantInstructions?.map((item) => item.toJson()).toList(),
+      'plant_instructions':
+          plantInstructions?.map((item) => item.toJson()).toList(),
       'plant_faqs': plantFaqs?.map((item) => item.toJson()).toList(),
       'plant_images': plantImages?.map((item) => item.toJson()).toList(),
       'created_at': createdAt,

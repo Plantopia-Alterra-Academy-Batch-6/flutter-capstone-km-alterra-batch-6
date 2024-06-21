@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -5,7 +6,6 @@ import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/plant_filter_controller.dart';
 import 'package:plantopia/controllers/plant_filter_search_result_controller.dart';
-import 'package:plantopia/controllers/search_plant_filter_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/plant_filter/widget/plant_category_widget.dart';
 import 'package:plantopia/views/plant_filter/widget/plant_harvest_duration_widget.dart';
@@ -78,13 +78,19 @@ class PlantFilterView extends StatelessWidget {
               await controller.createQueryParams();
               plantFilterSearchResultController.updateQuery(plantCategory);
 
-              print(addPlantController.isFilterSearchResulted.value);
+              if (kDebugMode) {
+                print(addPlantController.isFilterSearchResulted.value);
+              }
               if (addPlantController.isFilterSearchResulted.isTrue) {
                 // ignore: use_build_context_synchronously
                 Navigator.pop(context);
-                print("true");
+                if (kDebugMode) {
+                  print("true");
+                }
               } else {
-                print("false");
+                if (kDebugMode) {
+                  print("false");
+                }
                 addPlantController.isFilterSearchResulted(true);
                 Get.offNamed(AppRoutes.plantFilterResult);
               }

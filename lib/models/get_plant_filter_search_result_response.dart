@@ -79,11 +79,17 @@ class PlantData {
     sunlight = json['sunlight'];
     plantingTime = json['planting_time'];
     plantCategoryId = json['plant_category_id'];
-    plantCategory = json['plant_category'] != null ? PlantCategory.fromJson(json['plant_category']) : null;
+    plantCategory = json['plant_category'] != null
+        ? PlantCategory.fromJson(json['plant_category'])
+        : null;
     climateCondition = json['climate_condition'];
     plantCharacteristicId = json['plant_characteristic_id'];
-    plantCharacteristic = json['plant_characteristic'] != null ? PlantCharacteristic.fromJson(json['plant_characteristic']) : null;
-    wateringSchedule = json['watering_schedule'] != null ? WateringSchedule.fromJson(json['watering_schedule']) : null;
+    plantCharacteristic = json['plant_characteristic'] != null
+        ? PlantCharacteristic.fromJson(json['plant_characteristic'])
+        : null;
+    wateringSchedule = json['watering_schedule'] != null
+        ? WateringSchedule.fromJson(json['watering_schedule'])
+        : null;
     if (json['plant_instructions'] != null) {
       plantInstructions = <PlantInstruction>[];
       json['plant_instructions'].forEach((v) {
@@ -123,7 +129,8 @@ class PlantData {
     data['plant_characteristic'] = plantCharacteristic?.toJson();
     data['watering_schedule'] = wateringSchedule?.toJson();
     if (plantInstructions != null) {
-      data['plant_instructions'] = plantInstructions?.map((v) => v.toJson()).toList();
+      data['plant_instructions'] =
+          plantInstructions?.map((v) => v.toJson()).toList();
     }
     data['additional_tips'] = additionalTips;
     if (plantFaqs != null) {
@@ -145,7 +152,8 @@ class PlantCategory {
   String? createdAt;
   String? updatedAt;
 
-  PlantCategory({this.id, this.name, this.imageUrl, this.createdAt, this.updatedAt});
+  PlantCategory(
+      {this.id, this.name, this.imageUrl, this.createdAt, this.updatedAt});
 
   PlantCategory.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -175,7 +183,14 @@ class PlantCharacteristic {
   String? wideUnit;
   String? leafColor;
 
-  PlantCharacteristic({this.id, this.plantId, this.height, this.heightUnit, this.wide, this.wideUnit, this.leafColor});
+  PlantCharacteristic(
+      {this.id,
+      this.plantId,
+      this.height,
+      this.heightUnit,
+      this.wide,
+      this.wideUnit,
+      this.leafColor});
 
   PlantCharacteristic.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -287,7 +302,9 @@ class PlantInstruction {
     id = json['id'];
     plantId = json['plant_id'];
     instructionCategoryId = json['instruction_category_id'];
-    instructionCategory = json['instruction_category'] != null ? InstructionCategory.fromJson(json['instruction_category']) : null;
+    instructionCategory = json['instruction_category'] != null
+        ? InstructionCategory.fromJson(json['instruction_category'])
+        : null;
     stepNumber = json['step_number'];
     stepTitle = json['step_title'];
     stepDescription = json['step_description'];
@@ -319,7 +336,8 @@ class InstructionCategory {
   String? createdAt;
   String? updatedAt;
 
-  InstructionCategory({this.id, this.name, this.description, this.createdAt, this.updatedAt});
+  InstructionCategory(
+      {this.id, this.name, this.description, this.createdAt, this.updatedAt});
 
   InstructionCategory.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -348,7 +366,13 @@ class PlantFAQ {
   String? createdAt;
   String? updatedAt;
 
-  PlantFAQ({this.id, this.plantId, this.question, this.answer, this.createdAt, this.updatedAt});
+  PlantFAQ(
+      {this.id,
+      this.plantId,
+      this.question,
+      this.answer,
+      this.createdAt,
+      this.updatedAt});
 
   PlantFAQ.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -380,7 +404,8 @@ class PlantImage {
   String? updatedAt;
 
   // ignore: non_constant_identifier_names
-  PlantImage({this.id, this.plantId, this.file_name, this.createdAt, this.updatedAt});
+  PlantImage(
+      {this.id, this.plantId, this.file_name, this.createdAt, this.updatedAt});
 
   PlantImage.fromJson(Map<String, dynamic> json) {
     id = json['id'];

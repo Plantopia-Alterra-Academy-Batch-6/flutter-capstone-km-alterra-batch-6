@@ -24,14 +24,13 @@ part 'widget/plant_guide_third_item_widget.dart';
 part 'widget/plant_guide_widget.dart';
 
 class HomeView extends StatefulWidget {
-  HomeView({super.key});
+  const HomeView({super.key});
 
   @override
   State<HomeView> createState() => _HomeViewState();
 }
 
 class _HomeViewState extends State<HomeView> {
-  
   final MyPlantController myPlantController = Get.put(MyPlantController());
 
   final NotificationController notificationController =
@@ -39,7 +38,6 @@ class _HomeViewState extends State<HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       backgroundColor: ColorConstant.white,
       body: SafeArea(

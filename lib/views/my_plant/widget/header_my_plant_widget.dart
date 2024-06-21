@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/my_plant_controller.dart';
 
 class HeaderMyPlantWidget extends StatelessWidget {
   HeaderMyPlantWidget({super.key});
 
-    final MyPlantController myPlantController = Get.put(MyPlantController());
+  final MyPlantController myPlantController = Get.put(MyPlantController());
 
   @override
   Widget build(BuildContext context) {

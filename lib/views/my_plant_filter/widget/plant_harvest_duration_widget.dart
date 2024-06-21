@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -26,18 +25,24 @@ class MyPlantHarvestDurationWidget extends StatelessWidget {
             children: List.generate(
               4,
               (int index) {
-                bool isSelected = plantFilterController.isHarvestDurationSelected.value &&
-                    plantFilterController.selectedHarvestDuration.value == index;
+                bool isSelected =
+                    plantFilterController.isHarvestDurationSelected.value &&
+                        plantFilterController.selectedHarvestDuration.value ==
+                            index;
                 return Padding(
                   padding: const EdgeInsets.only(right: 8, bottom: 8),
                   child: GestureDetector(
                     onTap: () {
                       if (isSelected) {
-                        plantFilterController.isHarvestDurationSelected.value = false;
-                        plantFilterController.selectedHarvestDuration.value = -1; // Reset selection
+                        plantFilterController.isHarvestDurationSelected.value =
+                            false;
+                        plantFilterController.selectedHarvestDuration.value =
+                            -1; // Reset selection
                       } else {
-                        plantFilterController.selectedHarvestDuration.value = index;
-                        plantFilterController.isHarvestDurationSelected.value = true;
+                        plantFilterController.selectedHarvestDuration.value =
+                            index;
+                        plantFilterController.isHarvestDurationSelected.value =
+                            true;
                       }
                     },
                     child: IntrinsicWidth(
