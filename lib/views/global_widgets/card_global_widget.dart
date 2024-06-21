@@ -34,7 +34,6 @@ class CardGlobalWidget extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-                //alignment: Alignment.bottomRight,
                 bottom: -10,
                 left: 70,
                 child: CachedNetworkImage(
@@ -42,13 +41,6 @@ class CardGlobalWidget extends StatelessWidget {
                   height: 130,
                   width: 93,
                   imageUrl: plantImageUrl,
-                  placeholder: (context, url) {
-                    return const ShimmerContainerGlobalWidget(
-                      width: 93,
-                      height: 130,
-                      radius: 0,
-                    );
-                  },
                   errorWidget: (context, url, error) {
                     return Icon(
                       Icons.error,

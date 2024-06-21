@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
-import 'package:plantopia/helpers/shared_pref_helper.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/models/get_search_plant_response.dart';
 import 'package:plantopia/service/search_plant_service.dart';

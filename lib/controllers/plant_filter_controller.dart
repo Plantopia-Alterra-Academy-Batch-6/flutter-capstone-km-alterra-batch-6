@@ -64,10 +64,10 @@ class PlantFilterController extends GetxController {
   };
 
   var harvestDurationMap = {
-    0: 'less than 30 days',
-    1: '30-90 days',
-    2: '90-180 days',
-    3: 'greater than 180 days'
+    0: 'less than 1 month',
+    1: '1-3 months',
+    2: '3-6 months',
+    3: 'more than 6 months'
   };
 
   var toxicityMap = {

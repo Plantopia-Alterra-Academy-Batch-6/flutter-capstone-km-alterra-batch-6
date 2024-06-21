@@ -200,7 +200,7 @@ class NotificationController extends GetxController {
     }
   }
 
-  static Future<void> postWatering(int plantId) async {
+  Future<void> postWatering(int plantId) async {
     try {
       await WateringHistoryService.postWatering(plantId);
     } catch (e) {

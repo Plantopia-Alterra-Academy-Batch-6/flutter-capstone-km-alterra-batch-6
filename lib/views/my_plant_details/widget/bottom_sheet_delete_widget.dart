@@ -119,6 +119,9 @@ class BottomSheetDeleteWidget extends StatelessWidget {
                                   children: [
                                     Expanded(
                                       child: ButtonWidget(
+                                          onTap: () {
+                                            Get.back();
+                                          },
                                           buttonName: "Cancel",
                                           boxDecoration: BoxDecoration(
                                             borderRadius:
@@ -143,13 +146,53 @@ class BottomSheetDeleteWidget extends StatelessWidget {
                                                     myPlantDetailsController
                                                         .changeNameController
                                                         .text);
+                                            Get.offAll(
+                                              () =>
+                                                  const BottomNavigationBarGlobalWidget(
+                                                index: 2,
+                                              ),
+                                            );
                                           }
-                                          Get.offAll(
-                                            () =>
-                                                const BottomNavigationBarGlobalWidget(
-                                              index: 2,
-                                            ),
-                                          );
+                                          Get.defaultDialog(
+                                              title: "Warning",
+                                              contentPadding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 16),
+                                              confirm: Padding(
+                                                padding:
+                                                    const EdgeInsets.fromLTRB(
+                                                        16, 0, 16, 16),
+                                                child: ButtonWidget(
+                                                  onTap: () {
+                                                    Get.back();
+                                                  },
+                                                  buttonName: "Ok",
+                                                  boxDecoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              8),
+                                                      color: ColorConstant
+                                                          .primary500),
+                                                  textStyle: TextStyleConstant
+                                                      .title
+                                                      .copyWith(
+                                                    color: ColorConstant.white,
+                                                  ),
+                                                ),
+                                              ),
+                                              titlePadding:
+                                                  const EdgeInsets.fromLTRB(
+                                                      16, 16, 16, 0),
+                                              titleStyle: TextStyleConstant
+                                                  .heading4
+                                                  .copyWith(
+                                                      fontWeight:
+                                                          FontWeight.w700),
+                                              content: Text(
+                                                "Edit plant name cannot be empty",
+                                                style:
+                                                    TextStyleConstant.heading4,
+                                              ));
                                         },
                                         buttonName: "Save",
                                         boxDecoration: BoxDecoration(

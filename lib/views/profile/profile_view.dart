@@ -23,6 +23,7 @@ class ProfileView extends StatelessWidget {
   Widget build(BuildContext context) {
     final ProfileController profileController = Get.put(ProfileController());
     return Scaffold(
+      backgroundColor: ColorConstant.white,
       body: SafeArea(
         child: SingleChildScrollView(
           padding: const EdgeInsets.all(16.0),
