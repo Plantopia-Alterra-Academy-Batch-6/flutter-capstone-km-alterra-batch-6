@@ -18,7 +18,8 @@ class PlantCategoryWidget extends StatelessWidget {
       children: [
         Text(
           "Plant Category",
-          style: TextStyleConstant.subtitle.copyWith(fontWeight: FontWeight.w600),
+          style:
+              TextStyleConstant.subtitle.copyWith(fontWeight: FontWeight.w600),
         ),
         const SizedBox(height: 12),
         Obx(
@@ -26,18 +27,26 @@ class PlantCategoryWidget extends StatelessWidget {
             children: List.generate(
               addPlantController.plantCategoriesResponse!.data.length,
               (int index) {
-                bool isSelected = plantFilterController.isPlantCategorySelected.value &&
-                    plantFilterController.selectedCategory.value == addPlantController.plantCategoriesResponse!.data[index].id;
+                bool isSelected =
+                    plantFilterController.isPlantCategorySelected.value &&
+                        plantFilterController.selectedCategory.value ==
+                            addPlantController
+                                .plantCategoriesResponse!.data[index].id;
                 return Padding(
                   padding: const EdgeInsets.only(right: 8, bottom: 8),
                   child: GestureDetector(
                     onTap: () {
                       if (isSelected) {
-                        plantFilterController.isPlantCategorySelected.value = false;
-                        plantFilterController.selectedCategory.value = -1; // Reset selection
+                        plantFilterController.isPlantCategorySelected.value =
+                            false;
+                        plantFilterController.selectedCategory.value =
+                            -1; // Reset selection
                       } else {
-                        plantFilterController.selectedCategory.value = addPlantController.plantCategoriesResponse!.data[index].id;
-                        plantFilterController.isPlantCategorySelected.value = true;
+                        plantFilterController.selectedCategory.value =
+                            addPlantController
+                                .plantCategoriesResponse!.data[index].id;
+                        plantFilterController.isPlantCategorySelected.value =
+                            true;
                       }
                     },
                     child: IntrinsicWidth(

@@ -6,7 +6,6 @@ import 'package:plantopia/models/get_my_plant_response_model.dart';
 import 'package:plantopia/models/get_plant_category_response.dart';
 import 'package:plantopia/models/get_plant_recommendations_response.dart';
 import 'package:plantopia/service/add_plant_service.dart';
-import 'package:plantopia/service/auth_service.dart';
 import 'package:plantopia/service/my_plant_service.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 

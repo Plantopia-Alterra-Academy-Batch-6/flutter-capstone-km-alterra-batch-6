@@ -15,8 +15,7 @@ class BottomSheet1Widget extends StatelessWidget {
   final int notifId;
   final String messages;
 
-  final NotificationController notifController =
-      Get.find();
+  final NotificationController notifController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -145,7 +144,10 @@ class BottomSheet1Widget extends StatelessWidget {
                                 color: ColorConstant.primary500,
                               ),
                               onTap: () {
-                                Get.bottomSheet(BottomSheet2Widget(notifId: notifId,),
+                                Get.bottomSheet(
+                                    BottomSheet2Widget(
+                                      notifId: notifId,
+                                    ),
                                     isDismissible: false);
                               },
                             ),

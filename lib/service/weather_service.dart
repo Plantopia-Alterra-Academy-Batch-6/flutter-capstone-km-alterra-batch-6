@@ -17,7 +17,6 @@ class WeatherService {
       } else {
         throw Exception('Failed to load weather: ${response.statusCode}');
       }
-      
     } catch (e) {
       throw Exception('Failed to load weather: $e');
     }

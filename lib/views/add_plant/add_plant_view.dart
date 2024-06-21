@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
-import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/add_plant/widget/plant_category.dart';
 import 'package:plantopia/views/add_plant/widget/recommended_card.dart';
 import 'package:plantopia/views/add_plant/widget/search_bar.dart';
 import 'package:get/get.dart';
-import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 import 'package:plantopia/views/global_widgets/center_circular_progress_global_widget.dart';
 
 class AddPlantView extends StatelessWidget {

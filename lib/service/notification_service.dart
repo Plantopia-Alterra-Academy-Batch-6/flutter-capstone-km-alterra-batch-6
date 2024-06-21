@@ -1,7 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_late_watering_response.dart';
@@ -167,7 +166,9 @@ class NotificationService {
         throw Exception("Failed to get late reminder: ${response.statusCode}");
       }
     } on DioException {
-      print("disini error");
+      if (kDebugMode) {
+        print("disini error");
+      }
       throw Exception("Failed to get late reminder");
     }
   }

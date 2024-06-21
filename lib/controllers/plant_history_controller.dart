@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-import 'package:get/get_rx/get_rx.dart';
 import 'package:intl/intl.dart';
 import 'package:plantopia/models/get_panting_history_response.dart';
 import 'package:plantopia/service/planting_history_service.dart';

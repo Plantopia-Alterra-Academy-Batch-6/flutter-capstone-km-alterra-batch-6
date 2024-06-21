@@ -5,7 +5,6 @@ import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/plant_filter_search_result_controller.dart';
-import 'package:plantopia/controllers/search_plant_controller.dart';
 import 'package:plantopia/controllers/search_plant_filter_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
 
@@ -15,7 +14,8 @@ class PlantFilterResultBarWidget extends StatelessWidget {
   final controller = Get.put(SearchPlantFilterController());
   final addPlantController = Get.put(AddPlantController());
   final searchPlantFilterController = Get.put(SearchPlantFilterController());
-  final plantFilterSearchResultController = Get.put(PlantFilterSearchResultController());
+  final plantFilterSearchResultController =
+      Get.put(PlantFilterSearchResultController());
 
   @override
   Widget build(BuildContext context) {

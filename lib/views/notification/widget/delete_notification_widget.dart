@@ -10,8 +10,7 @@ import 'package:plantopia/views/my_plant_details/widget/button_widget.dart';
 class DeleteNotificationWidget extends StatelessWidget {
   DeleteNotificationWidget({super.key});
 
-  final NotificationController notifController =
-      Get.find();
+  final NotificationController notifController = Get.find();
 
   @override
   Widget build(BuildContext context) {

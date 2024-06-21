@@ -11,7 +11,6 @@ class HourlyWeatherListItemWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     final DateTime dateTime = hourlyWeather?.timestamp ?? DateTime.now();
     String formattedTime = DateFormat('HH:mm').format(dateTime);
     return Padding(

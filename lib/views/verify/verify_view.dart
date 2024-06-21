@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 // ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_otp_text_field/flutter_otp_text_field.dart';
 import 'package:get/get.dart';
@@ -75,7 +76,9 @@ class VerifyView extends StatelessWidget {
                         final LoginParamsModel? result =
                             await controller.verificationRegister(
                                 loginParams: loginParams!, otp: otpUser);
-                        print(result?.toJson());
+                        if (kDebugMode) {
+                          print(result?.toJson());
+                        }
                         //melakukan login otomatis ketika akun telah verifikasi
                         if (result != null) {
                           await authController.login(

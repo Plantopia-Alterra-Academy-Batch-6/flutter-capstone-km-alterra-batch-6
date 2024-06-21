@@ -10,7 +10,8 @@ class GetMyPlantService {
       String url = BaseUrlUtil.plantGuide;
       final response = await dio.get(url);
       if (response.statusCode == 200) {
-        GetMyPlantResponseModelNew plantGuide = GetMyPlantResponseModelNew.fromJson(response.data);
+        GetMyPlantResponseModelNew plantGuide =
+            GetMyPlantResponseModelNew.fromJson(response.data);
         List<PlantInstruction> plantInstructions = [];
         if (plantGuide.data != null && plantGuide.data!.plants != null) {
           for (var plant in plantGuide.data!.plants!) {

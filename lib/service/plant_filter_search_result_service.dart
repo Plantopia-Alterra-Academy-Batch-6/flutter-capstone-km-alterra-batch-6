@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:plantopia/models/get_plant_filter_search_result_response.dart';
 
 class PlantFilterSearchResultService {
@@ -21,19 +22,27 @@ class PlantFilterSearchResultService {
       }
     } on DioException catch (e) {
       // Handle DioError specifically
-      print("DioError: $e");
+      if (kDebugMode) {
+        print("DioError: $e");
+      }
       throw Exception("Failed to search plant by filter");
     } on SocketException catch (e) {
       // Handle SocketException specifically
-      print("SocketException: $e");
+      if (kDebugMode) {
+        print("SocketException: $e");
+      }
       throw Exception("Failed to search plant by filter");
     } on FormatException catch (e) {
       // Handle FormatException specifically
-      print("FormatException: $e");
+      if (kDebugMode) {
+        print("FormatException: $e");
+      }
       throw Exception("Failed to search plant by filter");
     } catch (e) {
       // Handle other errors
-      print("Error: $e");
+      if (kDebugMode) {
+        print("Error: $e");
+      }
       throw Exception("Failed to search plant by filter");
     }
   }

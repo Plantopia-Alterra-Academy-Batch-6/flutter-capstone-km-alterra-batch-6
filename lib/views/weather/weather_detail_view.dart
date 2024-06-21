@@ -44,8 +44,7 @@ class WeatherDetailView extends StatelessWidget {
                     );
                   case Status.loaded:
                     return HourlyWeatherListWidget(
-                        weatherData:
-                            weatherController.hourlyWeatherData.value);
+                        weatherData: weatherController.hourlyWeatherData.value);
                   case Status.error:
                     return const Center(
                       child: Text(
@@ -72,8 +71,7 @@ class WeatherDetailView extends StatelessWidget {
                     );
                   case Status.loaded:
                     return DailyWeatherListWidget(
-                        weatherData:
-                            weatherController.dailyWeatherData.value);
+                        weatherData: weatherController.dailyWeatherData.value);
                   case Status.error:
                     return const Center(
                       child: Text(

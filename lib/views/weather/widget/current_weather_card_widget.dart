@@ -23,7 +23,6 @@ class CurrentWeatherCardWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     DateTime dateTime = weatherData.data?.createdAt ?? DateTime.now();
 
-    
     dateTime = dateTime.toUtc().add(const Duration(hours: 7));
     String formattedDate = DateFormat('EEEE, dd MMMM yyyy').format(dateTime);
     final int hour = dateTime.hour;

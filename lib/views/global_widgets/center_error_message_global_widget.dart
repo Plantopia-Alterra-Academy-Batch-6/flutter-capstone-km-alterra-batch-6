@@ -9,7 +9,8 @@ class CenterErrorMessageGlobalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double screenHeight = MediaQuery.of(context).size.height;
-    final double sizedBoxHeight = screenHeight / 3; // Adjust the divisor as needed
+    final double sizedBoxHeight =
+        screenHeight / 3; // Adjust the divisor as needed
 
     return Column(
       children: [
@@ -17,7 +18,8 @@ class CenterErrorMessageGlobalWidget extends StatelessWidget {
         Center(
           child: Text(
             "Failed to load $pageName",
-            style: TextStyleConstant.subtitle.copyWith(fontWeight: FontWeight.w700),
+            style: TextStyleConstant.subtitle
+                .copyWith(fontWeight: FontWeight.w700),
           ),
         ),
       ],

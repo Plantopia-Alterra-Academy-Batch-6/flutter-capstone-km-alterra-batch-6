@@ -52,14 +52,14 @@ class PlantFilterSearchResultController extends GetxController {
         }
       }
 
-      searchedPlantResponse = await plantFilterSearchResultService.searchPlantByFilter(plantFilterController.queryParams.value);
+      searchedPlantResponse = await plantFilterSearchResultService
+          .searchPlantByFilter(plantFilterController.queryParams.value);
 
       if (searchedPlantResponse!.message! != "No data found") {
         isHaveResult(true);
       } else {
         isHaveResult(false);
       }
-
     } on Exception {
       isHaveResult(false); // Set false if an error occurs
     } finally {

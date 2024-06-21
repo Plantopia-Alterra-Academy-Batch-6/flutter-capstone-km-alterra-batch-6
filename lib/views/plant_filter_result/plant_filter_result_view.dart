@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/plant_filter_search_result_controller.dart';
 import 'package:plantopia/controllers/search_plant_filter_controller.dart';
-import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/global_widgets/no_result_global_widget.dart';
 import 'package:plantopia/views/plant_filter_result/widget/plant_category_row_widget.dart';
 import 'package:plantopia/views/plant_filter_result/widget/plant_filter_result_bar_widget.dart';
@@ -51,8 +50,7 @@ class PlantFilterResultView extends StatelessWidget {
                 }
                 if (controller.isHaveResult.isTrue) {
                   return PlantFilterResultWidget();
-                } 
-                else {
+                } else {
                   return const NoResultGlobalWidget();
                 }
               },

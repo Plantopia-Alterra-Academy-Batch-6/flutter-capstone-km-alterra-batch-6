@@ -44,7 +44,7 @@ class WeatherInfoRealFeelWidget extends StatelessWidget {
             Positioned(
               right: 16.0,
               bottom: 12.0,
-              child: Container(
+              child: SizedBox(
                 width: 64,
                 height: 64,
                 child: SfRadialGauge(

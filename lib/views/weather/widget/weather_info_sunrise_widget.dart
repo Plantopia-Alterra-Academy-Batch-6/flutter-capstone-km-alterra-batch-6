@@ -16,25 +16,18 @@ class WeatherInfoSunsetSunriseWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final int? sunrise = weatherData.data?.sunrise;
-    final int? sunset = weatherData.data?.sunrise;
+    
 
-    if (sunrise == null || sunset == null) {
+    if (sunrise == null) {
       return const Text("Data not available");
     }
 
-    final currentTime = DateTime.now();
-    final isSunrise = currentTime
-            .isBefore(DateTime.fromMillisecondsSinceEpoch(sunset * 1000)) &&
-        currentTime
-            .isAfter(DateTime.fromMillisecondsSinceEpoch(sunrise * 1000));
-    final sunriseOrSunsetText = isSunrise ? "Sunrise" : "Sunset";
-    final formattedTime = DateFormat.Hm().format(currentTime);
-
-    final sunriseDateTime = DateTime.fromMillisecondsSinceEpoch(sunrise * 1000);
-    final sunsetDateTime = DateTime.fromMillisecondsSinceEpoch(sunset * 1000);
-    final totalDuration = sunsetDateTime.difference(sunriseDateTime).inSeconds;
-    final elapsedDuration = currentTime.difference(sunriseDateTime).inSeconds;
-    final percentage = (elapsedDuration / totalDuration) * 100;
+    final DateTime sunriseDateTime =
+        DateTime.fromMillisecondsSinceEpoch(sunrise * 1000, isUtc: true);
+    final DateTime sunriseLocal = sunriseDateTime;
+    final String formattedSunrise = DateFormat('HH:mm').format(sunriseLocal);
+    const sunriseText = "Sunrise"; 
+     const percentage = 20.0; 
 
     return Center(
       child: Container(
@@ -53,7 +46,7 @@ class WeatherInfoSunsetSunriseWidget extends StatelessWidget {
               top: 15,
               left: 16,
               child: Text(
-                sunriseOrSunsetText,
+                sunriseText,
                 style: TextStyleConstant.caption
                     .copyWith(color: ColorConstant.neutral500),
               ),
@@ -62,7 +55,7 @@ class WeatherInfoSunsetSunriseWidget extends StatelessWidget {
               top: 32,
               left: 16,
               child: Text(
-                formattedTime,
+                formattedSunrise,
                 style: TextStyleConstant.title
                     .copyWith(fontWeight: FontWeight.w700),
               ),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
-import 'package:plantopia/helpers/shared_pref_helper.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/models/get_search_plant_response.dart';
 import 'package:plantopia/service/search_plant_service.dart';
@@ -15,7 +14,7 @@ class SearchPlantController extends GetxController {
   TextEditingController searchPlantText = TextEditingController();
   final addPlantController = Get.put(AddPlantController());
   RxBool isFirstTimeOpen = true.obs;
-  RxBool isHaveResult = false.obs; 
+  RxBool isHaveResult = false.obs;
   RxBool isPageLoading = false.obs;
   RxList<String> searchHistory = <String>[].obs;
 
@@ -34,13 +33,13 @@ class SearchPlantController extends GetxController {
   Future<void> searchPlant(String plantName) async {
     try {
       isPageLoading(true);
-      searchedPlantResponse = await searchPlantService.searchPlantByName(plantName);
+      searchedPlantResponse =
+          await searchPlantService.searchPlantByName(plantName);
       isFirstTimeOpen(false);
       isHaveResult(true);
       isPageLoading(false);
 
       _addSearchHistory(plantName);
-
     } on DioException {
       isHaveResult(false);
       isPageLoading(false);

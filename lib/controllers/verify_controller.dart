@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -91,9 +92,13 @@ class VerifyController extends GetxController {
     } catch (e) {
       if (e is CustomException) {
         if (e.code == 400) {
-          print(e.message);
+          if (kDebugMode) {
+            print(e.message);
+          }
         } else {
-          print(e.message);
+          if (kDebugMode) {
+            print(e.message);
+          }
         }
       }
     } finally {

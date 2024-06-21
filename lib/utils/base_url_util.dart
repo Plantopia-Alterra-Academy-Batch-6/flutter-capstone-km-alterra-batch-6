@@ -5,8 +5,6 @@ class BaseUrlUtil {
   static const String hourlyWeather = '$baseUrl/weather/hourly';
   static const String dailyWeather = '$baseUrl/weather/daily';
   static const String plantGuide = '$baseUrl/plants';
+  static const String plantDisease = '$baseUrl/plant-disease';
+  static const String plantInstruction = '$baseUrl/plants/instructions';
 }
-
-  
-
-

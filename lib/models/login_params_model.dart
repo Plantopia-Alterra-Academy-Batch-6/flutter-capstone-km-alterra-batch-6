@@ -13,7 +13,7 @@ String loginParamsModelToJson(LoginParamsModel data) =>
 class LoginParamsModel {
   final String? email;
   final String? password;
-   String? fcmToken;
+  String? fcmToken;
 
   LoginParamsModel({
     this.email,

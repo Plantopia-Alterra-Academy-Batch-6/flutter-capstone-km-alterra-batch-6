@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_plant_progress_response_model.dart';
@@ -63,16 +64,22 @@ class UploadProgressService {
       );
 
       if (response.statusCode == 201) {
-        print("success");
+        if (kDebugMode) {
+          print("success");
+        }
         return CustomException('Success', 200);
       } else {
         throw CustomException('there is an error ', 400);
       }
     } on DioException catch (e) {
-      print(e.response?.data);
+      if (kDebugMode) {
+        print(e.response?.data);
+      }
       throw CustomException(e.response?.data, e.response?.statusCode ?? 400);
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
 
       throw CustomException('there is an error : $e', 400);
     }

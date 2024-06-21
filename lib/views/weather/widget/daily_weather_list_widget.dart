@@ -7,7 +7,6 @@ import 'package:plantopia/views/weather/widget/weather_image_widget.dart';
 import 'package:plantopia/views/weather/widget/weather_temperature_widget.dart';
 import 'package:intl/intl.dart';
 
-
 part 'daily_weather_list_item_widget.dart';
 
 class DailyWeatherListWidget extends StatelessWidget {

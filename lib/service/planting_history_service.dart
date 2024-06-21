@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_panting_history_response.dart';
 
@@ -8,7 +9,9 @@ class PlantingHistoryService {
   static Future<GetPlantingHistoryResponse> getPlantingHistory() async {
     try {
       final token = await UserTokenPref.getToken();
-      print("hello token $token");
+      if (kDebugMode) {
+        print("hello token $token");
+      }
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
       };

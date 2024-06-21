@@ -72,22 +72,24 @@ class SearchBarWidget extends StatelessWidget {
           ],
         ),
         Obx(() {
-          if (controller.isFirstTimeOpen.value && controller.searchHistory.isNotEmpty) {
+          if (controller.isFirstTimeOpen.value &&
+              controller.searchHistory.isNotEmpty) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.start,
               children: controller.searchHistory
                   .take(2)
                   .map((history) => ListTile(
-                    dense: true,
-                    title: Text(history),
-                    titleTextStyle: TextStyleConstant.paragraph,
-                    leading: SvgPicture.asset('assets/icons/search_history_icon.svg'),
-                    onTap: () {
-                      controller.searchPlant(history);
-                      controller.searchPlantText.text = history;
-                      controller.isFirstTimeOpen.value = false;
-                    },
-                  ))
+                        dense: true,
+                        title: Text(history),
+                        titleTextStyle: TextStyleConstant.paragraph,
+                        leading: SvgPicture.asset(
+                            'assets/icons/search_history_icon.svg'),
+                        onTap: () {
+                          controller.searchPlant(history);
+                          controller.searchPlantText.text = history;
+                          controller.isFirstTimeOpen.value = false;
+                        },
+                      ))
                   .toList(),
             );
           } else {

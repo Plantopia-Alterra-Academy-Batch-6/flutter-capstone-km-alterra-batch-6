@@ -21,6 +21,5 @@ class AppRoutes {
   static const String forgotPassword = '/forgotPassword';
   static const String verify = '/verify';
   static const String setNewPassword = '/setNewPassword';
-
   static const String plantGuide = '/plantGuideView';
 }

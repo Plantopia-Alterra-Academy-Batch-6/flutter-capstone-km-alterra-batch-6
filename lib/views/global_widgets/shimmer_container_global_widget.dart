@@ -5,9 +5,12 @@ class ShimmerContainerGlobalWidget extends StatelessWidget {
   final double width;
   final double height;
   final double radius;
-  
+
   const ShimmerContainerGlobalWidget({
-    super.key, required this.width, required this.height, required this.radius,
+    super.key,
+    required this.width,
+    required this.height,
+    required this.radius,
   });
 
   @override

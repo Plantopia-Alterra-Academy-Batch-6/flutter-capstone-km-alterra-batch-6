@@ -14,7 +14,7 @@ class SignUpParamsModel {
   final String? name;
   final String? email;
   final String? password;
-   String? fcmToken;
+  String? fcmToken;
 
   SignUpParamsModel({
     this.name,

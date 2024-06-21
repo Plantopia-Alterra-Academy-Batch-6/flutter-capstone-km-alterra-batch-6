@@ -12,7 +12,8 @@ class PlantCategoryWidget extends StatelessWidget {
   PlantCategoryWidget({super.key});
 
   final controller = Get.put(AddPlantController());
-  final plantFilterSearchResultController = Get.put(PlantFilterSearchResultController());
+  final plantFilterSearchResultController =
+      Get.put(PlantFilterSearchResultController());
   final plantFilterController = Get.put(PlantFilterController());
 
   @override
@@ -37,8 +38,10 @@ class PlantCategoryWidget extends StatelessWidget {
                 child: InkWell(
                   borderRadius: BorderRadius.circular(10),
                   onTap: () {
-                    plantFilterController.selectedCategory.value = controller.plantCategoriesResponse!.data[index].id;
-                    plantFilterSearchResultController.updateQuery('${controller.plantCategoriesResponse!.data[index].id}');
+                    plantFilterController.selectedCategory.value =
+                        controller.plantCategoriesResponse!.data[index].id;
+                    plantFilterSearchResultController.updateQuery(
+                        '${controller.plantCategoriesResponse!.data[index].id}');
                     controller.isFilterSearchResulted(true);
                     Get.toNamed(AppRoutes.plantFilterResult);
                   },
@@ -67,8 +70,7 @@ class PlantCategoryWidget extends StatelessWidget {
                           ),
                           const SizedBox(width: 16),
                           Text(
-                            controller
-                                .plantCategoriesResponse!.data[index].name
+                            controller.plantCategoriesResponse!.data[index].name
                                 .toString(),
                             style: TextStyleConstant.subtitle.copyWith(
                               color: ColorConstant.neutral950,

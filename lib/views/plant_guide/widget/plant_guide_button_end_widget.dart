@@ -4,7 +4,6 @@ import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/utils/app_routes.dart';
-import 'package:plantopia/views/plant_details/success_add_plant_view.dart';
 
 class PlantGuideButtonEndWidget extends StatelessWidget {
   final String? textButton;

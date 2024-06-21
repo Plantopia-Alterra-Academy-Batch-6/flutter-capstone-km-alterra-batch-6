@@ -3,14 +3,12 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:plantopia/constants/color_constant.dart';
 
 class TextStyleConstant {
-
   static TextStyle superLarge = GoogleFonts.nunito(
     fontSize: 80,
     fontWeight: FontWeight.w600,
     color: const Color(0xFFFFFFFF),
   );
 
- 
   static TextStyle heading1 = GoogleFonts.nunito(
     fontSize: 32,
     fontWeight: FontWeight.w400,
@@ -65,9 +63,9 @@ class TextStyleConstant {
     color: ColorConstant.neutral950,
   );
 
-   static TextStyle semiBold = GoogleFonts.nunito(
+  static TextStyle semiBold = GoogleFonts.nunito(
     fontSize: 12,
     fontWeight: FontWeight.w600,
     color: const Color(0xFFFFFFFF),
-   );
+  );
 }

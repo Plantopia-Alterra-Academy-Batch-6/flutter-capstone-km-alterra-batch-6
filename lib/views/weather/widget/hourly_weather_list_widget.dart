@@ -25,8 +25,7 @@ class HourlyWeatherListWidget extends StatelessWidget {
         shrinkWrap: true,
         itemCount: weatherData.data?.length ?? 0,
         itemBuilder: (context, index) {
-          final weatherDataItem =
-              weatherData.data?[index];
+          final weatherDataItem = weatherData.data?[index];
           final isFirstItem = index == 0;
           return HourlyWeatherListItemWidget(
             hourlyWeather: weatherDataItem,
