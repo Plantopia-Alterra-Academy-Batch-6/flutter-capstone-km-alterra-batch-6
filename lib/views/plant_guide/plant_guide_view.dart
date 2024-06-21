@@ -7,6 +7,7 @@ import 'package:plantopia/controllers/plant_guide_controller.dart';
 import 'package:plantopia/views/plant_guide/plant_guide_detail_view.dart';
 import 'package:plantopia/views/plant_guide/widget/plant_guide_button_start_widget.dart';
 import 'package:plantopia/views/plant_guide/widget/plant_guide_instruction_category_widget.dart';
+import '../global_widgets/shimmer_container_global_widget.dart';
 
 class PlantGuideView extends StatelessWidget {
   PlantGuideView({super.key});
@@ -36,7 +37,43 @@ class PlantGuideView extends StatelessWidget {
       body: Obx(
         () {
           if (controller.isLoading.value) {
-            return const Center(child: CircularProgressIndicator());
+            return ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              physics: const NeverScrollableScrollPhysics(),
+              shrinkWrap: true,
+              itemCount: 6, // Number of shimmer items
+              itemBuilder: (context, int index) {
+                double height;
+                switch (index) {
+                  case 0:
+                    height = 25;
+                    break;
+                  case 1:
+                    height = 75;
+                    break;
+                  case 2:
+                    height = 65;
+                    break;
+                  case 3:
+                    height = 65;
+                    break;
+                  case 4:
+                    height = 65;
+                    break;
+                  default:
+                    height = 65;
+                    break;
+                }
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: ShimmerContainerGlobalWidget(
+                    width: double.infinity,
+                    height: height,
+                    radius: 5,
+                  ),
+                );
+              },
+            );
           } else if (controller.plantInstructions.isEmpty) {
             return const Center(child: Text('No instructions available'));
           } else {
@@ -110,7 +147,6 @@ class PlantGuideView extends StatelessWidget {
             );
           }
         },
-        
       ),
       bottomNavigationBar: const PlantGuideButtonStartWidget(),
     );
