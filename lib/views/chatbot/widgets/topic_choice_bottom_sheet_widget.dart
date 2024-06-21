@@ -14,7 +14,6 @@ class TopicChoiceBottomSheet extends StatelessWidget {
   final Function(bool) isBottomSheetClosed;
   final MyPlantController myPlantController = Get.find();
 
-
   TopicChoiceBottomSheet({
     super.key,
     required this.onSelectTopic,
@@ -76,17 +75,14 @@ class TopicChoiceBottomSheet extends StatelessWidget {
                       isSecondBottomSheet(false);
                       isBottomSheetClosed(true);
                     },
-                    isEnabled: true,
                   ),
-                  TopicChoiceItem(
-                    vector: ImageConstant.chatbotOption2,
-                    text: 'Consultate about my plant',
-                    onTap: myPlantController.listMyPlant.isNotEmpty
-                        ? () => handleSelectTopic(
-                            'Consultate about my plant', context)
-                        : () {},
-                    isEnabled: myPlantController.listMyPlant.isNotEmpty,
-                  ),
+                  if (myPlantController.listMyPlant.isNotEmpty)
+                    TopicChoiceItem(
+                      vector: ImageConstant.chatbotOption2,
+                      text: 'Consultate about my plant',
+                      onTap: () => handleSelectTopic(
+                          'Consultate about my plant', context),
+                    ),
                 ],
               )
             ],
@@ -116,7 +112,8 @@ class TopicChoiceBottomSheet extends StatelessWidget {
     }
   }
 
-  void _showPlantOptions(BuildContext context, List<PlantElement> plantOptions) {
+  void _showPlantOptions(
+      BuildContext context, List<PlantElement> plantOptions) {
     Get.bottomSheet(
       PlantOptionsBottomSheetWidget(
         isBottomSheetClosed: (isClose) {

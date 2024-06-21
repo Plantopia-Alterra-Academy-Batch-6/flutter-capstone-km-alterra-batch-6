@@ -4,21 +4,19 @@ import 'package:flutter_svg/flutter_svg.dart';
 class TopicChoiceItem extends StatelessWidget {
   final String text;
   final VoidCallback onTap;
-  final bool isEnabled;
   final String vector;
 
   const TopicChoiceItem({
     super.key,
     required this.text,
     required this.onTap,
-    this.isEnabled = true,
     required this.vector,
   });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: isEnabled ? onTap : null,
+      onTap: onTap,
       child: Container(
         width: 155,
         height: 164,
@@ -27,9 +25,7 @@ class TopicChoiceItem extends StatelessWidget {
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
           border: Border.all(
-            color: isEnabled
-                ? const Color(0xFFD1D5D7)
-                : Colors.grey.withOpacity(0.5),
+            color: const Color(0xFFD1D5D7),
             width: 1,
           ),
         ),
@@ -47,9 +43,9 @@ class TopicChoiceItem extends StatelessWidget {
             Flexible(
               child: Text(
                 text,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 12,
-                  color: isEnabled ? const Color(0xFF707A85) : Colors.grey,
+                  color: Color(0xFF707A85),
                 ),
                 textAlign: TextAlign.center,
                 softWrap: true,
