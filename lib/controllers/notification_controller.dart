@@ -72,6 +72,7 @@ class NotificationController extends GetxController {
       hours = 24 - hours;
       return "$hours hour";
     }
+    minutes = minutes < 0 ? -minutes : minutes;
     return "$minutes minutes";
   }
 
