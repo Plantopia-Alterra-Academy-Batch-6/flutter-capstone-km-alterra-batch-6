@@ -68,22 +68,16 @@ class NotificationService {
     }
   }
 
-  static Future<Notif> getNotificationById(int id) async {
+  static Future<void> getNotificationById(int id) async {
     final token = await UserTokenPref.getToken();
     // final String token = dotenv.get('TOKEN');
     try {
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
       };
-      final response = await dio.get(
+      await dio.get(
           "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/notifications/$id",
           options: Options(headers: headers));
-      if (response.statusCode == 200) {
-        return response.data['data'];
-      } else {
-        throw Exception(
-            'Failed to load notification data : ${response.statusCode}');
-      }
     } catch (e) {
       throw Exception(e);
     }
@@ -153,7 +147,6 @@ class NotificationService {
   static Future<GetLaterWateringResponse> getLateWatering() async {
     try {
       final token = await UserTokenPref.getToken();
-      // final String token = dotenv.get('TOKEN');
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
       };
@@ -165,11 +158,8 @@ class NotificationService {
       } else {
         throw Exception("Failed to get late reminder: ${response.statusCode}");
       }
-    } on DioException {
-      if (kDebugMode) {
-        print("disini error");
-      }
-      throw Exception("Failed to get late reminder");
+    } catch (e) {
+      return GetLaterWateringResponse(data: null, message: null, status: null);
     }
   }
 }

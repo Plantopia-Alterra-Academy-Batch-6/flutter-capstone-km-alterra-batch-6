@@ -79,7 +79,8 @@ class PlantHistoryController extends GetxController {
   }
 
   String parseDate(DateTime dateTime) {
-    String plantingDate = DateFormat('dd MMMM yyyy').format(dateTime);
+    DateTime newTime = dateTime.add(const Duration(hours: 7));
+    String plantingDate = DateFormat('dd MMMM yyyy').format(newTime);
     return plantingDate;
   }
 

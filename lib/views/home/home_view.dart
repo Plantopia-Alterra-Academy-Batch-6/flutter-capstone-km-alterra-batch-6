@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -62,10 +63,11 @@ class _HomeViewState extends State<HomeView> {
                 const SizedBox(
                   height: 12,
                 ),
-                const RecommendedWidget(),
-                const SizedBox(
-                  height: 24,
-                )
+                Obx(
+                  () => Visibility(
+                      visible: myPlantController.listMyPlant.isEmpty,
+                      child: const RecommendedWidget()),
+                ),
               ],
             ),
           ),

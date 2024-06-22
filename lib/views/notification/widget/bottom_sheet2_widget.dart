@@ -172,7 +172,6 @@ class BottomSheet2Widget extends StatelessWidget {
                         notifController.plantByIdResponse?.data
                                 ?.wateringSchedule?.each ??
                             "-");
-                    await notifController.getAllNotification();
                     while (Get.isBottomSheetOpen == true) {
                       Get.back();
                     }

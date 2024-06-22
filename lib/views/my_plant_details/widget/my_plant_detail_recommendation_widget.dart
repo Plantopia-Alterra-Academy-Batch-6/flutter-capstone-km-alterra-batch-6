@@ -23,7 +23,7 @@ class MyPlantDetailRecommendationWidget extends StatelessWidget {
             .extractPlantName(detailMyPlant.customizeName ?? "-")
         : myPlantDetailsController
             .extractPlantName(detailMyPlant.plant?.name ?? "-");
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       recomendationController.getRecommendations(plantName);
       recomendationController.getArticles(plantName);
     });

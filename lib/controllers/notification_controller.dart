@@ -145,11 +145,12 @@ class NotificationController extends GetxController {
 
   Future<void> getNotificationById(int id) async {
     try {
-      notifStatus.value = Status.loading;
       await NotificationService.getNotificationById(id);
-      notifStatus.value = Status.loaded;
+      final response = await NotificationService.getAllNotification();
+      final List<Notif> resultData = await reverseList(response.data ?? []);
+      listNotif.value = resultData;
     } catch (e) {
-      notifStatus.value = Status.error;
+      throw Exception(e);
     }
   }
 
@@ -218,134 +219,132 @@ class NotificationController extends GetxController {
   }
 
   Future<void> lateWatering() async {
-    try {
-      final response = await NotificationService.getLateWatering();
-      await getAllNotification();
+    final response = await NotificationService.getLateWatering();
+    await getAllNotification();
 
-      for (var value in listNotif) {
-        if (value.id == response.data?.id) {
-          Get.dialog(
-              barrierDismissible: false,
-              Center(
-                child: Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: Container(
-                    height: 472,
-                    padding: const EdgeInsets.all(16),
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: ColorConstant.white),
-                    child: Column(
-                      children: [
-                        CachedNetworkImage(
-                          width: double.infinity,
-                          height: 200,
-                          imageUrl:
-                              response.data?.plant?.plantImage?[0].fileName ??
-                                  "-",
-                          errorWidget: (context, url, error) {
-                            return Icon(
-                              Icons.error,
-                              color: ColorConstant.danger500,
-                            );
-                          },
-                        ),
-                        const SizedBox(
-                          height: 16,
-                        ),
-                        Text(
-                          response.data?.title ?? "-",
-                          style: TextStyleConstant.heading4.copyWith(
-                              fontWeight: FontWeight.w700,
-                              decoration: TextDecoration.none),
-                          textAlign: TextAlign.center,
-                        ),
-                        const SizedBox(
-                          height: 2,
-                        ),
-                        Text(
-                          response.data?.body ?? "-",
-                          style: TextStyleConstant.paragraph
-                              .copyWith(decoration: TextDecoration.none),
-                          textAlign: TextAlign.center,
-                        ),
-                        ButtonWidget(
-                          onTap: () async {
-                            Get.back();
-                            await getNotificationById(value.id ?? -1);
-                            await postWatering(value.plantId ?? -1);
-                            Get.dialog(Center(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: Colors.white,
-                                  borderRadius: BorderRadius.circular(16),
-                                ),
-                                height: 323,
-                                width: double.infinity,
-                                child: Padding(
-                                  padding: const EdgeInsets.all(16.0),
-                                  child: Column(
-                                    children: [
-                                      Image.asset(
-                                        ImageConstant.successWatering,
-                                        height: 200,
-                                      ),
-                                      const SizedBox(
-                                        height: 16,
-                                      ),
-                                      Text("Hurray! 💦",
-                                          style: TextStyleConstant.heading4
-                                              .copyWith(
-                                            decoration: TextDecoration.none,
-                                            fontWeight: FontWeight.w700,
-                                          )),
-                                      const SizedBox(
-                                        height: 4,
-                                      ),
-                                      Text(
-                                        "Your plant has been watered!\nKeep up the good care! 🙌",
-                                        style: TextStyleConstant.paragraph
-                                            .copyWith(
-                                                decoration:
-                                                    TextDecoration.none),
-                                        textAlign: TextAlign.center,
-                                      ),
-                                    ],
-                                  ),
+    for (var value in listNotif) {
+      if (value.id == response.data?.id) {
+        Get.dialog(
+            barrierDismissible: false,
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Container(
+                  height: 472,
+                  padding: const EdgeInsets.all(16),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(16),
+                      color: ColorConstant.white),
+                  child: Column(
+                    children: [
+                      CachedNetworkImage(
+                        width: double.infinity,
+                        height: 200,
+                        imageUrl:
+                            response.data?.plant?.plantImage?[0].fileName ??
+                                "-",
+                        errorWidget: (context, url, error) {
+                          return Icon(
+                            Icons.error,
+                            color: ColorConstant.danger500,
+                          );
+                        },
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Text(
+                        response.data?.title ?? "-",
+                        style: TextStyleConstant.heading4.copyWith(
+                            fontWeight: FontWeight.w700,
+                            decoration: TextDecoration.none),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 8,
+                      ),
+                      Text(
+                        response.data?.body ?? "-",
+                        style: TextStyleConstant.paragraph
+                            .copyWith(decoration: TextDecoration.none),
+                        textAlign: TextAlign.center,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      ButtonWidget(
+                        onTap: () async {
+                          Get.back();
+                          await getNotificationById(value.id ?? -1);
+                          await postWatering(value.plantId ?? -1);
+                          Get.dialog(Center(
+                            child: Container(
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(16),
+                              ),
+                              height: 323,
+                              width: double.infinity,
+                              child: Padding(
+                                padding: const EdgeInsets.all(16.0),
+                                child: Column(
+                                  children: [
+                                    Image.asset(
+                                      ImageConstant.successWatering,
+                                      height: 200,
+                                    ),
+                                    const SizedBox(
+                                      height: 16,
+                                    ),
+                                    Text("Hurray! 💦",
+                                        style:
+                                            TextStyleConstant.heading4.copyWith(
+                                          decoration: TextDecoration.none,
+                                          fontWeight: FontWeight.w700,
+                                        )),
+                                    const SizedBox(
+                                      height: 4,
+                                    ),
+                                    Text(
+                                      "Your plant has been watered!\nKeep up the good care! 🙌",
+                                      style: TextStyleConstant.paragraph
+                                          .copyWith(
+                                              decoration: TextDecoration.none),
+                                      textAlign: TextAlign.center,
+                                    ),
+                                  ],
                                 ),
                               ),
-                            ));
-                          },
-                          buttonName: "Watered",
-                          boxDecoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              color: ColorConstant.primary500),
-                          textStyle: TextStyleConstant.subtitle.copyWith(
-                              color: ColorConstant.white,
-                              decoration: TextDecoration.none),
-                        ),
-                        ButtonWidget(
-                          onTap: () {
-                            Get.back();
-                          },
-                          buttonName: "Remind me later",
-                          boxDecoration: BoxDecoration(
+                            ),
+                          ));
+                        },
+                        buttonName: "Watered",
+                        boxDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(8),
+                            color: ColorConstant.primary500),
+                        textStyle: TextStyleConstant.subtitle.copyWith(
                             color: ColorConstant.white,
-                          ),
-                          textStyle: TextStyleConstant.subtitle.copyWith(
-                              color: ColorConstant.primary500,
-                              decoration: TextDecoration.none),
+                            decoration: TextDecoration.none),
+                      ),
+                      ButtonWidget(
+                        onTap: () {
+                          Get.back();
+                        },
+                        buttonName: "Remind me later",
+                        boxDecoration: BoxDecoration(
+                          color: ColorConstant.white,
                         ),
-                      ],
-                    ),
+                        textStyle: TextStyleConstant.subtitle.copyWith(
+                            color: ColorConstant.primary500,
+                            decoration: TextDecoration.none),
+                      ),
+                    ],
                   ),
                 ),
-              ));
-          break;
-        }
+              ),
+            ));
+        break;
       }
-    } catch (e) {
-      throw Exception(e);
     }
   }
 }

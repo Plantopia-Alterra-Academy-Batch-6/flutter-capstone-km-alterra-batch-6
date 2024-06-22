@@ -83,13 +83,13 @@ class CategoryPlantWidget extends StatelessWidget {
                                 myPlantController.currentIndex(-1);
                               } else {
                                 myPlantController.currentIndex(index);
-                              }
-                              if (myPlantController.plantCategoriesResponse
-                                      ?.data[index].id !=
-                                  null) {
-                                myPlantController.getPlantByCatergories(
-                                    myPlantController.plantCategoriesResponse!
-                                        .data[index].id);
+                                if (myPlantController.plantCategoriesResponse
+                                        ?.data[index].id !=
+                                    null) {
+                                  myPlantController.getPlantByCatergories(
+                                      myPlantController.plantCategoriesResponse!
+                                          .data[index].id);
+                                }
                               }
                             },
                             child: Center(

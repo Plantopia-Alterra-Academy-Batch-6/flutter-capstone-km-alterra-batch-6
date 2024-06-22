@@ -152,8 +152,8 @@ class BottomSheetDeleteWidget extends StatelessWidget {
                                                 index: 2,
                                               ),
                                             );
-                                          }
-                                          Get.defaultDialog(
+                                          } else {
+                                            Get.defaultDialog(
                                               title: "Warning",
                                               contentPadding:
                                                   const EdgeInsets.symmetric(
@@ -193,6 +193,8 @@ class BottomSheetDeleteWidget extends StatelessWidget {
                                                 style:
                                                     TextStyleConstant.heading4,
                                               ));
+                                          }
+                                          
                                         },
                                         buttonName: "Save",
                                         boxDecoration: BoxDecoration(

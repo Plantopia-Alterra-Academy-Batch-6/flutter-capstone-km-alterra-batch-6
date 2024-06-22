@@ -68,44 +68,48 @@ class MyPlantView extends StatelessWidget {
                     }
                   },
                 ),
-                const SizedBox(
-                  height: 10,
+                Obx(
+                  () => Visibility(
+                    visible: myPlantController.listMyPlant.isEmpty,
+                    child: const RecommendedWidget(),
+                  ),
                 ),
-                const RecommendedWidget(),
               ],
             ),
           ),
         ),
       ),
       floatingActionButton: Obx(
-        () => myPlantController.showFloatingButton.value
-            ? FloatingActionButton.extended(
-                onPressed: () {
-                  Get.toNamed(AppRoutes.addPlant);
-                },
-                backgroundColor: ColorConstant.primary500,
-                label: Text(
-                  'Add Plant',
-                  style: TextStyleConstant.subtitle.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
+        () => myPlantController.listMyPlant.isEmpty
+            ? const SizedBox.shrink()
+            : myPlantController.showFloatingButton.value
+                ? FloatingActionButton.extended(
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.addPlant);
+                    },
+                    backgroundColor: ColorConstant.primary500,
+                    label: Text(
+                      'Add Plant',
+                      style: TextStyleConstant.subtitle.copyWith(
+                        fontWeight: FontWeight.w700,
+                        color: Colors.white,
+                      ),
+                    ),
+                    icon: const Icon(
+                      Icons.add_circle_outline,
+                      color: Colors.white,
+                    ),
+                  )
+                : FloatingActionButton(
+                    backgroundColor: ColorConstant.primary500,
+                    onPressed: () {
+                      Get.toNamed(AppRoutes.addPlant);
+                    },
+                    child: const Icon(
+                      Icons.add_circle_outline,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                icon: const Icon(
-                  Icons.add_circle_outline,
-                  color: Colors.white,
-                ),
-              )
-            : FloatingActionButton(
-                backgroundColor: ColorConstant.primary500,
-                onPressed: () {
-                  Get.toNamed(AppRoutes.addPlant);
-                },
-                child: const Icon(
-                  Icons.add_circle_outline,
-                  color: Colors.white,
-                ),
-              ),
       ),
     );
   }

@@ -166,16 +166,13 @@ class BottomSheet1Widget extends StatelessWidget {
                               color: Colors.white,
                             ),
                             onTap: () async {
-                              while (Get.isBottomSheetOpen == true) {
-                                Get.back();
-                              }
+                              Get.back();
                               Get.bottomSheet(const BottomSheet3Widget());
                               await notifController
                                   .getNotificationById(notifId);
                               await notifController.postWatering(
                                   notifController.plantByIdResponse?.data?.id ??
                                       -1);
-                              await notifController.getAllNotification();
                             },
                           )),
                         ],

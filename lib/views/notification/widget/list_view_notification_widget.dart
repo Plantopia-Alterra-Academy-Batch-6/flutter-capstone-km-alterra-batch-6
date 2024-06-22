@@ -46,16 +46,18 @@ class ListViewNotificationWidget extends StatelessWidget {
                         print(
                             "hello ${notifController.listNotif[index].plantId ?? -1}");
                       }
-                      Get.bottomSheet(
-                        BottomSheet1Widget(
-                          notifId: notifController.listNotif[index].id ?? -1,
-                          messages:
-                              notifController.listNotif[index].body ?? "-",
-                        ),
-                      );
-                      await notifController.getPlantDetails(
-                        notifController.listNotif[index].plantId ?? -1,
-                      );
+                      if (notifController.listNotif[index].isRead == false) {
+                        Get.bottomSheet(
+                          BottomSheet1Widget(
+                            notifId: notifController.listNotif[index].id ?? -1,
+                            messages:
+                                notifController.listNotif[index].body ?? "-",
+                          ),
+                        );
+                        await notifController.getPlantDetails(
+                          notifController.listNotif[index].plantId ?? -1,
+                        );
+                      }
                     },
                     child: Container(
                       width: double.infinity,

@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
-import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
 
 class CardGlobalWidget extends StatelessWidget {
   const CardGlobalWidget(
