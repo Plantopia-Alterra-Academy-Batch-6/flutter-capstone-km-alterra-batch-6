@@ -11,7 +11,7 @@ import 'package:plantopia/models/signup_params_model.dart';
 import 'package:plantopia/models/user_model.dart';
 import 'package:plantopia/service/auth_service.dart';
 import 'package:plantopia/utils/app_routes.dart';
-import 'package:plantopia/views/auth/allow_notif_view.dart';
+import 'package:plantopia/views/allow_notif/allow_notif_view.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 import 'package:plantopia/views/verify/widget/custom_dialog_success_widget.dart';
 
@@ -130,7 +130,7 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       if (e is CustomException) {
-        Get.snackbar('error [${e.code}]', e.message);
+        // Get.snackbar('error [${e.code}]', e.message);
       } else {
         Get.snackbar('error', '$e');
       }

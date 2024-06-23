@@ -1,3 +1,4 @@
+
 import 'package:flutter/material.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
@@ -59,7 +60,7 @@ class WeatherView extends StatelessWidget {
                           onPressed: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                              return WeatherDetailView();
+                              return const WeatherDetailView();
                             }));
                           },
                           child: Text(

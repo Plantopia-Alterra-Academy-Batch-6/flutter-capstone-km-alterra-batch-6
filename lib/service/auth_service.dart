@@ -98,7 +98,7 @@ class AuthService {
       }
     } on DioException catch (e) {
       throw CustomException(
-          'Email already exists', e.response?.statusCode ?? 400);
+          'Failed get user', e.response?.statusCode ?? 400);
     } catch (e) {
       throw CustomException('there is an error : $e', 400);
     }

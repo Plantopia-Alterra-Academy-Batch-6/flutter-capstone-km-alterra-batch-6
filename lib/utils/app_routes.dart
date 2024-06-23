@@ -22,4 +22,5 @@ class AppRoutes {
   static const String verify = '/verify';
   static const String setNewPassword = '/setNewPassword';
   static const String plantGuide = '/plantGuideView';
+  static const String authGoogle = '/authGoogle';
 }
