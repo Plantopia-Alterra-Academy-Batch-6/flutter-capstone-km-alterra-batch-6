@@ -14,6 +14,7 @@ class MyPlantController extends GetxController {
   Rx<Status> myPlantData = Status.loading.obs;
   Rx<Status> recommendationData = Status.loading.obs;
   Rx<Status> categoryData = Status.loading.obs;
+  RxBool isActive = false.obs;
 
   ScrollController scrollController = ScrollController();
 
@@ -21,6 +22,7 @@ class MyPlantController extends GetxController {
       true.obs; // State untuk mengontrol tampilan Floating Action Button
 
   RxList<PlantElement> listMyPlant = <PlantElement>[].obs;
+  RxList<PlantElement> searchMyPlant = <PlantElement>[].obs;
   RxList<Plant> recommendationPlant = <Plant>[].obs;
 
   AddPlantService addPlantService = AddPlantService();
@@ -28,16 +30,8 @@ class MyPlantController extends GetxController {
   PlantRecommendationsResponse? plantRecommendationsResponse;
   RxBool isPageLoading = false.obs;
   var activeIndex = (-1).obs;
-
   RxBool isSearchFound = false.obs;
 
-  dynamic searchResultJson = {
-    "customize_name": '',
-    'id': 0,
-    'name': '',
-    'image_url': '',
-    'category': '',
-  };
   final AuthController authController = Get.put(AuthController());
 
   @override
@@ -135,6 +129,7 @@ class MyPlantController extends GetxController {
 
   Future<void> searchPlant(String value) async {
     var totalData = listMyPlant.length;
+    List<PlantElement> listsearchPlantTemp = [];
 
     for (int i = 0; i < totalData; i++) {
       if (listMyPlant[i].plant!.name!.toLowerCase() == value.toLowerCase() ||
@@ -157,15 +152,10 @@ class MyPlantController extends GetxController {
                   .customizeName!
                   .toLowerCase()
                   .startsWith(value.toLowerCase())) {
-        searchResultJson['id'] = listMyPlant[i].id;
-        searchResultJson['customize_name'] = listMyPlant[i].customizeName;
-        searchResultJson['name'] = listMyPlant[i].plant!.name;
-        searchResultJson['image_url'] =
-            listMyPlant[i].plant?.plantImages?.first.fileName ?? "";
-        searchResultJson['category'] =
-            listMyPlant[i].plant?.plantCategory?.name ?? "";
+        listsearchPlantTemp.add(listMyPlant[i]);
         isSearchFound(true);
       }
     }
+    searchMyPlant.value = listsearchPlantTemp;
   }
 }

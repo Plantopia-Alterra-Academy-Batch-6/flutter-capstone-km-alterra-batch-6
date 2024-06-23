@@ -22,13 +22,52 @@ class CustomAppBarWidget extends StatelessWidget {
     final AuthController authController = Get.put(AuthController());
     authController.getUser();
     String greeting = getGreeting();
+    print('user  id ${authController.currentUser.value?.id}');
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Obx(
           () => authController.isLoading.value
-              ? const CircularProgressIndicator()
+              ? Row(
+                  children: [
+                    Container(
+                      width: 42,
+                      height: 42,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(
+                          32,
+                        ),
+                        color: ColorConstant.primary400,
+                      ),
+                      child: Center(
+                        child: Icon(
+                          Icons.person,
+                          color: ColorConstant.neutral0,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(
+                      width: 12,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "$greeting,",
+                          style: TextStyleConstant.subtitle.copyWith(
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        const ShimmerContainerGlobalWidget(
+                          width: 100,
+                          height: 18,
+                          radius: 0,
+                        ),
+                      ],
+                    ),
+                  ],
+                )
               : Row(
                   children: [
                     Container(

@@ -41,7 +41,7 @@ class PlantGuideView extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 16),
               physics: const NeverScrollableScrollPhysics(),
               shrinkWrap: true,
-              itemCount: 6, // Number of shimmer items
+              itemCount: 6,
               itemBuilder: (context, int index) {
                 double height;
                 switch (index) {
@@ -80,6 +80,14 @@ class PlantGuideView extends StatelessWidget {
             final plantInstructions = controller.plantInstructions
                 .where((instruction) => instruction.plantId == plantId)
                 .toList();
+
+            final uniqueCategories = <String, dynamic>{};
+            for (var instruction in plantInstructions) {
+              uniqueCategories[instruction.instructionCategory?.name ?? ''] =
+                  instruction;
+            }
+            final uniqueInstructions = uniqueCategories.values.toList();
+
             return SingleChildScrollView(
               child: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -103,9 +111,9 @@ class PlantGuideView extends StatelessWidget {
                         ListView.builder(
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
-                          itemCount: plantInstructions.length,
+                          itemCount: uniqueInstructions.length,
                           itemBuilder: (context, index) {
-                            final instruction = plantInstructions[index];
+                            final instruction = uniqueInstructions[index];
                             String iconData;
                             switch (instruction.instructionCategory?.name) {
                               case 'Soil Preparation':
@@ -127,14 +135,26 @@ class PlantGuideView extends StatelessWidget {
                             if (kDebugMode) {
                               print(instruction.stepDescription);
                             }
-
+                            
                             return PlantGuideInstructionCategoryWidget(
+                              color: Colors.white,
                               icon: iconData,
                               title: instruction.instructionCategory?.name ??
                                   'No Title',
                               onTap: () {
+                                final categoryInstructions = plantInstructions
+                                    .where((instr) =>
+                                        instr.instructionCategory?.name ==
+                                        instruction.instructionCategory?.name)
+                                    .toList();
+
                                 Get.to(() => PlantGuideDetailView(),
-                                    arguments: {'instruction': instruction});
+                                    arguments: {
+                                      'instruction': instruction,
+                                      'allInstructions': plantInstructions,
+                                      'categoryInstructions':
+                                          categoryInstructions,
+                                    });
                               },
                             );
                           },
@@ -148,7 +168,9 @@ class PlantGuideView extends StatelessWidget {
           }
         },
       ),
-      bottomNavigationBar: const PlantGuideButtonStartWidget(),
+      bottomNavigationBar: PlantGuideButtonStartWidget(
+        onPressed: () {},
+      ),
     );
   }
 }

@@ -3,7 +3,8 @@ import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 
 class PlantGuideButtonStartWidget extends StatelessWidget {
-  const PlantGuideButtonStartWidget({super.key});
+  final void Function() onPressed;
+  const PlantGuideButtonStartWidget({super.key, required this.onPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class PlantGuideButtonStartWidget extends StatelessWidget {
             ),
             elevation: 0,
           ),
-          onPressed: () {},
+          onPressed: onPressed,
           child: Text(
             'Start Planting',
             style: TextStyleConstant.subtitle.copyWith(

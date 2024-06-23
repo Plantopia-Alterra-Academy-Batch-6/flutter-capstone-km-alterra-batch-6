@@ -21,7 +21,6 @@ class PlantGuideWidget extends StatelessWidget {
                   fontWeight: FontWeight.w700,
                 ),
               ),
-              // TODO 1: Add DotIndicatorWidget
             ],
           ),
         ),
@@ -32,7 +31,6 @@ class PlantGuideWidget extends StatelessWidget {
           height: 76,
           child: ListView(
             padding: const EdgeInsets.symmetric(horizontal: 16),
-            // TODO 2: Make it full width
             shrinkWrap: true,
             scrollDirection: Axis.horizontal,
             children: const [

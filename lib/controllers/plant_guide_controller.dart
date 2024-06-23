@@ -26,4 +26,5 @@ class GetMyPlantGuideController extends GetxController {
       isLoading(false);
     }
   }
+  
 }

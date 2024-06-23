@@ -14,37 +14,9 @@ class RecomendationController extends GetxController {
     ),
   );
 
-  var responseText = "".obs;
   var articleResponseText = "".obs;
-  var recommendationLoading = false.obs;
   var articleLoading = false.obs;
 
-  Future<void> getRecommendations(String plantName) async {
-    recommendationLoading.value = true;
-    final request = ChatCompleteText(
-      messages: [
-        {
-          "role": "user",
-          "content":
-              "Give me 3 recommendations for safe pest control to address plant pest issues for $plantName."
-        }
-      ],
-      maxToken: 200,
-      model: Gpt4ChatModel(),
-    );
-
-    try {
-      ChatCTResponse? response =
-          await openAI.onChatCompletion(request: request);
-      if (response != null && response.choices.isNotEmpty) {
-        responseText.value = response.choices.first.message?.content ?? "";
-      }
-    } catch (e) {
-      responseText.value = "Error retrieving recommendations.";
-    } finally {
-      recommendationLoading.value = false;
-    }
-  }
 
   Future<void> getArticles(String plantName) async {
     articleLoading.value = true;

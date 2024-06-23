@@ -62,7 +62,13 @@ class _HomeViewState extends State<HomeView> {
                 const SizedBox(
                   height: 12,
                 ),
-                const RecommendedWidget(),
+                Obx(() {
+                  if (myPlantController.listMyPlant.isEmpty) {
+                    return const RecommendedWidget();
+                  } else {
+                    return Container();
+                  }
+                }),
                 const SizedBox(
                   height: 24,
                 )

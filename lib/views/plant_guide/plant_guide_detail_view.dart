@@ -1,6 +1,7 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
@@ -15,6 +16,10 @@ class PlantGuideDetailView extends StatelessWidget {
   PlantGuideDetailView({super.key});
 
   final PlantInstruction instruction = Get.arguments['instruction'];
+  final List<PlantInstruction> allInstructions =
+      Get.arguments['allInstructions'];
+  final List<PlantInstruction> categoryInstructions =
+      Get.arguments['categoryInstructions'];
   final controller = Get.put(GetMyPlantGuideController());
 
   Future<String> getAiSuggestion(String description) async {
@@ -57,6 +62,17 @@ class PlantGuideDetailView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    int currentIndex =
+        allInstructions.indexWhere((instr) => instr.id == instruction.id);
+
+    String buttonText;
+    if (currentIndex < allInstructions.length - 1) {
+      buttonText =
+          'Proceed to ${allInstructions[currentIndex + 1].instructionCategory!.name?.toLowerCase()}';
+    } else {
+      buttonText = 'Finished';
+    }
+
     return Scaffold(
       backgroundColor: ColorConstant.white,
       extendBody: false,
@@ -74,23 +90,25 @@ class PlantGuideDetailView extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              PlantGuideInstructionDetailWidget(
-                categoryDescription:
-                    instruction.instructionCategory?.description ??
-                        'No Description',
-                categoryTitle:
-                    instruction.instructionCategory?.name ?? 'No Title',
-                imageUrl: instruction.stepImageUrl ?? '',
-                stepNumber: instruction.stepNumber ?? 0,
-                stepTitle: instruction.stepTitle ?? 'No Title',
-                stepDescription:
-                    instruction.stepDescription ?? 'No Description',
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: categoryInstructions.asMap().entries.map((entry) {
+                  int index = entry.key;
+                  PlantInstruction instr = entry.value;
+                  return PlantGuideInstructionDetailWidget(
+                    categoryDescription: instr.instructionCategory?.description ?? 'No Description',
+                    categoryTitle: instr.instructionCategory?.name ?? 'No Title',
+                    imageUrl: instr.stepImageUrl ?? '',
+                    stepNumber: instr.stepNumber ?? 0,
+                    stepTitle: instr.stepTitle ?? 'No Title',
+                    stepDescription: instr.stepDescription ?? 'No Description',
+                    showCategory: index == 0, 
+                  );
+                }).toList(),
               ),
               FutureBuilder<String>(
-                future: getAiSuggestion(
-                    instruction.stepDescription ?? 'No Description'),
+                future: getAiSuggestion(instruction.stepDescription ?? 'No Description'),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const ShimmerContainerGlobalWidget(
@@ -132,9 +150,9 @@ class PlantGuideDetailView extends StatelessWidget {
                               Padding(
                                 padding: const EdgeInsets.only(
                                     left: 16, right: 16, bottom: 16),
-                                child: Text(
+                                child: HtmlWidget(
                                   snapshot.data!,
-                                  style: TextStyleConstant.paragraph,
+                                  textStyle: TextStyleConstant.paragraph,
                                 ),
                               ),
                             ],
@@ -152,7 +170,9 @@ class PlantGuideDetailView extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: const PlantGuideButtonEndWidget(),
+      bottomNavigationBar: PlantGuideButtonEndWidget(
+        textButton: buttonText,
+      ),
     );
   }
 }

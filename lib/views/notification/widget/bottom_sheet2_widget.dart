@@ -163,6 +163,7 @@ class BottomSheet2Widget extends StatelessWidget {
                 Expanded(
                     child: ButtonWidget(
                   onTap: () async {
+                    await notifController.getNotificationById(notifId);
                     await notifController.customizeWateringReminder(
                         notifController.plantByIdResponse?.data?.id ?? -1,
                         notifController

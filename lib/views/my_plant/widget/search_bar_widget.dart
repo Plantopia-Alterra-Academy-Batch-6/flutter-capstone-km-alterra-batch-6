@@ -37,16 +37,18 @@ class SearchBarWidget extends StatelessWidget {
                     ),
                   ),
                   trailing: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                      child: InkWell(
-                        onTap: () {},
-                        child: SvgPicture.asset(
-                          IconConstant.filter,
-                          height: 16,
-                          width: 16,
-                        ),
-                      ),
+                    Obx(
+                      () => Visibility(
+                          visible: _myPlantController.isActive.value &&
+                              _myPlantController
+                                  .searchController.text.isNotEmpty,
+                          child: IconButton(
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                _myPlantController.searchController.clear();
+                                _myPlantController.isActive.value = false;
+                                _myPlantController.isSearchFound.value = false;
+                              })),
                     ),
                   ],
                   hintText: "Search",
@@ -59,6 +61,12 @@ class SearchBarWidget extends StatelessWidget {
                     } else {
                       _myPlantController.isSearchFound(false);
                       await _myPlantController.searchPlant(value);
+                    }
+                    if (_myPlantController.searchController.text != "" ||
+                        _myPlantController.searchController.text.isNotEmpty) {
+                      _myPlantController.isActive.value = true;
+                    } else {
+                      _myPlantController.isActive.value = false;
                     }
                   },
                   onSubmitted: (value) async {
