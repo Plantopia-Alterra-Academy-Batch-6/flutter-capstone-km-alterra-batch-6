@@ -13,7 +13,6 @@ class RecommendedWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16),
           child: Row(
@@ -26,7 +25,6 @@ class RecommendedWidget extends StatelessWidget {
                 ),
               ),
               TextButton(
-
                 onPressed: () {
                   Get.offAll(
                     const BottomNavigationBarGlobalWidget(
@@ -49,9 +47,6 @@ class RecommendedWidget extends StatelessWidget {
           height: 18,
         ),
         ListRecomendedPlantWidget(),
-        const SizedBox(
-                  height: 24,
-                )
       ],
     );
   }

@@ -31,8 +31,8 @@ class HourlyWeatherListWidget extends StatelessWidget {
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
                 shrinkWrap: true,
-                itemCount:
-                    weatherController.hourlyWeatherData.value.data?.length ?? 0,
+                itemCount: _getLimitedItemCount(
+                    weatherController.hourlyWeatherData.value.data?.length ?? 0),
                 itemBuilder: (context, index) {
                   final weatherDataItem =
                       weatherController.hourlyWeatherData.value.data?[index];
@@ -50,6 +50,11 @@ class HourlyWeatherListWidget extends StatelessWidget {
     );
   }
 
+  int _getLimitedItemCount(int totalItemCount) {
+    // Limit the item count to 24
+    return totalItemCount > 24 ? 24 : totalItemCount;
+  }
+
   Widget _hourlyWeatherListWidgetStatus(
       Status status, Widget Function() onSuccess) {
     switch (status) {
@@ -61,7 +66,7 @@ class HourlyWeatherListWidget extends StatelessWidget {
             child: ListView.builder(
               scrollDirection: Axis.horizontal,
               shrinkWrap: true,
-              itemCount: 48,
+              itemCount: 24,
               itemBuilder: (context, index) {
                 return const Padding(
                   padding: EdgeInsets.only(right: 16),

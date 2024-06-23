@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/my_plant_details_controller.dart';
@@ -25,8 +24,9 @@ class PlantCareWidget extends StatelessWidget {
               TextStyleConstant.heading4.copyWith(fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 10),
-        HtmlWidget(
-          detailMyPlant.plant?.additionalTips ?? "-",
+        Text(
+          myPlantDetailsController
+              .filterHtmlTag(detailMyPlant.plant?.additionalTips ?? "-"),
         )
       ],
     );

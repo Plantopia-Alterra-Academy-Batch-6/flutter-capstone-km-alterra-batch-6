@@ -105,6 +105,8 @@ class WeatherController extends GetxController {
     }
   }
 
+
+
   void _setErrorStatus() {
     currentWeatherStatus.value = Status.error;
     hourlyWeather.value = Status.error;
