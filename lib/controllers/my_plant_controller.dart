@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
+import 'package:plantopia/constants/image_constant.dart';
+import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
+import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/models/get_plant_category_response.dart';
 import 'package:plantopia/models/get_plant_recommendations_response.dart';
+import 'package:plantopia/models/get_planting_care_response.dart';
 import 'package:plantopia/service/add_plant_service.dart';
 import 'package:plantopia/service/my_plant_service.dart';
+import 'package:plantopia/service/plant_details_service.dart';
+import 'package:plantopia/service/watering_history_service.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 
 class MyPlantController extends GetxController {
@@ -15,11 +22,11 @@ class MyPlantController extends GetxController {
   Rx<Status> recommendationData = Status.loading.obs;
   Rx<Status> categoryData = Status.loading.obs;
   RxBool isActive = false.obs;
-
+  RxList<PlantCaring> plantCaringData = <PlantCaring>[].obs;
+  Rx<Status> plantCaringStatus = Status.loading.obs;
   ScrollController scrollController = ScrollController();
-
-  RxBool showFloatingButton =
-      true.obs; // State untuk mengontrol tampilan Floating Action Button
+  RxBool showFloatingButton = true.obs;
+  PlantByIdResponse? plantByIdResponse;
 
   RxList<PlantElement> listMyPlant = <PlantElement>[].obs;
   RxList<PlantElement> searchMyPlant = <PlantElement>[].obs;
@@ -38,9 +45,10 @@ class MyPlantController extends GetxController {
   Future<void> onInit() async {
     super.onInit();
     await authController.getUser();
-    getMyPlant();
+    await getMyPlant();
     getAllCategories();
     getRecommendationPlant();
+    getPlantCaring();
 
     scrollController.addListener(() {
       // Jika posisi scroll berubah, periksa apakah harus menampilkan Floating Action Button
@@ -157,5 +165,96 @@ class MyPlantController extends GetxController {
       }
     }
     searchMyPlant.value = listsearchPlantTemp;
+  }
+
+  Future<void> getPlantDetails(int plantId) async {
+    try {
+      plantByIdResponse = await PlantDetailsService().getPlantById(plantId);
+    } catch (e) {
+      return;
+    }
+  }
+
+  String parseHour(String wateringSchedule) {
+    DateTime time = DateFormat.Hm().parse(wateringSchedule);
+
+    DateFormat formatter = DateFormat('hh:mm a');
+
+    String formattedTime = formatter.format(time);
+
+    return formattedTime;
+  }
+
+  Future<void> getPlantCaring() async {
+    try {
+      plantCaringStatus.value = Status.loading;
+      final response = await MyPlantService.getPlantCare();
+      for (var value in listMyPlant) {
+        if (value.plant?.id == response.data?[0].plantId) {
+          plantCaringData.value = response.data ?? [];
+          await getPlantDetails(plantCaringData[0].plantId ?? -1);
+        }
+      }
+      plantCaringStatus.value = Status.loaded;
+    } catch (e) {
+      plantCaringStatus.value = Status.error;
+    }
+  }
+
+  Future<void> postWatering(int plantId) async {
+    try {
+      await WateringHistoryService.postWatering(plantId);
+      Get.dialog(Center(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            height: 323,
+            width: double.infinity,
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                children: [
+                  Image.asset(
+                    ImageConstant.successWatering,
+                    height: 200,
+                  ),
+                  const SizedBox(
+                    height: 16,
+                  ),
+                  Text("Hurray! 💦",
+                      style: TextStyleConstant.heading4.copyWith(
+                        decoration: TextDecoration.none,
+                        fontWeight: FontWeight.w700,
+                      )),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Text(
+                    "Your plant has been watered!\nKeep up the good care! 🙌",
+                    style: TextStyleConstant.paragraph
+                        .copyWith(decoration: TextDecoration.none),
+                    textAlign: TextAlign.center,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ));
+    } catch (e) {
+      Get.defaultDialog(
+        title: "Error",
+        middleText: "Failed to watering plant, please try again!",
+        textConfirm: "OK",
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          Get.back();
+        },
+      );
+    }
   }
 }

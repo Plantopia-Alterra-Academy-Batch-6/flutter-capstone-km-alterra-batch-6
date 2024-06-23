@@ -4,6 +4,7 @@ import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
 import 'package:plantopia/models/get_plant_by_category_response.dart';
 import 'package:plantopia/models/get_plant_recommendations_response.dart';
+import 'package:plantopia/models/get_planting_care_response.dart';
 
 class MyPlantService {
   static Dio dio = Dio();
@@ -65,6 +66,26 @@ class MyPlantService {
       }
     } on DioException catch (_) {
       return GetPlantByCategoryResponse(data: []);
+    }
+  }
+
+  static Future<GetPlantingCare> getPlantCare() async {
+    try {
+      final token = await UserTokenPref.getToken();
+      Map<String, dynamic> headers = {
+        'Authorization': 'Bearer $token',
+      };
+      final response = await dio.get(
+          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/watering-earliest",
+          options: Options(headers: headers));
+      if (response.statusCode == 200) {
+        return GetPlantingCare.fromJson(response.data);
+      } else {
+        throw Exception(
+            'Failed to get plant caring data : ${response.statusCode}');
+      }
+    } on DioException catch (_) {
+      return GetPlantingCare();
     }
   }
 }

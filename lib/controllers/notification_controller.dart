@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/controllers/my_plant_controller.dart';
 import 'package:plantopia/models/get_notification_response.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/service/notification_service.dart';
@@ -20,6 +21,8 @@ class NotificationController extends GetxController {
   PlantByIdResponse? plantByIdResponse;
   Rx<DateTime> dateTime = DateTime.now().obs;
   var selectedOption = false.obs;
+
+  final MyPlantController myPlantController = Get.find();
 
   @override
   void onInit() {
@@ -223,7 +226,7 @@ class NotificationController extends GetxController {
     await getAllNotification();
 
     for (var value in listNotif) {
-      if (value.id == response.data?.id) {
+      if (value.id == response.data?.id && value.isRead == false) {
         Get.dialog(
             barrierDismissible: false,
             Center(
