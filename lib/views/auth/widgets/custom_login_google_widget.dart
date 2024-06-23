@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plantopia/utils/app_routes.dart';
 
 class CustomLoginGoogleWidget extends StatelessWidget {
   final void Function()? onPressed;
@@ -47,9 +49,7 @@ class CustomLoginGoogleWidget extends StatelessWidget {
               elevation: 0,
             ),
             onPressed: () {
-              // Get.dialog(
-              //   const CustomDialogSuccess(),
-              // );
+              Get.toNamed(AppRoutes.authGoogle);
             },
             // onPressed: () => authController.signInWithGoogle(),
             child: Row(

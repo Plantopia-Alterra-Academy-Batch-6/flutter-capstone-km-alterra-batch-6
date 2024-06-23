@@ -7,7 +7,8 @@ import 'package:get/get.dart';
 import 'package:plantopia/service/firebase_messaging_service.dart';
 import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/add_plant/add_plant_view.dart';
-import 'package:plantopia/views/auth/allow_notif_view.dart';
+import 'package:plantopia/views/allow_notif/allow_notif_view.dart';
+import 'package:plantopia/views/auth/auth_google_view.dart';
 import 'package:plantopia/views/auth/auth_view.dart';
 import 'package:plantopia/views/chatbot/chatbot_view.dart';
 import 'package:plantopia/views/forgot_password/forgot_password_view.dart';
@@ -138,6 +139,10 @@ Future<void> main() async {
         GetPage(
           name: AppRoutes.plantGuide,
           page: () => PlantGuideView(),
+        ),
+        GetPage(
+          name: AppRoutes.authGoogle,
+          page: () => const AuthGoogleView(),
         ),
       ],
       initialRoute: AppRoutes.splashApp,
