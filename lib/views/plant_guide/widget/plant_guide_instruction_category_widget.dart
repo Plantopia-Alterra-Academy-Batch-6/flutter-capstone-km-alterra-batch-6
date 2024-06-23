@@ -7,6 +7,7 @@ class PlantGuideInstructionCategoryWidget extends StatelessWidget {
   final String title;
   final VoidCallback? onTap;
   final TextStyle? textStyle;
+  final Color? color;
 
   const PlantGuideInstructionCategoryWidget({
     super.key,
@@ -14,6 +15,7 @@ class PlantGuideInstructionCategoryWidget extends StatelessWidget {
     required this.title,
     required this.onTap,
     this.textStyle,
+    this.color,
   });
 
   @override
@@ -26,7 +28,7 @@ class PlantGuideInstructionCategoryWidget extends StatelessWidget {
       width: 328,
       height: 69,
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: color ?? Colors.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(

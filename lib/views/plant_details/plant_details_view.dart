@@ -31,6 +31,7 @@ class PlantDetailsView extends StatelessWidget {
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
+        forceMaterialTransparency: true,
         backgroundColor: Colors.white,
         automaticallyImplyLeading: true,
         title: Text(

@@ -1,3 +1,4 @@
+import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -12,76 +13,78 @@ class EmptyMyPlantWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(
-        16,
-      ),
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: ColorConstant.neutral300,
-        ),
-        borderRadius: BorderRadius.circular(
+    return SizedBox(
+      width: double.infinity,
+      height: 204,
+      child: DottedBorder(
+        padding: const EdgeInsets.all(
           16,
         ),
-      ),
-      alignment: Alignment.center,
-      child: Column(
-        children: [
-          Image.asset(
-            ImageConstant.emptyPlant,
-            height: 58,
-            width: 58,
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          Text(
-            "Let’s get started by adding\nyour first plant!",
-            textAlign: TextAlign.center,
-            style: TextStyleConstant.paragraph,
-          ),
-          const SizedBox(
-            height: 12,
-          ),
-          InkWell(
-            onTap: () {
-              Get.toNamed(AppRoutes.addPlant);
-            },
-            child: Ink(
-              decoration: BoxDecoration(
-                color: ColorConstant.primary100,
-                borderRadius: BorderRadius.circular(
-                  8,
+        color: ColorConstant.neutral300,
+        radius: const Radius.circular(16),
+        borderType: BorderType.RRect,
+        strokeWidth: 1.2,
+        dashPattern: const [11],
+        child: Center(
+          child: Column(
+            children: [
+              Image.asset(
+                ImageConstant.emptyPlant,
+                height: 58,
+                width: 58,
+              ),
+              const SizedBox(
+                height: 4,
+              ),
+              Text(
+                "Let’s get started by adding\nyour first plant!",
+                textAlign: TextAlign.center,
+                style: TextStyleConstant.paragraph,
+              ),
+              const SizedBox(
+                height: 12,
+              ),
+              InkWell(
+                onTap: () {
+                  Get.toNamed(AppRoutes.addPlant);
+                },
+                child: Ink(
+                  decoration: BoxDecoration(
+                    color: ColorConstant.primary100,
+                    borderRadius: BorderRadius.circular(
+                      8,
+                    ),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(
+                      14,
+                    ),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        SvgPicture.asset(
+                          IconConstant.add,
+                          height: 20,
+                          width: 20,
+                        ),
+                        const SizedBox(
+                          width: 16,
+                        ),
+                        Text(
+                          "Add Plant",
+                          style: TextStyleConstant.subtitle.copyWith(
+                            color: ColorConstant.primary500,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
                 ),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(
-                  14,
-                ),
-                child: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SvgPicture.asset(
-                      IconConstant.add,
-                      height: 20,
-                      width: 20,
-                    ),
-                    const SizedBox(
-                      width: 16,
-                    ),
-                    Text(
-                      "Add Plant",
-                      style: TextStyleConstant.subtitle.copyWith(
-                        color: ColorConstant.primary500,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }

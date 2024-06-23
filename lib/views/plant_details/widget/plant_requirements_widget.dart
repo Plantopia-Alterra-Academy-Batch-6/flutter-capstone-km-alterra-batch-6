@@ -99,7 +99,7 @@ class PlantRequirementsWidget extends StatelessWidget {
                       .copyWith(fontWeight: FontWeight.w600),
                 ),
                 trailing: Text(
-                  '${(controller.plantByIdResponse!.data!.harvestDuration! / 30).truncate()} Months',
+                  '${controller.plantByIdResponse!.data!.harvestDuration!} Months',
                   style: TextStyleConstant.subtitle
                       .copyWith(fontWeight: FontWeight.w400),
                 ),

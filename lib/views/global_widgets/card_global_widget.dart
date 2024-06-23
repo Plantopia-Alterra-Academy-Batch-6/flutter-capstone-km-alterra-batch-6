@@ -2,7 +2,6 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
-import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
 
 class CardGlobalWidget extends StatelessWidget {
   const CardGlobalWidget(
@@ -34,7 +33,6 @@ class CardGlobalWidget extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-                //alignment: Alignment.bottomRight,
                 bottom: -10,
                 left: 70,
                 child: CachedNetworkImage(
@@ -42,13 +40,6 @@ class CardGlobalWidget extends StatelessWidget {
                   height: 130,
                   width: 93,
                   imageUrl: plantImageUrl,
-                  placeholder: (context, url) {
-                    return const ShimmerContainerGlobalWidget(
-                      width: 93,
-                      height: 130,
-                      radius: 0,
-                    );
-                  },
                   errorWidget: (context, url, error) {
                     return Icon(
                       Icons.error,

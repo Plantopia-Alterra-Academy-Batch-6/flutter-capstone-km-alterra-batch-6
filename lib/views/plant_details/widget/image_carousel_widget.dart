@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/plant_details_controller.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -58,7 +59,7 @@ class ImageCarouselWidget extends StatelessWidget {
                       controller.plantByIdResponse!.data!.plantImages?.length ??
                           0,
                   effect: ScrollingDotsEffect(
-                    activeDotColor: Colors.green,
+                    activeDotColor: ColorConstant.primary500,
                     dotColor: Colors.white.withOpacity(0.5),
                     dotHeight: 6,
                     dotWidth: 6,

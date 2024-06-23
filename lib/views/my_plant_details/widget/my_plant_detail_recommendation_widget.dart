@@ -23,42 +23,13 @@ class MyPlantDetailRecommendationWidget extends StatelessWidget {
             .extractPlantName(detailMyPlant.customizeName ?? "-")
         : myPlantDetailsController
             .extractPlantName(detailMyPlant.plant?.name ?? "-");
-    WidgetsBinding.instance!.addPostFrameCallback((_) {
-      recomendationController.getRecommendations(plantName);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       recomendationController.getArticles(plantName);
     });
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(
-          'Recommendation safe pest',
-          style: TextStyleConstant.heading4.copyWith(
-            fontWeight: FontWeight.w700,
-          ),
-        ),
         const SizedBox(height: 12),
-        Obx(() {
-          if (recomendationController.recommendationLoading.value) {
-            return Center(
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: LoadingIndicator(
-                  indicatorType: Indicator.ballPulse,
-                  colors: [ColorConstant.primary500],
-                  strokeWidth: 1,
-                ),
-              ),
-            );
-          } else {
-            return Text(
-              myPlantDetailsController.filterHtmlTag(
-                  recomendationController.responseText.value),
-              style: TextStyleConstant.paragraph,
-            );
-          }
-        }),
-        const SizedBox(height: 8),
         Text(
           'Article farming practice',
           style: TextStyleConstant.heading4.copyWith(
