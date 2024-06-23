@@ -18,7 +18,9 @@ class ProfileHelpAndSupportWidget extends StatelessWidget {
         ProfileSettingItemWidget(
           icon: IconConstant.plantBot,
           title: 'Talk with PlantBot',
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(AppRoutes.chatbot);
+          },
         ),
         const Divider(),
         ProfileSettingItemWidget(

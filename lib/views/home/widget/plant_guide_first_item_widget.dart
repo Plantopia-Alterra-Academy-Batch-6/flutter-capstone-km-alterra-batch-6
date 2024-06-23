@@ -30,7 +30,6 @@ class PlantGuideFirstItemWidget extends StatelessWidget {
               ),
               color: ColorConstant.primary100,
             ),
-            // TODO: Change the image path
             child: SvgPicture.asset(
               ImageConstant.g10,
               height: 24,

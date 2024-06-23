@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -24,17 +23,21 @@ class SuccessAddPlantView extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 4),
-            Text(
-              "You've successfully added a new plant to your collection",
-              style: TextStyleConstant.paragraph,
-              textAlign: TextAlign.center,
+            Padding(
+              padding: const EdgeInsets.only(left: 70, right: 70),
+              child: Text(
+                "You've successfully added a new plant to your collection",
+                style: TextStyleConstant.paragraph,
+                textAlign: TextAlign.center,
+              ),
             ),
             const SizedBox(height: 74),
             Padding(
               padding: const EdgeInsets.all(16.0),
               child: ElevatedButton(
                 onPressed: () {
-                  Get.offAll(() => const BottomNavigationBarGlobalWidget(index: 2));
+                  Get.offAll(
+                      () => const BottomNavigationBarGlobalWidget(index: 2));
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor:

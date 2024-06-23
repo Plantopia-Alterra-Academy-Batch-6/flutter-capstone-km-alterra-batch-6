@@ -30,10 +30,8 @@ class PlantGuideThirdItemWidget extends StatelessWidget {
               ),
               color: ColorConstant.warning100,
             ),
-            // TODO: Change the image path
-
-            child: SvgPicture.asset(
-              ImageConstant.g10,
+            child: Image.asset(
+              ImageConstant.sun,
               height: 24,
               width: 24,
             ),

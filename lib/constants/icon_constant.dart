@@ -18,7 +18,8 @@ class IconConstant {
   static const String search = 'assets/icons/search.svg';
   static const String filter = 'assets/icons/filter.svg';
   static const String history = 'assets/icons/history.svg';
-  static const String emptyHistoryPlant = 'assets/icons/empty_history_plant.svg';
+  static const String emptyHistoryPlant =
+      'assets/icons/empty_history_plant.svg';
   static const String waterDrop = 'assets/icons/water_drop.svg';
   static const String schedule = 'assets/icons/schedule.svg';
   static const String calendar = 'assets/icons/calendar.svg';
@@ -30,7 +31,8 @@ class IconConstant {
   static const String back = 'assets/icons/back.svg';
   static const String close = 'assets/icons/close.svg';
   static const String profile = 'assets/icons/profile.svg';
-  static const String manageNotification = 'assets/icons/manage_notification.svg';
+  static const String manageNotification =
+      'assets/icons/manage_notification.svg';
   static const String setLanguage = 'assets/icons/language.svg';
   static const String inviteFriends = 'assets/icons/invite_friends.svg';
   static const String plantBot = 'assets/icons/plant_bot.svg';
@@ -40,7 +42,9 @@ class IconConstant {
   static const String rateApp = 'assets/icons/rate_app.svg';
   static const String privacyPolicy = 'assets/icons/privacy_policy.svg';
   static const String profileNavbar = 'assets/icons/profile_navbar.svg';
+  static const String profileNavbarSelected = 'assets/icons/profile_navbar_selected.svg';
   static const String editPencil = 'assets/icons/edit_pencil.svg';
+  static const String trash = 'assets/icons/trash.svg';
   static const String plantCare = 'assets/icons/plant_care.svg';
   static const String soilPreparation = 'assets/icons/soil_preparation.svg';
   static const String harvest = 'assets/icons/harvest.svg';

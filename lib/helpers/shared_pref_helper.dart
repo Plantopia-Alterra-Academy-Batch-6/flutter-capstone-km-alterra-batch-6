@@ -15,8 +15,7 @@ class SharedPrefHelper {
     double? savedLatitude = await getUserLatitude();
     double? savedLongitude = await getUserLongitude();
     if (kDebugMode) {
-      print(
-          '$savedLatitude $savedLongitude');
+      print('$savedLatitude $savedLongitude');
     }
   }
 
@@ -35,8 +34,7 @@ class SharedPrefHelper {
     await prefs.setStringList(_userSearchHistoryKey, [searchedPlantName]);
     var userHistory = prefs.getStringList(_userSearchHistoryKey);
     if (kDebugMode) {
-      print(
-          '$userHistory');
+      print('$userHistory');
     }
   }
 }

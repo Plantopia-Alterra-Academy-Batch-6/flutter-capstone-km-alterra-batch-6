@@ -2,10 +2,10 @@ import 'package:get/get.dart';
 import 'package:plantopia/models/get_my_plant_response_model_new.dart';
 import 'package:plantopia/service/plant_guide_service.dart';
 
-
 class GetMyPlantGuideController extends GetxController {
   var plantInstructions = <PlantInstruction>[].obs;
   var isLoading = false.obs;
+  RxBool customIcon = false.obs;
 
   final GetMyPlantService _getMyPlantServiceNew = GetMyPlantService();
 
@@ -26,4 +26,5 @@ class GetMyPlantGuideController extends GetxController {
       isLoading(false);
     }
   }
+  
 }

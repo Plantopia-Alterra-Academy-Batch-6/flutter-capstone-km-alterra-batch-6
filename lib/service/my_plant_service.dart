@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
 import 'package:plantopia/models/get_plant_by_category_response.dart';
@@ -11,6 +12,9 @@ class MyPlantService {
     try {
       final token = await UserTokenPref.getToken();
       final userId = await UserTokenPref.getUserId();
+      if (kDebugMode) {
+        print("ini token $token $userId");
+      }
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
       };

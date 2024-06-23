@@ -19,7 +19,8 @@ class NoResultGlobalWidget extends StatelessWidget {
           const SizedBox(height: 40),
           Text(
             "No Result",
-            style: TextStyleConstant.heading4.copyWith(fontWeight: FontWeight.w700),
+            style: TextStyleConstant.heading4
+                .copyWith(fontWeight: FontWeight.w700),
           ),
           Text(
             "Sorry, there are no results for this search.",

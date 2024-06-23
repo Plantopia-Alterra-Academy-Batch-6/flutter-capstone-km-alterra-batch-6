@@ -1,6 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:plantopia/constants/color_constant.dart';
-import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 
 class CardGlobalWidget extends StatelessWidget {
@@ -16,6 +16,8 @@ class CardGlobalWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      width: 156,
+      height: 200,
       decoration: ShapeDecoration(
         color: Colors.white,
         shape: RoundedRectangleBorder(
@@ -31,29 +33,20 @@ class CardGlobalWidget extends StatelessWidget {
         child: Stack(
           children: [
             Positioned(
-              //alignment: Alignment.bottomRight,
-              bottom: -10,
-              left: 70,
-              child: Image.asset(
-                ImageConstant.plantDummy,
-                height: 130,
-                width: 93,
-              ),
-              //     CachedNetworkImage(
-              //   height: 130,
-              //   width: 93,
-              //   imageUrl: plantImageUrl,
-              //   placeholder: (context, url) {
-              //     return const CircularProgressIndicator();
-              //   },
-              //   errorWidget: (context, url, error) {
-              //     return Icon(
-              //       Icons.error,
-              //       color: ColorConstant.danger500,
-              //     );
-              //   },
-              // )
-            ),
+                bottom: -10,
+                left: 70,
+                child: CachedNetworkImage(
+                  fit: BoxFit.cover,
+                  height: 130,
+                  width: 93,
+                  imageUrl: plantImageUrl,
+                  errorWidget: (context, url, error) {
+                    return Icon(
+                      Icons.error,
+                      color: ColorConstant.danger500,
+                    );
+                  },
+                )),
             Align(
               alignment: Alignment.bottomCenter,
               child: Container(
@@ -78,6 +71,8 @@ class CardGlobalWidget extends StatelessWidget {
                     style: TextStyleConstant.subtitle.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   Text(
                     plantCategory,

@@ -15,16 +15,18 @@ class SearchPlantResultWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        addPlantController.selectedPlant(controller.searchedPlantResponse!.data!.plants!.first.id!);
+        addPlantController.selectedPlant(
+            controller.searchedPlantResponse!.data!.plants!.first.id!);
         Get.toNamed(AppRoutes.plantDetails);
       },
       child: SizedBox(
         height: 200,
         width: 156,
         child: CardGlobalWidget(
-          plantName: controller.searchedPlantResponse!.data!.plants!.first.name!,
-          plantCategory: controller
-              .searchedPlantResponse!.data!.plants!.first.plantCategory!.name!,
+          plantName: addPlantController.extractPlantName(
+              controller.searchedPlantResponse!.data!.plants!.first.name!),
+          plantCategory: addPlantController.extractFamilyName(
+              controller.searchedPlantResponse!.data!.plants!.first.name!),
           plantImageUrl: controller.searchedPlantResponse!.data!.plants!.first
               .plantImages!.first.fileName!,
         ),

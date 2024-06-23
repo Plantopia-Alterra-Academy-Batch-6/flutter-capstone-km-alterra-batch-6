@@ -36,8 +36,8 @@ class PlantCaringWidget extends StatelessWidget {
           alignment: Alignment.center,
           child: Column(
             children: [
-              SvgPicture.asset(
-                ImageConstant.g11,
+              Image.asset(
+                ImageConstant.emptyPlantCaring,
                 height: 60,
                 width: 60,
               ),

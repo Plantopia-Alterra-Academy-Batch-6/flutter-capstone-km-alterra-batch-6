@@ -1,17 +1,54 @@
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:html/parser.dart' as html_parser;
+import 'package:html/dom.dart' as dom;
 import 'package:intl/intl.dart';
+import 'package:plantopia/models/get_plant_progress_response_model.dart';
 import 'package:plantopia/service/my_plant_details_service.dart';
+import 'package:plantopia/service/upload_progress_service.dart';
 
 class MyPlantDetailsController extends GetxController {
   RxInt activeIndex = 0.obs;
   RxBool customIcon = false.obs;
   RxBool isSuccess = false.obs;
+  RxList<PlantProgress> progressPlant = <PlantProgress>[].obs;
+  TextEditingController changeNameController = TextEditingController();
 
+  @override
+  void dispose() {
+    super.dispose();
+    changeNameController.dispose();
+  }
+
+  String extractPlantName(String input) {
+    int index = input.indexOf('-');
+    if (index != -1) {
+      return input.substring(0, index).trim();
+    } else {
+      return input.trim();
+    }
+  }
+
+  Future<void> getPlantProgress(int plantId) async {
+    try {
+      final GetPlantProgressResponseModel? result =
+          await UploadProgressService.getPlantProgress(plantId);
+      List<PlantProgress>? progressPlantResult = result?.data?.plantProgress;
+      progressPlant.value = progressPlantResult ?? [];
+    } catch (e) {
+      throw Exception(e);
+    }
+  }
+
+  String filterHtmlTag(String htmlString) {
+    dom.Document document = html_parser.parse(htmlString);
+    return document.body?.text ?? '';
+  }
 
   String parseHour(String wateringSchedule) {
     DateTime time = DateFormat.Hm().parse(wateringSchedule);
 
-    DateFormat formatter = DateFormat('h a');
+    DateFormat formatter = DateFormat('hh:mm a');
 
     String formattedTime = formatter.format(time);
 
@@ -34,6 +71,7 @@ class MyPlantDetailsController extends GetxController {
     int days = ((difference.inDays % 365) % 30) % 7;
     int hours = difference.inHours;
     int minutes = difference.inMinutes.remainder(60);
+    int seconds = difference.inSeconds.remainder(60);
 
     if (years > 0) {
       plantAge = '$years years ';
@@ -47,21 +85,41 @@ class MyPlantDetailsController extends GetxController {
       plantAge = '$hours hours ';
     } else if (minutes > 0) {
       plantAge = '$minutes minutes ';
+    } else if (seconds > 0) {
+      plantAge = '$seconds seconds ';
     }
-
     return plantAge;
   }
 
-  void deleteMyplant(int plantId) async {
+  Future<void> deleteMyplant(int plantId) async {
     try {
-      final response = await MyPlantDetailsService.deleteMyPlant(plantId);
-      if (response == "success") {
-        isSuccess.value = true;
-      } else {
-        isSuccess.value = false;
-      }
+      await MyPlantDetailsService.deleteMyPlant(plantId);
     } catch (e) {
-      print("ini errornya disini $e");
+      Get.defaultDialog(
+        title: "Error",
+        middleText: "Failed to delete my plant, please try again!",
+        textConfirm: "OK",
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          Get.back();
+        },
+      );
+    }
+  }
+
+  Future<void> createCustomizeName(int plantId, String newName) async {
+    try {
+      await MyPlantDetailsService.createCustomName(plantId, newName);
+    } catch (e) {
+      Get.defaultDialog(
+        title: "Error",
+        middleText: "Failed to customize plant name, please try again!",
+        textConfirm: "OK",
+        confirmTextColor: Colors.white,
+        onConfirm: () {
+          Get.back();
+        },
+      );
     }
   }
 }

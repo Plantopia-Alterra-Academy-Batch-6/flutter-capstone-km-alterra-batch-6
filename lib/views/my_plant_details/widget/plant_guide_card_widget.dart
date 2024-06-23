@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -18,8 +19,10 @@ class PlantGuideCardWidget extends StatelessWidget {
         const SizedBox(height: 24),
         InkWell(
           onTap: () {
-            print(plantId);
-             Get.toNamed(AppRoutes.plantGuide, arguments: {
+            if (kDebugMode) {
+              print(plantId);
+            }
+            Get.toNamed(AppRoutes.plantGuide, arguments: {
               'plantId': plantId,
             });
           },

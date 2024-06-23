@@ -27,8 +27,8 @@ class EmptyMyPlantWidget extends StatelessWidget {
       alignment: Alignment.center,
       child: Column(
         children: [
-          SvgPicture.asset(
-            ImageConstant.g10,
+          Image.asset(
+            ImageConstant.emptyPlant,
             height: 58,
             width: 58,
           ),

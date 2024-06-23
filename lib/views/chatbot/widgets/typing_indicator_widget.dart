@@ -26,7 +26,7 @@ class TypingIndicatorWidget extends StatelessWidget {
               const SizedBox(width: 8),
               TypingIndicator(
                 flashingCircleBrightColor: ColorConstant.primary500,
-                flashingCircleDarkColor: Color(0xFFECFDF5),
+                flashingCircleDarkColor: const Color(0xFFECFDF5),
               ),
               const SizedBox(width: 3),
               Text(

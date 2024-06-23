@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
+import 'package:plantopia/utils/app_routes.dart';
 
 class CustomAuthAppbarWidget extends StatelessWidget {
   const CustomAuthAppbarWidget({
@@ -17,7 +18,7 @@ class CustomAuthAppbarWidget extends StatelessWidget {
       children: [
         IconButton(
             onPressed: () {
-              Navigator.pop(context);
+              Get.offNamed(AppRoutes.onboarding);
             },
             icon: const Icon(
               Icons.arrow_back_ios_new_rounded,

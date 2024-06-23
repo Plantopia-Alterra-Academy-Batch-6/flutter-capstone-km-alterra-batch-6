@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/my_plant_controller.dart';
+import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 import 'package:plantopia/views/global_widgets/card_global_widget.dart';
 import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
@@ -21,14 +23,16 @@ class ListRecomendedPlantWidget extends StatelessWidget {
             height: 200,
             width: double.infinity,
             child: ListView.builder(
+                padding: const EdgeInsets.symmetric(horizontal: 16),
                 scrollDirection: Axis.horizontal,
-                itemCount: myPlantController.recommendationPlant.length,
+                itemCount: 3,
                 itemExtent: 156,
                 itemBuilder: (context, int index) {
                   return const Padding(
-                      padding: EdgeInsets.only(right: 12.0),
-                      child: ShimmerContainerGlobalWidget(
-                          width: double.infinity, height: 200, radius: 24));
+                    padding: EdgeInsets.only(right: 12.0),
+                    child: ShimmerContainerGlobalWidget(
+                        width: double.infinity, height: 200, radius: 24),
+                  );
                 }),
           );
         case Status.loaded:
@@ -48,26 +52,39 @@ class ListRecomendedPlantWidget extends StatelessWidget {
               height: 200,
               width: double.infinity,
               child: ListView.builder(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
                   scrollDirection: Axis.horizontal,
                   itemCount: myPlantController.recommendationPlant.length,
                   itemExtent: 156,
                   itemBuilder: (context, int index) {
                     return Padding(
                         padding: const EdgeInsets.only(right: 12.0),
-                        child: CardGlobalWidget(
-                            plantName: myPlantController
-                                    .recommendationPlant[index].name ??
-                                "-",
-                            plantCategory: myPlantController
-                                    .recommendationPlant[index]
-                                    .plantCategory
-                                    ?.name ??
-                                "-",
-                            plantImageUrl: myPlantController
-                                    .recommendationPlant[index]
-                                    .plantImages?[0]
-                                    .fileName ??
-                                "-"));
+                        child: GestureDetector(
+                          onTap: () {
+                            final AddPlantController addPlantController =
+                                Get.put(AddPlantController());
+                            addPlantController.selectedPlant.value =
+                                myPlantController
+                                    .recommendationPlant[index].id!;
+                            Get.toNamed(AppRoutes.plantDetails);
+                          },
+                          child: CardGlobalWidget(
+                              plantName: myPlantController.extractPlantName(
+                                  myPlantController
+                                          .recommendationPlant[index].name ??
+                                      "-"),
+                              plantCategory: myPlantController
+                                  .extractFamilyName(myPlantController
+                                          .recommendationPlant[index].name ??
+                                      "-"),
+                              plantImageUrl: myPlantController
+                                      .recommendationPlant[index]
+                                      .plantImages?[0]
+                                      .fileName ??
+                                  "-"),
+                        ));
                   }),
             );
           }

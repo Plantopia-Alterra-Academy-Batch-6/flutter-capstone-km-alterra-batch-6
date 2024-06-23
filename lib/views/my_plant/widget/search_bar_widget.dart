@@ -25,50 +25,62 @@ class SearchBarWidget extends StatelessWidget {
           child: Row(
             children: [
               Expanded(
-                child: TextFormField(
+                child: SearchBar(
                   controller: _myPlantController.searchController,
-                  decoration: InputDecoration(
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: ColorConstant.neutral300,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        8,
-                      ),
+                  backgroundColor: WidgetStateProperty.all(Colors.white),
+                  leading: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 14.0),
+                    child: SvgPicture.asset(
+                      IconConstant.search,
+                      height: 16,
+                      width: 16,
                     ),
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(
-                        color: ColorConstant.neutral300,
-                      ),
-                      borderRadius: BorderRadius.circular(
-                        8,
-                      ),
+                  ),
+                  trailing: [
+                    Obx(
+                      () => Visibility(
+                          visible: _myPlantController.isActive.value &&
+                              _myPlantController
+                                  .searchController.text.isNotEmpty,
+                          child: IconButton(
+                              icon: const Icon(Icons.clear),
+                              onPressed: () {
+                                _myPlantController.searchController.clear();
+                                _myPlantController.isActive.value = false;
+                                _myPlantController.isSearchFound.value = false;
+                              })),
                     ),
-                    hintText: "Search",
-                    prefixIconConstraints: const BoxConstraints(
-                      minHeight: 16,
-                      minWidth: 16,
-                    ),
-                    prefixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                      child: SvgPicture.asset(
-                        IconConstant.search,
-                      ),
-                    ),
-                    suffixIconConstraints: const BoxConstraints(
-                      minHeight: 16,
-                      minWidth: 16,
-                    ),
-                    suffixIcon: Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 14.0),
-                      child: InkWell(
-                        onTap: () {},
-                        child: SvgPicture.asset(
-                          IconConstant.filter,
-                        ),
+                  ],
+                  hintText: "Search",
+                  hintStyle: WidgetStateProperty.all(
+                    TextStyle(color: ColorConstant.neutral300),
+                  ),
+                  onChanged: (value) async {
+                    if (value.isEmpty) {
+                      _myPlantController.isSearchFound(false);
+                    } else {
+                      _myPlantController.isSearchFound(false);
+                      await _myPlantController.searchPlant(value);
+                    }
+                    if (_myPlantController.searchController.text != "" ||
+                        _myPlantController.searchController.text.isNotEmpty) {
+                      _myPlantController.isActive.value = true;
+                    } else {
+                      _myPlantController.isActive.value = false;
+                    }
+                  },
+                  onSubmitted: (value) async {
+                    await _myPlantController.searchPlant(value);
+                  },
+                  shape: WidgetStateProperty.all(
+                    RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                      side: const BorderSide(
+                        color: Color(0xffD1D5DB),
                       ),
                     ),
                   ),
+                  elevation: WidgetStateProperty.all(0),
                 ),
               ),
               const SizedBox(

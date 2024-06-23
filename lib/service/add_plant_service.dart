@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:dio/dio.dart';
-import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_plant_category_response.dart';
 import 'package:plantopia/models/get_plant_recommendations_response.dart';

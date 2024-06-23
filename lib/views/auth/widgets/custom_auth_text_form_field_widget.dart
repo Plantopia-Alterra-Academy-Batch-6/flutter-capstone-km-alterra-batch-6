@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+import 'package:plantopia/constants/color_constant.dart';
+import 'package:plantopia/constants/text_style_constant.dart';
 
 class CustomAuthTextFormFieldWidget extends StatelessWidget {
   final String hintText;
@@ -10,8 +11,11 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
   final String? errorText;
   final TextEditingController? controller;
   final void Function(String)? onChanged;
-  final Color borderColor;
   final String? initialValue;
+  final bool isEnable;
+  final Color? borderColor;
+  final bool isEmailFailed;
+
   const CustomAuthTextFormFieldWidget(
       {super.key,
       required this.hintText,
@@ -22,7 +26,9 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
       this.controller,
       this.onChanged,
       this.initialValue,
-      this.borderColor = Colors.black});
+      this.isEnable = false,
+      this.isEmailFailed = false,
+      this.borderColor = Colors.grey});
 
   @override
   Widget build(BuildContext context) {
@@ -32,14 +38,21 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
         Text(
           hintText,
           style:
-              GoogleFonts.nunito(fontSize: 14.0, fontWeight: FontWeight.w700),
+              TextStyleConstant.paragraph.copyWith(fontWeight: FontWeight.w700),
         ),
         const SizedBox(
           height: 4.0,
         ),
         TextFormField(
           initialValue: initialValue,
-          style: TextStyle(color: borderColor),
+          style: TextStyle(
+              color: isEmailFailed
+                  ? Colors.red
+                  : errorText != null
+                      ? Colors.red
+                      : isEnable
+                          ? ColorConstant.primary500
+                          : ColorConstant.neutral950),
           onChanged: onChanged,
           controller: controller,
           keyboardType: keyboardType,
@@ -48,23 +61,51 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
           cursorColor: const Color(0xFFD1D5DB),
           decoration: InputDecoration(
             hintText: hintText,
+            hintStyle: TextStyleConstant.subtitle
+                .copyWith(color: ColorConstant.neutral400),
             suffixIcon: suffixIcon,
-            errorText: errorText,
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Color(0xFFD1D5DB))),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: borderColor)),
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(color: ColorConstant.neutral100),
+            ),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: BorderSide(color: borderColor)),
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(
+                  color: isEmailFailed
+                      ? Colors.red
+                      : errorText != null
+                          ? Colors.red
+                          : isEnable
+                              ? ColorConstant.primary500
+                              : ColorConstant.neutral950),
+            ),
             focusedErrorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Colors.red)),
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(
+                  color: isEmailFailed
+                      ? Colors.red
+                      : errorText != null
+                          ? Colors.red
+                          : isEnable
+                              ? ColorConstant.primary500
+                              : ColorConstant.neutral950),
+            ),
+            errorText: errorText,
             errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(8),
-                borderSide: const BorderSide(color: Colors.red)),
+              borderRadius: BorderRadius.circular(8),
+              borderSide: const BorderSide(color: Colors.red),
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(8),
+              borderSide: BorderSide(
+                  color: isEmailFailed
+                      ? Colors.red
+                      : errorText != null
+                          ? Colors.red
+                          : isEnable
+                              ? ColorConstant.primary500
+                              : ColorConstant.neutral400),
+            ),
           ),
         ),
       ],
