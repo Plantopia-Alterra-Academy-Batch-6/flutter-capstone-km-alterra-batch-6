@@ -18,95 +18,101 @@ class MyPlantView extends StatelessWidget {
   Widget build(BuildContext context) {
     final MyPlantController myPlantController = Get.find<MyPlantController>();
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: SafeArea(
-        child: SingleChildScrollView(
-          controller: myPlantController.scrollController,
-          child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
-                  ),
-                  child: Text(
-                    "My Plant",
-                    style: TextStyleConstant.heading3.copyWith(
-                      fontWeight: FontWeight.w700,
+        backgroundColor: Colors.white,
+        body: SafeArea(
+          child: SingleChildScrollView(
+            controller: myPlantController.scrollController,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ),
+                    child: Text(
+                      "My Plant",
+                      style: TextStyleConstant.heading3.copyWith(
+                        fontWeight: FontWeight.w700,
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(
-                  height: 12,
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
+                  const SizedBox(
+                    height: 12,
                   ),
-                  child: Obx(
-                    () => Text(
-                      '${myPlantController.listMyPlant.length} Plants',
-                      style: TextStyleConstant.subtitle,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ),
+                    child: Obx(
+                      () => Text(
+                        '${myPlantController.listMyPlant.length} Plants',
+                        style: TextStyleConstant.subtitle,
+                      ),
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 16,
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16,
+                    ),
+                    child: SearchBarWidget(),
                   ),
-                  child: SearchBarWidget(),
-                ),
-                Obx(
-                  () {
-                    if (myPlantController.isSearchFound.isTrue &&
-                        myPlantController.searchController.text != "") {
-                      return SingleResultWidget();
-                    } else {
-                      return MyPlantListWidget();
-                    }
-                  },
-                ),
-                const SizedBox(
-                  height: 10,
-                ),
-                const RecommendedWidget(),
-              ],
+                  Obx(
+                    () {
+                      if (myPlantController.isSearchFound.isTrue &&
+                          myPlantController.searchController.text != "") {
+                        return SingleResultWidget();
+                      } else {
+                        return MyPlantListWidget();
+                      }
+                    },
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Obx(
+                    () => Visibility(
+                      visible: myPlantController.listMyPlant.isEmpty,
+                      child: const RecommendedWidget(),
+                    ),
+                  )
+                ],
+              ),
             ),
           ),
         ),
-      ),
-      floatingActionButton: Obx(
-        () => myPlantController.showFloatingButton.value
-            ? FloatingActionButton.extended(
-                onPressed: () {
-                  Get.toNamed(AppRoutes.addPlant);
-                },
-                backgroundColor: ColorConstant.primary500,
-                label: Text(
-                  'Add Plant',
-                  style: TextStyleConstant.subtitle.copyWith(
-                    fontWeight: FontWeight.w700,
-                    color: Colors.white,
-                  ),
-                ),
-                icon: const Icon(
-                  Icons.add_circle_outline,
-                  color: Colors.white,
-                ),
-              )
-            : FloatingActionButton(
-                backgroundColor: ColorConstant.primary500,
-                onPressed: () {
-                  Get.toNamed(AppRoutes.addPlant);
-                },
-                child: const Icon(
-                  Icons.add_circle_outline,
-                  color: Colors.white,
-                ),
-              ),
-      ),
-    );
+        floatingActionButton: Obx(
+          () => myPlantController.listMyPlant.isEmpty
+              ? const SizedBox.shrink()
+              : myPlantController.showFloatingButton.value
+                  ? FloatingActionButton.extended(
+                      onPressed: () {
+                        Get.toNamed(AppRoutes.addPlant);
+                      },
+                      backgroundColor: ColorConstant.primary500,
+                      label: Text(
+                        'Add Plant',
+                        style: TextStyleConstant.subtitle.copyWith(
+                          fontWeight: FontWeight.w700,
+                          color: Colors.white,
+                        ),
+                      ),
+                      icon: const Icon(
+                        Icons.add_circle_outline,
+                        color: Colors.white,
+                      ),
+                    )
+                  : FloatingActionButton(
+                      backgroundColor: ColorConstant.primary500,
+                      onPressed: () {
+                        Get.toNamed(AppRoutes.addPlant);
+                      },
+                      child: const Icon(
+                        Icons.add_circle_outline,
+                        color: Colors.white,
+                      ),
+                    ),
+        ));
   }
 }

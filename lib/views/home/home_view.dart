@@ -70,7 +70,7 @@ class _HomeViewState extends State<HomeView> {
                   if (myPlantController.listMyPlant.isEmpty) {
                     return const RecommendedWidget();
                   } else {
-                    return Container();
+                    return const SizedBox.shrink();
                   }
                 }),
                 const SizedBox(
