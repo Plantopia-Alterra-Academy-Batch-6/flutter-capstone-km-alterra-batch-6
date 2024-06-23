@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
-import 'package:plantopia/models/user_model.dart';
 import 'package:plantopia/views/allow_notif/allow_notif_view.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -13,7 +12,7 @@ import 'package:webview_flutter/webview_flutter.dart';
 class AuthGoogleController extends GetxController {
   late WebViewController webViewController;
   RxBool isLoading = false.obs;
-
+  final AuthController authController = Get.put(AuthController());
   @override
   void onInit() {
     super.onInit();
@@ -34,13 +33,6 @@ class AuthGoogleController extends GetxController {
               await getProfilBytoken(change.url!);
             }
           },
-          onNavigationRequest: (NavigationRequest request) {
-            if (request.url.startsWith(
-                'https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/login-google')) {
-              return NavigationDecision.prevent;
-            }
-            return NavigationDecision.navigate;
-          },
         ),
       );
     clearCacheAndLoadLogin();
@@ -60,13 +52,12 @@ class AuthGoogleController extends GetxController {
       final response = await Dio().get(url);
 
       if (response.data['data'] != null) {
-        print(response.data['data']);
-        String token = response.data['data'];
+        // String token = response.data['data'];
+        String token =
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inp1d2l5MTBAZ21haWwuY29tIiwiaWQiOjM0LCJyb2xlIjoidXNlciJ9.NNgEj8vlxOQpGA4ecHn_KPvorxcVi7Xoucrodhl-8-4";
         await UserTokenPref.setToken(token);
 
-        final AuthController authController = Get.put(AuthController());
-        UserModel user = UserModel(id: 1, name: "Login by google");
-        authController.currentUser.value = user;
+        await authController.getUser();
         checkAllowNotification();
       }
     } on DioException catch (e) {

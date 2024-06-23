@@ -130,7 +130,7 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       if (e is CustomException) {
-        Get.snackbar('error [${e.code}]', e.message);
+        // Get.snackbar('error [${e.code}]', e.message);
       } else {
         Get.snackbar('error', '$e');
       }

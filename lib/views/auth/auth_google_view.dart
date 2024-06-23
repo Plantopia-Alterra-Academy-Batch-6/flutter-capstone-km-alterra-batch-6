@@ -21,7 +21,9 @@ class AuthGoogleView extends StatelessWidget {
         child: Center(
           child: Obx(() {
             if (controller.isLoading.value) {
-              return const CircularProgressIndicator();
+              return CircularProgressIndicator(
+                color: ColorConstant.primary500,
+              );
             } else {
               return WebViewWidget(controller: controller.webViewController);
             }
