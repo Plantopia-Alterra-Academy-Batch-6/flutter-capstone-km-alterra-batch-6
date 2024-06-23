@@ -26,14 +26,17 @@ class AuthGoogleController extends GetxController {
       ..setUserAgent("random")
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
-        NavigationDelegate(
-          onUrlChange: (change) async {
-            print("this is change : ${change.url}");
-            if (change.url != null) {
-              await getProfilBytoken(change.url!);
-            }
-          },
-        ),
+        NavigationDelegate(onUrlChange: (change) async {
+          print("this is change : ${change.url}");
+          if (change.url != null) {
+            await getProfilBytoken(change.url!);
+          }
+        }, onNavigationRequest: (NavigationRequest request) {
+          if (request.url.startsWith('https://your-redirect-url.com')) {
+            return NavigationDecision.prevent;
+          }
+          return NavigationDecision.navigate;
+        }),
       );
     clearCacheAndLoadLogin();
   }
@@ -51,10 +54,12 @@ class AuthGoogleController extends GetxController {
     try {
       final response = await Dio().get(url);
 
-      if (response.data['data'] != null) {
-        // String token = response.data['data'];
-        String token =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inp1d2l5MTBAZ21haWwuY29tIiwiaWQiOjM0LCJyb2xlIjoidXNlciJ9.NNgEj8vlxOQpGA4ecHn_KPvorxcVi7Xoucrodhl-8-4";
+      if (response.data['data'] != null) {       
+         // String token =
+        //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inp1d2l5MTBAZ21haWwuY29tIiwiaWQiOjM0LCJyb2xlIjoidXNlciJ9.NNgEj8vlxOQpGA4ecHn_KPvorxcVi7Xoucrodhl-8-4";
+
+        String token = response.data['data'];
+
         await UserTokenPref.setToken(token);
 
         await authController.getUser();
@@ -76,3 +81,5 @@ class AuthGoogleController extends GetxController {
     }
   }
 }
+
+

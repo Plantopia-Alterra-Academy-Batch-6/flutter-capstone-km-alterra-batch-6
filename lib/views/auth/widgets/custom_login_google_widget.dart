@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:plantopia/utils/app_routes.dart';
+import 'package:plantopia/constants/color_constant.dart';
 
 class CustomLoginGoogleWidget extends StatelessWidget {
   final void Function()? onPressed;
@@ -49,9 +49,29 @@ class CustomLoginGoogleWidget extends StatelessWidget {
               elevation: 0,
             ),
             onPressed: () {
-              Get.toNamed(AppRoutes.authGoogle);
+              Get.snackbar(
+                'Notice',
+                'App Info coming soon',
+                backgroundColor: ColorConstant.primary500,
+                colorText: ColorConstant.neutral100,
+                snackPosition: SnackPosition.BOTTOM,
+                borderRadius: 16,
+                margin: const EdgeInsets.all(16),
+                borderWidth: 2,
+                borderColor: ColorConstant.neutral100,
+                isDismissible: true,
+                duration: const Duration(seconds: 2),
+                animationDuration: const Duration(milliseconds: 400),
+                forwardAnimationCurve: Curves.fastOutSlowIn,
+                reverseAnimationCurve: Curves.easeOut,
+                icon: Icon(
+                  Icons.info_outline,
+                  color: ColorConstant.neutral0,
+                ),
+                shouldIconPulse: true,
+              );
+              // Get.toNamed(AppRoutes.authGoogle);
             },
-            // onPressed: () => authController.signInWithGoogle(),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
