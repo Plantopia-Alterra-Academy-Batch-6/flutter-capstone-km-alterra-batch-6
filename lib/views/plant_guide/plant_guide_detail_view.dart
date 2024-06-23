@@ -103,7 +103,7 @@ class PlantGuideDetailView extends StatelessWidget {
                     stepNumber: instr.stepNumber ?? 0,
                     stepTitle: instr.stepTitle ?? 'No Title',
                     stepDescription: instr.stepDescription ?? 'No Description',
-                    showCategory: index == 0, 
+                    showCategory: index == 0, // Tampilkan hanya di instruksi pertama
                   );
                 }).toList(),
               ),

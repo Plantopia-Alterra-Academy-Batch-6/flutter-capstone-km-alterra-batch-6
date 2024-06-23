@@ -7,4 +7,5 @@ class BaseUrlUtil {
   static const String plantGuide = '$baseUrl/plants';
   static const String plantDisease = '$baseUrl/plant-disease';
   static const String plantInstruction = '$baseUrl/plants/instructions';
+  static const String plantByUserId = '$baseUrl/my/plants';
 }

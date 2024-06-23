@@ -22,7 +22,9 @@ class CustomAppBarWidget extends StatelessWidget {
     final AuthController authController = Get.put(AuthController());
     authController.getUser();
     String greeting = getGreeting();
-    print('user  id ${authController.currentUser.value?.id}');
+    if (kDebugMode) {
+      print('user  id ${authController.currentUser.value?.id}');
+    }
     return Row(
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,

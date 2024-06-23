@@ -108,4 +108,3 @@ class CurrentWeatherCardWidget extends StatelessWidget {
     }
   }
 }
-
