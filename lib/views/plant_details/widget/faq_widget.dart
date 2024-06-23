@@ -62,7 +62,6 @@ class FaqWidget extends StatelessWidget {
                                       .plantFaqs![value]
                                       .answer!),
                                   style: TextStyleConstant.subtitle.copyWith(
-                                    fontWeight: FontWeight.w700,
                                     fontSize: 14,
                                   ),
                                 ),

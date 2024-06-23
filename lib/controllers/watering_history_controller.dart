@@ -64,8 +64,9 @@ class WateringHistoryController extends GetxController {
   }
 
   String parseHour(DateTime wateringTime) {
+    DateTime newTime = wateringTime.add(const Duration(hours: 7));
     DateFormat formatter = DateFormat('h:mm a');
-    String formattedTime = formatter.format(wateringTime);
+    String formattedTime = formatter.format(newTime);
     return formattedTime;
   }
 
