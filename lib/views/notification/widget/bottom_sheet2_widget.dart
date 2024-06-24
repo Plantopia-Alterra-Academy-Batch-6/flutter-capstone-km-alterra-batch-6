@@ -21,7 +21,7 @@ class BottomSheet2Widget extends StatelessWidget {
           borderRadius: BorderRadius.only(
               topLeft: Radius.circular(24), topRight: Radius.circular(24))),
       width: double.infinity,
-      height: 448,
+      height: 460,
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
