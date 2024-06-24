@@ -27,17 +27,20 @@ class UploadProgressController extends GetxController {
     var maxFileSizeInBytes = 2 * 1048576;
     final ImagePicker picker = ImagePicker();
     pickedFile.value = await picker.pickImage(source: ImageSource.gallery);
-    var imagePath = await pickedFile.value!.readAsBytes();
 
-    var fileSize = imagePath.length;
-    if (fileSize <= maxFileSizeInBytes) {
-      isImageLarge.value = false;
-      image.value = File(pickedFile.value!.path);
-      isActiveButton.value = true;
-    } else {
-      image.value = null;
-      isImageLarge.value = true;
-      isActiveButton.value = false;
+    if (pickedFile.value != null) {
+      var imagePath = await pickedFile.value!.readAsBytes();
+
+      var fileSize = imagePath.length;
+      if (fileSize <= maxFileSizeInBytes) {
+        isImageLarge.value = false;
+        image.value = File(pickedFile.value!.path);
+        isActiveButton.value = true;
+      } else {
+        image.value = null;
+        isImageLarge.value = true;
+        isActiveButton.value = false;
+      }
     }
   }
 
