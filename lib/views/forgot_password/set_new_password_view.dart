@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -20,8 +18,8 @@ class SetNewPasswordView extends StatelessWidget {
         Get.put(ForgotPasswordController());
 
     TextEditingController passwordController = TextEditingController();
-    final Map arguments = Get.arguments;
-    final String email = arguments['email'];
+    final Map<String, dynamic>? arguments = Get.arguments as Map<String, dynamic>?;
+    final String email = arguments?['email'] ?? '';
 
     return Scaffold(
       backgroundColor: ColorConstant.white,
