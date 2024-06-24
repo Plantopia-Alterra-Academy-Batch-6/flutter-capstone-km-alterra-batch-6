@@ -46,7 +46,9 @@ class ProfileAccountWidget extends StatelessWidget {
         ProfileSettingItemWidget(
           icon: IconConstant.manageNotification,
           title: 'Manage Notification',
-          onTap: () {},
+          onTap: () {
+            Get.toNamed(AppRoutes.notification);
+          },
         ),
         const Divider(),
         ProfileSettingItemWidget(
