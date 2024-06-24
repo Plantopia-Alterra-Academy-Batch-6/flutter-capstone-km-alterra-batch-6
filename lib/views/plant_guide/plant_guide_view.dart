@@ -135,28 +135,44 @@ class PlantGuideView extends StatelessWidget {
                             if (kDebugMode) {
                               print(instruction.stepDescription);
                             }
-                            
-                            return PlantGuideInstructionCategoryWidget(
-                              color: Colors.white,
-                              icon: iconData,
-                              title: instruction.instructionCategory?.name ??
-                                  'No Title',
-                              onTap: () {
-                                final categoryInstructions = plantInstructions
-                                    .where((instr) =>
-                                        instr.instructionCategory?.name ==
-                                        instruction.instructionCategory?.name)
-                                    .toList();
 
-                                Get.to(() => PlantGuideDetailView(),
-                                    arguments: {
-                                      'instruction': instruction,
-                                      'allInstructions': plantInstructions,
-                                      'categoryInstructions':
-                                          categoryInstructions,
-                                    });
-                              },
-                            );
+                            return Obx(() {
+                              final isEnabled = controller.isEnabled(index);
+                              return Opacity(
+                                opacity: isEnabled ? 1.0 : 0.5,
+                                child: PlantGuideInstructionCategoryWidget(
+                                  color: Colors.white,
+                                  icon: iconData,
+                                  title:
+                                      instruction.instructionCategory?.name ??
+                                          'No Title',
+                                  onTap: isEnabled
+                                      ? () {
+                                          final categoryInstructions =
+                                              plantInstructions
+                                                  .where((instr) =>
+                                                      instr.instructionCategory
+                                                          ?.name ==
+                                                      instruction
+                                                          .instructionCategory
+                                                          ?.name)
+                                                  .toList();
+
+                                          Get.to(() => PlantGuideDetailView(),
+                                              arguments: {
+                                                'instruction': instruction,
+                                                'allInstructions':
+                                                    plantInstructions,
+                                                'categoryInstructions':
+                                                    categoryInstructions,
+                                              })?.then((_) {
+                                            controller.enableNextIndex(index);
+                                          });
+                                        }
+                                      : null,
+                                ),
+                              );
+                            });
                           },
                         ),
                       ],
@@ -168,8 +184,23 @@ class PlantGuideView extends StatelessWidget {
           }
         },
       ),
-      bottomNavigationBar: PlantGuideButtonStartWidget(
-        onPressed: () {},
+       bottomNavigationBar: PlantGuideButtonStartWidget(
+        onPressed: () {
+          final latestEnabledIndex = controller.getLatestEnabledIndex();
+          final latestInstruction = controller.plantInstructions[latestEnabledIndex];
+          
+          final categoryInstructions = controller.plantInstructions
+              .where((instr) =>
+                  instr.instructionCategory?.name ==
+                  latestInstruction.instructionCategory?.name)
+              .toList();
+
+          Get.to(() => PlantGuideDetailView(), arguments: {
+            'instruction': latestInstruction,
+            'allInstructions': controller.plantInstructions,
+            'categoryInstructions': categoryInstructions,
+          });
+        },
       ),
     );
   }
