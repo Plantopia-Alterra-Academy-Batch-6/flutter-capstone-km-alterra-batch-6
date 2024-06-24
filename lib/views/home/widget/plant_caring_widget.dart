@@ -87,7 +87,7 @@ class PlantCaringWidget extends StatelessWidget {
                     ),
                     Container(
                       width: double.infinity,
-                      height: 150,
+                      height: 160,
                       clipBehavior: Clip.antiAlias,
                       decoration: ShapeDecoration(
                         color: ColorConstant.white,
