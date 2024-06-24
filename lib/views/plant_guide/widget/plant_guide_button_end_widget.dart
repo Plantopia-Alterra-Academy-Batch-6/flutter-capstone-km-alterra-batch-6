@@ -5,6 +5,7 @@ import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/controllers/plant_details_controller.dart';
+import 'package:plantopia/controllers/plant_history_controller.dart';
 import 'package:plantopia/utils/app_routes.dart';
 
 class PlantGuideButtonEndWidget extends StatelessWidget {
@@ -13,9 +14,9 @@ class PlantGuideButtonEndWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     final addPlantController = Get.find<AddPlantController>();
     final plantDetailsController = Get.find<PlantDetailsController>();
+    final plantHistoryController = Get.put(PlantHistoryController());
 
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 16),
@@ -84,8 +85,10 @@ class PlantGuideButtonEndWidget extends StatelessWidget {
                                 elevation: 0,
                               ),
                               onPressed: () async {
-                                // Pastikan controller dan selectedPlant diakses dengan benar
-                                await plantDetailsController.addPlant(addPlantController.selectedPlant.value);
+                                await plantDetailsController.addPlant(
+                                    addPlantController.selectedPlant.value);
+                                await plantHistoryController.addPlantingHistory(
+                                    addPlantController.selectedPlant.value);
                                 Get.toNamed(AppRoutes.successAddPlant);
                               },
                               child: Text(

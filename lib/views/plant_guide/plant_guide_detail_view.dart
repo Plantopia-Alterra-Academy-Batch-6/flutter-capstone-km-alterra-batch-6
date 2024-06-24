@@ -5,6 +5,8 @@ import 'package:flutter_widget_from_html_core/flutter_widget_from_html_core.dart
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
+import 'package:plantopia/controllers/add_plant_controller.dart';
+import 'package:plantopia/controllers/plant_details_controller.dart';
 import 'package:plantopia/models/get_my_plant_response_model_new.dart';
 import 'package:plantopia/views/plant_guide/widget/plant_guide_button_end_widget.dart';
 import 'package:plantopia/views/plant_guide/widget/plant_guide_instruction_detail_widget.dart';
@@ -21,6 +23,8 @@ class PlantGuideDetailView extends StatelessWidget {
   final List<PlantInstruction> categoryInstructions =
       Get.arguments['categoryInstructions'];
   final controller = Get.put(GetMyPlantGuideController());
+  final addPlantController = Get.put(AddPlantController());
+  final plantDetailsConttoller = Get.put(PlantDetailsController());
 
   Future<String> getAiSuggestion(String description) async {
     final openAI = OpenAI.instance.build(
@@ -97,18 +101,23 @@ class PlantGuideDetailView extends StatelessWidget {
                   int index = entry.key;
                   PlantInstruction instr = entry.value;
                   return PlantGuideInstructionDetailWidget(
-                    categoryDescription: instr.instructionCategory?.description ?? 'No Description',
-                    categoryTitle: instr.instructionCategory?.name ?? 'No Title',
+                    categoryDescription:
+                        instr.instructionCategory?.description ??
+                            'No Description',
+                    categoryTitle:
+                        instr.instructionCategory?.name ?? 'No Title',
                     imageUrl: instr.stepImageUrl ?? '',
                     stepNumber: instr.stepNumber ?? 0,
                     stepTitle: instr.stepTitle ?? 'No Title',
                     stepDescription: instr.stepDescription ?? 'No Description',
-                    showCategory: index == 0, // Tampilkan hanya di instruksi pertama
+                    showCategory:
+                        index == 0, // Tampilkan hanya di instruksi pertama
                   );
                 }).toList(),
               ),
               FutureBuilder<String>(
-                future: getAiSuggestion(instruction.stepDescription ?? 'No Description'),
+                future: getAiSuggestion(
+                    instruction.stepDescription ?? 'No Description'),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const ShimmerContainerGlobalWidget(
