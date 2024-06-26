@@ -71,7 +71,7 @@ class BottomSheetDeleteWidget extends StatelessWidget {
                   ),
                   Expanded(
                       child: ButtonWidget(
-                    buttonName: "Edit Plant Name",
+                    buttonName: "Edit Plant",
                     boxDecoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       color: ColorConstant.primary500,
@@ -84,7 +84,7 @@ class BottomSheetDeleteWidget extends StatelessWidget {
                           backgroundColor: ColorConstant.white,
                           insetPadding: const EdgeInsets.all(16),
                           child: Container(
-                            height: 212,
+                            height: 230,
                             padding: const EdgeInsets.symmetric(
                                 horizontal: 16, vertical: 20),
                             decoration: BoxDecoration(

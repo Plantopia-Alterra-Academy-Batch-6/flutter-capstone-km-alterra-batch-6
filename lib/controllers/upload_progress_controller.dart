@@ -27,7 +27,7 @@ class UploadProgressController extends GetxController {
     var maxFileSizeInBytes = 2 * 1048576;
     final ImagePicker picker = ImagePicker();
     pickedFile.value = await picker.pickImage(source: ImageSource.gallery);
-
+    
     if (pickedFile.value != null) {
       var imagePath = await pickedFile.value!.readAsBytes();
 
