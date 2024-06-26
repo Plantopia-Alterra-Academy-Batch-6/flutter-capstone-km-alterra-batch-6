@@ -20,8 +20,9 @@ class FaqWidget extends StatelessWidget {
         const SizedBox(height: 24),
         Text(
           "People Often Ask",
-          style:
-              TextStyleConstant.heading4.copyWith(fontWeight: FontWeight.w700),
+          style: TextStyleConstant.heading4.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const SizedBox(height: 14),
         Obx(
@@ -30,7 +31,9 @@ class FaqWidget extends StatelessWidget {
               detailMyPlant.plant?.plantFaqs?.length ?? 0,
               (value) {
                 return Padding(
-                  padding: const EdgeInsets.only(bottom: 14),
+                  padding: const EdgeInsets.only(
+                    bottom: 14,
+                  ),
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(

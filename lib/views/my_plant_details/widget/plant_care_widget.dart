@@ -20,8 +20,9 @@ class PlantCareWidget extends StatelessWidget {
         const SizedBox(height: 24),
         Text(
           "Plant Care",
-          style:
-              TextStyleConstant.heading4.copyWith(fontWeight: FontWeight.w700),
+          style: TextStyleConstant.heading4.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const SizedBox(height: 10),
         Text(

@@ -20,15 +20,22 @@ class CategoryPlantWidget extends StatelessWidget {
             height: 35,
             width: double.infinity,
             child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ),
                 scrollDirection: Axis.horizontal,
                 itemCount:
                     myPlantController.plantCategoriesResponse?.data.length,
                 itemBuilder: (context, int index) {
                   return const Padding(
-                    padding: EdgeInsets.only(right: 8.0),
+                    padding: EdgeInsets.only(
+                      right: 8.0,
+                    ),
                     child: ShimmerContainerGlobalWidget(
-                        width: 75, height: 32, radius: 50),
+                      width: 75,
+                      height: 32,
+                      radius: 50,
+                    ),
                   );
                 }),
           );
@@ -45,72 +52,99 @@ class CategoryPlantWidget extends StatelessWidget {
               ),
             );
           } else {
-            return SizedBox(
-              height: 35,
-              width: double.infinity,
-              child: ListView.builder(
-                  padding: const EdgeInsets.symmetric(horizontal: 16),
-                  scrollDirection: Axis.horizontal,
-                  itemCount:
-                      myPlantController.plantCategoriesResponse?.data.length,
-                  itemBuilder: (context, int index) {
-                    return Padding(
-                      padding: const EdgeInsets.only(right: 8.0),
-                      child: Obx(
-                        () => Container(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 12,
+            return Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16.0,
+                  ),
+                  child: Text(
+                    'Recommended',
+                    style: TextStyleConstant.heading4.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                ),
+                const SizedBox(
+                  height: 12,
+                ),
+                SizedBox(
+                  height: 35,
+                  width: double.infinity,
+                  child: ListView.builder(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 16,
+                      ),
+                      scrollDirection: Axis.horizontal,
+                      itemCount: myPlantController
+                          .plantCategoriesResponse?.data.length,
+                      itemBuilder: (context, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                            right: 8.0,
                           ),
-                          decoration: BoxDecoration(
-                              border: myPlantController.activeIndex.value ==
-                                      index
-                                  ? Border.all(color: ColorConstant.primary500)
-                                  : Border.all(
-                                      color: ColorConstant.neutral300,
-                                    ),
-                              color:
-                                  index == myPlantController.activeIndex.value
+                          child: Obx(
+                            () => Container(
+                              padding: const EdgeInsets.symmetric(
+                                horizontal: 12,
+                              ),
+                              decoration: BoxDecoration(
+                                  border: myPlantController.activeIndex.value ==
+                                          index
+                                      ? Border.all(
+                                          color: ColorConstant.primary500,
+                                        )
+                                      : Border.all(
+                                          color: ColorConstant.neutral300,
+                                        ),
+                                  color: index ==
+                                          myPlantController.activeIndex.value
                                       ? ColorConstant.primary100
                                       : Colors.white,
-                              borderRadius: BorderRadius.circular(
-                                50,
-                              )),
-                          child: InkWell(
-                            onTap: () {
-                              if (myPlantController.activeIndex.value ==
-                                  index) {
-                                myPlantController.getRecommendationPlant();
-                                myPlantController.currentIndex(-1);
-                              } else {
-                                myPlantController.currentIndex(index);
-                              }
-                              if (myPlantController.plantCategoriesResponse
-                                      ?.data[index].id !=
-                                  null) {
-                                myPlantController.getPlantByCatergories(
-                                    myPlantController.plantCategoriesResponse!
-                                        .data[index].id);
-                              }
-                            },
-                            child: Center(
-                              child: Text(
-                                myPlantController.plantCategoriesResponse
-                                        ?.data[index].name ??
-                                    "-",
-                                style:
-                                    index == myPlantController.activeIndex.value
+                                  borderRadius: BorderRadius.circular(
+                                    50,
+                                  )),
+                              child: InkWell(
+                                onTap: () {
+                                  if (myPlantController.activeIndex.value ==
+                                      index) {
+                                    myPlantController.getRecommendationPlant();
+                                    myPlantController.currentIndex(-1);
+                                  } else {
+                                    myPlantController.currentIndex(index);
+                                  }
+                                  if (myPlantController.plantCategoriesResponse
+                                          ?.data[index].id !=
+                                      null) {
+                                    myPlantController.getPlantByCatergories(
+                                        myPlantController
+                                            .plantCategoriesResponse!
+                                            .data[index]
+                                            .id);
+                                  }
+                                },
+                                child: Center(
+                                  child: Text(
+                                    myPlantController.plantCategoriesResponse
+                                            ?.data[index].name ??
+                                        "-",
+                                    style: index ==
+                                            myPlantController.activeIndex.value
                                         ? TextStyleConstant.paragraph.copyWith(
                                             fontWeight: FontWeight.w700,
                                             color: ColorConstant.primary500,
                                           )
                                         : TextStyleConstant.paragraph,
+                                  ),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                    );
-                  }),
+                        );
+                      }),
+                ),
+              ],
             );
           }
         case Status.error:

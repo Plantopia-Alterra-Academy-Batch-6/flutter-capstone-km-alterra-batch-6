@@ -41,7 +41,7 @@ class PlantFilterResultWidget extends StatelessWidget {
                           controller.searchedPlantResponse!.data![index]
                               .plantImages!.isNotEmpty
                       ? controller.searchedPlantResponse!.data![index]
-                              .plantImages![0].file_name ??
+                              .plantImages![0].fileName ??
                           ""
                       : "",
             ),

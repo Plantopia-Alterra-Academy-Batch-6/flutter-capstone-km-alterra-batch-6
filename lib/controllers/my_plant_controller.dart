@@ -9,7 +9,6 @@ import 'package:plantopia/models/get_my_plant_response_model.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
 import 'package:plantopia/models/get_plant_category_response.dart';
 import 'package:plantopia/models/get_plant_recommendations_response.dart';
-import 'package:plantopia/models/get_planting_care_response.dart';
 import 'package:plantopia/service/add_plant_service.dart';
 import 'package:plantopia/service/my_plant_service.dart';
 import 'package:plantopia/service/plant_details_service.dart';
@@ -22,7 +21,7 @@ class MyPlantController extends GetxController {
   Rx<Status> recommendationData = Status.loading.obs;
   Rx<Status> categoryData = Status.loading.obs;
   RxBool isActive = false.obs;
-  RxList<PlantCaring> plantCaringData = <PlantCaring>[].obs;
+  RxList<PlantElement> plantCaringData = <PlantElement>[].obs;
   Rx<Status> plantCaringStatus = Status.loading.obs;
   ScrollController scrollController = ScrollController();
   RxBool showFloatingButton = true.obs;
@@ -51,11 +50,9 @@ class MyPlantController extends GetxController {
     getPlantCaring();
 
     scrollController.addListener(() {
-      // Jika posisi scroll berubah, periksa apakah harus menampilkan Floating Action Button
       if (scrollController.position.userScrollDirection ==
           ScrollDirection.reverse) {
-        showFloatingButton.value =
-            false; // Sembunyikan Floating Action Button saat menggulir ke bawah
+        showFloatingButton.value = false;
       } else if (scrollController.position.userScrollDirection ==
           ScrollDirection.forward) {
         showFloatingButton.value = true; //
@@ -185,20 +182,42 @@ class MyPlantController extends GetxController {
     return formattedTime;
   }
 
+  DateTime convertToDateTime(String timeStr) {
+    final now = DateTime.now();
+    final formatter = DateFormat('yyyy-MM-dd HH:mm');
+    return formatter.parse('${now.year}-${now.month}-${now.day} $timeStr');
+  }
+
   Future<void> getPlantCaring() async {
-    try {
-      plantCaringStatus.value = Status.loading;
-      final response = await MyPlantService.getPlantCare();
-      for (var value in listMyPlant) {
-        if (value.plant?.id == response.data?[0].plantId) {
-          plantCaringData.value = response.data ?? [];
-          await getPlantDetails(plantCaringData[0].plantId ?? -1);
+    plantCaringStatus.value = Status.loading;
+    final now = DateTime.now();
+    List<PlantElement> futureSchedules = [];
+    List<PlantElement> pastSchedules = [];
+
+    if (listMyPlant.isNotEmpty) {
+      for (var schedule in listMyPlant) {
+        final scheduleTime = convertToDateTime(
+            schedule.plant?.wateringSchedule?.wateringTime ?? "00:00");
+        if (scheduleTime.isAfter(now)) {
+          futureSchedules.add(schedule);
+        } else {
+          pastSchedules.add(schedule);
         }
       }
-      plantCaringStatus.value = Status.loaded;
-    } catch (e) {
-      plantCaringStatus.value = Status.error;
+
+      futureSchedules.sort((a, b) =>
+          convertToDateTime(a.plant?.wateringSchedule?.wateringTime ?? "00:00")
+              .compareTo(convertToDateTime(
+                  b.plant?.wateringSchedule?.wateringTime ?? "00:00")));
+      pastSchedules.sort((a, b) =>
+          convertToDateTime(a.plant?.wateringSchedule?.wateringTime ?? "00:00")
+              .compareTo(convertToDateTime(
+                  b.plant?.wateringSchedule?.wateringTime ?? "00:00")));
+
+      plantCaringData.value = [...futureSchedules, ...pastSchedules];
+      await getPlantDetails(plantCaringData[0].plant?.id ?? -1);
     }
+    plantCaringStatus.value = Status.loaded;
   }
 
   Future<void> postWatering(int plantId) async {

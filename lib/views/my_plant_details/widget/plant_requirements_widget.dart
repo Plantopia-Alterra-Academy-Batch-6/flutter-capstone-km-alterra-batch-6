@@ -18,28 +18,36 @@ class PlantRequirementsWidget extends StatelessWidget {
         const SizedBox(height: 24),
         Text(
           "Plant requirements",
-          style:
-              TextStyleConstant.heading4.copyWith(fontWeight: FontWeight.w700),
+          style: TextStyleConstant.heading4.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const SizedBox(height: 12),
         Container(
           width: double.infinity,
           decoration: BoxDecoration(
-              border: Border.all(width: 0.3),
-              borderRadius: BorderRadius.circular(10)),
+            border: Border.all(
+              width: 0.3,
+            ),
+            borderRadius: BorderRadius.circular(
+              10,
+            ),
+          ),
           child: Column(
             children: [
               ListTile(
                 leading: SvgPicture.asset('assets/icons/plant_climate.svg'),
                 title: Text(
                   "Climate",
-                  style: TextStyleConstant.subtitle
-                      .copyWith(fontWeight: FontWeight.w600),
+                  style: TextStyleConstant.subtitle.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 trailing: Text(
                   detailMyPlant.plant?.climateCondition ?? "-",
-                  style: TextStyleConstant.subtitle
-                      .copyWith(fontWeight: FontWeight.w400),
+                  style: TextStyleConstant.subtitle.copyWith(
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
               Container(
@@ -48,13 +56,15 @@ class PlantRequirementsWidget extends StatelessWidget {
                   leading: SvgPicture.asset('assets/icons/plant_sunlight.svg'),
                   title: Text(
                     "Sunlight",
-                    style: TextStyleConstant.subtitle
-                        .copyWith(fontWeight: FontWeight.w600),
+                    style: TextStyleConstant.subtitle.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   trailing: Text(
                     detailMyPlant.plant?.sunlight ?? "-",
-                    style: TextStyleConstant.subtitle
-                        .copyWith(fontWeight: FontWeight.w400),
+                    style: TextStyleConstant.subtitle.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ),
@@ -62,13 +72,15 @@ class PlantRequirementsWidget extends StatelessWidget {
                 leading: SvgPicture.asset('assets/icons/plant_type.svg'),
                 title: Text(
                   "Type",
-                  style: TextStyleConstant.subtitle
-                      .copyWith(fontWeight: FontWeight.w600),
+                  style: TextStyleConstant.subtitle.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 trailing: Text(
                   detailMyPlant.plant?.isToxic != null ? 'Toxic' : 'Non-Toxic',
-                  style: TextStyleConstant.subtitle
-                      .copyWith(fontWeight: FontWeight.w400),
+                  style: TextStyleConstant.subtitle.copyWith(
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
               Container(
@@ -78,13 +90,15 @@ class PlantRequirementsWidget extends StatelessWidget {
                       SvgPicture.asset('assets/icons/plant_planting_time.svg'),
                   title: Text(
                     "Planting Time",
-                    style: TextStyleConstant.subtitle
-                        .copyWith(fontWeight: FontWeight.w600),
+                    style: TextStyleConstant.subtitle.copyWith(
+                      fontWeight: FontWeight.w600,
+                    ),
                   ),
                   trailing: Text(
                     detailMyPlant.plant?.plantingTime ?? "-",
-                    style: TextStyleConstant.subtitle
-                        .copyWith(fontWeight: FontWeight.w400),
+                    style: TextStyleConstant.subtitle.copyWith(
+                      fontWeight: FontWeight.w400,
+                    ),
                   ),
                 ),
               ),
@@ -93,13 +107,15 @@ class PlantRequirementsWidget extends StatelessWidget {
                     SvgPicture.asset('assets/icons/plant_harvest_time.svg'),
                 title: Text(
                   "Harvest Time",
-                  style: TextStyleConstant.subtitle
-                      .copyWith(fontWeight: FontWeight.w600),
+                  style: TextStyleConstant.subtitle.copyWith(
+                    fontWeight: FontWeight.w600,
+                  ),
                 ),
                 trailing: Text(
                   '${detailMyPlant.plant!.harvestDuration} Months',
-                  style: TextStyleConstant.subtitle
-                      .copyWith(fontWeight: FontWeight.w400),
+                  style: TextStyleConstant.subtitle.copyWith(
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               )
             ],

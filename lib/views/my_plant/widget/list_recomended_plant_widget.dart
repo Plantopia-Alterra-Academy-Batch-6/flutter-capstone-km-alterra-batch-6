@@ -23,15 +23,22 @@ class ListRecomendedPlantWidget extends StatelessWidget {
             height: 200,
             width: double.infinity,
             child: ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 16,
+                ),
                 scrollDirection: Axis.horizontal,
                 itemCount: 3,
                 itemExtent: 156,
                 itemBuilder: (context, int index) {
                   return const Padding(
-                    padding: EdgeInsets.only(right: 12.0),
+                    padding: EdgeInsets.only(
+                      right: 12.0,
+                    ),
                     child: ShimmerContainerGlobalWidget(
-                        width: double.infinity, height: 200, radius: 24),
+                      width: double.infinity,
+                      height: 200,
+                      radius: 24,
+                    ),
                   );
                 }),
           );
@@ -60,7 +67,9 @@ class ListRecomendedPlantWidget extends StatelessWidget {
                   itemExtent: 156,
                   itemBuilder: (context, int index) {
                     return Padding(
-                        padding: const EdgeInsets.only(right: 12.0),
+                        padding: const EdgeInsets.only(
+                          right: 12.0,
+                        ),
                         child: GestureDetector(
                           onTap: () {
                             final AddPlantController addPlantController =

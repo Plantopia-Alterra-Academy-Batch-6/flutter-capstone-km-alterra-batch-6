@@ -32,12 +32,6 @@ class _SignUpSectionWidgetState extends State<SignUpSectionWidget> {
     super.initState();
   }
 
-  // @override
-  // void dispose() {
-  //   signUpController.onClose();
-  //   super.dispose();
-  // }
-
   @override
   Widget build(BuildContext context) {
     return Column(

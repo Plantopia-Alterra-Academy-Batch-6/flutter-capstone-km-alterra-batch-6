@@ -12,7 +12,12 @@ class SingleResultWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: const EdgeInsets.fromLTRB(16, 24, 16, 0),
+      padding: const EdgeInsets.fromLTRB(
+        16,
+        24,
+        16,
+        0,
+      ),
       physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: myPlantController.searchMyPlant.length,
