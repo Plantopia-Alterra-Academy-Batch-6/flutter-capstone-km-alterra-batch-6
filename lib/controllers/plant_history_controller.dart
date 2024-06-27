@@ -112,14 +112,14 @@ class PlantHistoryController extends GetxController {
         final plantHistoryTime = plant.createdAt ?? DateTime(-1);
         Duration difference = now.difference(plantHistoryTime);
         int years = difference.inDays ~/ 365;
-        int days = ((difference.inDays % 365) % 30) % 7;
-        if (years > 1) {
+        int days = difference.inDays;
+        if (years >= 1) {
           lastYearHistory.add(plant);
-        } else if (days > 31 && years <= 365) {
+        } else if (days > 31) {
           thisYearHistory.add(plant);
-        } else if (days > 7 && days <= 30) {
+        } else if (days > 7) {
           thisMonthHistory.add(plant);
-        } else if (days > 1 && days <= 7) {
+        } else if (days > 1) {
           thisWeekHistory.add(plant);
         } else if (days == 1) {
           yesterdayHistory.add(plant);

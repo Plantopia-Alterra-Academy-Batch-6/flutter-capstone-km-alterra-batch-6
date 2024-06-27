@@ -52,7 +52,9 @@ class ImageCarouselWidget extends StatelessWidget {
                   count: detailMyPlant.plant?.plantImages?.length ?? 0,
                   effect: ScrollingDotsEffect(
                     activeDotColor: Colors.green,
-                    dotColor: Colors.white.withOpacity(0.5),
+                    dotColor: Colors.white.withOpacity(
+                      0.5,
+                    ),
                     dotHeight: 6,
                     dotWidth: 6,
                   ),

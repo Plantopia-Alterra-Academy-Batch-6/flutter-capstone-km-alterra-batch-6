@@ -27,7 +27,6 @@ class AuthGoogleController extends GetxController {
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
         NavigationDelegate(onUrlChange: (change) async {
-          print("this is change : ${change.url}");
           if (change.url != null) {
             await getProfilBytoken(change.url!);
           }
@@ -55,8 +54,6 @@ class AuthGoogleController extends GetxController {
       final response = await Dio().get(url);
 
       if (response.data['data'] != null) {       
-         // String token =
-        //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Inp1d2l5MTBAZ21haWwuY29tIiwiaWQiOjM0LCJyb2xlIjoidXNlciJ9.NNgEj8vlxOQpGA4ecHn_KPvorxcVi7Xoucrodhl-8-4";
 
         String token = response.data['data'];
 

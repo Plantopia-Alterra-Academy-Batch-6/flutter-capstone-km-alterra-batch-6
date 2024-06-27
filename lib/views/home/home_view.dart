@@ -1,5 +1,4 @@
 import 'package:flutter/foundation.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -17,8 +16,8 @@ import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widg
 import 'package:plantopia/views/global_widgets/card_global_widget.dart';
 import 'package:plantopia/views/global_widgets/recommended_widget.dart';
 import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
+import 'package:plantopia/views/home/widget/plant_caring_card_widget.dart';
 import 'package:plantopia/views/my_plant/widget/empty_my_plant_widget.dart';
-import 'package:plantopia/views/my_plant_details/widget/button_widget.dart';
 part 'widget/custom_app_bar_widget.dart';
 part 'widget/my_plant_widget.dart';
 part 'widget/plant_caring_widget.dart';
@@ -27,14 +26,9 @@ part 'widget/plant_guide_second_item_widget.dart';
 part 'widget/plant_guide_third_item_widget.dart';
 part 'widget/plant_guide_widget.dart';
 
-class HomeView extends StatefulWidget {
-  const HomeView({super.key});
+class HomeView extends StatelessWidget {
+  HomeView({super.key});
 
-  @override
-  State<HomeView> createState() => _HomeViewState();
-}
-
-class _HomeViewState extends State<HomeView> {
   final MyPlantController myPlantController = Get.put(MyPlantController());
 
   final NotificationController notificationController =

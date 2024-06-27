@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
@@ -8,6 +7,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:plantopia/controllers/plant_history_controller.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
 import 'package:plantopia/views/global_widgets/shimmer_container_global_widget.dart';
+import 'package:plantopia/views/history_plant/filter_button_widget.dart';
 import 'package:plantopia/views/history_plant/widget/filtering_widget.dart';
 import 'package:plantopia/views/history_plant/widget/sort_history_widget.dart';
 
@@ -31,76 +31,7 @@ class HistoryPlantView extends StatelessWidget {
               fontWeight: FontWeight.w700,
             ),
           ),
-          actions: [
-            PopupMenuButton(
-              padding: EdgeInsets.zero, // Mengatur padding ke EdgeInsets.zero
-              position: PopupMenuPosition.under,
-              color: ColorConstant.white,
-              icon: const Icon(Icons.filter_list, color: Colors.black),
-              itemBuilder: (BuildContext context) {
-                return [
-                  PopupMenuItem(
-                    padding: EdgeInsets.zero,
-                    value: 1,
-                    child: Center(
-                      child: Text(
-                        'Latest',
-                        style: TextStyleConstant.subtitle
-                            .copyWith(fontWeight: FontWeight.w600),
-                      ),
-                    ),
-                  ),
-                  PopupMenuItem(
-                    height: 40,
-                    value: 2,
-                    child: Center(
-                      child: Text('Oldest',
-                          style: TextStyleConstant.subtitle
-                              .copyWith(fontWeight: FontWeight.w600)),
-                    ),
-                  ),
-                  PopupMenuItem(
-                    height: 40,
-                    value: 3,
-                    child: Center(
-                      child: Text('A to Z',
-                          style: TextStyleConstant.subtitle
-                              .copyWith(fontWeight: FontWeight.w600)),
-                    ),
-                  ),
-                  PopupMenuItem(
-                    height: 40,
-                    value: 4,
-                    child: Center(
-                      child: Text('Z to A',
-                          style: TextStyleConstant.subtitle
-                              .copyWith(fontWeight: FontWeight.w600)),
-                    ),
-                  ),
-                ];
-              },
-              onSelected: (value) {
-                switch (value) {
-                  case 1:
-                    plantHistoryController.isFiltering.value = false;
-                    break;
-                  case 2:
-                    plantHistoryController.getPlantingHistory();
-                    break;
-                  case 3:
-                    plantHistoryController.sortAtoZ();
-                    break;
-                  case 4:
-                    plantHistoryController.sortZtoA();
-                    break;
-                  default:
-                }
-                if (kDebugMode) {
-                  print('You selected filter: $value');
-                }
-              },
-            ),
-          ],
+          actions: [FilterButtonWidget()],
         ),
         body: Obx(() {
           switch (plantHistoryController.plantingHistoryData.value) {

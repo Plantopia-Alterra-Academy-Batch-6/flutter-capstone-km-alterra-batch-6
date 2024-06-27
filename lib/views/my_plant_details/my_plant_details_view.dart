@@ -36,8 +36,9 @@ class MyPlantDetailsView extends StatelessWidget {
         automaticallyImplyLeading: true,
         title: Text(
           "Plant Details",
-          style:
-              TextStyleConstant.heading4.copyWith(fontWeight: FontWeight.w700),
+          style: TextStyleConstant.heading4.copyWith(
+            fontWeight: FontWeight.w700,
+          ),
         ),
         centerTitle: true,
         actions: [
@@ -75,13 +76,19 @@ class MyPlantDetailsView extends StatelessWidget {
                   width: double.infinity,
                   decoration: const BoxDecoration(
                     borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(30),
-                      topRight: Radius.circular(30),
+                      topLeft: Radius.circular(
+                        30,
+                      ),
+                      topRight: Radius.circular(
+                        30,
+                      ),
                     ),
                     color: Colors.white,
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(16.0),
+                    padding: const EdgeInsets.all(
+                      16.0,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -107,7 +114,9 @@ class MyPlantDetailsView extends StatelessWidget {
         valueListenable: isBottomBarVisible,
         builder: (context, isVisible, child) {
           return AnimatedContainer(
-            duration: const Duration(milliseconds: 300),
+            duration: const Duration(
+              milliseconds: 300,
+            ),
             height: isVisible
                 ? 76.0
                 : 0.0, // Ensure the height is appropriate for visibility
@@ -130,9 +139,13 @@ class MyPlantDetailsView extends StatelessWidget {
                                     .primary500, // Button background color
                                 fixedSize: const Size(
                                     double.infinity, 60), // Button size
-                                padding: const EdgeInsets.all(16.0),
+                                padding: const EdgeInsets.all(
+                                  16.0,
+                                ),
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8.0),
+                                  borderRadius: BorderRadius.circular(
+                                    8.0,
+                                  ),
                                 ),
                               ),
                               child: SvgPicture.asset(
@@ -153,13 +166,18 @@ class MyPlantDetailsView extends StatelessWidget {
                               }
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: ColorConstant
-                                  .primary500, // Button background color
+                              backgroundColor: ColorConstant.primary500,
                               fixedSize: const Size(
-                                  double.infinity, 60), // Button size
-                              padding: const EdgeInsets.all(16.0),
+                                double.infinity,
+                                60,
+                              ),
+                              padding: const EdgeInsets.all(
+                                16.0,
+                              ),
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(8.0),
+                                borderRadius: BorderRadius.circular(
+                                  8.0,
+                                ),
                               ),
                             ),
                             child: Text(

@@ -399,18 +399,18 @@ class PlantImage {
   int? id;
   int? plantId;
   // ignore: non_constant_identifier_names
-  String? file_name;
+  String? fileName;
   String? createdAt;
   String? updatedAt;
 
   // ignore: non_constant_identifier_names
   PlantImage(
-      {this.id, this.plantId, this.file_name, this.createdAt, this.updatedAt});
+      {this.id, this.plantId, this.fileName, this.createdAt, this.updatedAt});
 
   PlantImage.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     plantId = json['plant_id'];
-    file_name = json['file_name'];
+    fileName = json['file_name'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -419,7 +419,7 @@ class PlantImage {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['plant_id'] = plantId;
-    data['file_name'] = file_name;
+    data['file_name'] = fileName;
     data['created_at'] = createdAt;
     data['updated_at'] = updatedAt;
     return data;

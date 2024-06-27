@@ -36,7 +36,12 @@ class PlantGuideCardWidget extends StatelessWidget {
                   color: ColorConstant.neutral400,
                 )),
             width: double.infinity,
-            padding: const EdgeInsets.fromLTRB(10, 13, 22, 13),
+            padding: const EdgeInsets.fromLTRB(
+              10,
+              13,
+              22,
+              13,
+            ),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

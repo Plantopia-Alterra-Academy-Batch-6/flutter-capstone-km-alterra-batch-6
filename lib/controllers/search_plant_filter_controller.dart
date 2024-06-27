@@ -34,7 +34,7 @@ class SearchPlantFilterController extends GetxController {
           searchResultJson['id'] = plant.id;
           searchResultJson['name'] = plant.name;
           searchResultJson['image_url'] =
-              plant.plantImages?.first.file_name ?? '';
+              plant.plantImages?.first.fileName ?? '';
           searchResultJson['category'] = plant.plantCategory!.name;
           isPlantFound(true);
         }

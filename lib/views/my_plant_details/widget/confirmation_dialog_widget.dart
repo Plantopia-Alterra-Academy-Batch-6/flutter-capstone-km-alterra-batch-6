@@ -64,7 +64,9 @@ class ConfirmationDialogWidget extends StatelessWidget {
                     height: 4,
                   ),
                   Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 32),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 32,
+                      ),
                       width: double.infinity,
                       child: Center(
                         child: Text(
@@ -112,7 +114,9 @@ class ConfirmationDialogWidget extends StatelessWidget {
                           buttonName: "Delete",
                           boxDecoration: BoxDecoration(
                             color: ColorConstant.danger500,
-                            borderRadius: BorderRadius.circular(8),
+                            borderRadius: BorderRadius.circular(
+                              8,
+                            ),
                           ),
                           textStyle: TextStyleConstant.subtitle.copyWith(
                             color: Colors.white,
