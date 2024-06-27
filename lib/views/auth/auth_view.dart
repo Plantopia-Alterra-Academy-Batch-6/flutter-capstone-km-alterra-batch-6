@@ -93,7 +93,6 @@ class _AuthViewState extends State<AuthView> {
                                       ]),
                                 ),
                                 const SizedBox(
-                                  // color: Colors.orange[200],
                                   height: 600,
                                   child: TabBarView(children: [
                                     Padding(
