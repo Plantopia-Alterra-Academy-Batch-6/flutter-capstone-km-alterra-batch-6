@@ -26,10 +26,7 @@ Consult your plant problems with plantBot
 View your planting history and watering history
 
 ## 🛠️ Tech Stack
-<img src= "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flutter_logo.svg/2048px-Flutter_logo.svg.png" height= 60>
-<img src= "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/220px-ChatGPT_logo.svg.png" height= 60 >
-<img src= "https://static.javatpoint.com/tutorial/firebase/images/firebase-cloud-messaging.png" height= 60 >
-<img src= "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png" height= 60 >
+<img src= "https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flutter_logo.svg/2048px-Flutter_logo.svg.png" height= 60><img src= "https://upload.wikimedia.org/wikipedia/commons/thumb/0/04/ChatGPT_logo.svg/220px-ChatGPT_logo.svg.png" height= 60 ><img src= "https://static.javatpoint.com/tutorial/firebase/images/firebase-cloud-messaging.png" height= 60 ><img src= "https://upload.wikimedia.org/wikipedia/commons/7/7e/Dart-logo.png" height= 60 >
 
 ## Application Architecture
 <img src= "https://i.ibb.co.com/cJJby93/Mobile-Architecture.png" >
