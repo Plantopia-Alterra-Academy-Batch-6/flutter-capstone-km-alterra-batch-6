@@ -8,7 +8,7 @@ import 'package:plantopia/controllers/verify_controller.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/login_params_model.dart';
 import 'package:plantopia/models/signup_params_model.dart';
-import 'package:plantopia/models/user_model.dart';
+import 'package:plantopia/models/get_user_model_response.dart';
 import 'package:plantopia/service/auth_service.dart';
 import 'package:plantopia/utils/app_routes.dart';
 import 'package:plantopia/views/allow_notif/allow_notif_view.dart';
@@ -153,38 +153,4 @@ class AuthController extends GetxController {
     return null;
   }
 
-//   final GoogleSignInService _googleSignInService = GoogleSignInService();
-//   final Rx<User?> _user = Rx<User?>(null);
-//   User? get user => _user.value;
-
-//   @override
-//   void onInit() {
-//     super.onInit();
-//     _user.bindStream(FirebaseAuth.instance.authStateChanges());
-//   }
-
-// //sign in with Google
-//   Future<void> signInWithGoogle() async {
-//     isLoading.value = true;
-//     try {
-//       User? user = await _googleSignInService.signInWithGoogle();
-//       if (user != null) {
-//         _user.value = user;
-//         Get.snackbar('Success', 'Logged in as ${user.displayName}');
-//         Get.offAll(() => const AllowNotificationView());
-//       }
-//     } catch (e) {
-//       Get.snackbar('Error', 'Failed to sign in with Google');
-//     } finally {
-//       isLoading.value = false;
-//     }
-//   }
-
-// //sign out with Google
-//   Future<void> signOutGoogle() async {
-//     await _googleSignInService.signOut();
-//     _user.value = null;
-//     Get.snackbar('Success', 'Signed out');
-//     Get.offAll(() => const AuthView());
-//   }
 }

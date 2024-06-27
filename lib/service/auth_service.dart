@@ -4,7 +4,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:plantopia/models/login_params_model.dart';
 import 'package:plantopia/models/signup_params_model.dart';
-import 'package:plantopia/models/user_model.dart';
+import 'package:plantopia/models/get_user_model_response.dart';
 
 class AuthService {
   static Dio dio = Dio();

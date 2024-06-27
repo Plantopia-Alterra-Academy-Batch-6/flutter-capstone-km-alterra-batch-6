@@ -23,11 +23,11 @@ class UploadProgressController extends GetxController {
     getPlantProgress(plantId);
   }
 
-  Future<void> pickImage() async {
+  Future<void> pickImageFromGallery() async {
     var maxFileSizeInBytes = 2 * 1048576;
     final ImagePicker picker = ImagePicker();
     pickedFile.value = await picker.pickImage(source: ImageSource.gallery);
-    
+
     if (pickedFile.value != null) {
       var imagePath = await pickedFile.value!.readAsBytes();
 
@@ -42,6 +42,31 @@ class UploadProgressController extends GetxController {
         isActiveButton.value = false;
       }
     }
+
+    Get.back();
+  }
+
+  Future<void> pickImageFromCamera() async {
+    var maxFileSizeInBytes = 2 * 1048576;
+    final ImagePicker picker = ImagePicker();
+    pickedFile.value = await picker.pickImage(source: ImageSource.camera);
+
+    if (pickedFile.value != null) {
+      var imagePath = await pickedFile.value!.readAsBytes();
+
+      var fileSize = imagePath.length;
+      if (fileSize <= maxFileSizeInBytes) {
+        isImageLarge.value = false;
+        image.value = File(pickedFile.value!.path);
+        isActiveButton.value = true;
+      } else {
+        image.value = null;
+        isImageLarge.value = true;
+        isActiveButton.value = false;
+      }
+    }
+    Get.back();
+
   }
 
   Future<void> getPlantProgress(plantId) async {
