@@ -15,8 +15,6 @@ class CustomLoginGoogleWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final AuthController authController = Get.put(AuthController());
-
     return Column(
       children: [
         const SizedBox(
@@ -70,7 +68,6 @@ class CustomLoginGoogleWidget extends StatelessWidget {
                 ),
                 shouldIconPulse: true,
               );
-              // Get.toNamed(AppRoutes.authGoogle);
             },
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -82,8 +79,9 @@ class CustomLoginGoogleWidget extends StatelessWidget {
                 Text(
                   'Log In With Google',
                   style: GoogleFonts.nunito(
-                      fontWeight: FontWeight.w700,
-                      color: const Color(0xff10b981f)),
+                    fontWeight: FontWeight.w700,
+                    color: ColorConstant.primary500,
+                  ),
                 ),
               ],
             ),

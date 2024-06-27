@@ -18,7 +18,8 @@ class SetNewPasswordView extends StatelessWidget {
         Get.put(ForgotPasswordController());
 
     TextEditingController passwordController = TextEditingController();
-    final Map<String, dynamic>? arguments = Get.arguments as Map<String, dynamic>?;
+    final Map<String, dynamic>? arguments =
+        Get.arguments as Map<String, dynamic>?;
     final String email = arguments?['email'] ?? '';
 
     return Scaffold(
@@ -76,10 +77,12 @@ class SetNewPasswordView extends StatelessWidget {
                                     email: email,
                                     password: passwordController.text);
                             if (result) {
+                              if (!context.mounted) return;
                               CustomSnackbarBottomWidget.show(context,
                                   title: "Password Updated Successfully");
                               Get.offNamed(AppRoutes.auth);
                             } else {
+                              if (!context.mounted) return;
                               CustomSnackbarBottomWidget.show(context,
                                   title: "Failed to change new password");
                             }

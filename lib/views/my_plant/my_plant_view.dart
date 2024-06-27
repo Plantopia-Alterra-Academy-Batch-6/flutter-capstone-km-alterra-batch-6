@@ -23,7 +23,12 @@ class MyPlantView extends StatelessWidget {
         child: SingleChildScrollView(
           controller: myPlantController.scrollController,
           child: Padding(
-            padding: const EdgeInsets.fromLTRB(0, 24, 0, 0),
+            padding: const EdgeInsets.fromLTRB(
+              0,
+              24,
+              0,
+              0,
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [

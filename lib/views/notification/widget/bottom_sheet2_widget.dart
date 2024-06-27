@@ -5,7 +5,8 @@ import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/notification_controller.dart';
-import 'package:plantopia/views/notification/widget/button_widget.dart';
+import 'package:plantopia/views/notification/widget/bottom_sheet2_button_widget.dart';
+import 'package:plantopia/views/notification/widget/radio_button_widget.dart';
 
 class BottomSheet2Widget extends StatelessWidget {
   BottomSheet2Widget({super.key, required this.notifId});
@@ -51,8 +52,9 @@ class BottomSheet2Widget extends StatelessWidget {
                       ),
                       Text(
                         "Default reminder : ${notifController.plantByIdResponse?.data?.wateringSchedule?.wateringTime ?? "-"}",
-                        style: TextStyleConstant.caption
-                            .copyWith(color: ColorConstant.neutral500),
+                        style: TextStyleConstant.caption.copyWith(
+                          color: ColorConstant.neutral500,
+                        ),
                       )
                     ],
                   ),
@@ -64,8 +66,9 @@ class BottomSheet2Widget extends StatelessWidget {
             ),
             Container(
               decoration: BoxDecoration(
-                  color: ColorConstant.neutral50,
-                  borderRadius: BorderRadius.circular(16)),
+                color: ColorConstant.neutral50,
+                borderRadius: BorderRadius.circular(16),
+              ),
               padding: const EdgeInsets.all(16),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,110 +109,11 @@ class BottomSheet2Widget extends StatelessWidget {
                 ],
               ),
             ),
-            Obx(
-              () => Column(
-                children: [
-                  RadioListTile(
-                    title: Text(
-                      "Set this as default",
-                      style: TextStyleConstant.subtitle,
-                    ),
-                    fillColor: WidgetStatePropertyAll(ColorConstant.primary500),
-                    value: true,
-                    groupValue: notifController.selectedOption.value,
-                    onChanged: (value) {
-                      notifController.setSelectedOption(value!);
-                    },
-                  ),
-                  RadioListTile(
-                    title: Text(
-                      "Just Once",
-                      style: TextStyleConstant.subtitle,
-                    ),
-                    fillColor: WidgetStatePropertyAll(ColorConstant.primary500),
-                    value: false,
-                    groupValue: notifController.selectedOption.value,
-                    onChanged: (value) {
-                      notifController.setSelectedOption(value!);
-                    },
-                  ),
-                ],
-              ),
-            ),
+            Obx(() => RadioButtonWidget()),
             const SizedBox(
               height: 16,
             ),
-            Row(
-              children: [
-                Expanded(
-                    child: ButtonWidget(
-                  onTap: () {
-                    Get.back();
-                  },
-                  buttonName: "Cancel",
-                  boxDecoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    border: Border.all(
-                      width: 1,
-                      color: ColorConstant.primary500,
-                    ),
-                  ),
-                  textStyle: TextStyleConstant.subtitle
-                      .copyWith(color: ColorConstant.primary500),
-                )),
-                const SizedBox(
-                  width: 8,
-                ),
-                Expanded(
-                    child: ButtonWidget(
-                  onTap: () async {
-                    await notifController.getNotificationById(notifId);
-                    await notifController.customizeWateringReminder(
-                        notifController.plantByIdResponse?.data?.id ?? -1,
-                        notifController
-                            .formatTime(notifController.dateTime.value),
-                        notifController.selectedOption.value,
-                        notifController.plantByIdResponse?.data
-                                ?.wateringSchedule?.each ??
-                            "-");
-                    while (Get.isBottomSheetOpen == true) {
-                      Get.back();
-                    }
-                    final snackBar = SnackBar(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(
-                          6,
-                        ),
-                      ),
-                      behavior: SnackBarBehavior.floating,
-                      margin: const EdgeInsets.all(16),
-                      backgroundColor: ColorConstant.primary500,
-                      content: Text(
-                        'Watering will be reminded in ${notifController.snackBarReminder(
-                          notifController.dateTime.value,
-                        )}',
-                        style: TextStyleConstant.paragraph.copyWith(
-                          color: ColorConstant.white,
-                        ),
-                      ),
-                      action: SnackBarAction(
-                        label: '',
-                        onPressed: () {},
-                      ),
-                    );
-                    if (!context.mounted) return;
-                    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                  },
-                  buttonName: "Save",
-                  boxDecoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: ColorConstant.primary500,
-                  ),
-                  textStyle:
-                      TextStyleConstant.subtitle.copyWith(color: Colors.white),
-                )),
-              ],
-            )
+            BottomSheet2ButtonWidget(notifId: notifId)
           ],
         ),
       ),
