@@ -17,8 +17,6 @@ void main() {
 
     testWidgets('should display the heading and number of plants',
         (WidgetTester tester) async {
-      final MyPlantController myPlantController = Get.find<MyPlantController>();
-
       await tester.pumpWidget(
         GetMaterialApp(
           home: MyPlantView(),
@@ -102,7 +100,5 @@ void main() {
 
       expect(Get.currentRoute, AppRoutes.addPlant);
     });
-
-  
   });
 }
