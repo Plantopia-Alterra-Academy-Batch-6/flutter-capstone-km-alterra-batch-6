@@ -109,7 +109,7 @@ class BottomSheet2Widget extends StatelessWidget {
                 ],
               ),
             ),
-            Obx(() => RadioButtonWidget()),
+            RadioButtonWidget(),
             const SizedBox(
               height: 16,
             ),

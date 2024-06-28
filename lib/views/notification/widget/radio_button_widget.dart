@@ -11,33 +11,35 @@ class RadioButtonWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        RadioListTile(
-          title: Text(
-            "Set this as default",
-            style: TextStyleConstant.subtitle,
+    return Obx(
+      () => Column(
+        children: [
+          RadioListTile(
+            title: Text(
+              "Set this as default",
+              style: TextStyleConstant.subtitle,
+            ),
+            fillColor: WidgetStatePropertyAll(ColorConstant.primary500),
+            value: true,
+            groupValue: notifController.selectedOption.value,
+            onChanged: (value) {
+              notifController.setSelectedOption(value!);
+            },
           ),
-          fillColor: WidgetStatePropertyAll(ColorConstant.primary500),
-          value: true,
-          groupValue: notifController.selectedOption.value,
-          onChanged: (value) {
-            notifController.setSelectedOption(value!);
-          },
-        ),
-        RadioListTile(
-          title: Text(
-            "Just Once",
-            style: TextStyleConstant.subtitle,
+          RadioListTile(
+            title: Text(
+              "Just Once",
+              style: TextStyleConstant.subtitle,
+            ),
+            fillColor: WidgetStatePropertyAll(ColorConstant.primary500),
+            value: false,
+            groupValue: notifController.selectedOption.value,
+            onChanged: (value) {
+              notifController.setSelectedOption(value!);
+            },
           ),
-          fillColor: WidgetStatePropertyAll(ColorConstant.primary500),
-          value: false,
-          groupValue: notifController.selectedOption.value,
-          onChanged: (value) {
-            notifController.setSelectedOption(value!);
-          },
-        ),
-      ],
+        ],
+      ),
     );
   }
 }
