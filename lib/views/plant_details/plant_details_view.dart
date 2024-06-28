@@ -28,11 +28,11 @@ class PlantDetailsView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         forceMaterialTransparency: true,
-        backgroundColor: Colors.white,
+        backgroundColor: ColorConstant.white,
         automaticallyImplyLeading: true,
         title: Text(
           "Plant Details",
@@ -70,15 +70,15 @@ class PlantDetailsView extends StatelessWidget {
                     ImageCarouselWidget(),
                     Transform.translate(
                       offset: const Offset(
-                          0, -30), // Moves the container up by 20 pixels
+                          0, -30), 
                       child: Container(
                         width: double.infinity,
-                        decoration: const BoxDecoration(
-                          borderRadius: BorderRadius.only(
+                        decoration:  BoxDecoration(
+                          borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(30),
                             topRight: Radius.circular(30),
                           ),
-                          color: Colors.white,
+                          color: ColorConstant.white,
                         ),
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
@@ -110,7 +110,7 @@ class PlantDetailsView extends StatelessWidget {
             duration: const Duration(milliseconds: 300),
             height: isVisible
                 ? 76.0
-                : 0.0, // Ensure the height is appropriate for visibility
+                : 0.0, 
             child: isVisible
                 ? Padding(
                     padding: const EdgeInsets.symmetric(
@@ -124,20 +124,20 @@ class PlantDetailsView extends StatelessWidget {
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor:
-                            ColorConstant.primary500, // Button background color
+                            ColorConstant.primary500, 
                         fixedSize:
-                            const Size(double.infinity, 60), // Button size
+                            const Size(double.infinity, 60), 
                         padding: const EdgeInsets.all(16.0),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8.0),
                         ),
                       ),
-                      child: const Text(
+                      child:  Text(
                         'Add to my plants',
                         style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
-                          color: Colors.white, // Button text color
+                          color: ColorConstant.white, 
                         ),
                       ),
                     ),

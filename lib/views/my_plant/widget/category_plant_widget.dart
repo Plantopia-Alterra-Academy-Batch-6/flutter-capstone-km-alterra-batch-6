@@ -101,7 +101,7 @@ class CategoryPlantWidget extends StatelessWidget {
                                   color: index ==
                                           myPlantController.activeIndex.value
                                       ? ColorConstant.primary100
-                                      : Colors.white,
+                                      : ColorConstant.white,
                                   borderRadius: BorderRadius.circular(
                                     50,
                                   )),

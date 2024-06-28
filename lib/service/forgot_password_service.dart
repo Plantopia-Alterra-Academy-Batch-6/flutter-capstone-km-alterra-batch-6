@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:plantopia/service/auth_service.dart';
+import 'package:plantopia/utils/base_url_util.dart';
 
 class ForgotPasswordService {
   static Dio dio = Dio();
@@ -8,7 +9,7 @@ class ForgotPasswordService {
       {required String email, required String password}) async {
     try {
       String url =
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/forgot-password";
+          "${BaseUrlUtil.baseUrl}/forgot-password";
       final response = await dio.post(
         url,
         options: Options(

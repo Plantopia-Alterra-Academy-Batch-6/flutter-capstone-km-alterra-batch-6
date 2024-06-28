@@ -23,7 +23,7 @@ class DeleteNotificationWidget extends StatelessWidget {
                 height: 380,
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: ColorConstant.white,
                   borderRadius: BorderRadius.circular(
                     16,
                   ),
@@ -83,7 +83,7 @@ class DeleteNotificationWidget extends StatelessWidget {
                               },
                               buttonName: "Cancel",
                               boxDecoration:
-                                  const BoxDecoration(color: Colors.white),
+                                   BoxDecoration(color: ColorConstant.white),
                               textStyle: TextStyleConstant.subtitle.copyWith(
                                 decoration: TextDecoration.none,
                                 color: ColorConstant.primary500,
@@ -107,7 +107,7 @@ class DeleteNotificationWidget extends StatelessWidget {
                               ),
                               textStyle: TextStyleConstant.subtitle.copyWith(
                                 decoration: TextDecoration.none,
-                                color: Colors.white,
+                                color: ColorConstant.white,
                               ),
                             ),
                           ),

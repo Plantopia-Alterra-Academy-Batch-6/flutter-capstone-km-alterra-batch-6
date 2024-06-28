@@ -6,6 +6,7 @@ import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_late_watering_response.dart';
 import 'package:plantopia/models/get_notification_response.dart';
 import 'package:plantopia/models/get_plant_by_id_response.dart';
+import 'package:plantopia/utils/base_url_util.dart';
 
 class NotificationService {
   static Dio dio = Dio();
@@ -49,13 +50,12 @@ class NotificationService {
 
   static Future<GetNotificationResponse> getAllNotification() async {
     final token = await UserTokenPref.getToken();
-    // final String token = dotenv.get('TOKEN');
     try {
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
       };
       final response = await dio.get(
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/notifications",
+          "${BaseUrlUtil.baseUrl}/notifications",
           options: Options(headers: headers));
       if (response.statusCode == 200) {
         return GetNotificationResponse.fromJson(response.data);
@@ -70,13 +70,12 @@ class NotificationService {
 
   static Future<void> getNotificationById(int id) async {
     final token = await UserTokenPref.getToken();
-    // final String token = dotenv.get('TOKEN');
     try {
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
       };
       await dio.get(
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/notifications/$id",
+          "${BaseUrlUtil.baseUrl}/notifications/$id",
           options: Options(headers: headers));
     } catch (e) {
       throw Exception(e);
@@ -90,7 +89,7 @@ class NotificationService {
         'Authorization': 'Bearer $token',
       };
       final response = await dio.delete(
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/notifications",
+          "${BaseUrlUtil.baseUrl}/notifications",
           options: Options(headers: headers));
       if (response.statusCode == 200) {
         return response.data['status'];
@@ -109,13 +108,12 @@ class NotificationService {
       required bool isRecurring,
       required String type}) async {
     final token = await UserTokenPref.getToken();
-    // final String token = dotenv.get('TOKEN');
     try {
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $token',
       };
       await dio.post(
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/create-customize-watering-reminder",
+          "${BaseUrlUtil.baseUrl}/create-customize-watering-reminder",
           data: {
             "plant_id": myPlantId,
             "time": customizeTime,
@@ -131,7 +129,7 @@ class NotificationService {
   static Future<PlantByIdResponse> getPlantById(int id) async {
     try {
       final api =
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/$id";
+          "${BaseUrlUtil.baseUrl}/plants/$id";
       final response = await dio.get(api);
 
       if (response.statusCode == 200) {
@@ -151,7 +149,7 @@ class NotificationService {
         'Authorization': 'Bearer $token',
       };
       final response = await dio.get(
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/check-watering",
+          "${BaseUrlUtil.baseUrl}/check-watering",
           options: Options(headers: headers));
       if (response.statusCode == 200) {
         return GetLaterWateringResponse.fromJson(response.data);

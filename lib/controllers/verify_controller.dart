@@ -10,8 +10,8 @@ import 'package:plantopia/service/verify_service.dart';
 import 'package:plantopia/utils/app_routes.dart';
 
 class VerifyController extends GetxController {
-  final borderVerifyColor = Rx<Color>(Colors.grey);
-  final numberColor = Rx<Color>(Colors.black);
+  final borderVerifyColor = Rx<Color>(ColorConstant.neutral500);
+  final numberColor = Rx<Color>(ColorConstant.neutral950);
   RxBool isLoading = false.obs;
   RxInt start = 0.obs;
   Timer? _timer;
@@ -19,8 +19,8 @@ class VerifyController extends GetxController {
   @override
   void onClose() {
     _timer?.cancel();
-    borderVerifyColor.value = Colors.grey;
-    numberColor.value = Colors.black;
+    borderVerifyColor.value = ColorConstant.neutral500;
+    numberColor.value = ColorConstant.neutral950;
 
     super.onClose();
   }

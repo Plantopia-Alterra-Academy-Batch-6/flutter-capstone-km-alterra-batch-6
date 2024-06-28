@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/add_plant_controller.dart';
 import 'package:plantopia/views/add_plant/widget/plant_category.dart';
@@ -19,10 +20,10 @@ class AddPlantView extends StatelessWidget {
         if (controller.isPageLoading.value) {
           return Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.white,
+            backgroundColor: ColorConstant.white,
             appBar: AppBar(
-              backgroundColor: Colors.white,
-              automaticallyImplyLeading: true, // Disable default leading icon
+              backgroundColor: ColorConstant.white,
+              automaticallyImplyLeading: true, 
               title: Text(
                 "Add Plants",
                 style: TextStyleConstant.heading4
@@ -35,10 +36,10 @@ class AddPlantView extends StatelessWidget {
         } else {
           return Scaffold(
             resizeToAvoidBottomInset: false,
-            backgroundColor: Colors.white,
+            backgroundColor: ColorConstant.white,
             appBar: AppBar(
-              backgroundColor: Colors.white,
-              automaticallyImplyLeading: true, // Disable default leading icon
+              backgroundColor: ColorConstant.white,
+              automaticallyImplyLeading: true, 
               title: Text(
                 "Add Plants",
                 style: TextStyleConstant.heading4

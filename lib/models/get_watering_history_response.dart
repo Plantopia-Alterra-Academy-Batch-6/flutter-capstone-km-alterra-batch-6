@@ -1,6 +1,4 @@
-// To parse this JSON data, do
-//
-//     final getWateringHistoryResponse = getWateringHistoryResponseFromJson(jsonString);
+
 
 import 'dart:convert';
 

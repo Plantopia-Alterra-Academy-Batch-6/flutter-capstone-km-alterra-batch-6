@@ -37,9 +37,9 @@ class CustomLoginGoogleWidget extends StatelessWidget {
           height: 45,
           child: ElevatedButton(
             style: ElevatedButton.styleFrom(
-              overlayColor: Colors.white,
+              overlayColor: ColorConstant.white,
               splashFactory: InkRipple.splashFactory,
-              backgroundColor: Colors.white,
+              backgroundColor: ColorConstant.white,
               shape: RoundedRectangleBorder(
                 side: const BorderSide(color: Color(0xFF10B981)),
                 borderRadius: BorderRadius.circular(borderRadiusCircular ?? 8),

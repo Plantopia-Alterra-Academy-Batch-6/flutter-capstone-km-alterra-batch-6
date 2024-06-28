@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
@@ -47,9 +46,9 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
           initialValue: initialValue,
           style: TextStyle(
               color: isEmailFailed
-                  ? Colors.red
+                  ? ColorConstant.danger500
                   : errorText != null
-                      ? Colors.red
+                      ? ColorConstant.danger500
                       : isEnable
                           ? ColorConstant.primary500
                           : ColorConstant.neutral950),
@@ -72,9 +71,9 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
                   color: isEmailFailed
-                      ? Colors.red
+                      ? ColorConstant.danger500
                       : errorText != null
-                          ? Colors.red
+                          ? ColorConstant.danger500
                           : isEnable
                               ? ColorConstant.primary500
                               : ColorConstant.neutral950),
@@ -83,9 +82,9 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
                   color: isEmailFailed
-                      ? Colors.red
+                      ? ColorConstant.danger500
                       : errorText != null
-                          ? Colors.red
+                          ? ColorConstant.danger500
                           : isEnable
                               ? ColorConstant.primary500
                               : ColorConstant.neutral950),
@@ -93,15 +92,15 @@ class CustomAuthTextFormFieldWidget extends StatelessWidget {
             errorText: errorText,
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Colors.red),
+              borderSide: BorderSide(color: ColorConstant.danger500),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
                   color: isEmailFailed
-                      ? Colors.red
+                      ? ColorConstant.danger500
                       : errorText != null
-                          ? Colors.red
+                          ? ColorConstant.danger500
                           : isEnable
                               ? ColorConstant.primary500
                               : ColorConstant.neutral400),

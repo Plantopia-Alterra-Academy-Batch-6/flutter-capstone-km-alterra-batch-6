@@ -27,7 +27,7 @@ class SearchBarWidget extends StatelessWidget {
               Expanded(
                 child: SearchBar(
                   controller: _myPlantController.searchController,
-                  backgroundColor: WidgetStateProperty.all(Colors.white),
+                  backgroundColor: WidgetStateProperty.all(ColorConstant.white),
                   leading: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 14.0),
                     child: SvgPicture.asset(

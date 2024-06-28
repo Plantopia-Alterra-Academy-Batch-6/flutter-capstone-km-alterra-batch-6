@@ -13,7 +13,7 @@ class AboutPlantWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const SizedBox(height: 20), // Add some space to adjust for the overlap
+        const SizedBox(height: 20), 
         Center(
           child: Text(
             controller

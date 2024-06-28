@@ -18,7 +18,7 @@ class MyPlantView extends StatelessWidget {
   Widget build(BuildContext context) {
     final MyPlantController myPlantController = Get.find<MyPlantController>();
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.white,
       body: SafeArea(
         child: SingleChildScrollView(
           controller: myPlantController.scrollController,
@@ -93,12 +93,12 @@ class MyPlantView extends StatelessWidget {
                   'Add Plant',
                   style: TextStyleConstant.subtitle.copyWith(
                     fontWeight: FontWeight.w700,
-                    color: Colors.white,
+                    color: ColorConstant.white,
                   ),
                 ),
-                icon: const Icon(
+                icon: Icon(
                   Icons.add_circle_outline,
-                  color: Colors.white,
+                  color: ColorConstant.white,
                 ),
               )
             : FloatingActionButton(
@@ -106,9 +106,9 @@ class MyPlantView extends StatelessWidget {
                 onPressed: () {
                   Get.toNamed(AppRoutes.addPlant);
                 },
-                child: const Icon(
+                child: Icon(
                   Icons.add_circle_outline,
-                  color: Colors.white,
+                  color: ColorConstant.white,
                 ),
               ),
       ),

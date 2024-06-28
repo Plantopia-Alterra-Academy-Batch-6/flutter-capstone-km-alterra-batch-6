@@ -1,5 +1,6 @@
 import 'package:plantopia/service/auth_service.dart';
 import 'package:dio/dio.dart';
+import 'package:plantopia/utils/base_url_util.dart';
 
 class VerifyService {
   static Dio dio = Dio();
@@ -7,7 +8,7 @@ class VerifyService {
       {required String email, required String otp}) async {
     try {
       String url =
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/verify";
+          "${BaseUrlUtil.baseUrl}/verify";
 
       final response = await dio.post(
         url,
@@ -37,7 +38,7 @@ class VerifyService {
   static Future<CustomException?> resendOTP({required String email}) async {
     try {
       String url =
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/resendotp";
+          "${BaseUrlUtil.baseUrl}/resendotp";
 
       final response = await dio.post(
         url,

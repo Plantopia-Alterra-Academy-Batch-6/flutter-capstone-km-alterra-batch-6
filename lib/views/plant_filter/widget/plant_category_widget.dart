@@ -40,7 +40,7 @@ class PlantCategoryWidget extends StatelessWidget {
                         plantFilterController.isPlantCategorySelected.value =
                             false;
                         plantFilterController.selectedCategory.value =
-                            -1; // Reset selection
+                            -1; 
                       } else {
                         plantFilterController.selectedCategory.value =
                             addPlantController
@@ -57,7 +57,7 @@ class PlantCategoryWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: isSelected
                               ? ColorConstant.primary100
-                              : Colors.white,
+                              : ColorConstant.white,
                           border: Border.all(
                             color: isSelected
                                 ? ColorConstant.primary500
@@ -72,7 +72,7 @@ class PlantCategoryWidget extends StatelessWidget {
                           style: TextStyleConstant.paragraph.copyWith(
                             color: isSelected
                                 ? ColorConstant.primary500
-                                : Colors.black,
+                                : ColorConstant.danger950,
                           ),
                         ),
                       ),

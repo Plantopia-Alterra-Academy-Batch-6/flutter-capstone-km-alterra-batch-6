@@ -1,4 +1,3 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
@@ -71,9 +70,6 @@ class _CarouselWidgetState extends State<CarouselWidget> {
               autoPlay: true,
               autoPlayCurve: Curves.linear,
               autoPlayInterval: const Duration(seconds: 10),
-              // autoPlayAnimationDuration:
-              //     const Duration(seconds: 5, milliseconds: 200),
-              // enlargeCenterPage: true,
               enableInfiniteScroll: true,
               initialPage: 2,
               onPageChanged: (index, reason) =>

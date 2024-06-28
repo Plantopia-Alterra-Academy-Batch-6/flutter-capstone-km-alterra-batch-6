@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
@@ -41,7 +40,7 @@ class CustomFormfieldForgotPasswordWidget extends StatelessWidget {
         TextFormField(
           initialValue: initialValue,
           style: TextStyle(
-              color: errorText != null ? Colors.red : ColorConstant.neutral950),
+              color: errorText != null ? ColorConstant.danger500 : ColorConstant.neutral950),
           onChanged: onChanged,
           controller: controller,
           keyboardType: keyboardType,
@@ -61,26 +60,26 @@ class CustomFormfieldForgotPasswordWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
                   color: errorText != null
-                      ? Colors.red
+                      ? ColorConstant.danger500
                       : ColorConstant.neutral950),
             ),
             focusedErrorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
                   color: errorText != null
-                      ? Colors.red
+                      ? ColorConstant.danger500
                       : ColorConstant.neutral950),
             ),
             errorText: errorText,
             errorBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
-              borderSide: const BorderSide(color: Colors.red),
+              borderSide: BorderSide(color: ColorConstant.danger500),
             ),
             enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(8),
               borderSide: BorderSide(
                   color: errorText != null
-                      ? Colors.red
+                      ? ColorConstant.danger500
                       : ColorConstant.neutral400),
             ),
           ),

@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_watering_history_response.dart';
+import 'package:plantopia/utils/base_url_util.dart';
 
 class WateringHistoryService {
   static Dio dio = Dio();
@@ -16,7 +17,7 @@ class WateringHistoryService {
         'Authorization': 'Bearer $token',
       };
       final response = await dio.get(
-        "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/watering-history",
+        "${BaseUrlUtil.baseUrl}/watering-history",
         options: Options(
           headers: headers,
         ),
@@ -39,7 +40,7 @@ class WateringHistoryService {
         'Authorization': 'Bearer $token',
       };
       await dio.post(
-        "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/watering-history",
+        "${BaseUrlUtil.baseUrl}/watering-history",
         data: {"plant_id": plantId},
         options: Options(
           headers: headers,

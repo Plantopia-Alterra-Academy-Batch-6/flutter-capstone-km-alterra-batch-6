@@ -33,10 +33,10 @@ class WateringHistoryView extends StatelessWidget {
         ),
         actions: [
           PopupMenuButton(
-            padding: EdgeInsets.zero, // Mengatur padding ke EdgeInsets.zero
+            padding: EdgeInsets.zero, 
             position: PopupMenuPosition.under,
             color: ColorConstant.white,
-            icon: const Icon(Icons.filter_list, color: Colors.black),
+            icon: Icon(Icons.filter_list, color: ColorConstant.neutral950),
             itemBuilder: (BuildContext context) {
               return [
                 PopupMenuItem(

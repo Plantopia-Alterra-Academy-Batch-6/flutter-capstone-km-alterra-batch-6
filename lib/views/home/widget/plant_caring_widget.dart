@@ -94,7 +94,7 @@ class PlantCaringWidget extends StatelessWidget {
               height: 144,
               clipBehavior: Clip.antiAlias,
               decoration: ShapeDecoration(
-                color: Colors.white,
+                color: ColorConstant.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(24),
                 ),

@@ -9,11 +9,9 @@ import 'package:plantopia/controllers/search_plant_filter_controller.dart';
 
 class PlantCategoryRowWidget extends StatelessWidget {
   PlantCategoryRowWidget({super.key}) {
-    // Initialize the controllers
     final addPlantController = Get.put(AddPlantController());
     final plantFilterController = Get.put(PlantFilterController());
 
-    // Set the default selected category to the first one if not already selected
     if (addPlantController.plantCategoriesResponse != null &&
         addPlantController.plantCategoriesResponse!.data.isNotEmpty &&
         !plantFilterController.isPlantCategorySelected.value) {
@@ -54,7 +52,7 @@ class PlantCategoryRowWidget extends StatelessWidget {
                           plantFilterController.isPlantCategorySelected.value =
                               false;
                           plantFilterController.selectedCategory.value =
-                              -1; // Reset selection
+                              -1; 
 
                           plantFilterSearchResultController.updateQuery('');
                           searchPlantFilterController.isPlantFound(false);
@@ -80,7 +78,7 @@ class PlantCategoryRowWidget extends StatelessWidget {
                           decoration: BoxDecoration(
                             color: isSelected
                                 ? ColorConstant.primary100
-                                : Colors.white,
+                                : ColorConstant.white,
                             border: Border.all(
                               color: isSelected
                                   ? ColorConstant.primary500
@@ -95,7 +93,7 @@ class PlantCategoryRowWidget extends StatelessWidget {
                             style: TextStyleConstant.paragraph.copyWith(
                               color: isSelected
                                   ? ColorConstant.primary500
-                                  : Colors.black,
+                                  : ColorConstant.neutral950,
                             ),
                           ),
                         ),

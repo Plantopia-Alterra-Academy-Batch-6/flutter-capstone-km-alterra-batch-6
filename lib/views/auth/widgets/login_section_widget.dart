@@ -1,7 +1,7 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/controllers/login_form_controller.dart';
 import 'package:plantopia/models/login_params_model.dart';
@@ -31,11 +31,7 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
     passwordController.text = loginFormController.passwordInit.value;
     super.initState();
   }
-  // @override
-  // void dispose() {
-  //   loginFormController.onClose();
-  //   super.dispose();
-  // }
+  
 
   @override
   Widget build(BuildContext context) {
@@ -84,8 +80,8 @@ class _LoginSectionWidgetState extends State<LoginSectionWidget> {
                             ? Icons.visibility_off
                             : Icons.visibility,
                         color: loginFormController.showPassword.value
-                            ? Colors.black26
-                            : Colors.black54,
+                            ? ColorConstant.primary900
+                            : ColorConstant.neutral900,
                         size: 20,
                       )),
                 ),

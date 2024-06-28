@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,16 +10,14 @@ import 'package:plantopia/models/login_params_model.dart';
 import 'package:plantopia/views/verify/widget/confirm_description_verify_widget.dart';
 import 'package:plantopia/views/verify/widget/custom_appbar_verify_widget.dart';
 
-// ignore: must_be_immutable
 class VerifyView extends StatelessWidget {
   final VerifyController controller = Get.put(VerifyController());
   VerifyView({super.key});
 
-  String? email;
-  LoginParamsModel? loginParams;
-
   @override
   Widget build(BuildContext context) {
+    String? email;
+  LoginParamsModel? loginParams;
     final AuthController authController = Get.put(AuthController());
     final Map arguments = Get.arguments;
     if (arguments['loginParams'] != null) {
@@ -62,10 +58,10 @@ class VerifyView extends StatelessWidget {
                     borderWidth: 0.8,
                     borderColor: ColorConstant.danger500,
                     enabledBorderColor: controller.borderVerifyColor.value,
-                    focusedBorderColor: Colors.black,
-                    cursorColor: Colors.black,
+                    focusedBorderColor: ColorConstant.neutral950,
+                    cursorColor: ColorConstant.neutral950,
                     keyboardType: TextInputType.number,
-                    disabledBorderColor: Colors.red,
+                    disabledBorderColor: ColorConstant.danger500,
                     contentPadding: const EdgeInsets.symmetric(vertical: 22),
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -79,7 +75,6 @@ class VerifyView extends StatelessWidget {
                         if (kDebugMode) {
                           print(result?.toJson());
                         }
-                        //melakukan login otomatis ketika akun telah verifikasi
                         if (result != null) {
                           await authController.login(
                               loginParams: result,
@@ -129,7 +124,7 @@ class VerifyView extends StatelessWidget {
                         style: TextStyle(
                           color: controller.start.value == 0
                               ? ColorConstant.primary500
-                              : Colors.grey,
+                              : ColorConstant.neutral500,
                           fontWeight: FontWeight.w700,
                         ),
                       ),

@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
@@ -55,7 +54,7 @@ class AddPlantController extends GetxController {
             "Please check your internet connection, or contact the developers if this issue still exist!",
         middleTextStyle: TextStyleConstant.paragraph,
         textConfirm: "OK",
-        confirmTextColor: Colors.white,
+        confirmTextColor: ColorConstant.white,
         buttonColor: ColorConstant.primary500,
         onConfirm: () {
           Get.back();

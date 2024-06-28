@@ -71,7 +71,7 @@ class PlantFilterController extends GetxController {
   };
 
   var toxicityMap = {
-    0: 'false', // non toxic
-    1: 'true', // toxic
+    0: 'false', 
+    1: 'true', 
   };
 }

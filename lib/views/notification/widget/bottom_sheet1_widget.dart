@@ -20,9 +20,9 @@ class BottomSheet1Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
+        decoration:  BoxDecoration(
+            color: ColorConstant.white,
+            borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(24), topRight: Radius.circular(24))),
         height: 448,
         child: Obx(
@@ -163,7 +163,7 @@ class BottomSheet1Widget extends StatelessWidget {
                               color: ColorConstant.primary500,
                             ),
                             textStyle: TextStyleConstant.subtitle.copyWith(
-                              color: Colors.white,
+                              color: ColorConstant.white,
                             ),
                             onTap: () async {
                               Get.back();

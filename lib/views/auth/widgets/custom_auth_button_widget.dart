@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:plantopia/constants/color_constant.dart';
 
 class CustomAuthButtonWidget extends StatelessWidget {
   final void Function()? onPressed;
@@ -35,7 +36,7 @@ class CustomAuthButtonWidget extends StatelessWidget {
           text,
           style: GoogleFonts.nunito(
               fontWeight: FontWeight.w700,
-              color: isActive ? Colors.white : const Color(0xFF9CA3AF)),
+              color: isActive ? ColorConstant.white : const Color(0xFF9CA3AF)),
         ),
       ),
     );

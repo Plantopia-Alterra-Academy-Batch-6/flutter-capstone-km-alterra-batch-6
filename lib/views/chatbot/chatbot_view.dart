@@ -19,8 +19,8 @@ class ChatbotView extends StatelessWidget {
       Scaffold(
         extendBody: false,
         appBar: AppBar(
-          backgroundColor: Colors.white,
-          surfaceTintColor: Colors.white,
+          backgroundColor: ColorConstant.white,
+          surfaceTintColor: ColorConstant.white,
           title: Text(
             "PlantBot",
             style: TextStyleConstant.semiBold.copyWith(
@@ -47,7 +47,7 @@ class ChatbotView extends StatelessWidget {
           return Blur(
             blur: controller.isBottomSheetClosed.value ? 0 : 3,
             child: Container(
-              color: Colors.black.withOpacity(0.6),
+              color: ColorConstant.neutral950.withOpacity(0.6),
             ),
           );
         } else {

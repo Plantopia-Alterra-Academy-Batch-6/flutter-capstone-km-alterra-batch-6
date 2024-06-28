@@ -28,7 +28,7 @@ class ConfirmationDialogWidget extends StatelessWidget {
             height: 380,
             width: double.infinity,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ColorConstant.white,
               borderRadius: BorderRadius.circular(
                 16,
               ),
@@ -90,7 +90,7 @@ class ConfirmationDialogWidget extends StatelessWidget {
                           },
                           buttonName: "Cancel",
                           boxDecoration:
-                              const BoxDecoration(color: Colors.white),
+                              BoxDecoration(color: ColorConstant.white),
                           textStyle: TextStyleConstant.subtitle.copyWith(
                               color: ColorConstant.primary500,
                               decoration: TextDecoration.none),
@@ -119,7 +119,7 @@ class ConfirmationDialogWidget extends StatelessWidget {
                             ),
                           ),
                           textStyle: TextStyleConstant.subtitle.copyWith(
-                            color: Colors.white,
+                            color: ColorConstant.white,
                             fontSize: 16,
                             decoration: TextDecoration.none,
                           ),

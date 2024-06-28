@@ -37,7 +37,7 @@ class PlantDifficultyWidget extends StatelessWidget {
                         plantFilterController.isDifficultyLevelSelected.value =
                             false;
                         plantFilterController.selectedDifficultyLevel.value =
-                            -1; // Reset selection
+                            -1; 
                       } else {
                         plantFilterController.selectedDifficultyLevel.value =
                             index;
@@ -53,7 +53,7 @@ class PlantDifficultyWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: isSelected
                               ? ColorConstant.primary100
-                              : Colors.white,
+                              : ColorConstant.white,
                           border: Border.all(
                             color: isSelected
                                 ? ColorConstant.primary500
@@ -67,7 +67,7 @@ class PlantDifficultyWidget extends StatelessWidget {
                           style: TextStyleConstant.paragraph.copyWith(
                             color: isSelected
                                 ? ColorConstant.primary500
-                                : Colors.black,
+                                : ColorConstant.neutral950,
                           ),
                         ),
                       ),

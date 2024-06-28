@@ -20,7 +20,6 @@ class AuthController extends GetxController {
   Rxn<UserModel> currentUser = Rxn<UserModel>();
   RxInt authSection = 0.obs;
 
-  // Login
   Future<void> login(
       {required LoginParamsModel loginParams,
       bool isOnLogin = false,
@@ -54,7 +53,6 @@ class AuthController extends GetxController {
             Get.offAllNamed(AppRoutes.auth);
           }
         } else if (e.code == 401) {
-          // disini saya melakukan pengecekan ketika mendapat error 401 maka langsung ke halaman verifikasi
           final VerifyController verifyController = Get.put(VerifyController());
           verifyController.resendOTP(email: loginParams.email!);
           loginFormController.errorPassword.value =
@@ -83,17 +81,14 @@ class AuthController extends GetxController {
     }
   }
 
-  // Sign Up
   Future<void> signUp(SignUpParamsModel signUpParamsModel) async {
     isLoading.value = true;
     try {
-      // melakukan refresh fcm token saat sign up untuk mendapatkan token baru
       String? newToken = await refreshFcmToken();
       signUpParamsModel.fcmToken = newToken;
       UserModel? result = await AuthService.signUp(signUpParamsModel);
       currentUser.value = result;
 
-      // mengirimkan login params ke verifikasi page supaya jika berhasil verify, akan otomatis login menggunakan login params ini
       LoginParamsModel loginParams = LoginParamsModel(
           email: signUpParamsModel.email!,
           password: signUpParamsModel.password!);
@@ -115,7 +110,6 @@ class AuthController extends GetxController {
     }
   }
 
-  // Mendapatkan user
   Future<void> getUser() async {
     isLoading.value = true;
     try {
@@ -130,7 +124,6 @@ class AuthController extends GetxController {
       }
     } catch (e) {
       if (e is CustomException) {
-        // Get.snackbar('error [${e.code}]', e.message);
       } else {
         Get.snackbar('error', '$e');
       }
@@ -139,7 +132,6 @@ class AuthController extends GetxController {
     }
   }
 
-  // refresh fcm token
   Future<String?> refreshFcmToken() async {
     try {
       final newToken = await FirebaseMessaging.instance

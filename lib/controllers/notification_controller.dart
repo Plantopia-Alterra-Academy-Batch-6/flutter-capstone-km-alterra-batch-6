@@ -165,7 +165,7 @@ class NotificationController extends GetxController {
         title: "Error",
         middleText: "Failed to add plant, please try again!",
         textConfirm: "OK",
-        confirmTextColor: Colors.white,
+        confirmTextColor: ColorConstant.white,
         onConfirm: () {
           Get.back();
         },
@@ -186,7 +186,7 @@ class NotificationController extends GetxController {
         title: "Error",
         middleText: "Failed to add customize reminder, please try again!",
         textConfirm: "OK",
-        confirmTextColor: Colors.white,
+        confirmTextColor: ColorConstant.white,
         onConfirm: () {
           Get.back();
         },
@@ -213,7 +213,7 @@ class NotificationController extends GetxController {
         title: "Error",
         middleText: "Failed to watering plant, please try again!",
         textConfirm: "OK",
-        confirmTextColor: Colors.white,
+        confirmTextColor: ColorConstant.white,
         onConfirm: () {
           Get.back();
         },
@@ -283,7 +283,7 @@ class NotificationController extends GetxController {
                           Get.dialog(Center(
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: ColorConstant.white,
                                 borderRadius: BorderRadius.circular(16),
                               ),
                               height: 323,

@@ -26,7 +26,7 @@ class ProfileButtonLogoutWidget extends StatelessWidget {
                   BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
                     child: Container(
-                      color: Colors.black.withOpacity(0.5),
+                      color: ColorConstant.neutral950.withOpacity(0.5),
                     ),
                   ),
                   Center(
@@ -82,13 +82,13 @@ class ProfileButtonLogoutWidget extends StatelessWidget {
                                 ),
                                 onPressed: () async {
                                   await profileController
-                                      .logout(); // Call logout method
+                                      .logout(); 
                                 },
                                 child: Text(
                                   "Log Out",
                                   style: TextStyleConstant.subtitle.copyWith(
                                     fontWeight: FontWeight.w700,
-                                    color: Colors.white,
+                                    color: ColorConstant.white,
                                   ),
                                 ),
                               ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/plant_filter_search_result_controller.dart';
 import 'package:plantopia/controllers/search_plant_filter_controller.dart';
@@ -20,9 +21,9 @@ class PlantFilterResultView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorConstant.white,
         automaticallyImplyLeading: true,
         title: Text(
           "Search Result",

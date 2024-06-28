@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
@@ -55,7 +56,7 @@ class MyPlantController extends GetxController {
         showFloatingButton.value = false;
       } else if (scrollController.position.userScrollDirection ==
           ScrollDirection.forward) {
-        showFloatingButton.value = true; //
+        showFloatingButton.value = true; 
       }
     });
   }
@@ -228,7 +229,7 @@ class MyPlantController extends GetxController {
           padding: const EdgeInsets.all(16.0),
           child: Container(
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: ColorConstant.white,
               borderRadius: BorderRadius.circular(16),
             ),
             height: 323,
@@ -269,7 +270,7 @@ class MyPlantController extends GetxController {
         title: "Error",
         middleText: "Failed to watering plant, please try again!",
         textConfirm: "OK",
-        confirmTextColor: Colors.white,
+        confirmTextColor: ColorConstant.white,
         onConfirm: () {
           Get.back();
         },

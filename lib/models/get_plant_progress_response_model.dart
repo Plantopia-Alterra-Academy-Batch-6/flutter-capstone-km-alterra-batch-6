@@ -1,6 +1,4 @@
-// To parse this JSON data, do
-//
-//     final getPlantProgressResponseModel = getPlantProgressResponseModelFromJson(jsonString);
+
 
 import 'dart:convert';
 

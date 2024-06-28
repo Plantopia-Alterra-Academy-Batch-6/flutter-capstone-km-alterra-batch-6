@@ -26,11 +26,11 @@ class PlantFilterSearchResultController extends GetxController {
                   '',
                 )
                 .replaceAll(
-                  RegExp(r'&+'), // Remove any extraneous '&' characters
+                  RegExp(r'&+'), 
                   '&',
                 )
                 .replaceAll(
-                  RegExp(r'^&|&$'), // Remove leading or trailing '&' characters
+                  RegExp(r'^&|&$'), 
                   '',
                 );
       } else {
@@ -61,7 +61,7 @@ class PlantFilterSearchResultController extends GetxController {
         isHaveResult(false);
       }
     } on Exception {
-      isHaveResult(false); // Set false if an error occurs
+      isHaveResult(false); 
     } finally {
       isPageLoading(false);
     }

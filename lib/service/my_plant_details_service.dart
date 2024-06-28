@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
+import 'package:plantopia/utils/base_url_util.dart';
 
 class MyPlantDetailsService {
   static Dio dio = Dio();
@@ -12,7 +13,7 @@ class MyPlantDetailsService {
         'Content-Type': 'application/json',
       };
       final response = await dio.delete(
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/my/plants/$plantId",
+          "${BaseUrlUtil.baseUrl}/my/plants/$plantId",
           data: {'user_plant_id': plantId},
           options: Options(headers: headers));
       return response.data['status'];
@@ -28,7 +29,7 @@ class MyPlantDetailsService {
         'Authorization': 'Bearer $token',
       };
       await dio.put(
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/my/plants/$userPlantId/customize-name",
+          "${BaseUrlUtil.baseUrl}/my/plants/$userPlantId/customize-name",
           data: {"customize_name": name},
           options: Options(headers: headers));
     } catch (e) {

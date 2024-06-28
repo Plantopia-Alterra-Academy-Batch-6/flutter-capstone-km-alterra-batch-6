@@ -86,17 +86,4 @@ class SignUpFormController extends GetxController {
       isEnableButtonPassword.value = true;
     }
   }
-
-  // @override
-  // void onClose() {
-  //   errorName.value = null;
-  //   borderName.value = Colors.black;
-  //   errorEmail.value = null;
-  //   borderEmail.value = Colors.black;
-  //   isEnableButtonEmail.value = false;
-  //   errorPassword.value = null;
-  //   borderPassword.value = Colors.black;
-  //   isEnableButtonPassword.value = false;
-  //   super.onClose();
-  // }
 }

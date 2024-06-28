@@ -1,5 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -68,7 +66,7 @@ class _AuthViewState extends State<AuthView> {
                                           const BorderRadius.all(
                                               Radius.circular(8)),
                                       dividerHeight: 0,
-                                      labelColor: Colors.white,
+                                      labelColor: ColorConstant.white,
                                       indicatorPadding: const EdgeInsets.all(5),
                                       indicator: const BoxDecoration(
                                         borderRadius: BorderRadius.all(
@@ -76,7 +74,7 @@ class _AuthViewState extends State<AuthView> {
                                         color: Color(0xFF10B981),
                                       ),
                                       indicatorSize: TabBarIndicatorSize.tab,
-                                      indicatorColor: Colors.amber,
+                                      indicatorColor: ColorConstant.primary500,
                                       unselectedLabelStyle: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.w400),

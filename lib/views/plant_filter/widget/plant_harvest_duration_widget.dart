@@ -37,7 +37,7 @@ class PlantHarvestDurationWidget extends StatelessWidget {
                         plantFilterController.isHarvestDurationSelected.value =
                             false;
                         plantFilterController.selectedHarvestDuration.value =
-                            -1; // Reset selection
+                            -1; 
                       } else {
                         plantFilterController.selectedHarvestDuration.value =
                             index;
@@ -53,7 +53,7 @@ class PlantHarvestDurationWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: isSelected
                               ? ColorConstant.primary100
-                              : Colors.white,
+                              : ColorConstant.white,
                           border: Border.all(
                             color: isSelected
                                 ? ColorConstant.primary500
@@ -67,7 +67,7 @@ class PlantHarvestDurationWidget extends StatelessWidget {
                           style: TextStyleConstant.paragraph.copyWith(
                             color: isSelected
                                 ? ColorConstant.primary500
-                                : Colors.black,
+                                : ColorConstant.neutral950,
                           ),
                         ),
                       ),

@@ -19,7 +19,6 @@ class ShimmerContainerGlobalWidget extends StatelessWidget {
       baseColor: Colors.grey[300]!,
       highlightColor: Colors.grey[100]!,
       child: Container(
-        // rectangleiAQ (12:690)
         width: width,
         height: height,
         decoration: BoxDecoration(

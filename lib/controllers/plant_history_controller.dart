@@ -68,7 +68,6 @@ class PlantHistoryController extends GetxController {
     }
   }
 
-  // Fungsi untuk membalik urutan indeks dalam semua RxList yang Anda miliki
   void reverseAllLists() async {
     reverseList(todayHistory);
     reverseList(yesterdayHistory);

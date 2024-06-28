@@ -38,7 +38,7 @@ class FaqWidget extends StatelessWidget {
                     decoration: BoxDecoration(
                       border: Border.all(
                           color: controller.customIcon.value
-                              ? Colors.black
+                              ? ColorConstant.neutral950
                               : ColorConstant.neutral500),
                       borderRadius: BorderRadius.circular(5),
                     ),

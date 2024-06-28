@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/search_plant_controller.dart';
 import 'package:plantopia/views/add_plant/widget/plant_category.dart';
@@ -16,10 +17,10 @@ class SearchPlantView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorConstant.white,
         automaticallyImplyLeading: true,
         title: Text(
           "Search Plant",

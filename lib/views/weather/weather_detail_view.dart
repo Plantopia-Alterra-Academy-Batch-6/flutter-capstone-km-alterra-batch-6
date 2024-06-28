@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/views/weather/widget/daily_weather_list_widget.dart';
 import 'package:plantopia/views/weather/widget/hourly_weather_list_widget.dart';
@@ -9,9 +10,9 @@ class WeatherDetailView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorConstant.white,
         title: Text(
           'Weather Detail',
           style: TextStyleConstant.heading4.copyWith(

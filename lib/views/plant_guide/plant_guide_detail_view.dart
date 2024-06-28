@@ -81,8 +81,8 @@ class PlantGuideDetailView extends StatelessWidget {
       backgroundColor: ColorConstant.white,
       extendBody: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        surfaceTintColor: Colors.white,
+        backgroundColor: ColorConstant.white,
+        surfaceTintColor: ColorConstant.white,
         centerTitle: true,
         title: Text(
           instruction.instructionCategory?.name ?? 'No Title',
@@ -111,7 +111,7 @@ class PlantGuideDetailView extends StatelessWidget {
                     stepTitle: instr.stepTitle ?? 'No Title',
                     stepDescription: instr.stepDescription ?? 'No Description',
                     showCategory:
-                        index == 0, // Tampilkan hanya di instruksi pertama
+                        index == 0, 
                   );
                 }).toList(),
               ),
@@ -138,7 +138,7 @@ class PlantGuideDetailView extends StatelessWidget {
                         decoration: BoxDecoration(
                           border: Border.all(
                             color: controller.customIcon.value
-                                ? Colors.black
+                                ? ColorConstant.neutral950
                                 : ColorConstant.neutral500,
                           ),
                           borderRadius: BorderRadius.circular(5),

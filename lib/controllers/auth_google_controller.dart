@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
+import 'package:plantopia/utils/base_url_util.dart';
 import 'package:plantopia/views/allow_notif/allow_notif_view.dart';
 import 'package:plantopia/views/global_widgets/bottom_navigation_bar_global_widget.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -22,7 +23,7 @@ class AuthGoogleController extends GetxController {
   Future<void> initWebView() async {
     isLoading.value = true;
     webViewController = WebViewController()
-      ..setBackgroundColor(Colors.white)
+      ..setBackgroundColor(ColorConstant.white)
       ..setUserAgent("random")
       ..setJavaScriptMode(JavaScriptMode.unrestricted)
       ..setNavigationDelegate(
@@ -45,7 +46,7 @@ class AuthGoogleController extends GetxController {
     await webViewController.clearLocalStorage();
     await WebViewCookieManager().clearCookies();
     webViewController.loadRequest(Uri.parse(
-        'https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/login-google'));
+        '${BaseUrlUtil.baseUrl}/login-google'));
     isLoading.value = false;
   }
 

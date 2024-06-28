@@ -18,9 +18,9 @@ class BottomSheetDeleteWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+          color: ColorConstant.white,
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(24), topRight: Radius.circular(24))),
       height: 307,
       child: Padding(

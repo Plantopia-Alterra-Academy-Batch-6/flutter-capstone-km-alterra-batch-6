@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/my_plant_details_controller.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
 import '../../../constants/icon_constant.dart';
@@ -21,9 +22,9 @@ class PlantOptionsBottomSheetWidget extends StatelessWidget {
     final MyPlantDetailsController myPlantDetailsController =
         Get.put(MyPlantDetailsController());
     return Container(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
+        decoration:  BoxDecoration(
+          color: ColorConstant.white,
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(16),
             topRight: Radius.circular(16),
           ),
@@ -40,17 +41,17 @@ class PlantOptionsBottomSheetWidget extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const Text(
+                 Text(
                   '2/2',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Colors.grey,
+                    color: ColorConstant.neutral500,
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
+                 const Text(
                   'Choose the topic that\nyou want to consult about',
                   textAlign: TextAlign.left,
                   style: TextStyle(
@@ -59,13 +60,13 @@ class PlantOptionsBottomSheetWidget extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 4),
-                const Text(
+                 Text(
                   'Choose 1 plant',
                   textAlign: TextAlign.left,
                   style: TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w400,
-                    color: Colors.grey,
+                    color: ColorConstant.neutral500,
                   ),
                 ),
                 const SizedBox(height: 24),

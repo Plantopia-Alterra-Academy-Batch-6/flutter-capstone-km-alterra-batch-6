@@ -24,9 +24,9 @@ class PlantFilterView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorConstant.white,
         automaticallyImplyLeading: false,
         title: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -37,7 +37,7 @@ class PlantFilterView extends StatelessWidget {
                   .copyWith(fontWeight: FontWeight.w700),
             ),
             IconButton(
-              icon: const Icon(Icons.close, color: Colors.black),
+              icon:  Icon(Icons.close, color: ColorConstant.neutral950),
               onPressed: () {
                 Get.back();
               },
@@ -64,7 +64,7 @@ class PlantFilterView extends StatelessWidget {
       ),
       bottomNavigationBar: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        height: 76, // Ensure the height is appropriate for visibility
+        height: 76,
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
           child: ElevatedButton(
@@ -82,7 +82,7 @@ class PlantFilterView extends StatelessWidget {
                 print(addPlantController.isFilterSearchResulted.value);
               }
               if (addPlantController.isFilterSearchResulted.isTrue) {
-                // ignore: use_build_context_synchronously
+                if (!context.mounted) return;
                 Navigator.pop(context);
                 if (kDebugMode) {
                   print("true");
@@ -96,20 +96,19 @@ class PlantFilterView extends StatelessWidget {
               }
             },
             style: ElevatedButton.styleFrom(
-              backgroundColor:
-                  ColorConstant.primary500, // Button background color
-              fixedSize: const Size(double.infinity, 60), // Button size
+              backgroundColor: ColorConstant.primary500,
+              fixedSize: const Size(double.infinity, 60),
               padding: const EdgeInsets.all(16.0),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(8.0),
               ),
             ),
-            child: const Text(
+            child:  Text(
               'Show result',
               style: TextStyle(
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
-                color: Colors.white, // Button text color
+                color: ColorConstant.white,
               ),
             ),
           ),

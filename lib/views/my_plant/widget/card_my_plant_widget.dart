@@ -17,7 +17,7 @@ class CardMyPlantWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: ShapeDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             width: 1,

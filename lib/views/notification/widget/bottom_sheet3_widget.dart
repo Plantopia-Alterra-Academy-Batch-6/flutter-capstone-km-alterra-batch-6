@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/image_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 
@@ -8,9 +9,9 @@ class BottomSheet3Widget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+          color: ColorConstant.white,
+          borderRadius: const BorderRadius.only(
               topLeft: Radius.circular(24), topRight: Radius.circular(24))),
       height: 323,
       width: double.infinity,

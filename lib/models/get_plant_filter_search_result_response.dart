@@ -398,12 +398,10 @@ class PlantFAQ {
 class PlantImage {
   int? id;
   int? plantId;
-  // ignore: non_constant_identifier_names
   String? fileName;
   String? createdAt;
   String? updatedAt;
 
-  // ignore: non_constant_identifier_names
   PlantImage(
       {this.id, this.plantId, this.fileName, this.createdAt, this.updatedAt});
 

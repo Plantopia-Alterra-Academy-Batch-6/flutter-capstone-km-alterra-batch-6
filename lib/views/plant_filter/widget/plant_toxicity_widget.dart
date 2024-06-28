@@ -36,7 +36,7 @@ class PlantToxicityWidget extends StatelessWidget {
                         plantFilterController.isPlantToxicitySelected.value =
                             false;
                         plantFilterController.selectedToxicity.value =
-                            -1; // Reset selection
+                            -1; 
                       } else {
                         plantFilterController.selectedToxicity.value = index;
                         plantFilterController.isPlantToxicitySelected.value =
@@ -51,7 +51,7 @@ class PlantToxicityWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: isSelected
                               ? ColorConstant.primary100
-                              : Colors.white,
+                              : ColorConstant.white,
                           border: Border.all(
                             color: isSelected
                                 ? ColorConstant.primary500
@@ -65,7 +65,7 @@ class PlantToxicityWidget extends StatelessWidget {
                           style: TextStyleConstant.paragraph.copyWith(
                             color: isSelected
                                 ? ColorConstant.primary500
-                                : Colors.black,
+                                : ColorConstant.neutral950,
                           ),
                         ),
                       ),

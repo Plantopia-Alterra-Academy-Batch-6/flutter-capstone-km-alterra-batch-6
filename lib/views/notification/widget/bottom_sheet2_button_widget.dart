@@ -79,7 +79,7 @@ class BottomSheet2ButtonWidget extends StatelessWidget {
               borderRadius: BorderRadius.circular(8),
               color: ColorConstant.primary500,
             ),
-            textStyle: TextStyleConstant.subtitle.copyWith(color: Colors.white),
+            textStyle: TextStyleConstant.subtitle.copyWith(color: ColorConstant.white),
           ),
         ),
       ],

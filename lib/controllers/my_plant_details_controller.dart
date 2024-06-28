@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:html/parser.dart' as html_parser;
 import 'package:html/dom.dart' as dom;
 import 'package:intl/intl.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/models/get_plant_progress_response_model.dart';
 import 'package:plantopia/service/my_plant_details_service.dart';
 import 'package:plantopia/service/upload_progress_service.dart';
@@ -99,7 +100,7 @@ class MyPlantDetailsController extends GetxController {
         title: "Error",
         middleText: "Failed to delete my plant, please try again!",
         textConfirm: "OK",
-        confirmTextColor: Colors.white,
+        confirmTextColor: ColorConstant.white,
         onConfirm: () {
           Get.back();
         },
@@ -115,7 +116,7 @@ class MyPlantDetailsController extends GetxController {
         title: "Error",
         middleText: "Failed to customize plant name, please try again!",
         textConfirm: "OK",
-        confirmTextColor: Colors.white,
+        confirmTextColor: ColorConstant.white,
         onConfirm: () {
           Get.back();
         },

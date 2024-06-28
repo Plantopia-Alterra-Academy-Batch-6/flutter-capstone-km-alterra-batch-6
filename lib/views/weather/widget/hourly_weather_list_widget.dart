@@ -51,7 +51,6 @@ class HourlyWeatherListWidget extends StatelessWidget {
   }
 
   int _getLimitedItemCount(int totalItemCount) {
-    // Limit the item count to 24
     return totalItemCount > 24 ? 24 : totalItemCount;
   }
 

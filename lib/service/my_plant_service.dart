@@ -4,6 +4,7 @@ import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
 import 'package:plantopia/models/get_plant_by_category_response.dart';
 import 'package:plantopia/models/get_plant_recommendations_response.dart';
+import 'package:plantopia/utils/base_url_util.dart';
 
 class MyPlantService {
   static Dio dio = Dio();
@@ -19,7 +20,7 @@ class MyPlantService {
         'Authorization': 'Bearer $token',
       };
       final response = await dio.get(
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/my/plants/$userId",
+          "${BaseUrlUtil.baseUrl}/my/plants/$userId",
           options: Options(headers: headers));
 
       if (response.statusCode == 200) {
@@ -40,7 +41,7 @@ class MyPlantService {
         'Authorization': 'Bearer $token',
       };
       final response = await dio.get(
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/recommendations",
+          "${BaseUrlUtil.baseUrl}/plants/recommendations",
           options: Options(headers: headers));
 
       if (response.statusCode == 200) {
@@ -56,7 +57,7 @@ class MyPlantService {
   static Future<GetPlantByCategoryResponse> getPlantByCategories(int id) async {
     try {
       final response = await dio.get(
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/category/$id");
+          "${BaseUrlUtil.baseUrl}/plants/category/$id");
 
       if (response.statusCode == 200) {
         return GetPlantByCategoryResponse.fromJson(response.data);

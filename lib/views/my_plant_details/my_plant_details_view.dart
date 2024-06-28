@@ -28,11 +28,11 @@ class MyPlantDetailsView extends StatelessWidget {
     final Map arguments = Get.arguments;
     final PlantElement detailMyPlant = arguments['myPlantDetails'];
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
         forceMaterialTransparency: true,
-        backgroundColor: Colors.white,
+        backgroundColor: ColorConstant.white,
         automaticallyImplyLeading: true,
         title: Text(
           "Plant Details",
@@ -74,8 +74,8 @@ class MyPlantDetailsView extends StatelessWidget {
                 offset: const Offset(0, -30),
                 child: Container(
                   width: double.infinity,
-                  decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(
+                  decoration:  BoxDecoration(
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(
                         30,
                       ),
@@ -83,7 +83,7 @@ class MyPlantDetailsView extends StatelessWidget {
                         30,
                       ),
                     ),
-                    color: Colors.white,
+                    color: ColorConstant.white,
                   ),
                   child: Padding(
                     padding: const EdgeInsets.all(
@@ -119,7 +119,7 @@ class MyPlantDetailsView extends StatelessWidget {
             ),
             height: isVisible
                 ? 76.0
-                : 0.0, // Ensure the height is appropriate for visibility
+                : 0.0, 
             child: isVisible
                 ? Padding(
                     padding: const EdgeInsets.symmetric(
@@ -136,9 +136,9 @@ class MyPlantDetailsView extends StatelessWidget {
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: ColorConstant
-                                    .primary500, // Button background color
+                                    .primary500, 
                                 fixedSize: const Size(
-                                    double.infinity, 60), // Button size
+                                    double.infinity, 60), 
                                 padding: const EdgeInsets.all(
                                   16.0,
                                 ),
@@ -184,7 +184,7 @@ class MyPlantDetailsView extends StatelessWidget {
                               'Customize Plant',
                               style: TextStyleConstant.subtitle.copyWith(
                                 fontWeight: FontWeight.w700,
-                                color: Colors.white,
+                                color: ColorConstant.white,
                               ),
                             ),
                           ),

@@ -20,7 +20,7 @@ class CardGlobalWidget extends StatelessWidget {
       width: 156,
       height: 200,
       decoration: ShapeDecoration(
-        color: Colors.white,
+        color: ColorConstant.white,
         shape: RoundedRectangleBorder(
           side: BorderSide(
             width: 1,

@@ -1,7 +1,7 @@
-// ignore_for_file: camel_case_types, prefer_typing_uninitialized_variables
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/auth_controller.dart';
 import 'package:plantopia/controllers/sign_up_form_controller.dart';
 import 'package:plantopia/models/signup_params_model.dart';
@@ -86,8 +86,8 @@ class _SignUpSectionWidgetState extends State<SignUpSectionWidget> {
                             ? Icons.visibility_off
                             : Icons.visibility,
                         color: signUpController.showPassword.value
-                            ? Colors.black26
-                            : Colors.black54,
+                            ? ColorConstant.neutral950
+                            : ColorConstant.neutral900,
                         size: 20,
                       )),
                 ),

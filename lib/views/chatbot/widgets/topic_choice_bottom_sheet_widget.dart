@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/my_plant_controller.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
 import '../../../constants/icon_constant.dart';
@@ -24,9 +25,9 @@ class TopicChoiceBottomSheet extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
+      decoration: BoxDecoration(
+        color: ColorConstant.white,
+        borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(16),
           topRight: Radius.circular(16),
         ),
@@ -44,13 +45,13 @@ class TopicChoiceBottomSheet extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text(
+              Text(
                 '1/2',
                 textAlign: TextAlign.left,
                 style: TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w400,
-                  color: Colors.grey,
+                  color: ColorConstant.neutral500,
                 ),
               ),
               const SizedBox(height: 4),

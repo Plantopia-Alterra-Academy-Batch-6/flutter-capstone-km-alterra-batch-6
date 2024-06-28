@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
@@ -66,7 +65,7 @@ class PlantDetailsController extends GetxController {
         middleTextStyle: TextStyleConstant.paragraph,
         textConfirm: "OK",
         buttonColor: ColorConstant.primary500,
-        confirmTextColor: Colors.white,
+        confirmTextColor: ColorConstant.white,
         onConfirm: () {
           Get.back(canPop: true);
         },

@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/models/get_watering_history_response.dart';
 import 'package:plantopia/service/watering_history_service.dart';
 import 'package:plantopia/utils/status_enum_util.dart';
@@ -78,7 +78,7 @@ class WateringHistoryController extends GetxController {
         title: "Error",
         middleText: "Failed to watering plant, please try again!",
         textConfirm: "OK",
-        confirmTextColor: Colors.white,
+        confirmTextColor: ColorConstant.white,
         onConfirm: () {
           Get.back();
         },

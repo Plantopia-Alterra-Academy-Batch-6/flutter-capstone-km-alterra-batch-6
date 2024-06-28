@@ -10,7 +10,7 @@ class SuccessAddPlantView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.white,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -41,19 +41,19 @@ class SuccessAddPlantView extends StatelessWidget {
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor:
-                      ColorConstant.primary500, // Button background color
-                  fixedSize: const Size(400, 60), // Button size
+                      ColorConstant.primary500, 
+                  fixedSize: const Size(400, 60), 
                   padding: const EdgeInsets.all(16.0),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8.0),
                   ),
                 ),
-                child: const Text(
+                child:  Text(
                   'View added plants',
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
-                    color: Colors.white, // Button text color
+                    color: ColorConstant.white, 
                   ),
                 ),
               ),

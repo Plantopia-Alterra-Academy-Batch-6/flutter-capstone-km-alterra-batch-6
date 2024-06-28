@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:get/get.dart';
@@ -19,7 +20,7 @@ class SearchBarWidget extends StatelessWidget {
             },
             child: AbsorbPointer(
               child: SearchBar(
-                backgroundColor: WidgetStateProperty.all(Colors.white),
+                backgroundColor: WidgetStateProperty.all(ColorConstant.white),
                 trailing: [
                   InkWell(
                     child: SvgPicture.asset(

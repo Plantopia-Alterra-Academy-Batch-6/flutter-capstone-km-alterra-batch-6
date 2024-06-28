@@ -68,10 +68,10 @@ class ChatUIWidget extends StatelessWidget {
             inputMaxLines: 1,
             inputDecoration: InputDecoration(
               hoverColor: ColorConstant.primary500,
-              focusColor: Colors.white,
+              focusColor: ColorConstant.white,
               enabled: true,
               filled: true,
-              fillColor: Colors.white,
+              fillColor: ColorConstant.white,
               border: outlineInputBorder(),
               enabledBorder: outlineInputBorder(),
               disabledBorder: outlineInputBorder(),
@@ -89,7 +89,7 @@ class ChatUIWidget extends StatelessWidget {
               ),
             ),
             inputTextStyle: TextStyleConstant.paragraph.copyWith(
-              color: Colors.black,
+              color: ColorConstant.neutral950,
             ),
             alwaysShowSend: true,
             cursorStyle: CursorStyle(

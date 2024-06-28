@@ -95,7 +95,7 @@ class PlantGuideButtonEndWidget extends StatelessWidget {
                                 "Finished",
                                 style: TextStyleConstant.subtitle.copyWith(
                                   fontWeight: FontWeight.w700,
-                                  color: Colors.white,
+                                  color: ColorConstant.white,
                                 ),
                               ),
                             ),

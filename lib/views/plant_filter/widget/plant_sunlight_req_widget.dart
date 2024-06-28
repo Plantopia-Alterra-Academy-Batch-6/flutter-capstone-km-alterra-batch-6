@@ -37,7 +37,7 @@ class PlantSunlightReqWidget extends StatelessWidget {
                         plantFilterController
                             .isSunlightRequirementSelected.value = false;
                         plantFilterController.selectedSunlightRequirement
-                            .value = -1; // Reset selection
+                            .value = -1; 
                       } else {
                         plantFilterController
                             .selectedSunlightRequirement.value = index;
@@ -53,7 +53,7 @@ class PlantSunlightReqWidget extends StatelessWidget {
                         decoration: BoxDecoration(
                           color: isSelected
                               ? ColorConstant.primary100
-                              : Colors.white,
+                              : ColorConstant.white,
                           border: Border.all(
                             color: isSelected
                                 ? ColorConstant.primary500
@@ -67,7 +67,7 @@ class PlantSunlightReqWidget extends StatelessWidget {
                           style: TextStyleConstant.paragraph.copyWith(
                             color: isSelected
                                 ? ColorConstant.primary500
-                                : Colors.black,
+                                : ColorConstant.neutral950,
                           ),
                         ),
                       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 
 class PlantGuideInstructionCategoryWidget extends StatelessWidget {
@@ -28,11 +29,11 @@ class PlantGuideInstructionCategoryWidget extends StatelessWidget {
       width: 328,
       height: 69,
       decoration: BoxDecoration(
-        color: color ?? Colors.white,
+        color: color ?? ColorConstant.white,
         borderRadius: BorderRadius.circular(8),
         boxShadow: [
           BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
+            color: ColorConstant.neutral500.withOpacity(0.5),
             spreadRadius: 1,
           ),
         ],

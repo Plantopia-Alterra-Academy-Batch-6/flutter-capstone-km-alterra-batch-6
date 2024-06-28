@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/controllers/my_plant_details_controller.dart';
 import 'package:plantopia/models/get_my_plant_response_model.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -36,7 +37,7 @@ class ImageCarouselWidget extends StatelessWidget {
               },
               options: CarouselOptions(
                 height: 380,
-                viewportFraction: 1.0, // Ensure full-width images
+                viewportFraction: 1.0,
                 onPageChanged: (index, reason) {
                   controller.activeIndex.value = index;
                 },
@@ -51,8 +52,8 @@ class ImageCarouselWidget extends StatelessWidget {
                   activeIndex: controller.activeIndex.value,
                   count: detailMyPlant.plant?.plantImages?.length ?? 0,
                   effect: ScrollingDotsEffect(
-                    activeDotColor: Colors.green,
-                    dotColor: Colors.white.withOpacity(
+                    activeDotColor: ColorConstant.primary500,
+                    dotColor: ColorConstant.white.withOpacity(
                       0.5,
                     ),
                     dotHeight: 6,

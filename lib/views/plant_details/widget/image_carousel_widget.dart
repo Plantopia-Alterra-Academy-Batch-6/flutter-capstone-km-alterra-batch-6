@@ -24,7 +24,7 @@ class ImageCarouselWidget extends StatelessWidget {
                   width: double.infinity,
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(
-                        30), // Add border radius if needed
+                        30), 
                   ),
                   child: Image.network(
                     controller.plantByIdResponse!.data!.plantImages?[index]
@@ -42,7 +42,7 @@ class ImageCarouselWidget extends StatelessWidget {
               options: CarouselOptions(
                 enableInfiniteScroll: false,
                 height: 380,
-                viewportFraction: 1.0, // Ensure full-width images
+                viewportFraction: 1.0, 
                 onPageChanged: (index, reason) {
                   controller.activeIndex.value = index;
                 },
@@ -60,7 +60,7 @@ class ImageCarouselWidget extends StatelessWidget {
                           0,
                   effect: ScrollingDotsEffect(
                     activeDotColor: ColorConstant.primary500,
-                    dotColor: Colors.white.withOpacity(0.5),
+                    dotColor: ColorConstant.white.withOpacity(0.5),
                     dotHeight: 6,
                     dotWidth: 6,
                   ),

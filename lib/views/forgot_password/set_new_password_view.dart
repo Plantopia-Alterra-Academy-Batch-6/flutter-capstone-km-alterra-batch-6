@@ -53,8 +53,8 @@ class SetNewPasswordView extends StatelessWidget {
                                     ? Icons.visibility_off
                                     : Icons.visibility,
                                 color: controller.showPassword.value
-                                    ? Colors.black26
-                                    : Colors.black54,
+                                    ? ColorConstant.neutral950
+                                    : ColorConstant.neutral900,
                                 size: 20,
                               )),
                           controller: passwordController,

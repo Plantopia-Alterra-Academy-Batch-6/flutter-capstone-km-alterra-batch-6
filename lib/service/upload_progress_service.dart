@@ -4,6 +4,7 @@ import 'package:image_picker/image_picker.dart';
 import 'package:plantopia/helpers/user_token_preference.dart';
 import 'package:plantopia/models/get_plant_progress_response_model.dart';
 import 'package:plantopia/service/auth_service.dart';
+import 'package:plantopia/utils/base_url_util.dart';
 
 class UploadProgressService {
   static Dio dio = Dio();
@@ -13,7 +14,7 @@ class UploadProgressService {
     try {
       final String? bearerToken = await UserTokenPref.getToken();
       final String url =
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/progress/$plantId";
+          "${BaseUrlUtil.baseUrl}/plants/progress/$plantId";
       Map<String, dynamic> headers = {
         'Authorization': 'Bearer $bearerToken',
         'Content-Type': 'application/json',
@@ -42,7 +43,7 @@ class UploadProgressService {
       final String? bearerToken = await UserTokenPref.getToken();
 
       const String url =
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/plants/progress";
+          "${BaseUrlUtil.baseUrl}/plants/progress";
 
       FormData formData = FormData.fromMap({
         'plant_id': plantId,

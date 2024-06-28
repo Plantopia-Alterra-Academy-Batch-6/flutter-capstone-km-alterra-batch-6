@@ -22,7 +22,7 @@ class WeatherView extends StatelessWidget {
     final WeatherController weatherController = Get.find<WeatherController>();
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.white,
       body: Obx(
         () {
           if (weatherController.locationPermissionDenied.value) {

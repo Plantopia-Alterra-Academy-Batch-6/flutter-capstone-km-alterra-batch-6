@@ -11,7 +11,6 @@ import 'package:plantopia/views/profile/profile_view.dart';
 import 'package:plantopia/views/weather/weather_view.dart';
 import 'package:plantopia/controllers/weather_controller.dart';
 
-// ignore: must_be_immutable
 class BottomNavigationBarGlobalWidget extends StatelessWidget {
   final int? index;
 

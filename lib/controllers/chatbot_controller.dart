@@ -118,13 +118,11 @@ class ChatbotController extends GetxController {
   Future<void> sendMediaPrompt(ChatMessage chatMessage) async {
     try {
       String base64Image = '';
-      // Memuat semua gambar yang terlampir secara asinkron
       List<Uint8List> images =
           await Future.wait(chatMessage.medias!.map((media) async {
         return await File(media.url).readAsBytes();
       }).toList());
 
-      // Menambahkan setiap gambar ke dalam permintaan sebagai Base64
       for (var image in images) {
         base64Image = base64Encode(image);
       }
@@ -163,7 +161,7 @@ class ChatbotController extends GetxController {
         }
       }
     } catch (e) {
-      // Log error
+      throw Exception(e);
     }
   }
 

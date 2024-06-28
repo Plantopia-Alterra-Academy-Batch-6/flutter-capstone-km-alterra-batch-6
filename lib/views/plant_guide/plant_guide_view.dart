@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/plant_guide_controller.dart';
@@ -24,9 +25,9 @@ class PlantGuideView extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.white,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorConstant.white,
         title: Text(
           'Planting Guide',
           style:
@@ -141,7 +142,7 @@ class PlantGuideView extends StatelessWidget {
                               return Opacity(
                                 opacity: isEnabled ? 1.0 : 0.5,
                                 child: PlantGuideInstructionCategoryWidget(
-                                  color: Colors.white,
+                                  color: ColorConstant.white,
                                   icon: iconData,
                                   title:
                                       instruction.instructionCategory?.name ??

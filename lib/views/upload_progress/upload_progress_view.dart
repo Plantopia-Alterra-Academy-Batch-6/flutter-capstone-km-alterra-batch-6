@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/upload_progress_controller.dart';
 import 'package:plantopia/views/upload_progress/widget/all_photos_widget.dart';
@@ -19,10 +20,10 @@ class UploadProgressView extends StatelessWidget {
         Get.put(UploadProgressController());
     final plantId = Get.arguments["id"];
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: ColorConstant.white,
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: ColorConstant.white,
         automaticallyImplyLeading: true,
         title: Text(
           "Progress Photo",
@@ -45,7 +46,6 @@ class UploadProgressView extends StatelessWidget {
                 ),
                 Obx(
                   () => GestureDetector(
-                    // onTap: controller.pickImage,
                     onTap: () {
                       Get.dialog(SnackbarOptionWidget(
                         controller: controller,
@@ -85,6 +85,7 @@ class UploadProgressView extends StatelessWidget {
                       if (controller.image.value != null) {
                         bool result = await controller.uploadProgress(plantId);
                         if (result) {
+                          if (!context.mounted) return;
                           CustomSnackbarProgressWidget.alertsuccess(context);
 
                           controller.image.value = null;

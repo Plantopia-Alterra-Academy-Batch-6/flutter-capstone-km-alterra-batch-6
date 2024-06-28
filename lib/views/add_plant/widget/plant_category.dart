@@ -27,14 +27,14 @@ class PlantCategoryWidget extends StatelessWidget {
         ),
         const SizedBox(height: 12),
         Wrap(
-          spacing: 16, // Adjust as needed
-          runSpacing: 16, // Adjust as needed
+          spacing: 16, 
+          runSpacing: 16, 
           children: List.generate(
             controller.plantCategoriesResponse!.data.length,
             (index) {
               return SizedBox(
                 width: (MediaQuery.of(context).size.width - 48) /
-                    2, // Adjust for padding
+                    2, 
                 child: InkWell(
                   borderRadius: BorderRadius.circular(10),
                   onTap: () {

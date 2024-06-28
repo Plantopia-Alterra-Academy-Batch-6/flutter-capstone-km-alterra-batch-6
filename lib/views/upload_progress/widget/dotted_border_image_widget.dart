@@ -37,7 +37,7 @@ class DottedBorderImageWidget extends StatelessWidget {
                       TextSpan(
                           text: '*',
                           style: TextStyleConstant.caption
-                              .copyWith(color: Colors.red)),
+                              .copyWith(color: ColorConstant.danger500)),
                     ],
                   ),
                 ),

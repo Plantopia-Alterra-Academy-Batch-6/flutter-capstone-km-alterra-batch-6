@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:plantopia/models/login_params_model.dart';
 import 'package:plantopia/models/signup_params_model.dart';
 import 'package:plantopia/models/get_user_model_response.dart';
+import 'package:plantopia/utils/base_url_util.dart';
 
 class AuthService {
   static Dio dio = Dio();
@@ -12,7 +13,7 @@ class AuthService {
   static Future<String> login({required LoginParamsModel loginParams}) async {
     try {
       String url =
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/login";
+          "${BaseUrlUtil.baseUrl}/login";
       final response = await dio.post(url,
           options: Options(
             headers: {'Content-Type': 'application/json'},
@@ -46,7 +47,7 @@ class AuthService {
   static Future<UserModel?> signUp(SignUpParamsModel signUpParamsModel) async {
     try {
       String url =
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/register";
+          "${BaseUrlUtil.baseUrl}/register";
 
       final response = await dio.post(url,
           options: Options(
@@ -76,7 +77,7 @@ class AuthService {
   static Future<UserModel?> getUser(String token) async {
     try {
       String url =
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/profile";
+          "${BaseUrlUtil.baseUrl}/profile";
 
       final response = await dio.get(
         url,
@@ -108,7 +109,7 @@ class AuthService {
       {required String email, required String otp}) async {
     try {
       String url =
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/verify";
+          "${BaseUrlUtil.baseUrl}/verify";
 
       final response = await dio.post(
         url,
@@ -138,7 +139,7 @@ class AuthService {
   static Future<CustomException?> resendOTP({required String email}) async {
     try {
       String url =
-          "https://be-agriculture-awh2j5ffyq-uc.a.run.app/api/v1/resendotp";
+          "${BaseUrlUtil.baseUrl}/resendotp";
 
       final response = await dio.post(
         url,

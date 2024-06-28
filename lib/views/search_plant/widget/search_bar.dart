@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:plantopia/constants/color_constant.dart';
 import 'package:plantopia/constants/icon_constant.dart';
 import 'package:plantopia/constants/text_style_constant.dart';
 import 'package:plantopia/controllers/search_plant_controller.dart';
@@ -20,7 +21,7 @@ class SearchBarWidget extends StatelessWidget {
             Expanded(
               child: SearchBar(
                 controller: controller.searchPlantText,
-                backgroundColor: WidgetStateProperty.all(Colors.white),
+                backgroundColor: WidgetStateProperty.all(ColorConstant.white),
                 leading: SvgPicture.asset(
                   IconConstant.search,
                 ),
@@ -29,7 +30,7 @@ class SearchBarWidget extends StatelessWidget {
                     onTap: () {
                       controller.searchPlantText.clear();
                     },
-                    child: const Icon(Icons.clear, color: Colors.black),
+                    child: Icon(Icons.clear, color: ColorConstant.neutral950),
                   ),
                 ],
                 hintText: 'Enter search terms',
@@ -47,8 +48,8 @@ class SearchBarWidget extends StatelessWidget {
                 shape: WidgetStateProperty.all(
                   RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
-                    side: const BorderSide(
-                      color: Colors.grey,
+                    side:  BorderSide(
+                      color: ColorConstant.neutral500,
                       width: 0.3,
                     ),
                   ),
